@@ -4,9 +4,10 @@
 {% block body %}
 
 <div class="container">
-    <div class="row form-container p-3" style="margin:150px auto">
-        <a href="/" class="go-back"><i class="fa-solid fa-arrow-left"></i></a>
+   
+    <div class="row form-container p-3" style="margin:150px auto">                
         <div class="col-md-6 p-3">
+            <a href="{{ path('home.plan_mariage')}}"><img class="img-circle" src="{{ asset('icons/icons8-retour-25.png') }}" width="10%"></a>
             {{ form_start (form, {'attr': {'class': 'form-group sing-up-bloc', 'action': path ('app_inscr')}}) }}
                 <h2 class="text-center pb-5 pt-5"><span><i class="fa-regular fa-user"></i></span>Inscrivez-vous</h2>
                 {{ form_row (form.username, {'attr': {'class': 'form-control', 'placeholder': 'Nom d\'utilisateur'}}) }} <br>
