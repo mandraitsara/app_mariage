@@ -8,7 +8,7 @@
         <div class="col-md-6 p-3">
             <form action="{{ path('app_login') }}" method="post">
                 <div class="form-group login-bloc">
-                    <h2 class="text-center pt-5 pb-5"> <span><i class="fa-regular fa-user"></i></span>  Bienvenue</h2>
+                    <a href="{{ path('home.plan_mariage')}}"><img class="img-circle" src="{{ asset('icons/icons8-retour-25.png') }}" width="10%"></a> <h2 class="text-center pt-5 pb-5"> <span><i class="fa-regular fa-user"></i></span>  Bienvenue</h2>
                     <input type="text" class="form-control" placeholder="Votre adresse email" required name="_username"> <br>
                     <input type="password" class="form-control" id="inputPassword3" placeholder="Mot de passe" required name="_password"> <br>
                     

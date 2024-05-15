@@ -32,9 +32,6 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 8, minMessage: "Votre mot de passe doit contenir 8 caractères minimum.")]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $test = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -94,17 +91,5 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->username;
-    }
-
-    public function getTest(): ?string
-    {
-        return $this->test;
-    }
-
-    public function setTest(string $test): static
-    {
-        $this->test = $test;
-
-        return $this;
     }
 }
