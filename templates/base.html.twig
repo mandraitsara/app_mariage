@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome{% endblock %}</title>
+        
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}            
+            {{ encore_entry_script_tags('app') }}   
+        {% endblock %}
+    </head>
+<<<<<<< HEAD
+    <body>
+        {% block navbar %}
+        <div class="container-fluid pt-3">
+            <div class="container">
+                <div class="row">
+                    <div class="head">
+                        <a href="{{path('home.plan_mariage')}}" class="logo">Logo</a>
+                        <ul>
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="{{path('app_prestataire')}}">Test fotsiny</a></li>
+                             <li><a href="{{path('app_new')}}">Ajout tsotsotrafotsiny</a></li>
+                            {% if app.user %}
+                                <li><a href="{{ path('app_compte_principale') }}">Mes projets</a></li>
+                            {% endif %}
+                            <li><a href="#">À propos</a></li>
+                        </ul>
+                        {% if not app.user %}
+                            <div class="btn-bloc">
+                                <a href="{{ path('app_login') }}" class="btn-1">Connexion</a>
+                                <a href="{{ path('app_inscr') }}" class="btn-2">Inscription</a>
+                            </div>
+                        {% else %}
+                            <div class="btn-bloc">
+                                <span><i class="fa-regular fa-user"></i> {{ app.user.username }}</span>
+                                <a href="{{ path('app_logout') }}" class="btn-2">Déconnexion</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+        {# Messages Flash #}
+        {% for label, messages in app.flashes %}
+            <div class="alert alert-{{ label }}">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        {% block body %}
+        {% endblock %}
+
+    </body>
+=======
+   <body>
+        {% block body %}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% block content %}{% endblock %}
+        {% endblock %}
+
+</body>
+   
+        
+>>>>>>> 47fc7db303b2ed08ae866021ea1dbb90f76e3e71
+</html>

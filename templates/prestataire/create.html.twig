@@ -1,0 +1,15 @@
+{# templates/prestataire/create.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouveau Prestataire{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau Prestataire</h1>
+
+    {{ form_start(form) }}
+        {{ form_row (form.NomPrestataire) }}
+        {{ form_row (form.TypePrestataire) }}
+        {{ form_row (form.infoPrestataire) }} <br>
+        <button type="submit" class="btn btn-primary">Ajout du prestataire </button>
+    {{ form_end(form) }}
+{% endblock %}
