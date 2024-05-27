@@ -1,10 +1,5 @@
 framework:
     mailer:
-<<<<<<< HEAD
         dsn: '%env(MAILER_DSN)%'
+
        
-=======
-        dsn: 'smtp://localhost'
-        # Exemple avec Gmail
-        # dsn: 'smtp://smtp.gmail.com:587?encryption=starttls&auth_mode=login&username=YOUR_GMAIL_USERNAME&password=YOUR_GMAIL_PASSWORD'
->>>>>>> 47fc7db303b2ed08ae866021ea1dbb90f76e3e71

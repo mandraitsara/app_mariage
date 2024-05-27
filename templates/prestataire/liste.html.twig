@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Prestataires{% endblock %}
+
+{% block body %}
+    <h2>Liste des Prestataires</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom du Prestataire</th>
+                <th>Type du Prestataire</th>
+                <th>Info du Prestataire</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prestataire in prestataires %}
+                <tr>
+                    <td>{{ prestataire.NomPrestataire }}</td>
+                    <td>{{ prestataire.TypePrestataire }}</td>
+                    <td>{{ prestataire.infoPrestataire }}</td>
+                    <td>
+                        <a href="{{ path('app_edit', {'id': prestataire.id}) }}" class="btn btn-warning">Modifier</a>
+                        <a href="{{ path('app_delete', {'id': prestataire.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prestataire ?');">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun prestataire trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{{ path('app_prestataire') }}"> Retour </a>
+{% endblock %}

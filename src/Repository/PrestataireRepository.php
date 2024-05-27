@@ -16,28 +16,14 @@ class PrestataireRepository extends ServiceEntityRepository
         parent::__construct($registry, Prestataire::class);
     }
 
-    //    /**
-    //     * @return Prestataire[] Returns an array of Prestataire objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Prestataire
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function searchByQuery($query)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.NomPrestataire LIKE :query')
+            ->orWhere('p.TypePrestataire LIKE :query')
+            ->orWhere('p.infoPrestataire LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

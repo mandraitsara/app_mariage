@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Mime\Message;
 use App\Repository\UserLoginRepository;
-use Doctrine\DBAL\Types\Type;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserLoginRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'L\'adresse email est déjà utilisée.')]
@@ -33,17 +32,11 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 8, minMessage: "Votre mot de passe doit contenir 8 caractères minimum.")]
     private ?string $password = null;
 
-<<<<<<< HEAD
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $resetToken = null;
-    
-=======
-    #[ORM\Column(length:255, nullable:true)]
-    private $resetToken;
+    #[ORM\Column(length: 255)]
+    private ?string $reset_token = null;
 
- 
-
->>>>>>> 47fc7db303b2ed08ae866021ea1dbb90f76e3e71
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_now = null;
     public function getId(): ?int
     {
         return $this->id;
@@ -94,19 +87,6 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getResetToken(): ?string
-    {
-        return $this->resetToken;
-    }
-
-    public function setResetToken(?string $resetToken): self
-    {
-        $this->resetToken = $resetToken;
-
-        return $this;
-    }
-
-
     public function eraseCredentials(): void
     {
 
@@ -126,4 +106,21 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->username;
     }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->reset_token;
+    }
+
+    public function setResetToken(string $reset_token): static
+    {
+        $this->reset_token = $reset_token;
+
+        return $this;
+    }   
 }

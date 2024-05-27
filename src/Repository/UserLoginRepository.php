@@ -24,4 +24,3 @@ class UserLoginRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 }
-

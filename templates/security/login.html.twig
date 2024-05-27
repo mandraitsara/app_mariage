@@ -1,8 +1,4 @@
-
 {% extends 'base.html.twig' %}
-{% block navbar %}
-
-{% endblock %}
 
 {% block body %}
 
@@ -11,24 +7,14 @@
                 <div class="col-md-6 p-3">
                     <form class="toto" action="{{ path('app_login') }}" method="post">
                         <div class="form-group login-bloc">
-<<<<<<< HEAD
                             <h2 class="text-center pt-5 pb-5"> <span><i class="fa-regular fa-user"></i></span>  Bienvenue</h2>
                             <input type="text" class="form-control" placeholder="Adresse mail" required name="_username" value=""> <br>
-=======
-                            <h2 class="text-center pt-5 pb-5"> <span><i class="fa-regular fa-user"></i></span>  Salama </h2>
-                            <input type="text" class="form-control" placeholder="Adresse mail" required name="_username"> <br>
->>>>>>> 47fc7db303b2ed08ae866021ea1dbb90f76e3e71
                             <input type="password" class="form-control" placeholder="Mot de passe" required name="_password">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success"> Connexion </button>
-<<<<<<< HEAD
                             <button type="submit" class="btn btn-danger"> Annuler </button>
                             <a href="{{ path ('app_mdp_oublie')}}">Mot de passe oublié </a>
-=======
-                            <button type="button" class="btn btn-danger"> Annuler </button>
-                            <a href="{{ path('app_mdp_oublie')}}" class="btn btn-link"> Mot de passe oublié</a>
->>>>>>> 47fc7db303b2ed08ae866021ea1dbb90f76e3e71
                         </div>
                     </form>
                 </div>
@@ -42,4 +28,3 @@
    
 
 {% endblock %}
-    
