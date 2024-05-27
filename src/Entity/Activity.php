@@ -64,6 +64,9 @@ class Activity
     #[ORM\ManyToOne(inversedBy: 'activities')]
     private ?UserLogin $user_id = null;
 
+    #[ORM\ManyToOne(inversedBy: 'activities')]
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -261,15 +264,16 @@ class Activity
         return $this;
     }
 
-    public function getUserId(): ?UserLogin
+    public function getUser(): ?UserLogin
     {
         return $this->user_id;
     }
 
-    public function setUserId(?UserLogin $user_id): static
+    public function setUser(?UserLogin $user_id): static
     {
         $this->user_id = $user_id;
 
         return $this;
     }
+
 }

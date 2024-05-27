@@ -37,9 +37,6 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $reset_token = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $date_now = null;
-
     /**
      * @var Collection<int, Activity>
      */
@@ -49,7 +46,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->activities = new ArrayCollection();
-    }
+    }  
   
 
     public function getId(): ?int
@@ -125,17 +122,6 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateNow(): ?string
-    {
-        return $this->date_now;
-    }
-
-    public function setDateNow(string $date_now): static
-    {
-        $this->date_now = $date_now;
-        return $this;
-    }
-
     /**
      * @return Collection<int, Activity>
      */
@@ -148,7 +134,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->activities->contains($activity)) {
             $this->activities->add($activity);
-            $activity->setUserId($this);
+            $activity->setUser($this);
         }
 
         return $this;
@@ -158,8 +144,8 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->activities->removeElement($activity)) {
             // set the owning side to null (unless already changed)
-            if ($activity->getUserId() === $this) {
-                $activity->setUserId(null);
+            if ($activity->getUser() === $this) {
+                $activity->setUser(null);
             }
         }
 

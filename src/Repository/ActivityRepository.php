@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repository;
-
 use App\Entity\Activity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,6 +14,8 @@ class ActivityRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Activity::class);
     }
+
+   
 
     //    /**
     //     * @return Activity[] Returns an array of Activity objects
@@ -40,4 +41,13 @@ class ActivityRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function activityId($id_user)
+    {
+        return $this->createQueryBuilder('a')
+                ->andWhere('a.user_id=:id_user')
+                ->setParameter('id_user', $id_user)
+                ->getQuery()
+                ->getOneOrNullResult();
+    }
 }
