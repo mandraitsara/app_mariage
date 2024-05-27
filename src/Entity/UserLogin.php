@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Mime\Message;
 use App\Repository\UserLoginRepository;
-use Doctrine\DBAL\Types\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -33,17 +32,9 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 8, minMessage: "Votre mot de passe doit contenir 8 caractères minimum.")]
     private ?string $password = null;
 
-<<<<<<< HEAD
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $resetToken = null;
     
-=======
-    #[ORM\Column(length:255, nullable:true)]
-    private $resetToken;
-
- 
-
->>>>>>> 47fc7db303b2ed08ae866021ea1dbb90f76e3e71
     public function getId(): ?int
     {
         return $this->id;
@@ -93,19 +84,6 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
         $this->resetToken = $resetToken;
         return $this;
     }
-
-    public function getResetToken(): ?string
-    {
-        return $this->resetToken;
-    }
-
-    public function setResetToken(?string $resetToken): self
-    {
-        $this->resetToken = $resetToken;
-
-        return $this;
-    }
-
 
     public function eraseCredentials(): void
     {

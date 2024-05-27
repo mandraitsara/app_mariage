@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un Prestataire{% endblock %}
+
+{% block body %}
+    <h1>Modifier le Prestataire</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.NomPrestataire) }}
+        {{ form_row(form.TypePrestataire) }}
+        {{ form_row(form.infoPrestataire) }} <br>
+        <button type="submit" class="btn btn-primary">Modifier le prestataire</button>
+    {{ form_end(form) }}
+{% endblock %}

@@ -12,7 +12,7 @@
             {{ encore_entry_script_tags('app') }}   
         {% endblock %}
     </head>
-<<<<<<< HEAD
+
     <body>
         {% block navbar %}
         <div class="container-fluid pt-3">
@@ -23,7 +23,7 @@
                         <ul>
                             <li><a href="#">Accueil</a></li>
                             <li><a href="{{path('app_prestataire')}}">Test fotsiny</a></li>
-                             <li><a href="{{path('app_new')}}">Ajout tsotsotrafotsiny</a></li>
+                             <li><a href="{{path('app_categ_new')}}">Categorie</a></li>
                             {% if app.user %}
                                 <li><a href="{{ path('app_compte_principale') }}">Mes projets</a></li>
                             {% endif %}
@@ -46,21 +46,7 @@
         </div>
         {% endblock %}
 
-        {# Messages Flash #}
-        {% for label, messages in app.flashes %}
-            <div class="alert alert-{{ label }}">
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endfor %}
-
-        {% block body %}
-        {% endblock %}
-
-    </body>
-=======
-   <body>
+        
         {% block body %}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
@@ -75,5 +61,4 @@
 </body>
    
         
->>>>>>> 47fc7db303b2ed08ae866021ea1dbb90f76e3e71
 </html>

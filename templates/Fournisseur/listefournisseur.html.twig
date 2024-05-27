@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste fournisseur {% endblock %}
+
+{% block body %}
+    <h2>Liste fournisseur reetra : </h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre : </th>
+                <th>Description : </th>
+                <th>Titre Catégorie : </th>
+                <th>Sous catégorie : </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fournisseur in fournisseurs %}
+                <tr>
+                    <td>{{ fournisseur.Titre }}</td>
+                    <td>{{ fournisseur.Description }}</td>
+                    <td>{{ fournisseur.TitreCateg }}</td>
+                    <td>{{ fournisseur.SousCateg }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun prestataire trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{{ path('app_fournisseur_new') }}"> Retour </a>
+{% endblock %}
