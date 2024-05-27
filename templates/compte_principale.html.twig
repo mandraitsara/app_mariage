@@ -2,6 +2,56 @@
 {% block title %} Vous connectez en tant que : {{username}} {% endblock %}
 
 {% block body %}
-{{username}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./newProjet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <title>Nouveau Projet</title>
+</head>
+<body>
+    
+
+    <div class="container">
+        <div class="row p-5 text-center">
+            <div class="col-12">
+                <h3>Les projet de mariage que vous suivez</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 d-flex justify-content-center align-center">
+                <div class="new-project text-center p-5">
+                    <span class="gear-icon"><i class="fa-solid fa-gear"></i></span>
+                    <div class="name">
+                        <h5> Nom & Prénom </h5>
+                        <p> Date de création</p>
+                    </div>
+                    <div class="delete-box p-3" style="display: none;">
+                        <span style="display: block;" class="archiver">Archiver</span>
+                        <span style="display: block;" class="supprimer">Supprimer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-center">
+                <a  href="{{ path('app.who')}}" class="add-new-project text-center p-5">
+                    <p><i class="fa-solid fa-plus"></i></p>
+                    <p>Créer un nouveau projet de mariage</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        
+        
+    </script>    
+</body>
+</html>
 {% endblock %}
 
