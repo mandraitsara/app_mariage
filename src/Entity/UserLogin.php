@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserLoginRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -35,8 +37,21 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $reset_token = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $date_now = null;
+    #[ORM\Column(length: 255)]
+    private ?string $date_now = null;
+
+    /**
+     * @var Collection<int, Activity>
+     */
+    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'user_id')]
+    private Collection $activities;
+
+    public function __construct()
+    {
+        $this->activities = new ArrayCollection();
+    }
+  
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +106,13 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
     public function getResetToken(): ?string
     {
         return $this->reset_token;
@@ -101,5 +123,46 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
         $this->reset_token = $reset_token;
 
         return $this;
-    }   
+    }
+
+    public function getDateNow(): ?string
+    {
+        return $this->date_now;
+    }
+
+    public function setDateNow(string $date_now): static
+    {
+        $this->date_now = $date_now;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Activity>
+     */
+    public function getActivities(): Collection
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): static
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities->add($activity);
+            $activity->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): static
+    {
+        if ($this->activities->removeElement($activity)) {
+            // set the owning side to null (unless already changed)
+            if ($activity->getUserId() === $this) {
+                $activity->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
 }
