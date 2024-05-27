@@ -64,29 +64,8 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $email;
 
         return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-    public function getResetToken(): ?string 
-    {
-        return $this->resetToken;
-    }
-    public function setResetToken(?string $resetToken) : self
-    {
-        $this->resetToken = $resetToken;
-        return $this;
-    }
-
+    }    
+    
     public function eraseCredentials(): void
     {
 
