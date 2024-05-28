@@ -21,7 +21,7 @@ class ComptePrincipaleController extends AbstractController
         
         $activity = $entityManager->getRepository(Activity::class);
         $activite = $activity->activityId($user_id)->getUser();
-        $is_activated = $activite->getId();        
+        $is_activated = $activite->getId();     
     
             if ($username==null )            {
                 return $this->redirectToRoute('app_login');
@@ -32,6 +32,7 @@ class ComptePrincipaleController extends AbstractController
             $content = [
                 'username' => $username,
                 'is_activated' =>$is_activated,
+                
                 
 
             ];
