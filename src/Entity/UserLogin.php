@@ -34,20 +34,23 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 8, minMessage: "Votre mot de passe doit contenir 8 caractères minimum.")]
     private ?string $password = null;
 
+    
+
     #[ORM\Column(length: 255)]
     private ?string $reset_token = null;
 
     /**
      * @var Collection<int, Activity>
      */
-    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'user_id')]
-    private Collection $activities;
+    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'user')]
+    private Collection $user;
 
     public function __construct()
     {
-        $this->activities = new ArrayCollection();
-    }  
-  
+        $this->user = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -58,7 +61,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->username;
     }
-
+    
     public function setUsername(string $username): static
     {
         $this->username = $username;
@@ -103,13 +106,14 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
+   
+
     public function setPassword(string $password): static
     {
         $this->password = $password;
 
         return $this;
     }
-
     public function getResetToken(): ?string
     {
         return $this->reset_token;
@@ -125,27 +129,27 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Activity>
      */
-    public function getActivities(): Collection
+    public function getUser(): Collection
     {
-        return $this->activities;
+        return $this->user;
     }
 
-    public function addActivity(Activity $activity): static
+    public function addUser(Activity $user): static
     {
-        if (!$this->activities->contains($activity)) {
-            $this->activities->add($activity);
-            $activity->setUser($this);
+        if (!$this->user->contains($user)) {
+            $this->user->add($user);
+            $user->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeActivity(Activity $activity): static
+    public function removeUser(Activity $user): static
     {
-        if ($this->activities->removeElement($activity)) {
+        if ($this->user->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($activity->getUser() === $this) {
-                $activity->setUser(null);
+            if ($user->getUser() === $this) {
+                $user->setUser(null);
             }
         }
 

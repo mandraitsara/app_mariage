@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ActivityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
@@ -61,12 +63,11 @@ class Activity
     #[ORM\Column(length: 255)]
     private ?string $ami_proche_h = null;
 
-    #[ORM\ManyToOne(inversedBy: 'activities')]
-    private ?UserLogin $user_id = null;
+    #[ORM\ManyToOne(inversedBy: 'user')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?UserLogin $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'activities')]
-    
-
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -266,14 +267,13 @@ class Activity
 
     public function getUser(): ?UserLogin
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUser(?UserLogin $user_id): static
+    public function setUser(?UserLogin $user): static
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
-
 }
