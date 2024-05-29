@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Mime\Message;
 use App\Repository\UserLoginRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -34,7 +36,18 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $resetToken = null;
-    
+
+    /**
+     * @var Collection<int, Activity>
+     */
+    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'user')]
+    private Collection $activities;
+
+    public function __construct()
+    {
+        $this->activities = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,11 +57,10 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->username;
     }
-
+    
     public function setUsername(string $username): static
     {
         $this->username = $username;
-
         return $this;
     }
 
@@ -60,7 +72,6 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -72,14 +83,15 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
-    public function getResetToken(): ?string 
+
+    public function getResetToken(): ?string
     {
         return $this->resetToken;
     }
-    public function setResetToken(?string $resetToken) : self
+
+    public function setResetToken(?string $resetToken): static
     {
         $this->resetToken = $resetToken;
         return $this;
@@ -87,7 +99,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials(): void
     {
-
+       
     }
 
     public function getSalt(): ?string
@@ -99,9 +111,36 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return ['ROLE_USER'];
     }
-    
+
     public function getUserIdentifier(): string
     {
         return $this->username;
+    }
+
+    /**
+     * @return Collection<int, Activity>
+     */
+    public function getActivities(): Collection
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): static
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities->add($activity);
+            $activity->setUser($this);
+        }
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): static
+    {
+        if ($this->activities->removeElement($activity)) {
+            if ($activity->getUser() === $this) {
+                $activity->setUser(null);
+            }
+        }
+        return $this;
     }
 }

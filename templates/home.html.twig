@@ -1,35 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<<<<<<< HEAD
-=======
-
-<div class="container-fluid pt-3">
-    <div class="container">
-        <div class="row">
-            <div class="head">
-                <a href="/" class="logo">Logo</a>
-                <ul>
-                    <li><a href="#">Acceuil</a></li>
-                    <li><a href="{{path("app.who")}}">Mes projets</a></li>
-                    <li><a href="#">A propos</a></li>
-                </ul>
-                {% if not app.user %}
-                    <div class="btn-bloc">
-                        <a href="{{ path('app_login') }}" class="btn-1">Connexion</a>
-                        <a href="{{ path('app_inscr') }}" class="btn-2">Inscription</a>
-                    </div>
-                {% else %}
-                <div class="btn-bloc">
-                    <span> <span> <i class="fa-regular fa-user"></i> </span> {{ app.user.username }}</span>
-                    <a href="{{ path('app_logout') }}" class="btn-2">Deconnexion</a>
-                </div>
-                {% endif %}
-                   
-                </div>
-            </div >
-        </div>
-    </div>
->>>>>>> 47fc7db303b2ed08ae866021ea1dbb90f76e3e71
     <div class="container mt-5 " style="position: relative;">
         <div class="row">
             <span class="blob-2"><img src="{{ asset('icons/blob-2.svg')}}" alt="blob-2"></span>

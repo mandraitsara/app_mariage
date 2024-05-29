@@ -1,26 +1,39 @@
 <?php
 namespace App\Controller;
+use App\Entity\Activity;
+use App\Entity\UserLogin;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ComptePrincipaleController extends AbstractController
 {
     #[Route('comptePrincipale/', name:'app_compte_principale')]
-    public function comptePrincipale(AuthenticationUtils $authenticationUtils)
+    public function comptePrincipale(AuthenticationUtils $authenticationUtils,UserInterface $userInterface,EntityManagerInterface $entityManager)
     {
-        $templates = 'compte_principale.html.twig';
-
-            
-            $username =  $authenticationUtils->getLastUsername();
+        $templates = 'compte_principale.html.twig';        
+        $user_id = $userInterface->getId();       
+        $username =  $authenticationUtils->getLastUsername();
+        
+        $activity = $entityManager->getRepository(Activity::class);
+        $activite = $activity->activityId($user_id)->getUser();
+        $is_activated = $activite->getId();     
+    
             if ($username==null )            {
                 return $this->redirectToRoute('app_login');
             }
+        
+        
 
             $content = [
                 'username' => $username,
+                'is_activated' =>$is_activated,
+                
+                
 
             ];
         return $this->render($templates, $content);

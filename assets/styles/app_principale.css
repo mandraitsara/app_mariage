@@ -1,0 +1,53 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.add-new-project {
+    border: 1px dashed #0b98eb;
+    cursor: pointer;
+    width: 300px;
+}
+.add-new-project i {
+    font-size: 35px;
+}
+.new-project {
+    position: relative;
+    border: 1px solid #dd8090;
+    cursor: pointer;
+    width: 300px;
+}
+.new-project .gear-icon {
+    position: absolute;
+    color: #00000093;
+    display: none;
+    top: 5%;
+    right: 5%;
+    font-size: 20px;
+}
+.show-gear {
+    display: block !important;
+}
+.name {
+    color: #0b98eb;
+}
+.delete-box {
+    position: absolute;
+    top: 10%;
+    right: -55%;
+    width: 150px;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.397);
+}
+.archiver {
+    border: 2px solid #ee0f46dc;
+    padding: 5px 10px;
+    color: #ee0f46dc;
+    margin-bottom: 5px;
+}
+.supprimer {
+    background: #ee0f46dc;
+    padding: 5px 10px;
+    color: #fff;
+}

@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Qwigley&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Qwigley&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
-
-
+@import url('fontwesome.css');
 @import url('who.css');
 @import url('login.css');
 @import url('bootstrap_V4.css');
+@import url('app_principale.css');
