@@ -33,8 +33,6 @@ class HomeController extends AbstractController
         $activite = $activity->activityId($user_id)->getUser();
         $is_activated = $activite->getId();
 
-        var_dump($is_activated);
-
         $templates = 'who.html.twig';
         return $this->render($templates);
     }
