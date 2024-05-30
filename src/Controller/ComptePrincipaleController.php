@@ -18,7 +18,7 @@ class ComptePrincipaleController extends AbstractController
     #[Route('comptePrincipale/', name:'app_compte_principale')]
     public function comptePrincipale(AuthenticationUtils $authenticationUtils,UserInterface $userInterface,EntityManagerInterface $entityManager)
     {
-        global $is_activated;
+        global $is_activated,$user_id;
 
         $templates = 'compte_principale.html.twig';        
         $user_id = $userInterface->getId();     
@@ -31,21 +31,22 @@ class ComptePrincipaleController extends AbstractController
             $activite= $activity->activityId($user_id)->getUser();
             $is_activated = $activite->getId();
             
-        }else{
-                $active = new Activity();
+        }
+            else{
+                $newActive = new Activity();
                 $users = new UserLogin();
-             
-                $id_users = $users->getId();
-                $act = $active->setUser($id_users);
-                var_dump($act);
-                $entityManager->persist($active);           
+
+                $users->getActivities()->add($newActive->getUser());
+                $newActive->setUser($users);
+
+                $new = $entityManager->persist($newActive);
+                var_dump($users);
+                //$entityManager->flush();           
+           
 
                 
 
-              
                 
-
-
         }
 
         if ($username==null )            {

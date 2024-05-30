@@ -46,11 +46,13 @@ class ActivityRepository extends ServiceEntityRepository
      */
     public function activityId($user_id): ?Activity
     {
-        
+
         return $this->createQueryBuilder('a')
                 ->andWhere('a.id=:user_id')
                 ->setParameter('user_id', $user_id)
                 ->getQuery()
                 ->getOneOrNullResult();
     }
+
+    
 }
