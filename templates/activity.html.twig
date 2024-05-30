@@ -1,0 +1,238 @@
+{% extends 'base.html.twig'%}
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fuid">
+    <div class="row p-5">
+        <!-- Nav tabs -->
+        <div class="col-md-2">
+            <div class="bloc-menu" style="border: 1px solid #00000015; height:500px">
+                <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="true">Vue général </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Liste des invités</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                            aria-controls="contact" aria-selected="false">Réception</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="budget-tab" data-toggle="tab" href="#budget" role="tab"
+                            aria-controls="budget" aria-selected="false">Budget</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Vue général -->
+        <div class="col-md-10">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="title text-center">
+                        <h3>Contenu pour Menu 1</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, ipsa!</p>
+                    </div>
+
+
+                    <!-- menu-collapse-1 -->
+                    <div class="box-mari text-center p-5" style="border: 1px solid #00000015;">
+                        <span class="arrow-icon" data-toggle="collapse" data-target="#demo"><img src="{{asset("/icons/arrow.svg")}}" class="img-arrow" alt="arrow" style="width: 20px;margin:5px;">Couple</span>
+                        <span class="pen-modif"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
+                        <div class="collapse" id="demo">
+                            <a href="#">Parametré le nom et <br>prénom des mariées</a>
+                            <div class="img-valentine">
+                                <img src="{{asset("/icons/valentine.svg")}} alt="valentine" style="width: 250px;">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- menu-collapse-2 -->
+                    <div class="box-about-event p-5">
+                        <span class="arrow-icon2" data-toggle="collapse" data-target="#demo2"><img src="{{asset("/icons/arrow.svg")}}" class="img-arrow2" alt="arrow" style="width:20px;margin:5px;">Information de l'événement</span>
+                        <span class="pen-modif2"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
+                        <div class="collapse" id="demo2">
+                            <div class="row p-3">
+                                <div class="col-md-6">
+                                    <h4>Date de la cérémonie</h4>
+                                    <p><a href="#">Ajouter une date pour la cérémonie</a></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>Adresse de la cérémonie</h4>
+                                    <p><a href="#">Paramétrer un lieu</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- menu-collapse-3 -->
+                    <div class="add-guest p-5">
+                        <span class="arrow-icon3" data-toggle="collapse" data-target="#demo3"><img src="{{asset('/icons/arrow.svg')}}" class="img-arrow3" alt="arrow" style="width:20px;margin:5px;">Invités</span>
+                        <span class="pen-modif3"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
+                        <div class="collapse" id="demo3">
+                            <div class="p-3 text-center">
+                                <a href="#">Ajouter des invités</a>
+                            </div>
+                            <div class="guest-info pt-3 pb-3">
+                                <p>Invités : 2</p>
+                                <p>Total des invités : 0</p>
+                                <p>Confirmé Réponses : 0</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- Liste des invités -->
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="p-5">
+                        <h4 class="text-center">Les invités du mariage</h4>
+                        <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere maxime officiis laboriosam.Saepe, molestias adipisci.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 border-right text-center">
+                            <img src="./assets/shoes-man.svg" alt="shoes-man" style="width: 75px;">
+                            <p style="font-weight: bold;">Les invités du marié</p>
+                            <form class="add-guest-form  pt-3">
+                                <input type="text" id="name" class="mb-3" placeholder="Nom du marié">
+                                <i class="fa fa-user icon"></i>
+                                <input type="text" id="name" placeholder="Prénom du marié">
+                                <i class="fa fa-user icon"></i>
+                                <div class="m-5">
+                                    <button class="btn-add-guest text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img src="{{asset('shoes-woman.svg')}}" alt="shoes-woman" style="width: 75px;">
+                            <p style="font-weight: bold;">Les invités de la mariée</p>
+                            <form class="add-guest-form  pt-3">
+                                <input type="text" id="name" class="mb-3" placeholder="Nom du mariée">
+                                <i class="fa fa-user icon" style="color: #dd8090;"></i>
+                                <input type="text" id="name" placeholder="Prénom du mariée">
+                                <i class="fa fa-user icon" style="color: #dd8090;"></i>
+                                <div class="m-5">
+                                    <button class="btn-add-guest text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-12">
+                            <div class="guest-sum p-3">
+                                <p class="text-center">Ration par côtés</p>
+                                <h4 class="text-center" style="font-weight: bold;"> {1} | {2}</h4>
+                                <h4 class="text-center"> Les invités {2}</h4>
+                                <h4 class="text-center"> Total des invités {0}</h4>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="guest-import p-3">
+                                <button class="btn-1"><i class="fa-solid fa-download"></i>Importés une liste d'invités</button>
+                                <button class="btn-2"><i class="fa-solid fa-file-pdf"></i>Télécharger le fichier PDF</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- Réception -->
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <h4>Contenu pour Menu 3</h4>
+                    <p>Ceci est le contenu du troisième onglet.</p>
+                </div>
+                <!-- Budget -->
+                <div class="tab-pane fade" id="budget" role="tabpanel" aria-labelledby="budget-tab">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="budget-bloc text-center">
+                                <h4>Hello Budget</h4>
+                                <p>Tenez un registre précis de chaque dépense, puis organisez vos catégories <br> ou éléments individuels à votre guise en les déplaçant à volonté.</p>
+                            </div>
+                        </div>
+                        <div class="col-12 p-3">
+                            <div class="budget-amount text-center">
+                                <h2>Budget : <span><input type="text"></span> Ariary </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <div class="container-search p-3" style="border: 1px solid #000;">
+                                <form class="search">
+                                    <input class="filter" type="text" placeholder="Filtres...">
+                                    <i class="fa fa-search"></i>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="beauty p-3" style="border: 1px solid #000;">
+                                <span class="arrow-budget" id="el-01" data-toggle="collapse" data-target="#demo10"><img src="{{asset('icons/arrow.svg')}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h4>Beauté et santé</h4>
+                                <div class="beautyChildParent" class="collapse" id="demo10">
+                                    <div class="beautyChild01">
+                                        <div>
+                                            <p>Titre</p>
+                                            <p>Coiffure et maquillage</p>
+                                        </div>
+                                        <div>
+                                            <p>Coût actuel</p>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="beauty p-3" style="border: 1px solid #000;">
+                                <span class="arrow-budget" id="el-02" data-toggle="collapse" data-target="#demo11"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h4>Robe et tenue vestimentaire - Mariée</h4>
+                                <div class="beautyChildParent" class="collapse" id="demo11">
+                                    <div class="beautyChild01">
+                                        <div>
+                                            <p>Titre</p>
+                                            <p>Coiffure et maquillage</p>
+                                        </div>
+                                        <div>
+                                            <p>Coût actuel</p>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="beauty p-3" style="border: 1px solid #000;">
+                                <span class="arrow-budget" id="el-03" data-toggle="collapse" data-target="#demo12"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h4>Costume - Marié</h4>
+                                <div class="beautyChildParent" class="collapse" id="demo12">
+                                    <div class="beautyChild01">
+                                        <div>
+                                            <p>Titre</p>
+                                            <p>Coiffure et maquillage</p>
+                                        </div>
+                                        <div>
+                                            <p>Coût actuel</p>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}
