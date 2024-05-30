@@ -63,7 +63,7 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ami_proche_h = null;
 
-    #[ORM\ManyToOne(inversedBy: 'user')]
+    #[ORM\ManyToOne(inversedBy: 'user', cascade:["persist"])]
     #[ORM\JoinColumn(nullable: true)]
     private ?UserLogin $user = null;
 

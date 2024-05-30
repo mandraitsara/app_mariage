@@ -31,23 +31,18 @@ class ComptePrincipaleController extends AbstractController
             $activite= $activity->activityId($user_id)->getUser();
             $is_activated = $activite->getId();
             
-        }
+        }/*
             else{
                 $newActive = new Activity();
                 $users = new UserLogin();
-
-                $users->getActivities()->add($newActive->getUser());
-                $newActive->setUser($users);
-
-                $new = $entityManager->persist($newActive);
-                var_dump($users);
-                //$entityManager->flush();           
-           
+                $users->getActivities()->add($newActive);
+                $new = $newActive->setUser($users);
+                var_dump($new);
+                $entityManager->persist($new);
+                $entityManager->flush();        
 
                 
-
-                
-        }
+        }*/
 
         if ($username==null )            {
                 return $this->redirectToRoute('app_login');

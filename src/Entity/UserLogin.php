@@ -21,15 +21,15 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $username = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Email(message: "L'adresse email n'est pas valide.")]
     #[Assert\NotBlank(message: "L'adresse email ne peut pas être vide.")]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message: "Le mot de passe ne peut pas être vide.")]
     #[Assert\Length(min: 8, minMessage: "Votre mot de passe doit contenir 8 caractères minimum.")]
     private ?string $password = null;
@@ -40,7 +40,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Activity>
      */
-    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'user', cascade:["persist"])]
     private Collection $activities;
 
     public function __construct()

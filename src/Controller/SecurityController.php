@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Activity;
 use App\Form\ResetType;
 use App\Entity\UserLogin;
 use App\Form\InscriptionType;
@@ -66,9 +67,16 @@ class SecurityController extends AbstractController
             $user = $form->getData();
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
             
-            $user->setPassword($hashedPassword);          
+            $user->setPassword($hashedPassword); 
 
-            $manager->persist($user);
+            $newActive = new Activity();
+
+            $user->getActivities()->add($newActive);
+            $new = $newActive->setUser($user);        
+
+
+
+            $manager->persist($new);
             $manager->flush();
 
             return $this->redirectToRoute('app_login');
