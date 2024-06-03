@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\PrestataireRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PrestataireRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: PrestataireRepository::class)]
 class Prestataire
@@ -22,6 +24,14 @@ class Prestataire
     #[ORM\Column(length: 255)]
     private ?string $infoPrestataire = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Prestataires')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categorie $categorie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'Prestataire')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Contact $contact = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -32,7 +42,7 @@ class Prestataire
         return $this->NomPrestataire;
     }
 
-    public function setNomPrestataire(string $NomPrestataire): static
+    public function setNomPrestataire(string $NomPrestataire): self
     {
         $this->NomPrestataire = $NomPrestataire;
 
@@ -44,7 +54,7 @@ class Prestataire
         return $this->TypePrestataire;
     }
 
-    public function setTypePrestataire(string $TypePrestataire): static
+    public function setTypePrestataire(string $TypePrestataire): self
     {
         $this->TypePrestataire = $TypePrestataire;
 
@@ -56,9 +66,33 @@ class Prestataire
         return $this->infoPrestataire;
     }
 
-    public function setInfoPrestataire(string $infoPrestataire): static
+    public function setInfoPrestataire(string $infoPrestataire): self
     {
         $this->infoPrestataire = $infoPrestataire;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): static
+    {
+        $this->contact = $contact;
 
         return $this;
     }

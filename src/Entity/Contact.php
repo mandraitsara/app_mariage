@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
@@ -14,7 +16,7 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $gerant = null;
+    private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
     private ?string $adresse = null;
@@ -22,22 +24,30 @@ class Contact
     #[ORM\Column(length: 255)]
     private ?string $mail = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $numero = null;
+    /**
+     * @var Collection<int, Prestataire>
+     */
+    #[ORM\OneToMany(targetEntity: Prestataire::class, mappedBy: 'contact')]
+    private Collection $Prestataire;
+
+    public function __construct()
+    {
+        $this->Prestataire = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getGerant(): ?string
+    public function getNom(): ?string
     {
-        return $this->gerant;
+        return $this->nom;
     }
 
-    public function setGerant(string $gerant): static
+    public function setNom(string $nom): static
     {
-        $this->gerant = $gerant;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -66,14 +76,32 @@ class Contact
         return $this;
     }
 
-    public function getNumero(): ?string
+    /**
+     * @return Collection<int, Prestataire>
+     */
+    public function getPrestataire(): Collection
     {
-        return $this->numero;
+        return $this->Prestataire;
     }
 
-    public function setNumero(string $numero): static
+    public function addPrestataire(Prestataire $prestataire): static
     {
-        $this->numero = $numero;
+        if (!$this->Prestataire->contains($prestataire)) {
+            $this->Prestataire->add($prestataire);
+            $prestataire->setContact($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrestataire(Prestataire $prestataire): static
+    {
+        if ($this->Prestataire->removeElement($prestataire)) {
+            // set the owning side to null (unless already changed)
+            if ($prestataire->getContact() === $this) {
+                $prestataire->setContact(null);
+            }
+        }
 
         return $this;
     }

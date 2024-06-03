@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
@@ -21,6 +23,17 @@ class Categorie
 
     #[ORM\Column(length: 255)]
     private ?string $Content = null;
+
+    /**
+     * @var Collection<int, Prestataire>
+     */
+    #[ORM\OneToMany(targetEntity: Prestataire::class, mappedBy: 'categorie')]
+    private Collection $Prestataires;
+
+    public function __construct()
+    {
+        $this->Prestataires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +72,36 @@ class Categorie
     public function setContent(string $Content): static
     {
         $this->Content = $Content;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Prestataire>
+     */
+    public function getPrestataires(): Collection
+    {
+        return $this->Prestataires;
+    }
+
+    public function addPrestataire(Prestataire $prestataire): static
+    {
+        if (!$this->Prestataires->contains($prestataire)) {
+            $this->Prestataires->add($prestataire);
+            $prestataire->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrestataire(Prestataire $prestataire): static
+    {
+        if ($this->Prestataires->removeElement($prestataire)) {
+            // set the owning side to null (unless already changed)
+            if ($prestataire->getCategorie() === $this) {
+                $prestataire->setCategorie(null);
+            }
+        }
 
         return $this;
     }
