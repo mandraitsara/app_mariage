@@ -5,10 +5,10 @@
 {% block body %}
     <h1>Ajout de nouveau contact</h1>
     {{ form_start (form) }}
-    {{ form_row (form.gerant) }}
+    {{ form_row (form.nom) }}
     {{ form_row (form.adresse) }}
     {{ form_row (form.mail) }}
-    {{ form_row (form.numero) }}
+
     <br>
     <button type="submit" class="btn btn-primary">Ajout</button>
     {{ form_end (form) }}

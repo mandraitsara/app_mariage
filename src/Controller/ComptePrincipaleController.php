@@ -29,7 +29,7 @@ class ComptePrincipaleController extends AbstractController
         
         if($activite!=null){
             $activite= $activity->activityId($user_id)->getUser();
-            $is_activated = $activite->getId();
+            $is_activated = $activite->getUsername();
             
         }/*
             else{
@@ -79,9 +79,6 @@ class ComptePrincipaleController extends AbstractController
         $entityManager->getRepository(Activity::class);
 
         $activite = new Activity();
-       
-
-        
         return $this->json("created new project successfully");
 
     }

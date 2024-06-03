@@ -14,8 +14,8 @@ class InfoContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('gerant', TextType::class, [
-                'label' => 'Le gérant : ',
+            ->add('nom', TextType::class, [
+                'label' => 'Le nom : ',
                 'attr' => [
                     'placeholder' => 'Le gérant',
                     'class' => 'form-control'
@@ -34,14 +34,14 @@ class InfoContactType extends AbstractType
                     'placeholder' => 'Adresse Email',
                     'class' => 'form-control'
                 ]
-            ])
+                ]);/*
             ->add('numero', TextType::class, [
                 'label' => 'Contact : ',
                 'attr' => [
                     'placeholder' => 'Contact',
                     'class' => 'form-control'
                 ]
-            ]);
+            ]);*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void
