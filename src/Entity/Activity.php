@@ -61,7 +61,7 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ami_proche_h = null;
 
-    #[ORM\ManyToOne(targetEntity: UserLogin::class, inversedBy: 'activities')]
+    #[ORM\ManyToOne(targetEntity: UserLogin::class, inversedBy: 'activities', cascade:['persist'])]
     #[ORM\JoinColumn(nullable: true)]
     private ?UserLogin $user = null;
 
