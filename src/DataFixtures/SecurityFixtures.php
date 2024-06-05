@@ -22,7 +22,7 @@ class SecurityFixtures extends Fixture
         $admin = new UserLogin();
         $admin->setUsername('Administrateur de Mariage')
             ->setEmail('aministrateur+1@gmail.com')
-            ->setRoles(['ROLE_ADMIN']);
+            ->setRoles(null);
 
         // Encodage du mot de passe
         $password = $this->passwordHasher->hashPassword($admin, 'admintest');
