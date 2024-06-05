@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class HomeController extends AbstractController
 {
 
-    #[Route('/', name:'home.plan_mariage')]
+    #[Route('/', name: 'home.plan_mariage')]
     public function home(Request $request)
     {
         $templates = 'home.html.twig';
@@ -23,22 +23,23 @@ class HomeController extends AbstractController
     }
 
 
-    #[Route('who/', name:'app.who')]
-    public function who(AuthenticationUtils $authenticationUtils,UserInterface $userInterface,EntityManagerInterface $entityManager)
+    #[Route('who/', name: 'app.who')]
+    public function who(AuthenticationUtils $authenticationUtils, UserInterface $userInterface, EntityManagerInterface $entityManager)
     {
-        
-        $user_id = $userInterface->getId();       
-        $username =  $authenticationUtils->getLastUsername();        
+
+
+        $user_id = $userInterface->getId();
+        $username =  $authenticationUtils->getLastUsername();
         $activity = $entityManager->getRepository(Activity::class);
-        $activite = $activity->activityId($user_id)->getUser();
-        $is_activated = $activite->getId();
+
+        //$activite = $activity->activityId($user_id)->getUser();
+        //$is_activated = $activite->getId();
+
+        var_dump($username);
+
+
 
         $templates = 'who.html.twig';
         return $this->render($templates);
     }
-
-    
 }
-
-
-?>

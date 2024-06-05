@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ActivityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
@@ -63,11 +61,12 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ami_proche_h = null;
 
-    #[ORM\ManyToOne(inversedBy: 'user', cascade:["persist"])]
+    #[ORM\ManyToOne(targetEntity: UserLogin::class, inversedBy: 'activities')]
     #[ORM\JoinColumn(nullable: true)]
     private ?UserLogin $user = null;
 
-   
+    // Getters and Setters...
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,10 +77,9 @@ class Activity
         return $this->civilité_f;
     }
 
-    public function setCivilitéF(string $civilité_f): static
+    public function setCivilitéF(?string $civilité_f): self
     {
         $this->civilité_f = $civilité_f;
-
         return $this;
     }
 
@@ -90,10 +88,9 @@ class Activity
         return $this->nom_f;
     }
 
-    public function setNomF(string $nom_f): static
+    public function setNomF(?string $nom_f): self
     {
         $this->nom_f = $nom_f;
-
         return $this;
     }
 
@@ -102,10 +99,9 @@ class Activity
         return $this->temoin_f;
     }
 
-    public function setTemoinF(string $temoin_f): static
+    public function setTemoinF(?string $temoin_f): self
     {
         $this->temoin_f = $temoin_f;
-
         return $this;
     }
 
@@ -114,10 +110,9 @@ class Activity
         return $this->civilite_temoin_f;
     }
 
-    public function setCiviliteTemoinF(string $civilite_temoin_f): static
+    public function setCiviliteTemoinF(?string $civilite_temoin_f): self
     {
         $this->civilite_temoin_f = $civilite_temoin_f;
-
         return $this;
     }
 
@@ -126,10 +121,9 @@ class Activity
         return $this->parent_f;
     }
 
-    public function setParentF(string $parent_f): static
+    public function setParentF(?string $parent_f): self
     {
         $this->parent_f = $parent_f;
-
         return $this;
     }
 
@@ -138,10 +132,9 @@ class Activity
         return $this->amie_proche_f;
     }
 
-    public function setAmieProcheF(string $amie_proche_f): static
+    public function setAmieProcheF(?string $amie_proche_f): self
     {
         $this->amie_proche_f = $amie_proche_f;
-
         return $this;
     }
 
@@ -150,10 +143,9 @@ class Activity
         return $this->amie_f;
     }
 
-    public function setAmieF(string $amie_f): static
+    public function setAmieF(?string $amie_f): self
     {
         $this->amie_f = $amie_f;
-
         return $this;
     }
 
@@ -162,10 +154,9 @@ class Activity
         return $this->parent;
     }
 
-    public function setParent(string $parent): static
+    public function setParent(?string $parent): self
     {
         $this->parent = $parent;
-
         return $this;
     }
 
@@ -174,10 +165,9 @@ class Activity
         return $this->civilite_h;
     }
 
-    public function setCiviliteH(string $civilite_h): static
+    public function setCiviliteH(?string $civilite_h): self
     {
         $this->civilite_h = $civilite_h;
-
         return $this;
     }
 
@@ -186,10 +176,9 @@ class Activity
         return $this->nom_h;
     }
 
-    public function setNomH(string $nom_h): static
+    public function setNomH(?string $nom_h): self
     {
         $this->nom_h = $nom_h;
-
         return $this;
     }
 
@@ -198,10 +187,9 @@ class Activity
         return $this->temoin_h;
     }
 
-    public function setTemoinH(string $temoin_h): static
+    public function setTemoinH(?string $temoin_h): self
     {
         $this->temoin_h = $temoin_h;
-
         return $this;
     }
 
@@ -210,10 +198,9 @@ class Activity
         return $this->civilite_temoin_h;
     }
 
-    public function setCiviliteTemoinH(string $civilite_temoin_h): static
+    public function setCiviliteTemoinH(?string $civilite_temoin_h): self
     {
         $this->civilite_temoin_h = $civilite_temoin_h;
-
         return $this;
     }
 
@@ -222,10 +209,9 @@ class Activity
         return $this->garcon_d_honneur;
     }
 
-    public function setGarconDHonneur(string $garcon_d_honneur): static
+    public function setGarconDHonneur(?string $garcon_d_honneur): self
     {
         $this->garcon_d_honneur = $garcon_d_honneur;
-
         return $this;
     }
 
@@ -234,10 +220,9 @@ class Activity
         return $this->parent_h;
     }
 
-    public function setParentH(string $parent_h): static
+    public function setParentH(?string $parent_h): self
     {
         $this->parent_h = $parent_h;
-
         return $this;
     }
 
@@ -246,10 +231,9 @@ class Activity
         return $this->ami_h;
     }
 
-    public function setAmiH(string $ami_h): static
+    public function setAmiH(?string $ami_h): self
     {
         $this->ami_h = $ami_h;
-
         return $this;
     }
 
@@ -258,10 +242,9 @@ class Activity
         return $this->ami_proche_h;
     }
 
-    public function setAmiProcheH(string $ami_proche_h): static
+    public function setAmiProcheH(?string $ami_proche_h): self
     {
         $this->ami_proche_h = $ami_proche_h;
-
         return $this;
     }
 
@@ -270,10 +253,9 @@ class Activity
         return $this->user;
     }
 
-    public function setUser(?UserLogin $user): static
+    public function setUser(?UserLogin $user): self
     {
         $this->user = $user;
-
         return $this;
     }
 }

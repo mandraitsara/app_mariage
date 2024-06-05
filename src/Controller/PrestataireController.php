@@ -105,13 +105,13 @@ class PrestataireController extends AbstractController
         if (!$prestataire) {
             throw $this->createNotFoundException('Aucun prestataire trouvé ' . $id);
         }
-    
+
         $entityManager->remove($prestataire);
         $entityManager->flush();
-    
+
         $this->addFlash('success', 'Prestataire supprimé avec succès.');
-    
-        return $this->redirectToRoute('app_prestataire_list'); 
+
+        return $this->redirectToRoute('app_prestataire_list');
     }
     ///////////// LISTE ZAVATRA REETRA ///////////
     #[Route('/prestataires', name: 'app_prestataire_list')]
@@ -123,7 +123,7 @@ class PrestataireController extends AbstractController
             'prestataires' => $prestataires
         ]);
     }
-   
+
     ///////////// AJOUT CONTACT//////////////
     #[Route('/contact/new', name: 'app_new_contact')]
     public function create_contact(Request $request, EntityManagerInterface $entityManager)
@@ -131,14 +131,13 @@ class PrestataireController extends AbstractController
         $contact = new Contact();
         $form = $this->createForm(InfoContactType::class, $contact);
         $form->handleRequest($request);
-        
-        if($form->isSubmitted())
-        {
+
+        if ($form->isSubmitted()) {
             $entityManager->persist($contact);
             $entityManager->flush();
             $this->addFlash('success', 'Contact créé avec succès.');
-    
-            return $this->redirectToRoute('app_new_contact'); 
+
+            return $this->redirectToRoute('app_new_contact');
         }
         return $this->render('Contact/createcontact.html.twig', [
             'form' => $form->createView(),
@@ -157,8 +156,8 @@ class PrestataireController extends AbstractController
 
     ////// AJOUT CATEGORIE //////////////
 
-    #[Route('/categ/new', name:'app_categ_new')]
-    public function ajout_categ(Request $request, EntityManagerInterface $entityManager): Response 
+    #[Route('/categ/new', name: 'app_categ_new')]
+    public function ajout_categ(Request $request, EntityManagerInterface $entityManager): Response
     {
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
@@ -191,14 +190,14 @@ class PrestataireController extends AbstractController
         ]);
     }
     //////////////////////// AJOUT FOURNISSEUR ///////////////////////////////
-    #[Route('/fournisseur/new', name:'app_fournisseur_new')]
-    public function ajout_fournisseur(Request $request, EntityManagerInterface $entityManager): Response 
+    #[Route('/fournisseur/new', name: 'app_fournisseur_new')]
+    public function ajout_fournisseur(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $fournisseur = new Fournisseur();
+        $fournisseur = new FournisseurType();
         $form = $this->createForm(FournisseurType::class, $fournisseur);
         $form->handleRequest($request);
 
-       /* $categories = $entityManager->getRepository(Categorie::class)->findAll();
+        /* $categories = $entityManager->getRepository(Categorie::class)->findAll();
 
         foreach ($categories as $value) {
             var_dump($value) ;
@@ -223,15 +222,10 @@ class PrestataireController extends AbstractController
     #[Route('/fournisseur', name: 'app_fournisseur_list')]
     public function list_fournisseur(EntityManagerInterface $entityManager): Response
     {
-        $fournisseurs = $entityManager->getRepository(Fournisseur::class)->findAll();
+        $fournisseurs = $entityManager->getRepository(FournisseurType::class)->findAll();
 
         return $this->render('Fournisseur/listefournisseur.html.twig', [
             'fournisseurs' => $fournisseurs
         ]);
     }
-    
 }
-
-
-
-

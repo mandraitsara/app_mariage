@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Controller;
+
 use App\Entity\Activity;
 use App\Entity\UserLogin;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,22 +17,21 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ComptePrincipaleController extends AbstractController
 {
-    #[Route('comptePrincipale/', name:'app_compte_principale')]
-    public function comptePrincipale(AuthenticationUtils $authenticationUtils,UserInterface $userInterface,EntityManagerInterface $entityManager)
+    #[Route('comptePrincipale/', name: 'app_compte_principale')]
+    public function comptePrincipale(AuthenticationUtils $authenticationUtils, UserInterface $userInterface, EntityManagerInterface $entityManager)
     {
-        global $is_activated,$user_id;
+        global $is_activated, $user_id, $activite;
 
-        $templates = 'compte_principale.html.twig';        
-        $user_id = $userInterface->getId();     
-        $username =  $authenticationUtils->getLastUsername();      
-        
-        $activity = $entityManager->getRepository(Activity::class);         
-        $activite= $activity->activityId($user_id);       
-        
-        if($activite!=null){
-            $activite= $activity->activityId($user_id)->getUser();
+        $templates = 'compte_principale.html.twig';
+        $user_id = $userInterface->getId();
+        $username =  $authenticationUtils->getLastUsername();
+
+        $activity = $entityManager->getRepository(Activity::class);
+        $activite = $activity->activityId($user_id);
+
+        if ($activite != null) {
+            $activite = $activity->activityId($user_id)->getUser();
             $is_activated = $activite->getUsername();
-            
         }/*
             else{
                 $newActive = new Activity();
@@ -44,28 +45,31 @@ class ComptePrincipaleController extends AbstractController
                 
         }*/
 
-        if ($username==null )            {
-                return $this->redirectToRoute('app_login');
+
+        var_dump($is_activated);
+
+        if ($username == null) {
+            return $this->redirectToRoute('app_login');
         }
-        
-        
 
-            $content = [
-                'username' => $username,
-                'is_activated'=>$is_activated,
-            
-                
-                
 
-            ];
+
+        $content = [
+            'username' => $username,
+            'is_activated' => $user_id,
+
+
+
+
+        ];
         return $this->render($templates, $content);
     }
 
-    #[Route('activite/', name:"activite.app_mariage")]
+    #[Route('activite/', name: "activite.app_mariage")]
     public function activite()
     {
         $templates = 'activity.html.twig';
-        
+
 
 
 
@@ -73,15 +77,12 @@ class ComptePrincipaleController extends AbstractController
     }
 
     //methods:['POST']
-    #[Route('activite/new', name:'active_new.app_mariage')]
-    public function activiteNew(Request $request, EntityManagerInterface $entityManager)    
+    #[Route('activite/new', name: 'active_new.app_mariage')]
+    public function activiteNew(Request $request, EntityManagerInterface $entityManager)
     {
         $entityManager->getRepository(Activity::class);
 
         $activite = new Activity();
         return $this->json("created new project successfully");
-
     }
-
 }
-?>

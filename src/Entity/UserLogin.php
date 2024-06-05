@@ -21,7 +21,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255,nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $username = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -40,7 +40,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Activity>
      */
-    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'user', cascade:["persist"])]
+    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'user', cascade: ["persist"])]
     private Collection $activities;
 
     public function __construct()
@@ -52,7 +52,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->id;
     }
-    
+
     public function setId(int $id)
     {
         $this->id = $id;
@@ -63,7 +63,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->username;
     }
-    
+
     public function setUsername(string $username): static
     {
         $this->username = $username;
@@ -105,7 +105,6 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials(): void
     {
-       
     }
 
     public function getSalt(): ?string

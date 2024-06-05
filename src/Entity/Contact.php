@@ -28,11 +28,11 @@ class Contact
      * @var Collection<int, Prestataire>
      */
     #[ORM\OneToMany(targetEntity: Prestataire::class, mappedBy: 'contact')]
-    private Collection $Prestataire;
+    private Collection $prestataires;
 
     public function __construct()
     {
-        $this->Prestataire = new ArrayCollection();
+        $this->prestataires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,15 +79,15 @@ class Contact
     /**
      * @return Collection<int, Prestataire>
      */
-    public function getPrestataire(): Collection
+    public function getPrestataires(): Collection
     {
-        return $this->Prestataire;
+        return $this->prestataires;
     }
 
     public function addPrestataire(Prestataire $prestataire): static
     {
-        if (!$this->Prestataire->contains($prestataire)) {
-            $this->Prestataire->add($prestataire);
+        if (!$this->prestataires->contains($prestataire)) {
+            $this->prestataires->add($prestataire);
             $prestataire->setContact($this);
         }
 
@@ -96,7 +96,7 @@ class Contact
 
     public function removePrestataire(Prestataire $prestataire): static
     {
-        if ($this->Prestataire->removeElement($prestataire)) {
+        if ($this->prestataires->removeElement($prestataire)) {
             // set the owning side to null (unless already changed)
             if ($prestataire->getContact() === $this) {
                 $prestataire->setContact(null);

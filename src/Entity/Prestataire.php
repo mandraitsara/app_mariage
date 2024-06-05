@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PrestataireRepository;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: PrestataireRepository::class)]
 class Prestataire
@@ -28,7 +26,7 @@ class Prestataire
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Prestataire')]
+    #[ORM\ManyToOne(inversedBy: 'Prestataires')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Contact $contact = null;
 
@@ -78,7 +76,7 @@ class Prestataire
         return $this->categorie;
     }
 
-    public function setCategorie(?Categorie $categorie): static
+    public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
 
@@ -90,7 +88,7 @@ class Prestataire
         return $this->contact;
     }
 
-    public function setContact(?Contact $contact): static
+    public function setContact(?Contact $contact): self
     {
         $this->contact = $contact;
 
