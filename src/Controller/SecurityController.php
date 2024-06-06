@@ -25,54 +25,52 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SecurityController extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils, Security $security, Request $request ): Response
+    public function login(AuthenticationUtils $authenticationUtils, Security $security, Request $request): Response
     {
- 
+        // Vérifier si l'utilisateur est déjà authentifié
+        if ($security->isGranted('IS_AUTHENTICATED_FULLY')) {
+            // Rediriger vers la page d'accueil s'il est déjà authentifié
+            return $this->redirectToRoute('home.plan_mariage');
+        }
 
-    
-       if ($security->isGranted('ROLE_USER')) {
-        return $this->redirectToRoute('home.plan_mariage');
-         }
+        // $error = $authenticationUtils->getLastAuthenticationError();
+        $error = '';
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-           // $error = $authenticationUtils->getLastAuthenticationError();
-           $error = '';
-            $lastUsername = $authenticationUtils->getLastUsername();
-    
-            return $this->render('security/login.html.twig', [
-                'last_username' => $lastUsername,
-                'error'         => $error,
-            ]);
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ]);
     }
-    
-    #[Route('/deconnexion', name:'app_logout')]
+
+    #[Route('/deconnexion', name: 'app_logout')]
     public function logout()
     {
-        
     }
 
     #[Route('/inscr', name: 'app_inscr')]
-    public function inscription (Request $request, ObjectManager $manager, UserPasswordHasherInterface $passwordHasher, ): Response
+    public function inscription(Request $request, ObjectManager $manager, UserPasswordHasherInterface $passwordHasher,): Response
     {
         $user = new UserLogin();
         $form = $this->createForm(InscriptionType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $user = $form->getData();
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
-            
-            $user->setPassword($hashedPassword); 
+
+            $user->setPassword($hashedPassword);
 
             $newActive = new Activity();
 
             $user->getActivities()->add($newActive);
-            $new = $newActive->setUser($user);        
+            $new = $newActive->setUser($user);
 
 
 
@@ -80,48 +78,50 @@ class SecurityController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute('app_login');
-        } 
+        }
 
-        return $this->render('security/inscr.html.twig', 
-        [
-            'form'=> $form
-        ]);
-
+        return $this->render(
+            'security/inscr.html.twig',
+            [
+                'form' => $form
+            ]
+        );
     }
 
     #[Route('/mdp_oublie', name: 'app_mdp_oublie')]
-    public function mdp_oublie(Request $request, 
-                               UserLoginRepository $userLoginRepository, 
-                               TokenGeneratorInterface $tokenGeneratorInterface, 
-                               EntityManagerInterface $entityManager, 
-                               SendMailService $emailService, 
-                               MailerInterface $mailer): Response
-    {
+    public function mdp_oublie(
+        Request $request,
+        UserLoginRepository $userLoginRepository,
+        TokenGeneratorInterface $tokenGeneratorInterface,
+        EntityManagerInterface $entityManager,
+        SendMailService $emailService,
+        MailerInterface $mailer
+    ): Response {
         $form = $this->createForm(ResetPasswordType::class);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $userLoginRepository->findOneByEmail($form->get('email')->getData());
-    
+
             if ($user) {
                 $token = $tokenGeneratorInterface->generateToken();
-    
+
                 if ($token) {
                     $user->setResetToken($token);
                     $entityManager->persist($user);
                     $entityManager->flush();
-    
+
                     $url = $this->generateUrl('app_reset_pass', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
                     $context = compact('url', 'user');
-    
+
                     $email = (new Email())
-                            ->from('mixellorak9@gmail.com')
-                            ->to($user->getEmail())
-                            ->subject('Réinitialisation de mot de passe')
-                            ->html($this->renderView('security/passwordreset.html.twig', $context));
-    
+                        ->from('mixellorak9@gmail.com')
+                        ->to($user->getEmail())
+                        ->subject('Réinitialisation de mot de passe')
+                        ->html($this->renderView('security/passwordreset.html.twig', $context));
+
                     $mailer->send($email);
-    
+
                     $this->addFlash('success', 'Un email de réinitialisation de mot de passe a été envoyé.');
                     return $this->redirectToRoute('app_login');
                 } else {
@@ -131,46 +131,46 @@ class SecurityController extends AbstractController
                 $this->addFlash('danger', 'Utilisateur non trouvé.');
             }
         }
-    
+
         return $this->render('security/resetpassword.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
-    
+
     #[Route('oubliepassword/{token}', name: 'app_reset_pass')]
-    public function reset_pass(string $token, 
-                              Request $request, 
-                              UserLoginRepository $userLoginRepository, 
-                              UserPasswordHasherInterface $passwordHasher, 
-                              EntityManagerInterface $entityManager): Response
-    {
+    public function reset_pass(
+        string $token,
+        Request $request,
+        UserLoginRepository $userLoginRepository,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $entityManager
+    ): Response {
         $user = $userLoginRepository->findOneByResetToken($token);
-        
+
         if (!$user) {
             $this->addFlash('danger', 'Utilisateur non trouvé');
             return $this->redirectToRoute('app_login');
         }
-    
+
         $form = $this->createForm(ResetType::class);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setResetToken(null); 
+            $user->setResetToken(null);
             $user->setPassword($passwordHasher->hashPassword(
                 $user,
                 $form->get('password')->getData()
             ));
-            
+
             $entityManager->persist($user);
             $entityManager->flush();
-    
+
             $this->addFlash('success', 'Mot de passe réinitialisé avec succès.');
             return $this->redirectToRoute('app_login');
         }
-    
+
         return $this->render('security/resettypepassword.html.twig', [
             'passForm' => $form->createView()
         ]);
     }
-
 }

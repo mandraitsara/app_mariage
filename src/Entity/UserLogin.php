@@ -37,8 +37,8 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $resetToken = null;
 
-    #[ORM\Column(type: Types::JSON, nullable: true)]
-    private $roles = null;
+    #[ORM\Column(type: Types::JSON)]
+    private array $roles = []; // Initialiser par défaut avec un tableau vide
 
     /**
      * @var Collection<int, Activity>
@@ -49,6 +49,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->activities = new ArrayCollection();
+        $this->roles = ['ROLE_USER']; // Initialisation par défaut avec le rôle ROLE_USER
     }
 
     public function getId(): ?int
@@ -123,12 +124,11 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(?array $roles): static
+    public function setRoles(array $roles): static
     {
         $this->roles = $roles;
         return $this;
     }
-
 
     public function getUserIdentifier(): string
     {

@@ -16,22 +16,18 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
         main:
             lazy: true
             provider: users
             form_login:
                 login_path: app_login
                 check_path: app_login
+                default_target_path: home.plan_mariage # Rediriger ici après la connexion réussie
             logout :
                 path : app_logout
                 target: home.plan_mariage
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-
-

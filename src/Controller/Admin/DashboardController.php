@@ -2,19 +2,21 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Categorie;
 use App\Entity\Contact;
-use App\Entity\Prestataire;
+use App\Entity\Categorie;
 use App\Entity\UserLogin;
+use App\Entity\Prestataire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
         return $this->render('admin/dashboard.html.twig');
@@ -23,7 +25,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle(' Mariage - Administration')
+            ->setTitle('Mariage - Administration')
             ->renderContentMaximized();
     }
 
@@ -31,8 +33,8 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', UserLogin::class);
-        yield MenuItem::linkToCrud('Prestataire', 'fa-solid fa-right-to-bracket', Prestataire::class);
-        yield MenuItem::linkToCrud('Catégorie', 'fa-solid fa-timeline-arrow', Categorie::class);
-        yield MenuItem::linkToCrud('Contact', 'fa-solid fa-address-book', Contact::class);
+        yield MenuItem::linkToCrud('Fournisseurs', 'fa fa-suitcase', Prestataire::class);
+        yield MenuItem::linkToCrud('Catégories', 'fa fa-list', Categorie::class);
+        yield MenuItem::linkToCrud('Contacts', 'fa fa-address-book', Contact::class);
     }
 }

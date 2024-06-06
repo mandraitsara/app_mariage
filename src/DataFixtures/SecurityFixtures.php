@@ -20,11 +20,11 @@ class SecurityFixtures extends Fixture
     {
         // Créer un utilisateur avec le rôle ADMIN
         $admin = new UserLogin();
-        $admin->setUsername('Administrateur de Mariage')
-            ->setEmail('aministrateur+1@gmail.com')
-            ->setRoles(null);
+        $admin->setUsername('Administrateur')
+            ->setEmail('administrateur+1@gmail.com')
+            ->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
 
-        // Encodage du mot de passe
+        // Encodage du mot de pass
         $password = $this->passwordHasher->hashPassword($admin, 'admintest');
         $admin->setPassword($password);
 
