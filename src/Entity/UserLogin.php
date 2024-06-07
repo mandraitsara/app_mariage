@@ -37,7 +37,7 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $resetToken = null;
 
-    #[ORM\Column(type: Types::JSON)]
+    #[ORM\Column(length: 255, nullable:true)]
     private array $roles = []; // Initialiser par défaut avec un tableau vide
 
     /**

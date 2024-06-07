@@ -33,9 +33,7 @@ class HomeController extends AbstractController
         $activity = $entityManager->getRepository(Activity::class);
 
         //$activite = $activity->activityId($user_id)->getUser();
-        //$is_activated = $activite->getId();
-
-        var_dump($username);
+        //$is_activated = $activite->getId();      
 
 
 

@@ -1,10 +1,19 @@
 {% extends 'base.html.twig'%}
-
-
+{% block navbar %}
+{%endblock%}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('./styles/liste.css')}}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"/>
+              
+{% endblock %}
 {% block javascripts %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/podpper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 {% endblock %}
 
 {% block body %}
@@ -23,12 +32,12 @@
                             aria-controls="profile" aria-selected="false">Liste des invités</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                            aria-controls="contact" aria-selected="false">Réception</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" id="budget-tab" data-toggle="tab" href="#budget" role="tab"
                             aria-controls="budget" aria-selected="false">Budget</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                            aria-controls="contact" aria-selected="false">Tous les prestataires</a>
                     </li>
                 </ul>
             </div>
@@ -45,12 +54,12 @@
 
                     <!-- menu-collapse-1 -->
                     <div class="box-mari text-center p-5" style="border: 1px solid #00000015;">
-                        <span class="arrow-icon" data-toggle="collapse" data-target="#demo"><img src="{{asset("/icons/arrow.svg")}}" class="img-arrow" alt="arrow" style="width: 20px;margin:5px;">Couple</span>
+                        <span class="arrow-icon" data-toggle="collapse" data-target="#demo"><img src="./assets/arrow.svg" class="img-arrow" alt="arrow" style="width: 20px;margin:5px;">Couple</span>
                         <span class="pen-modif"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
                         <div class="collapse" id="demo">
                             <a href="#">Parametré le nom et <br>prénom des mariées</a>
                             <div class="img-valentine">
-                                <img src="{{asset("/icons/valentine.svg")}} alt="valentine" style="width: 250px;">
+                                <img src="./assets/valentine.svg" alt="valentine" style="width: 250px;">
                             </div>
                         </div>
                     </div>
@@ -58,7 +67,7 @@
 
                     <!-- menu-collapse-2 -->
                     <div class="box-about-event p-5">
-                        <span class="arrow-icon2" data-toggle="collapse" data-target="#demo2"><img src="{{asset("/icons/arrow.svg")}}" class="img-arrow2" alt="arrow" style="width:20px;margin:5px;">Information de l'événement</span>
+                        <span class="arrow-icon2" data-toggle="collapse" data-target="#demo2"><img src="./assets/arrow.svg" class="img-arrow2" alt="arrow" style="width:20px;margin:5px;">Information de l'événement</span>
                         <span class="pen-modif2"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
                         <div class="collapse" id="demo2">
                             <div class="row p-3">
@@ -76,7 +85,7 @@
                     
                     <!-- menu-collapse-3 -->
                     <div class="add-guest p-5">
-                        <span class="arrow-icon3" data-toggle="collapse" data-target="#demo3"><img src="{{asset('/icons/arrow.svg')}}" class="img-arrow3" alt="arrow" style="width:20px;margin:5px;">Invités</span>
+                        <span class="arrow-icon3" data-toggle="collapse" data-target="#demo3"><img src="./assets/arrow.svg" class="img-arrow3" alt="arrow" style="width:20px;margin:5px;">Invités</span>
                         <span class="pen-modif3"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
                         <div class="collapse" id="demo3">
                             <div class="p-3 text-center">
@@ -103,9 +112,9 @@
                             <img src="./assets/shoes-man.svg" alt="shoes-man" style="width: 75px;">
                             <p style="font-weight: bold;">Les invités du marié</p>
                             <form class="add-guest-form  pt-3">
-                                <input type="text" id="name" class="mb-3" placeholder="Nom du marié">
+                                <input type="text" id="name_epouse" name="name_epouse" class="mb-3" placeholder="Nom du marié">
                                 <i class="fa fa-user icon"></i>
-                                <input type="text" id="name" placeholder="Prénom du marié">
+                                <input type="text" id="lastname_epouse" name="lastname_epouse" placeholder="Prénom du marié">
                                 <i class="fa fa-user icon"></i>
                                 <div class="m-5">
                                     <button class="btn-add-guest text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
@@ -113,7 +122,7 @@
                             </form>
                         </div>
                         <div class="col-md-6 text-center">
-                            <img src="{{asset('shoes-woman.svg')}}" alt="shoes-woman" style="width: 75px;">
+                            <img src="./assets/shoes-woman.svg" alt="shoes-woman" style="width: 75px;">
                             <p style="font-weight: bold;">Les invités de la mariée</p>
                             <form class="add-guest-form  pt-3">
                                 <input type="text" id="name" class="mb-3" placeholder="Nom du mariée">
@@ -144,10 +153,123 @@
                     </div>
                     
                 </div>
-                <!-- Réception -->
+                <!-- Tous les prestataires -->
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <h4>Contenu pour Menu 3</h4>
-                    <p>Ceci est le contenu du troisième onglet.</p>
+                    <div class="row">
+                        <div class="text-center">
+                            <h4>Tous les vendeurs</h4>
+                            <p>
+                                Explorez notre vaste répertoire de prestataires, d'emplacements et de services idéaux pour votre mariage en
+                                découvrant notre base de données étendue de professionnels de confiance. De plus, personnalisez votre liste en
+                                ajoutant des vendeurs sur mesure pour garantir que chaque détail de votre journée soit en accord avec votre
+                                vision personnelle.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-12 mb-5 d-flex justify-content-center">
+                            <div class="add-prest p-5 text-center">
+                                <span><i class="fa-solid fa-plus"></i> <br> Ajouter des prestataires</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-1">
+                                <div class="show-prest text-center" id="openModalBtn"><i class="fa-regular fa-eye"></i><span>Afficher les détails</span></div>
+                                <span class="ellipsis"><img src="./assets/ellipsis.svg" alt="ellipsis"></span>
+                                <p>Wedding planner</p>
+                                <h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-2">
+                                <p>Wedding planner</p>
+                                <h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-3">
+                                <p>Wedding planner</p>
+                                <h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-4">
+                                <p>Wedding planner</p>
+                                <h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="myModal" class="modal">
+                                    <div class="scrollBar">
+                                        <div class="modal-bloc">
+                                            <span id="closeModalBtn" class="close">&times;</span>
+                                            <div class="row">
+                                                <div class="bg-modal">
+                                                    <div class="head-prest" style="background-image: url(assets/pictures/test.png);">
+                                                        <div class="about-prest">
+                                                            <h4>Wedding Planner</h4>
+                                                            <h2>Harmony Weddings (Thailand) Co.,Ltd.</h2>
+                                                            <p>Bangkok, Thailand</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-3">
+                                                        <div class="col-md-8">
+                                                            <h4 class="border-bottom">A propos de</h4>
+                                                            <p class="pt-3">Welcome to Harmony Weddings Thailand, your premier destination wedding planning company in the heart of Thailand. We are dedicated to crafting unforgettable wedding experiences that are tailored to your dreams and budget. Whether you envision an intimate elopement surrounded by lush tropical landscapes or a grand celebration with your loved ones.</p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <h4 class="border-bottom">Contacts</h4>
+                                                            <div class="btnBloc pt-3">
+                                                                <p><button class="btn01">Ajouter au mariage</button></p>
+                                                                <p><button class="btn02">Demander un devis</button></p>
+                                                                <p><i class="fa-solid fa-phone"></i>+6 694 861-6634</p>
+                                                                <p style="color: #0b98eb;"><i class="fa-solid fa-envelope"></i>test24@gmail.com</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container">
+                                                        
+                                                        <div class="row pb-3">
+                                                            <div class="col-md-12">
+                                                                <h4 class="border-bottom">Photos et vidéos</h4>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <img style="width: 100%; margin-bottom:20px;" src="./assets/pictures/images/sar02.png" alt="">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <img style="width: 100%;" src="./assets/pictures/images/sar05.png" alt="">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <img style="width: 100%;" src="./assets/pictures/images/sar04.png" alt="">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <img style="width: 100%;" src="./assets/pictures/images/sar08.png" alt="">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <img style="width: 100%;" src="./assets/pictures/images/sar10.png" alt="">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <img style="width: 100%;" src="./assets/pictures/images/sar07.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                 </div>
                 <!-- Budget -->
                 <div class="tab-pane fade" id="budget" role="tabpanel" aria-labelledby="budget-tab">
@@ -166,7 +288,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 mt-3">
-                            <div class="container-search p-3" style="border: 1px solid #000;">
+                            <div class="container-search p-3" >
                                 <form class="search">
                                     <input class="filter" type="text" placeholder="Filtres...">
                                     <i class="fa fa-search"></i>
@@ -176,57 +298,245 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="beauty p-3" style="border: 1px solid #000;">
-                                <span class="arrow-budget" id="el-01" data-toggle="collapse" data-target="#demo10"><img src="{{asset('icons/arrow.svg')}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h4>Beauté et santé</h4>
+                            <div class="beauty p-3" >
+                                <span class="arrow-budget" id="el-01" data-toggle="collapse" data-target="#demo10"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h5>Beauté et santé</h5>
                                 <div class="beautyChildParent" class="collapse" id="demo10">
                                     <div class="beautyChild01">
-                                        <div>
-                                            <p>Titre</p>
-                                            <p>Coiffure et maquillage</p>
-                                        </div>
-                                        <div>
-                                            <p>Coût actuel</p>
-                                            <input type="text">
-                                        </div>
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-right">Coût actuel</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Coiffure et maquillage</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="beauty p-3" style="border: 1px solid #000;">
+                            <div class="beauty p-3" >
                                 <span class="arrow-budget" id="el-02" data-toggle="collapse" data-target="#demo11"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h4>Robe et tenue vestimentaire - Mariée</h4>
+                                <h5>Robe et tenue vestimentaire - Mariée</h5>
                                 <div class="beautyChildParent" class="collapse" id="demo11">
                                     <div class="beautyChild01">
-                                        <div>
-                                            <p>Titre</p>
-                                            <p>Coiffure et maquillage</p>
-                                        </div>
-                                        <div>
-                                            <p>Coût actuel</p>
-                                            <input type="text">
-                                        </div>
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-right">Coût actuel</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Accessoires de la mariée</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Habillage et retouches</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tête et voile</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="beauty p-3" style="border: 1px solid #000;">
+                            <div class="beauty p-3" >
                                 <span class="arrow-budget" id="el-03" data-toggle="collapse" data-target="#demo12"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h4>Costume - Marié</h4>
+                                <h5>Costume - Marié</h5>
                                 <div class="beautyChildParent" class="collapse" id="demo12">
                                     <div class="beautyChild01">
-                                        <div>
-                                            <p>Titre</p>
-                                            <p>Coiffure et maquillage</p>
-                                        </div>
-                                        <div>
-                                            <p>Coût actuel</p>
-                                            <input type="text">
-                                        </div>
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-right">Coût actuel</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Accessoires de la mariée</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Costume de marié</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="beauty p-3" >
+                                <span class="arrow-budget" id="el-04" data-toggle="collapse" data-target="#demo13"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h5>Restauration</h5>
+                                <div class="beautyChildParent" class="collapse" id="demo13">
+                                    <div class="beautyChild01">
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-right">Coût actuel</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Boissons et barmans</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Alimentation et services</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="beauty p-3" >
+                                <span class="arrow-budget" id="el-05" data-toggle="collapse" data-target="#demo14"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h5>Bijoux</h5>
+                                <div class="beautyChildParent" class="collapse" id="demo14">
+                                    <div class="beautyChild01">
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-right">Coût actuel</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Sa bague</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Son anneau</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="beauty p-3" >
+                                <span class="arrow-budget" id="el-06" data-toggle="collapse" data-target="#demo15"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h5>Animateur</h5>
+                                <div class="beautyChildParent" class="collapse" id="demo15">
+                                    <div class="beautyChild01">
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-right">Coût actuel</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Musiciens de cérémonie / Orchestre</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chanteuse</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>DJ</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="beauty p-3" >
+                                <span class="arrow-budget" id="el-07" data-toggle="collapse" data-target="#demo16"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h5>Fleurs</h5>
+                                <div class="beautyChildParent" class="collapse" id="demo16">
+                                    <div class="beautyChild01">
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-right">Coût actuel</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Bouquet de la mariée</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Bouquets de demoiselles d'honneur</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Décorations de la cérémonie</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Boutonnières de marié et de garçon d'honneur</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Décorations de réception et centres de table</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="beauty p-3" >
+                                <span class="arrow-budget" id="el-08" data-toggle="collapse" data-target="#demo17"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h5>Photographe et Vidéaste</h5>
+                                <div class="beautyChildParent" class="collapse" id="demo17">
+                                    <div class="beautyChild01">
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-right">Coût actuel</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Photographe</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vidéographe</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="beauty p-3" >
+                                <span class="arrow-budget" id="el-09" data-toggle="collapse" data-target="#demo18"><img src="./assets/arrow.svg" style="width:20px;margin:5px;" alt="arrow01"> </span>
+                                <h5>Transport</h5>
+                                <div class="beautyChildParent" class="collapse" id="demo18">
+                                    <div class="beautyChild01">
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-right">Coût actuel</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Navette ou stationnement pour les invités</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Location de limousine ou de voiture</td>
+                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="total text-right p-3">
+                                <p>Total actuel</p>
+                                <h4> {{2200000}} <span style="font-style:italic">Ariary</span></h4>
+                                <hr>
+                                <h2 class="text-secondary">Budget {{ 1500000 }} <span style="font-style:italic">Ariary</span> </h2>
                             </div>
                         </div>
                     </div>
@@ -236,5 +546,27 @@
     </div>
 </div>
 
+<input id="update_id" value="1">
+<script>
+    $("#name_epouse").change(function(){        
+        let data ={name_epouse: $('#name_epouse').val()};
+        $.ajax({
+            url:"/activite/new/"+ $("#update_id").val(),
+            method: "PUT",
+            data: data,
+            success: function(response)
+            {
+                $("#name_epouse").val();
+            }
+
+        })
+        
+
+    })
+    $("#lastname_epouse").keypress(function(){
+        
+    })
+
+</script>
 
 {%endblock%}

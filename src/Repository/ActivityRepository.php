@@ -54,5 +54,16 @@ class ActivityRepository extends ServiceEntityRepository
                 ->getOneOrNullResult();
     }
 
+    /**
+     * @return Activity[] Returns an array of Activity objects
+    */
+    // public function find($id): ?Activity
+    // {
+    //     return $this->createQueryBuilder('p')
+    //     ->andWhere('p.id=:id')
+    //     ->setParameter('id',$id)
+    //     ->getQuery()
+    //     ->getOneOrNullResult();
+    // }
     
 }

@@ -21,68 +21,54 @@ class ComptePrincipaleController extends AbstractController
     public function comptePrincipale(AuthenticationUtils $authenticationUtils, UserInterface $userInterface, EntityManagerInterface $entityManager)
     {
         global $is_activated, $user_id, $activite;
-
         $templates = 'compte_principale.html.twig';
-        $user_id = $userInterface->getId();
+        $Id_Name= $userInterface->getId();
+        $activity = $entityManager->getRepository(Activity::class)
+                    ->activityId($Id_Name)
+                    ->getUser()
+                    ->getUsername();
+
         $username =  $authenticationUtils->getLastUsername();
-
-        $activity = $entityManager->getRepository(Activity::class);
-        $activite = $activity->activityId($user_id);
-
-        if ($activite != null) {
-            $activite = $activity->activityId($user_id)->getUser();
-            $is_activated = $activite->getUsername();
-        }/*
-            else{
-                $newActive = new Activity();
-                $users = new UserLogin();
-                $users->getActivities()->add($newActive);
-                $new = $newActive->setUser($users);
-                var_dump($new);
-                $entityManager->persist($new);
-                $entityManager->flush();        
-
-                
-        }*/
-
-
-        var_dump($is_activated);
-
-        if ($username == null) {
+            
+        if ($username == null){
             return $this->redirectToRoute('app_login');
-        }
-
-
-
+        } 
+        
         $content = [
             'username' => $username,
-            'is_activated' => $user_id,
-
-
-
-
+            'is_activated' => $activity,
         ];
-        return $this->render($templates, $content);
+        return $this->render($templates,$content);
     }
 
     #[Route('activite/', name: "activite.app_mariage")]
     public function activite()
     {
         $templates = 'activity.html.twig';
-
-
-
-
         return $this->render($templates);
     }
 
     //methods:['POST']
-    #[Route('activite/new', name: 'active_new.app_mariage')]
-    public function activiteNew(Request $request, EntityManagerInterface $entityManager)
+    #[Route('activite/new/{id}', name: 'active_new.app_mariage', methods:['PUT'])]
+    public function activiteEdit(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface, int $id)
     {
-        $entityManager->getRepository(Activity::class);
+        $project = $entityManager->getRepository(Activity::class)->find($id);
+        
+        if(!$project){
+            return $this->json('No project found for id' . $id, 404);
+        }
 
-        $activite = new Activity();
-        return $this->json("created new project successfully");
+        $project->setNomF($request->request->get('name_epouse'));        
+        $project->setNomH($request->request->get('lastname_epouse'));
+        $entityManager->flush();
+        $data = [
+            'id'=>$project->getId(),
+            'name_epouse' => $project->getNomF(),
+            'lastname_epouse'=>$project->getNomH()
+        ];
+
+        
+
+        return $this->json($data);
     }
 }

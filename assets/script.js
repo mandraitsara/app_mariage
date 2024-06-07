@@ -16,3 +16,5 @@ const newProjectBox = document.querySelector('.new-project');
                 box.style.display = "none";
             }
 })
+
+
