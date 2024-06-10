@@ -49,7 +49,7 @@ class ComptePrincipaleController extends AbstractController
         var_dump($userID)  ;
         $activiteID = $entityManager->getRepository(Activity::class)->activityId($userID)->getId();
         $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF();
-        $PrenomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getPrenomH();
+        $PrenomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getPrenomF();
         $content = [
             'idUser' => $activiteID,
             'nom_f'=>$NomF,

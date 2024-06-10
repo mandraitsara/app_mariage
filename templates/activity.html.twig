@@ -549,7 +549,13 @@
 <input id="update_id" value="{{idUser}}">
 <script>
     $("#name_epoux").change(function(){        
-        let data ={name_epoux: $('#name_epoux').val()};  
+        let data ={
+            
+            name_epouse: $('#name_epouse').val(),
+            lastname_epouse: $('#lastname_epouse').val(),
+            name_epoux: $('#name_epoux').val(),
+            lastname_epoux: $('#lastname_epoux').val(),
+        };  
         console.log(data)      
         $.ajax({
             url:"/activite/new/"+ $("#update_id").val(),
@@ -568,7 +574,12 @@
     })
 
     $("#lastname_epoux").change(function(){        
-        let data ={lastname_epoux: $('#lastname_epoux').val()};        
+        let data ={
+            name_epouse: $('#name_epouse').val(),
+            lastname_epouse: $('#lastname_epouse').val(),
+            name_epoux: $('#name_epoux').val(),
+            lastname_epoux: $('#lastname_epoux').val(),
+        };        
         $.ajax({
             url:"/activite/new/"+ $("#update_id").val(),
             method: "PUT",
@@ -588,9 +599,11 @@
         let data ={
             name_epouse: $('#name_epouse').val(),
             lastname_epouse: $('#lastname_epouse').val(),
+            name_epoux: $('#name_epoux').val(),
+            lastname_epoux: $('#lastname_epoux').val(),
     
     };        
-    console.log(data);
+    
         $.ajax({
             url:"/activite/new/"+ $("#update_id").val(),
             method: "PUT",
@@ -608,8 +621,13 @@
     })
 
     $("#lastname_epouse").change(function(){        
-        let data ={lastname_epouse: $('#lastname_epouse').val()};  
-        console.log(data)
+        let data ={
+            name_epouse: $('#name_epouse').val(),
+            lastname_epouse: $('#lastname_epouse').val(),
+            name_epoux: $('#name_epoux').val(),
+            lastname_epoux: $('#lastname_epoux').val(),
+        };  
+        
         $.ajax({
             url:"/activite/new/"+ $("#update_id").val(),
             method: "PUT",
