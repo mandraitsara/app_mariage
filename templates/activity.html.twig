@@ -111,7 +111,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 border-right text-center">
-                            <img src="./assets/shoes-man.svg" alt="shoes-man" style="width: 75px;">
+                            <img src="{{asset('./icons/shoes-man.svg')}}" alt="shoes-man" style="width: 75px;">
                             <p style="font-weight: bold;">Les invités du marié</p>
                             <form class="add-guest-form  pt-3">
                                 <input type="text" id="name_epoux" name="name_epoux" value="{{nomHomme}}" class="mb-3" placeholder="Nom du marié">
@@ -130,7 +130,7 @@
                             </form>
                         </div>
                         <div class="col-md-6 text-center">
-                            <img src="./assets/shoes-woman.svg" alt="shoes-woman" style="width: 75px;">
+                            <img src="{{asset('./icons/shoes-woman.svg')}}" alt="shoes-woman" style="width: 75px;">
                             <p style="font-weight: bold;">Les invités de la mariée</p>
                             <form class="add-guest-form  pt-3">
                                 
@@ -193,7 +193,7 @@
                         <div class="col-md-3">
                             <div class="card card-1">
                                 <div class="show-prest text-center" id="openModalBtn"><i class="fa-regular fa-eye"></i><span>Afficher les détails</span></div>
-                                <span class="ellipsis"><img src="./assets/ellipsis.svg" alt="ellipsis"></span>
+                                <span class="ellipsis"><img src="{{asset('./icons/ellipsis.svg')}}" alt="ellipsis"></span>
                                 <p>Wedding planner</p>
                                 <h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
                             </div>
@@ -699,12 +699,10 @@ const btnAddGuestF= document.querySelector('.btn-add-guestF')
 const selectElementF = document.querySelector('.selectBlocF')
 const selectElementH = document.querySelector('.selectBlocH')
 
-$(".btn-add-guestH").click(function(){
-    alert('hello')
-})
+
 
   btnAddGuestH.addEventListener('click', function(e){
-    alert('hello')
+    
         e.preventDefault()
         if(selectElementH.style.display === "block") {
             selectElementH.style.display = "none";
