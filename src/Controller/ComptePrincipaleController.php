@@ -42,32 +42,66 @@ class ComptePrincipaleController extends AbstractController
     }
 
     #[Route('activite/', name: "activite.app_mariage")]
-    public function activite()
+    public function activite(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface)
     {
         $templates = 'activity.html.twig';
-        return $this->render($templates);
+        $userID = $userInterface->getId();      
+        var_dump($userID)  ;
+        $activiteID = $entityManager->getRepository(Activity::class)->activityId($userID)->getId();
+        $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF();
+        $PrenomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getPrenomH();
+        $content = [
+            'idUser' => $activiteID,
+            'nom_f'=>$NomF,
+            'prenom_f'=>$PrenomF,
+        ];
+        return $this->render($templates, $content);
     }
 
+   
     //methods:['POST']
     #[Route('activite/new/{id}', name: 'active_new.app_mariage', methods:['PUT'])]
     public function activiteEdit(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface, int $id)
     {
         $project = $entityManager->getRepository(Activity::class)->find($id);
         
-        if(!$project){
-            return $this->json('No project found for id' . $id, 404);
-        }
+        if($project)
+        {
+            $project->setNomH($request->request->get('name_epoux'));      
+            $project->setPrenomH($request->request->get('lastname_epoux'));
+            $project->setNomF($request->request->get('name_epouse'));
+            $project->setPrenomF($request->request->get('lastname_epouse'));
 
-        $project->setNomF($request->request->get('name_epouse'));        
-        $project->setNomH($request->request->get('lastname_epouse'));
-        $entityManager->flush();
-        $data = [
-            'id'=>$project->getId(),
-            'name_epouse' => $project->getNomF(),
-            'lastname_epouse'=>$project->getNomH()
-        ];
+            $entityManager->flush();
 
+            $data = [
+            
+                'id'=>$project->getId(),
+                'name_epoux' => $project->getTemoinF(),
+                'lastname_epoux'=>$project->getPrenomH(),
+                'name_epouse' => $project->getNomF(),
+                'lastname_epouse'=>$project->getPrenomF()
+            ];        
+
+           
+
+            return $this->json($data);
+        }     
+
+    
+
+      
         
+        $data = [
+            
+            'id'=>$project->getId(),
+            'name_epoux' => $project->getNomH(),
+            'lastname_epoux'=>$project->getPrenomH(),
+            'name_epouse' => $project->getNomF(),
+            'lastname_epouse'=>$project->getPrenomF()
+        ];
+        
+   
 
         return $this->json($data);
     }

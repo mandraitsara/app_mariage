@@ -65,6 +65,12 @@ class Activity
     #[ORM\JoinColumn(nullable: true)]
     private ?UserLogin $user = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $prenom_f = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $prenom_h = null;
+
     // Getters and Setters...
 
     public function getId(): ?int
@@ -256,6 +262,30 @@ class Activity
     public function setUser(?UserLogin $user): self
     {
         $this->user = $user;
+        return $this;
+    }
+
+    public function getPrenomF(): ?string
+    {
+        return $this->prenom_f;
+    }
+
+    public function setPrenomF(?string $prenom_f): static
+    {
+        $this->prenom_f = $prenom_f;
+
+        return $this;
+    }
+
+    public function getPrenomH(): ?string
+    {
+        return $this->prenom_h;
+    }
+
+    public function setPrenomH(?string $prenom_h): static
+    {
+        $this->prenom_h = $prenom_h;
+
         return $this;
     }
 }
