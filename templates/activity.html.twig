@@ -112,9 +112,9 @@
                             <img src="./assets/shoes-man.svg" alt="shoes-man" style="width: 75px;">
                             <p style="font-weight: bold;">Les invités du marié</p>
                             <form class="add-guest-form  pt-3">
-                                <input type="text" id="name_epoux" name="name_epoux" value="" class="mb-3" placeholder="Nom du marié">
+                                <input type="text" id="name_epoux" name="name_epoux" value="{{nomHomme}}" class="mb-3" placeholder="Nom du marié">
                                 <i class="fa fa-user icon"></i>
-                                <input type="text" id="lastname_epoux" name="lastname_epoux" placeholder="Prénom du marié">
+                                <input type="text" id="lastname_epoux" name="lastname_epoux"  value="{{prenomHomme}}" placeholder="Prénom du marié">
                                 <i class="fa fa-user icon"></i>
                                 <div class="m-5">
                                     <button class="btn-add-guest text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
@@ -125,9 +125,9 @@
                             <img src="./assets/shoes-woman.svg" alt="shoes-woman" style="width: 75px;">
                             <p style="font-weight: bold;">Les invités de la mariée</p>
                             <form class="add-guest-form  pt-3">
-                                <input type="text" id="name_epouse" name="name_epouse" valeur="{{nom_f}}" class="mb-3" placeholder="Nom du mariée">
+                                <input type="text" id="name_epouse" name="name_epouse" valeur="{{nomFemme}}" class="mb-3" placeholder="Nom du mariée">
                                 <i class="fa fa-user icon" style="color: #dd8090;"></i>
-                                <input type="text" id="lastname_epouse" name="lastname_epouse" value="{{prenom_f}}" placeholder="Prénom du mariée">
+                                <input type="text" id="lastname_epouse" name="lastname_epouse" value="{{prenomFemme}}" placeholder="Prénom du mariée">
                                 <i class="fa fa-user icon" style="color: #dd8090;"></i>
                                 <div class="m-5">
                                     <button class="btn-add-guest text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
@@ -546,11 +546,11 @@
     </div>
 </div>
 
-<input id="update_id" value="{{idUser}}">
+<input type="hidden" id="update_id" value="{{idUser}}">
 <script>
     $("#name_epoux").change(function(){        
         let data ={
-            
+
             name_epouse: $('#name_epouse').val(),
             lastname_epouse: $('#lastname_epouse').val(),
             name_epoux: $('#name_epoux').val(),

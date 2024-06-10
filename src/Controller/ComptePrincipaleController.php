@@ -50,10 +50,14 @@ class ComptePrincipaleController extends AbstractController
         $activiteID = $entityManager->getRepository(Activity::class)->activityId($userID)->getId();
         $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF();
         $PrenomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getPrenomF();
+        $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();
+        $PrenomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getPrenomH();        
         $content = [
             'idUser' => $activiteID,
-            'nom_f'=>$NomF,
-            'prenom_f'=>$PrenomF,
+            'nomFemme'=>$NomF,
+            'prenomFemme'=>$PrenomF,
+            'nomHomme'=>$NomH,
+            'prenomHomme'=>$PrenomH,
         ];
         return $this->render($templates, $content);
     }
