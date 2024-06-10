@@ -75,6 +75,7 @@ class ComptePrincipaleController extends AbstractController
             $project->setPrenomH($request->request->get('lastname_epoux'));
             $project->setNomF($request->request->get('name_epouse'));
             $project->setPrenomF($request->request->get('lastname_epouse'));
+            
 
             $entityManager->flush();
 
@@ -90,9 +91,7 @@ class ComptePrincipaleController extends AbstractController
            
 
             return $this->json($data);
-        }     
-
-    
+        }   
 
       
         

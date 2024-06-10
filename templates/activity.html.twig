@@ -125,7 +125,8 @@
                             <img src="./assets/shoes-woman.svg" alt="shoes-woman" style="width: 75px;">
                             <p style="font-weight: bold;">Les invités de la mariée</p>
                             <form class="add-guest-form  pt-3">
-                                <input type="text" id="name_epouse" name="name_epouse" valeur="{{nomFemme}}" class="mb-3" placeholder="Nom du mariée">
+                                
+                                <input type="text" id="name_epouse" name="name_epouse" value="{{nomFemme}}" class="mb-3" placeholder="Nom du mariée">
                                 <i class="fa fa-user icon" style="color: #dd8090;"></i>
                                 <input type="text" id="lastname_epouse" name="lastname_epouse" value="{{prenomFemme}}" placeholder="Prénom du mariée">
                                 <i class="fa fa-user icon" style="color: #dd8090;"></i>
@@ -139,7 +140,7 @@
                         <div class="col-12">
                             <div class="guest-sum p-3">
                                 <p class="text-center">Ration par côtés</p>
-                                <h4 class="text-center" style="font-weight: bold;"> {1} | {2}</h4>
+                                <h4 class="text-center" style="font-weight: bold;"> <span id="info_femme">0</span> | <span id="info_homme">0</span></h4>                                
                                 <h4 class="text-center"> Les invités {2}</h4>
                                 <h4 class="text-center"> Total des invités {0}</h4>
                             </div>
@@ -548,15 +549,21 @@
 
 <input type="hidden" id="update_id" value="{{idUser}}">
 <script>
-    $("#name_epoux").change(function(){        
+    $("#name_epoux").change(function(){   
+        if ($("#name_epoux").length>0)
+        {
+            let info_femme = $("#info_femme").text()
+            let calcule = parseFloat(info_femme) + 1
+            $("#info_femme").text(calcule)
+        }
+        
         let data ={
 
             name_epouse: $('#name_epouse').val(),
             lastname_epouse: $('#lastname_epouse').val(),
             name_epoux: $('#name_epoux').val(),
             lastname_epoux: $('#lastname_epoux').val(),
-        };  
-        console.log(data)      
+        };              
         $.ajax({
             url:"/activite/new/"+ $("#update_id").val(),
             method: "PUT",
@@ -573,7 +580,14 @@
 
     })
 
-    $("#lastname_epoux").change(function(){        
+    $("#lastname_epoux").change(function(){    
+        if ($("#lastname_epoux").length>0)
+        {
+            let info_femme = $("#info_femme").text()
+            let calcule = parseFloat(info_femme) + 1
+            $("#info_femme").text(calcule)
+        }
+            
         let data ={
             name_epouse: $('#name_epouse').val(),
             lastname_epouse: $('#lastname_epouse').val(),
@@ -595,7 +609,18 @@
 
     })
 
-    $("#name_epouse").change(function(){        
+    $("#name_epouse").change(function(){           
+        if ($("#name_epouse").val() !="")
+        {
+            let info_femme = $("#info_homme").text()
+            let calcule = parseFloat(info_femme) + 1
+            $("#info_homme").text(calcule)
+        } else{
+            let info_femme = $("#info_homme").text()
+            let calcule = parseFloat(info_femme) - 1
+            $("#info_homme").text(calcule)
+        }
+             
         let data ={
             name_epouse: $('#name_epouse').val(),
             lastname_epouse: $('#lastname_epouse').val(),
@@ -620,13 +645,19 @@
 
     })
 
-    $("#lastname_epouse").change(function(){        
+    $("#lastname_epouse").change(function(){    
+        if ($("#lastname_epouse").length>0)
+        {
+            let info_femme = $("#info_homme").text()
+            let calcule = parseFloat(info_femme) + 1
+            $("#info_homme").text(calcule)
+        }    
         let data ={
             name_epouse: $('#name_epouse').val(),
             lastname_epouse: $('#lastname_epouse').val(),
             name_epoux: $('#name_epoux').val(),
             lastname_epoux: $('#lastname_epoux').val(),
-        };  
+        };
         
         $.ajax({
             url:"/activite/new/"+ $("#update_id").val(),
