@@ -12,7 +12,9 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{{asset('./js/active.js')}}">
+
 
 {% endblock %}
 
@@ -54,12 +56,12 @@
 
                     <!-- menu-collapse-1 -->
                     <div class="box-mari text-center p-5" style="border: 1px solid #00000015;">
-                        <span class="arrow-icon" data-toggle="collapse" data-target="#demo"><img src="./assets/arrow.svg" class="img-arrow" alt="arrow" style="width: 20px;margin:5px;">Couple</span>
+                        <span class="arrow-icon" data-toggle="collapse" data-target="#demo"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow" alt="arrow" style="width: 20px;margin:5px;">Couple</span>
                         <span class="pen-modif"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
                         <div class="collapse" id="demo">
                             <a href="#">Parametré le nom et <br>prénom des mariées</a>
                             <div class="img-valentine">
-                                <img src="./assets/valentine.svg" alt="valentine" style="width: 250px;">
+                                <img src="{{asset('./icons/valentine.svg')}}" alt="valentine" style="width: 250px;">
                             </div>
                         </div>
                     </div>
@@ -67,7 +69,7 @@
 
                     <!-- menu-collapse-2 -->
                     <div class="box-about-event p-5">
-                        <span class="arrow-icon2" data-toggle="collapse" data-target="#demo2"><img src="./assets/arrow.svg" class="img-arrow2" alt="arrow" style="width:20px;margin:5px;">Information de l'événement</span>
+                        <span class="arrow-icon2" data-toggle="collapse" data-target="#demo2"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow2" alt="arrow" style="width:20px;margin:5px;">Information de l'événement</span>
                         <span class="pen-modif2"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
                         <div class="collapse" id="demo2">
                             <div class="row p-3">
@@ -85,7 +87,7 @@
                     
                     <!-- menu-collapse-3 -->
                     <div class="add-guest p-5">
-                        <span class="arrow-icon3" data-toggle="collapse" data-target="#demo3"><img src="./assets/arrow.svg" class="img-arrow3" alt="arrow" style="width:20px;margin:5px;">Invités</span>
+                        <span class="arrow-icon3" data-toggle="collapse" data-target="#demo3"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow3" alt="arrow" style="width:20px;margin:5px;">Invités</span>
                         <span class="pen-modif3"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
                         <div class="collapse" id="demo3">
                             <div class="p-3 text-center">
@@ -116,8 +118,14 @@
                                 <i class="fa fa-user icon"></i>
                                 <input type="text" id="lastname_epoux" name="lastname_epoux"  value="{{prenomHomme}}" placeholder="Prénom du marié">
                                 <i class="fa fa-user icon"></i>
-                                <div class="m-5">
-                                    <button class="btn-add-guest text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
+                                <div class="m-5">                                    
+                                    <button class="btn-add-guestH text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
+                                            <div class="selectBlocH text-left">
+                                                <p>Garçon d'honneur</p>
+                                                <p>Parent</p>                                           
+                                                <p>Ami/Amie</p>
+                                            </div>
+
                                 </div>
                             </form>
                         </div>
@@ -131,7 +139,16 @@
                                 <input type="text" id="lastname_epouse" name="lastname_epouse" value="{{prenomFemme}}" placeholder="Prénom du mariée">
                                 <i class="fa fa-user icon" style="color: #dd8090;"></i>
                                 <div class="m-5">
-                                    <button class="btn-add-guest text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
+                                    <button class="btn-add-guestF text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
+                                            <div class="selectBlocF text-left">
+                                                <p>Demoiselle d'honneur</p>
+                                                <p>Parent</p>
+                                                <p>Famille proche</p>
+                                                <p>Ami/Amie</p>
+                                            </div>
+
+
+
                                 </div>
                             </form>
                         </div>
@@ -615,7 +632,7 @@
             let info_femme = $("#info_homme").text()
             let calcule = parseFloat(info_femme) + 1
             $("#info_homme").text(calcule)
-        } else{
+        }else{
             let info_femme = $("#info_homme").text()
             let calcule = parseFloat(info_femme) - 1
             $("#info_homme").text(calcule)
@@ -674,6 +691,39 @@
 
     })
     
+
+
+
+    const btnAddGuestH= document.querySelector('.btn-add-guestH')
+const btnAddGuestF= document.querySelector('.btn-add-guestF')
+const selectElementF = document.querySelector('.selectBlocF')
+const selectElementH = document.querySelector('.selectBlocH')
+
+$(".btn-add-guestH").click(function(){
+    alert('hello')
+})
+
+  btnAddGuestH.addEventListener('click', function(e){
+    alert('hello')
+        e.preventDefault()
+        if(selectElementH.style.display === "block") {
+            selectElementH.style.display = "none";
+        } else {
+            selectElementH.style.display = "block";
+        }
+  })
+
+//Femme :
+
+
+  btnAddGuestF.addEventListener('click', function(e){
+    e.preventDefault()
+    if(selectElementF.style.display === "block") {
+        selectElementF.style.display = "none";
+    } else {
+        selectElementF.style.display = "block";
+    }
+})
 
 </script>
 

@@ -46,7 +46,7 @@ class ComptePrincipaleController extends AbstractController
     {
         $templates = 'activity.html.twig';
         $userID = $userInterface->getId();      
-        var_dump($userID)  ;
+//        var_dump($userID)  ;
         $activiteID = $entityManager->getRepository(Activity::class)->activityId($userID)->getId();
         $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF();
         $PrenomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getPrenomF();
@@ -75,7 +75,7 @@ class ComptePrincipaleController extends AbstractController
             $project->setPrenomH($request->request->get('lastname_epoux'));
             $project->setNomF($request->request->get('name_epouse'));
             $project->setPrenomF($request->request->get('lastname_epouse'));
-            
+
 
             $entityManager->flush();
 
