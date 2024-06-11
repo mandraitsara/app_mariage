@@ -120,24 +120,40 @@
 
                                 <input type="text" id="lastname_epoux" name="lastname_epoux"  value="{{prenomHomme}}" placeholder="Prénom du marié">
                                 <i class="fa fa-user icon"></i>
+
                                 <div id="garcon_dhonneur_epoux">
-                                <input type="text" id="garcon_dhonneur_epoux_input" name="garcon_dhonneur_epoux"  value="" placeholder="">
-                                <i class="fa fa-user icon"></i>
-                                <span id="garcon_dhonneur_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                    <input type="text" id="garcon_dhonneur_epoux_input" name="garcon_dhonneur_epoux"  value="" placeholder="Garçon d'honneur">
+                                        <i class="fa fa-user icon"></i>
+                                            <span id="garcon_dhonneur_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
 
-                            </div>
+                                </div>
 
-                                <input type="text" id="ami_epoux" name="ami_epoux"  value="" placeholder="">
-                                <i class="fa fa-user icon"></i><span id="ami_epoux_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                <div id="parents_epoux">
+                                    <input type="text" id="parents_epoux_input" name="parents_epoux_input"  value="" placeholder="parents">
+                                        <i class="fa fa-user icon"></i>
+                                            <span id="parents_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </div>
 
-                                <input type="text" id="ami_proche_epoux" name="ami_proche_epoux"  value="" placeholder="">
-                                <i class="fa fa-user icon"></i><span id="ami_proche_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                <div id="ami_epoux">
+                                    <input type="text" id="ami_epoux_input" name="ami_epoux"  value="" placeholder="ami(e)">
+                                        <i class="fa fa-user icon"></i>
+                                        <span id="ami_epoux_suppr" class="suppr"> <i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </div>
+                                
+
+                                <div id="ami_proche_epoux">
+                                    <input type="text" id="ami_proche_epoux_input" name="ami_proche_epoux_input"  value="" placeholder="famille proche">
+                                        <i class="fa fa-user icon"></i><span id="ami_proche_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </div>
+
+
                                 <div class="m-5">                                    
                                     <button class="btn-add-guestH text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
                                             <div class="selectBlocH text-left">
                                                 <p id="gh_h">Garçon d'honneur</p>
                                                 <p id="prt_h">Parent</p>                                           
                                                 <p id="am_h">Ami/Amie</p>
+                                                <p id="amproche_h">Ami(e) proche</p>
                                             </div>
 
                                 </div>
@@ -152,13 +168,40 @@
                                 <i class="fa fa-user icon" style="color: #dd8090;"></i>
                                 <input type="text" id="lastname_epouse" name="lastname_epouse" value="{{prenomFemme}}" placeholder="Prénom du mariée">
                                 <i class="fa fa-user icon" style="color: #dd8090;"></i>
+
+                                <div id="fille_dhonneur_epouse">
+                                    <input type="text" id="fille_dhonneur_epouse_input" name="fille_dhonneur_epouse"  value="" placeholder="Fille d'honneur">
+                                        <i class="fa fa-user icon"></i>
+                                            <span id="fille_dhonneur_epouse_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+
+                                </div>
+                                <div id="parents_epouse">
+                                    <input type="text" id="parents_epouse_input" name="parents_epouse_input"  value="" placeholder="parents">
+                                        <i class="fa fa-user icon"></i>
+                                            <span id="parents_epouse_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </div>
+
+                                <div id="ami_epouse">
+                                    <input type="text" id="ami_epouse_input" name="ami_epouse"  value="" placeholder="ami(e)">
+                                        <i class="fa fa-user icon"></i>
+                                        <span id="ami_epouse_suppr" class="suppr"> <i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </div>
+                                
+
+                                <div id="ami_proche_epouse">
+                                    <input type="text" id="ami_proche_epouse_input" name="ami_proche_epouse_input"  value="" placeholder="famille proche">
+                                        <i class="fa fa-user icon"></i><span id="ami_proche_epouse_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </div>
+                                
+
+
                                 <div class="m-5">
                                     <button class="btn-add-guestF text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
                                             <div class="selectBlocF text-left">
-                                                <p>Demoiselle d'honneur</p>
-                                                <p>Parent</p>
-                                                <p>Famille proche</p>
-                                                <p>Ami/Amie</p>
+                                                <p id="gh_f">Demoiselle d'honneur</p>
+                                                <p id="prt_f">Parent</p>
+                                                <p id="amproche_f">Famille proche</p>
+                                                <p id="am_f">Ami/Amie</p>
                                             </div>
 
 
@@ -738,12 +781,186 @@ const selectElementH = document.querySelector('.selectBlocH')
     }
 })
 
-
+//Page de souris sur des case
 $("#garcon_dhonneur_epoux").mouseover(function(){
     $("#garcon_dhonneur_epoux_suppr").show()
 })
 $("#garcon_dhonneur_epoux").mouseout(function(){
     $("#garcon_dhonneur_epoux_suppr").hide()
+})
+//parents_epoux
+
+$("#ami_epoux").mouseover(function(){
+    $("#ami_epoux_suppr").show()
+})
+$("#ami_epoux").mouseout(function(){
+    $("#ami_epoux_suppr").hide()
+})
+
+$("#parents_epoux").mouseover(function(){
+    $("#parents_epoux_suppr").show()
+})
+$("#parents_epoux").mouseout(function(){
+    $("#parents_epoux_suppr").hide()
+})
+
+
+$("#ami_proche_epoux").mouseover(function(){
+    $("#ami_proche_epoux_suppr").show()
+})
+$("#ami_proche_epoux").mouseout(function(){
+    $("#ami_proche_epoux_suppr").hide()
+})
+
+
+
+//fin
+
+//pour le button suppr caché
+$("#garcon_dhonneur_epoux_suppr").click(function(){
+    $("#garcon_dhonneur_epoux").hide()
+})
+
+
+
+$("#ami_epoux_suppr").click(function(){
+    $("#ami_epoux").hide()
+})
+
+$("#ami_proche_epoux_suppr").click(function(){
+    $("#ami_proche_epoux").hide()
+})
+
+$("#ami_proche_epoux_suppr").click(function(){
+    $("#ami_proche_epoux").hide()
+})
+
+$("#parents_epoux_suppr").click(function(){
+    $("#parents_epoux").hide()
+})
+
+
+
+//Fin
+
+//Affiché le case pour le garçon d'honneur
+$("#gh_h").click(function(){
+    $("#garcon_dhonneur_epoux").show()
+})
+
+
+
+//Pour les mariée
+
+//Page de souris sur des case
+$("#fille_dhonneur_epouse").mouseover(function(){
+    $("#fille_dhonneur_epouse_suppr").show()
+})
+$("#fille_dhonneur_epouse").mouseout(function(){
+    $("#fille_dhonneur_epouse_suppr").hide()
+})
+//parents_epouse
+
+$("#ami_epouse").mouseover(function(){
+    $("#ami_epouse_suppr").show()
+})
+$("#ami_epouse").mouseout(function(){
+    $("#ami_epouse_suppr").hide()
+})
+
+$("#parents_epouse").mouseover(function(){
+    $("#parents_epouse_suppr").show()
+})
+$("#parents_epouse").mouseout(function(){
+    $("#parents_epouse_suppr").hide()
+})
+
+
+$("#ami_proche_epouse").mouseover(function(){
+    $("#ami_proche_epouse_suppr").show()
+})
+$("#ami_proche_epouse").mouseout(function(){
+    $("#ami_proche_epouse_suppr").hide()
+})
+
+
+
+//fin
+
+//pour le button suppr caché
+$("#fille_dhonneur_epouse_suppr").click(function(){
+    $("#fille_dhonneur_epouse").hide()
+})
+
+$("#ami_epouse_suppr").click(function(){
+    $("#ami_epouse").hide()
+})
+
+$("#ami_proche_epouse_suppr").click(function(){
+    $("#ami_proche_epouse").hide()
+})
+
+
+$("#parents_epouse_suppr").click(function(){
+    $("#parents_epouse").hide()
+})
+
+
+
+//Fin
+
+//Affiché le case pour le garçon d'honneur
+$("#gh_h").click(function(){
+    $("#garcon_dhonneur_epouse").show()
+})
+
+$("#prt_h").click(function(){
+    $("#parents_epoux").show()
+})
+
+$("#amproche_h").click(function(){
+    $("#ami_proche_epoux").show()
+})
+
+$("#am_h").click(function(){
+    $("#ami_epoux").show()
+})
+
+//mariée
+
+$("#gh_f").click(function(){
+    $("#fille_dhonneur_epouse").show()
+})
+
+$("#prt_f").click(function(){
+    $("#parents_epouse").show()
+})
+
+$("#amproche_f").click(function(){
+    $("#ami_proche_epouse").show()
+})
+
+$("#am_f").click(function(){
+    $("#ami_epouse").show()
+})
+
+//Fin
+$(document).ready(function(){
+    //caché l'input garçon d'honneur lorsqu'on fait le chargement de page.
+
+    //Pour marié
+    $("#garcon_dhonneur_epoux").hide()
+    $("#ami_epoux").hide()
+    $("#ami_proche_epoux").hide()    
+    $("#parents_epoux").hide()
+
+//Pour mariée
+    $("#ami_epouse").hide()
+    $("#ami_proche_epouse").hide()
+    $("#fille_dhonneur_epouse").hide()
+    $("#parents_epouse").hide()
+
+//fin
 })
 </script>
 
