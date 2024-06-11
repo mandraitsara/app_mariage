@@ -626,6 +626,8 @@
     $("#name_epoux").change(function(){   
         if ($("#name_epoux").length>0)
         {
+            let count = $("#name_epoux[data-count]")
+            console.log(count)
             let info_femme = $("#info_femme").text()
             let calcule = parseFloat(info_femme) + 1
             $("#info_femme").text(calcule)
@@ -686,6 +688,7 @@
     $("#name_epouse").change(function(){           
         if ($("#name_epouse").val() !="")
         {
+            
             let info_femme = $("#info_homme").text()
             let calcule = parseFloat(info_femme) + 1
 
@@ -723,6 +726,7 @@
     $("#lastname_epouse").change(function(){    
         if ($("#lastname_epouse").length>0)
         {
+           
             let info_femme = $("#info_homme").text()
             let calcule = parseFloat(info_femme) + 1
             $("#info_homme").text(calcule)
