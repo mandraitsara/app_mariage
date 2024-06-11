@@ -73,29 +73,23 @@ class ComptePrincipaleController extends AbstractController
         {
             $project->setNomH($request->request->get('name_epoux'));      
             $project->setPrenomH($request->request->get('lastname_epoux'));
+            $project->setParentH($request->request->get('parents_epoux'));
+            $project->setGarconDHonneur($request->request->get('garcon_dhonneur_epoux'));
+            $project->setAmiProcheH($request->request->get('ami_proche_epoux'));
+            $project->setAmiH($request->request->get('ami_epoux'));
+
+
             $project->setNomF($request->request->get('name_epouse'));
             $project->setPrenomF($request->request->get('lastname_epouse'));
+            $project->setFilleDHonneur($request->request->get('fille_dhonneur_epouse'));            
+            $project->setParentF($request->request->get('parents_epouse'));
+            $project->setAmieF($request->request->get('ami_epouse'));
+            $project->setAmieProcheF($request->request->get('ami_proche_epouse'));
 
 
-            $entityManager->flush();
 
-            $data = [
-            
-                'id'=>$project->getId(),
-                'name_epoux' => $project->getTemoinF(),
-                'lastname_epoux'=>$project->getPrenomH(),
-                'name_epouse' => $project->getNomF(),
-                'lastname_epouse'=>$project->getPrenomF()
-            ];        
-
-           
-
-            return $this->json($data);
-        }   
-
-      
-        
-        $data = [
+         $entityManager->flush(); 
+         $data = [
             
             'id'=>$project->getId(),
             'name_epoux' => $project->getNomH(),
@@ -103,9 +97,11 @@ class ComptePrincipaleController extends AbstractController
             'name_epouse' => $project->getNomF(),
             'lastname_epouse'=>$project->getPrenomF()
         ];
-        
-   
+           
 
-        return $this->json($data);
+            return $this->json($data);
+        }  
+        
+        return $this->json("rechargement reussi....");
     }
 }

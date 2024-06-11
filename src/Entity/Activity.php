@@ -71,6 +71,9 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $prenom_h = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fille_d_honneur = null;
+
     // Getters and Setters...
 
     public function getId(): ?int
@@ -285,6 +288,18 @@ class Activity
     public function setPrenomH(?string $prenom_h): static
     {
         $this->prenom_h = $prenom_h;
+
+        return $this;
+    }
+
+    public function getFilleDHonneur(): ?string
+    {
+        return $this->fille_d_honneur;
+    }
+
+    public function setFilleDHonneur(?string $fille_d_honneur): static
+    {
+        $this->fille_d_honneur = $fille_d_honneur;
 
         return $this;
     }
