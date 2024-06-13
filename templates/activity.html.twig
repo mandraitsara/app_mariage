@@ -9,6 +9,7 @@
               
 {% endblock %}
 {% block javascripts %}
+<script src="jquery.add-input-area.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
@@ -103,6 +104,7 @@
 
 
                 </div>
+                
                 <!-- Liste des invités -->
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="p-5">
@@ -110,6 +112,19 @@
                         <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere maxime officiis laboriosam.Saepe, molestias adipisci.</p>
                     </div>
                     <div class="row">
+                        <div class="col-md-3"><span class="btn btn-success" id="valide" ><i class="fa fa-save"></i></span></div>
+                        <div class="col-md-6">
+                            <div id="success-alert" class="alert alert-success">
+                                <span id="notification"></span>
+                            </div>
+                        </div>
+                        
+
+                        
+                    </div>
+                    <div class="row">
+                        
+                        
                         <div class="col-md-6 border-right text-center">
                             <img src="{{asset('./icons/shoes-man.svg')}}" alt="shoes-man" style="width: 75px;">
                             <p style="font-weight: bold;">Les invités du marié</p>
@@ -120,45 +135,46 @@
 
                                 <input type="text" id="lastname_epoux" name="lastname_epoux"  value="{{prenomHomme}}" placeholder="Prénom du marié">
                                 <i class="fa fa-user icon"></i>
-
-                                <div id="garcon_dhonneur_epoux">
-                                    <input type="text" id="garcon_dhonneur_epoux_input" name="garcon_dhonneur_epoux"  value="" placeholder="Garçon d'honneur">
-                                        <i class="fa fa-user icon"></i>
-                                            <input type="hidden" value="2">
-                                            <span id="garcon_dhonneur_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
-
-                                </div>
-
-                                <div id="parents_epoux">
-                                    <input type="text" id="parents_epoux_input" name="parents_epoux_input"  value="" placeholder="parents">
-                                        <i class="fa fa-user icon"></i>
-                                            <span id="parents_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
-                                </div>
-
-                                <div id="ami_epoux">
-                                    <input type="text" id="ami_epoux_input" name="ami_epoux"  value="" placeholder="ami(e)">
-                                        <i class="fa fa-user icon"></i>
-                                        <span id="ami_epoux_suppr" class="suppr"> <i class="fa fa-trash" aria-hidden="true"></i></span>
-                                </div>
                                 
+                                <div id="newinput_garcon_dhonneur" class="mb-3 newinput">
 
-                                <div id="ami_proche_epoux">
-                                    <input type="text" id="ami_proche_epoux_input" name="ami_proche_epoux_input"  value="" placeholder="famille proche">
-                                        <i class="fa fa-user icon"></i><span id="ami_proche_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
                                 </div>
 
+                                <div id="newinput_parents_homme" class="newinput">
+                                </div>
+                            
+                                <div id="newinput_amis_homme" class="newinput">
+                                </div>
+                                <div>
+                                   
+                                </div>
+                                <div id="newinput_famille_homme" class="newinput">
+
+                                </div>
 
                                 <div class="m-5">                                    
                                     <button class="btn-add-guestH text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
                                             <div class="selectBlocH text-left">
-                                                <p id="gh_h">Garçon d'honneur</p>
-                                                <p id="prt_h">Parent</p>                                           
-                                                <p id="am_h">Ami/Amie</p>
-                                                <p id="amproche_h">Famille Proche</p>
+                                                <p id="gh_h" class="garcon_dhonneur_epoux">Garçon d'honneur</p>
+                                                <p id="prt_h" class="parents_homme">Parent</p>                                           
+                                                <p id="am_h" class="amis_homme">Ami/Amie</p>
+                                                <p id="amproche_h" class="famille_homme">Famille Proche</p>
                                             </div>
 
                                 </div>
                             </form>
+                        </div>
+                        
+                        <div hidden>
+                            {% for famille_proche in amis_homme %}
+                                <input id="data_famille_homme_{{loop.index}}" value="{{famille_proche}}">                                    
+                            {% endfor %}
+
+                            {% for famille_femme in amis_femme %}
+                                <input id="data_famille_femme_{{loop.index}}" value="{{famille_femme}}">  
+                            {% endfor %}
+                            
+
                         </div>
                         <div class="col-md-6 text-center">
                             <img src="{{asset('./icons/shoes-woman.svg')}}" alt="shoes-woman" style="width: 75px;">
@@ -167,42 +183,32 @@
                                 
                                 <input type="text" id="name_epouse" name="name_epouse" value="{{nomFemme}}" class="mb-3" placeholder="Nom du mariée">
                                 <i class="fa fa-user icon" style="color: #dd8090;"></i>
-                                <input type="text" id="lastname_epouse" name="lastname_epouse" value="{{prenomFemme}}" placeholder="Prénom du mariée">
-                                <i class="fa fa-user icon" style="color: #dd8090;"></i>
+                                <input type="text" id="lastname_epouse" name="lastname_epouse" value="{{prenomHomme}}" placeholder="Prénom du mariée">
+                                <i class="fa fa-user icon" style="color: #dd8090;"></i>                                
 
-                                <div id="fille_dhonneur_epouse">
-                                    <input type="text" id="fille_dhonneur_epouse_input" name="fille_dhonneur_epouse"  value="" placeholder="Fille d'honneur">
-                                        <i class="fa fa-user icon"></i>
-                                            <span id="fille_dhonneur_epouse_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                <div id="newinput_fille_dhonneur" class="mb-3 newinput">
 
                                 </div>
-                                <div id="parents_epouse">
-                                    <input type="text" id="parents_epouse_input" name="parents_epouse_input"  value="" placeholder="parents">
-                                        <i class="fa fa-user icon"></i>
-                                            <span id="parents_epouse_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+
+                                <div id="newinput_parents_femme" class="newinput">
+                                </div>
+                            
+                                <div id="newinput_amis_femme" class="newinput">
                                 </div>
 
-                                <div id="ami_epouse">
-                                    <input type="text" id="ami_epouse_input" name="ami_epouse"  value="" placeholder="ami(e)">
-                                        <i class="fa fa-user icon"></i>
-                                        <span id="ami_epouse_suppr" class="suppr"> <i class="fa fa-trash" aria-hidden="true"></i></span>
-                                </div>
-                                
+                                <div id="newinput_famille_femme" class="newinput">
 
-                                <div id="ami_proche_epouse">
-                                    <input type="text" id="ami_proche_epouse_input" name="ami_proche_epouse_input"  value="" placeholder="famille proche">
-                                        <i class="fa fa-user icon"></i><span id="ami_proche_epouse_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
                                 </div>
-                                
+
 
 
                                 <div class="m-5">
                                     <button class="btn-add-guestF text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
                                             <div class="selectBlocF text-left">
-                                                <p id="gh_f">Demoiselle d'honneur</p>
-                                                <p id="prt_f">Parent</p>
-                                                <p id="amproche_f">Famille proche</p>
-                                                <p id="am_f">Ami/Amie</p>
+                                                <p id="gh_f" class="fille_dhonneur">Demoiselle d'honneur</p>
+                                                <p id="prt_f" class="parents_femme">Parent</p>
+                                                <p id="amproche_f" class="famille_femme">Famille proche</p>
+                                                <p id="am_f" class="amis_femme">Ami/Amie</p>
                                             </div>
 
 
@@ -623,486 +629,11 @@
 </div>
 
 <input type="hidden" id="update_id" value="{{idUser}}">
+
+
 <script>
-    $("#name_epoux").change(function(){   
-        if ($("#name_epoux").length>0)
-        {
-            let count = $("#name_epoux[data-count]")
-            console.log(count)
-            let info_femme = $("#info_femme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_femme").text(calcule)
-        }
-        
-        let data ={
-
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };              
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#name_epoux").val();
-            }
-
-        })
-        
-
-
-
-    })
-
-    $("#lastname_epoux").change(function(){    
-        if ($("#lastname_epoux").length>0)
-        {
-            let info_femme = $("#info_femme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_femme").text(calcule)
-        }
-            
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epoux").val();
-
-            }
-
-        })
-        
-
-    })
-
-    $("#name_epouse").change(function(){           
-        if ($("#name_epouse").val() !="")
-        {
-            
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-
-            $("#info_homme").text(calcule)
-        }else{
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 0
-            $("#info_homme").text(calcule)
-        }
-             
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
     
-    };        
     
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#name_epouse").val();
-            }
-
-        })
-        
-
-
-
-    })
-
-    $("#lastname_epouse").change(function(){ 
-        if ($("#lastname_epouse").length>0)
-        {
-           
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_homme").text(calcule)
-        }    
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epouse").val();
-
-            }
-
-        })
-    })  
-
-        $("#garcon_dhonneur_epoux_input").change(function(){
-        if ($("#garcon_dhonneur_epoux_input").length>0)
-        {
-           
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_homme").text(calcule)
-        }    
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epouse").val();
-
-            }
-
-        })
-        
-
-    })
-
-    $("#parents_epoux_input").change(function(){
-        if ($("#parents_epoux_input").length>0)
-        {
-           
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_homme").text(calcule)
-        }    
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epouse").val();
-
-            }
-
-        })
-        
-
-    })
-
-    $("#ami_epoux_input").change(function(){
-        if ($("#ami_epoux_input").length>0)
-        {
-           
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_homme").text(calcule)
-        }    
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epouse").val();
-
-            }
-
-        })
-        
-
-    })
-
-    $("#ami_proche_epoux_input").change(function(){
-        if ($("#ami_proche_epoux_input").length>0)
-        {
-           
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_homme").text(calcule)
-        }    
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epouse").val();
-
-            }
-
-        })
-        
-
-    })
-
-
-    $("#fille_dhonneur_epouse_input").change(function(){
-        if ($("#fille_dhonneur_epouse_input").length>0)
-        {
-           
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_homme").text(calcule)
-        }    
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epouse").val();
-
-            }
-
-        })
-        
-
-    })
-
-    $("#parents_epouse_input").change(function(){
-        if ($("#parents_epouse_input").length>0)
-        {
-           
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_homme").text(calcule)
-        }    
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epouse").val();
-
-            }
-
-        })
-        
-
-    })
-    
-    $("#ami_epouse_input").change(function(){
-        if ($("#ami_epouse_input").length>0)
-        {
-           
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_homme").text(calcule)
-        }    
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epouse").val();
-
-            }
-
-        })
-        
-
-    })
-
-    $("#ami_proche_epouse_input").change(function(){
-        if ($("#ami_proche_epouse_input").length>0)
-        {
-           
-            let info_femme = $("#info_homme").text()
-            let calcule = parseFloat(info_femme) + 1
-            $("#info_homme").text(calcule)
-        }    
-        let data ={
-            name_epouse: $('#name_epouse').val(),
-            lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
-            parents_epouse:$("#parents_epouse_input").val(),
-            ami_epouse:$("#ami_epouse_input").val(),
-            ami_proche_epouse: $("#ami_proche_epouse_input").val(),
-
-            name_epoux: $('#name_epoux').val(),
-            lastname_epoux: $('#lastname_epoux').val(),
-            garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
-            parents_epoux:$("#parents_epoux_input").val(),
-            ami_epoux:$("#ami_epoux_input").val(),
-            ami_proche_epoux: $("#ami_proche_epoux_input").val()
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response)
-            {
-                $("#lastname_epouse").val();
-
-            }
-
-        })
-        
-
-    })
-    
-
-
 
 const btnAddGuestH= document.querySelector('.btn-add-guestH')
 const btnAddGuestF= document.querySelector('.btn-add-guestF')
@@ -1124,6 +655,8 @@ const selectElementH = document.querySelector('.selectBlocH')
 //Femme :
 
 
+
+
   btnAddGuestF.addEventListener('click', function(e){
     e.preventDefault()
     if(selectElementF.style.display === "block") {
@@ -1133,187 +666,292 @@ const selectElementH = document.querySelector('.selectBlocH')
     }
 })
 
-//Page de souris sur des case
-$("#garcon_dhonneur_epoux").mouseover(function(){
-    $("#garcon_dhonneur_epoux_suppr").show()
-})
-$("#garcon_dhonneur_epoux").mouseout(function(){
-    $("#garcon_dhonneur_epoux_suppr").hide()
-})
-//parents_epoux
-
-$("#ami_epoux").mouseover(function(){
-    $("#ami_epoux_suppr").show()
-})
-$("#ami_epoux").mouseout(function(){
-    $("#ami_epoux_suppr").hide()
-})
-
-$("#parents_epoux").mouseover(function(){
-    $("#parents_epoux_suppr").show()
-})
-$("#parents_epoux").mouseout(function(){
-    $("#parents_epoux_suppr").hide()
-})
-
-
-$("#ami_proche_epoux").mouseover(function(){
-    $("#ami_proche_epoux_suppr").show()
-})
-$("#ami_proche_epoux").mouseout(function(){
-    $("#ami_proche_epoux_suppr").hide()
-})
 
 
 
-//fin
+//Pour l'ajout de bouton
 
-//pour le button suppr caché
-$("#garcon_dhonneur_epoux_suppr").click(function(){
-    $("#garcon_dhonneur_epoux").hide()
-})
-
-
-
-$("#ami_epoux_suppr").click(function(){
-    $("#ami_epoux").hide()
-})
-
-$("#ami_proche_epoux_suppr").click(function(){
-    $("#ami_proche_epoux").hide()
-})
-
-$("#ami_proche_epoux_suppr").click(function(){
-    $("#ami_proche_epoux").hide()
-})
-
-$("#parents_epoux_suppr").click(function(){
-    $("#parents_epoux").hide()
-})
-
-
-
-//Fin
-
-//Affiché le case pour le garçon d'honneur
-$("#gh_h").click(function(){
-    $("#garcon_dhonneur_epoux").show()
-})
-
-
-
-//Pour les mariée
-
-//Page de souris sur des case
-$("#fille_dhonneur_epouse").mouseover(function(){
-    $("#fille_dhonneur_epouse_suppr").show()
-})
-$("#fille_dhonneur_epouse").mouseout(function(){
-    $("#fille_dhonneur_epouse_suppr").hide()
-})
-//parents_epouse
-
-$("#ami_epouse").mouseover(function(){
-    $("#ami_epouse_suppr").show()
-})
-$("#ami_epouse").mouseout(function(){
-    $("#ami_epouse_suppr").hide()
-})
-
-$("#parents_epouse").mouseover(function(){
-    $("#parents_epouse_suppr").show()
-})
-$("#parents_epouse").mouseout(function(){
-    $("#parents_epouse_suppr").hide()
-})
-
-
-$("#ami_proche_epouse").mouseover(function(){
-    $("#ami_proche_epouse_suppr").show()
-})
-$("#ami_proche_epouse").mouseout(function(){
-    $("#ami_proche_epouse_suppr").hide()
-})
-
-
-
-//fin
-
-//pour le button suppr caché
-$("#fille_dhonneur_epouse_suppr").click(function(){
-    $("#fille_dhonneur_epouse").hide()
-})
-
-$("#ami_epouse_suppr").click(function(){
-    $("#ami_epouse").hide()
-})
-
-$("#ami_proche_epouse_suppr").click(function(){
-    $("#ami_proche_epouse").hide()
-})
-
-
-$("#parents_epouse_suppr").click(function(){
-    $("#parents_epouse").hide()
-})
-
-
-
-//Fin
-
-//Affiché le case pour le garçon d'honneur
-$("#gh_h").click(function(){
-    $("#garcon_dhonneur_epouse").show()
-})
-
-$("#prt_h").click(function(){
-    $("#parents_epoux").show()
-})
-
-$("#amproche_h").click(function(){
-    $("#ami_proche_epoux").show()
-})
-
-$("#am_h").click(function(){
-    $("#ami_epoux").show()
-})
-
-//mariée
-
-$("#gh_f").click(function(){
-    $("#fille_dhonneur_epouse").show()
-})
-
-$("#prt_f").click(function(){
-    $("#parents_epouse").show()
-})
-
-$("#amproche_f").click(function(){
-    $("#ami_proche_epouse").show()
-})
-
-$("#am_f").click(function(){
-    $("#ami_epouse").show()
-})
-
-//Fin
 $(document).ready(function(){
-    //caché l'input garçon d'honneur lorsqu'on fait le chargement de page.
 
-    //Pour marié
-    $("#garcon_dhonneur_epoux").hide()
-    $("#ami_epoux").hide()
-    $("#ami_proche_epoux").hide()    
-    $("#parents_epoux").hide()
+    $("#success-alert").hide()
 
-//Pour mariée
-    $("#ami_epouse").hide()
-    $("#ami_proche_epouse").hide()
-    $("#fille_dhonneur_epouse").hide()
-    $("#parents_epouse").hide()
+    let count = 1;
+    let count1 = 1;
+    let count2 = 1;
+    let count3 = 1;
+    let num = 1;
+    let num1 = 1;
+    let num2 = 1;
+    let num3 = 1;
+    let data_famille_homme = 0 
+    let data_famille_femme = 0
+
+//Ajout garcon d'honneur 
+$(".garcon_dhonneur_epoux").click(function(){
+        
+    
+   
+newgarcon_dhonneur = 
+  '<div id="garcon_dhonneur_epoux">' +  
+    '<select id="cv_parents_homme_'+count+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
+    '<input type="text" id="garcon_dhonneur_'+count+'" class="mb-3"  name="garcon_dhonneur"  value="" placeholder="Garçon d honneur">' +
+    '<i class="fa fa-trash" id="deleteRow"</div>';     
+
+    $('#newinput_garcon_dhonneur').append(newgarcon_dhonneur);
+    
+    count++;
+    
+    let data_garcon_dhonneur_1 = $("#data_garcon_dhonneur_1").val();    
+    $("#garcon_dhonneur_1").val(data_garcon_dhonneur_1);
+})
+
+$("body").on("click", "#deleteRow", function(){
+    $(this).parents("#garcon_dhonneur_epoux").remove();
+})
 
 //fin
+
+//Ajout parent pour le marié
+$(".parents_homme").click(function(){
+        
+   
+   
+        neWparents_homme = 
+          '<div id="parents_homme">' +  
+            '<select id="cv_parents_homme_'+count1+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
+            '<input type="text" id="parents_homme_'+count1+'" class="mb-3" name="parents_homme"  value="" placeholder="Parents">' +
+            '<i class="fa fa-trash" id="deleteParents_homme"</div>';  
+        
+            $('#newinput_parents_homme').append(neWparents_homme);            
+            count1++;            
+          
+        })
+        
+        $("body").on("click", "#deleteParents_homme", function(){
+            $(this).parents("#parents_homme").remove();
+        })
+
+//fin
+
+//Ajout ami/Amie pour Homme
+$(".amis_homme").click(function(){
+        
+       
+       
+            neWamis_homme = 
+              '<div id="garcon_dhonneur_epoux">' +                  
+                '<select id="cv_parents_homme_'+count2+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
+                '<input type="text" id="amis_homme_'+count2+'" class="mb-3" name="amis_homme"  value="" placeholder="Ami/Amie">' +
+                    '<i class="fa fa-trash" id="deleteRow"</div>';   
+            
+                $('#newinput_amis_homme').append(neWamis_homme);
+                
+                count2++;
+                
+                //let data_garcon_dhonneur_1 = $("#data_garcon_dhonneur_1").val();    
+                //$("#garcon_dhonneur_1").val(data_garcon_dhonneur_1);
+            })
+            
+            $("body").on("click", "#deleteRow", function(){
+                $(this).parents("#garcon_dhonneur_epoux").remove();
+            })
+
+
+//fin
+
+//Ajout famille proche pour l'homme
+$(".famille_homme").click(function(){
+        
+        
+       
+            neWfamille_homme = 
+              '<div id="famille_homme">' +  
+                '<select id="cv_famille_homme_'+count3+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
+                '<input type="text" id="famille_homme_'+count3+'" class="mb-3" name="famille_homme"  value="" placeholder="Famille proche">' +
+                    '<i class="fa fa-trash" id="deleteFamilleProche"</div>';  
+            
+                $('#newinput_famille_homme').append(neWfamille_homme);
+                
+                count3++;
+                data_famille_homme++;      
+                $datas = $("#data_famille_homme_"+data_famille_homme).val()
+                $test = $("#data_famille_homme_"+data_famille_homme).val($datas);                
+            })
+            
+            $("body").on("click", "#deleteFamilleProche", function(){
+                $(this).parents("#famille_homme").remove();
+            })
+
+//fin
+
+
+//Ajout garcon d'honneur 
+$(".fille_dhonneur").click(function(){       
+    
+    
+   
+        newfille_dhonneur = 
+          '<div id="fille_dhonneur">' +  
+            '<select id="fille_dhonneur_'+num+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
+            '<input type="text" id="fille_dhonneur_'+num+'" class="mb-3"  name="fille_dhonneur"  value="" placeholder="Garçon d honneur">' +
+            '<i class="fa fa-trash" id="deleteFille_dhonneur"</div>';     
+        
+            $('#newinput_fille_dhonneur').append(newfille_dhonneur);
+            
+            num++;
+            
+            let data_garcon_dhonneur_1 = $("#data_garcon_dhonneur_1").val();    
+            $("#garcon_dhonneur_1").val(data_garcon_dhonneur_1);
+        })
+        
+        $("body").on("click", "#deleteFille_dhonneur", function(){
+            $(this).parents("#fille_dhonneur").remove();
+        })
+        
+        //fin
+        
+        //Ajout parent pour le marié
+        $(".parents_femme").click(function(){
+                
+           
+           
+                neWparents_femme = 
+                  '<div id="parents_femme">' +  
+                    '<select id="cv_parents_homme_'+num1+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
+                    '<input type="text" id="parents_homme_'+num1+'" class="mb-3" name="parents_femme"  value="" placeholder="Parents">' +
+                    '<i class="fa fa-trash" id="deleteParents_femme"</div>';  
+                
+                    $('#newinput_parents_femme').append(neWparents_femme);            
+                    num1++;            
+                  
+                })
+                
+                $("body").on("click", "#deleteParents_femme", function(){
+                    $(this).parents("#parents_femme").remove();
+                })
+        
+        //fin
+        
+        //Ajout ami/Amie pour Homme
+        $(".amis_femme").click(function(){
+                
+               
+               
+                    neWamis_femme = 
+                      '<div id="amis_femme">' +                  
+                        '<select id="cv_amis_femme_'+num2+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
+                        '<input type="text" id="amis_femme_'+num2+'" class="mb-3" name="amis_femme"  value="" placeholder="Ami/Amie">' +
+                            '<i class="fa fa-trash" id="deleteAmis_femme"</div>';   
+                    
+                        $('#newinput_amis_femme').append(neWamis_femme);
+                        
+                        num2++;
+                        
+                        //let data_garcon_dhonneur_1 = $("#data_garcon_dhonneur_1").val();    
+                        //$("#garcon_dhonneur_1").val(data_garcon_dhonneur_1);
+                    })
+                    
+                    $("body").on("click", "#deleteAmis_femme", function(){
+                        $(this).parents("#amis_femme").remove();
+                    })
+        
+        
+        //fin
+        
+        //Ajout famille proche pour l'homme
+        $(".famille_femme").click(function(){
+                
+                
+               
+                    neWfamille_femme = 
+                      '<div id="famille_femme">' +  
+                        '<select id="cv_famille_femme_'+num3+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
+                        '<input type="text" id="famille_femme_'+num3+'" class="mb-3" name="famille_femme"  value="" placeholder="Famille proche">' +
+                            '<i class="fa fa-trash" id="deleteFamille_femme"</div>';  
+                    
+                        $('#newinput_famille_femme').append(neWfamille_femme);
+                        
+                        num3++;
+                        data_famille_femme++
+                        let datas = $("#data_famille_femme_"+data_famille_femme).val()
+                        let jet = $("#famille_femme_"+data_famille_femme).val(datas);
+                        console.log(datas)
+                        
+                       
+                    })
+                    
+                    $("body").on("click", "#deleteFamille_femme", function(){
+                        $(this).parents("#famille_femme").remove();
+                    })
+        
+        //fin
+
+
+
+$("#valide").click(function(){
+    var garcon_dhonneur = $("#garcon_dhonneur_1").val() + ";" + $("#garcon_dhonneur_2").val() + ";" +  $("#garcon_dhonneur_3").val() +  ";" + $("#garcon_dhonneur_4").val()
+    var parents_homme = $("#parents_homme_1").val() + ";" + $("#parents_homme_2").val();
+    var amis_homme = $("#amis_homme_1").val() + ";" + $("#amis_homme_2").val() + ";" + $("#amis_homme_3").val() + ";" + $("#amis_homme_4").val() + ";" + $("#amis_homme_5").val() + ";" + $("#amis_homme_6").val() + ";"+ 
+                     $("#amis_homme_7").val() + ";" + $("#amis_homme_8").val() + ";" + $("#amis_homme_9").val() + ";" + $("#amis_homme_10").val() + ";" + $("#amis_homme_11").val() + ";" + $("#amis_homme_12").val() + ";" +
+                     $("#amis_homme_13").val() + ";" + $("#amis_homme_14").val() + ";" + $("#amis_homme_15").val() + ";" + $("#amis_homme_16").val() + ";" + $("#amis_homme_17").val() + ";" + $("#amis_homme_18").val() + ";" +
+                     $("#amis_homme_19").val() + ";" + $("#amis_homme_20").val() + ";" + $("#amis_homme_21").val() + ";" + $("#amis_homme_22").val() + ";" + $("#amis_homme_23").val() + ";" + $("#amis_homme_24").val() + ";" +
+                     $("#amis_homme_25").val() + ";" + $("#amis_homme_26").val() + ";" + $("#amis_homme_27").val() + ";" + $("#amis_homme_28").val() + ";" + $("#amis_homme_29").val() + ";" + $("#amis_homme_30").val()
+    var famille_homme = $("#famille_homme_1").val() + ";" + $("#famille_homme_2").val() + ";" + $("#famille_homme_3").val() + ";" + $("#famille_homme_4").val() + ";" + $("#famille_homme_5").val() + ";" + $("#famille_homme_6").val() + ";"+ 
+                     $("#famille_homme_7").val() + ";" + $("#famille_homme_8").val() + ";" + $("#famille_homme_9").val() + ";" + $("#famille_homme_10").val() + ";" + $("#famille_homme_11").val() + ";" + $("#famille_homme_12").val() + ";" +
+                     $("#famille_homme_13").val() + ";" + $("#famille_homme_14").val() + ";" + $("#famille_homme_15").val() + ";" + $("#famille_homme_16").val() + ";" + $("#famille_homme_17").val() + ";" + $("#famille_homme_18").val() + ";" +
+                     $("#famille_homme_19").val() + ";" + $("#famille_homme_20").val() + ";" + $("#famille_homme_21").val() + ";" + $("#famille_homme_22").val() + ";" + $("#famille_homme_23").val() + ";" + $("#famille_homme_24").val() + ";" +
+                     $("#famille_homme_25").val() + ";" + $("#famille_homme_26").val() + ";" + $("#famille_homme_27").val() + ";" + $("#famille_homme_28").val() + ";" + $("#famille_homme_29").val() + ";" + $("#famille_homme_30").val()
+
+    var fille_dhonneur = $("#fille_dhonneur_1").val() + ";" + $("#fille_dhonneur_2").val() + ";" +  $("#fille_dhonneur_3").val() +  ";" + $("#fille_dhonneur_4").val()
+    var parents_femme = $("#parents_femme_1").val() + ";" + $("#parents_femme_2").val();
+    var amis_femme = $("#amis_femme_1").val() + ";" + $("#amis_femme_2").val() + ";" + $("#amis_femme_3").val() + ";" + $("#amis_femme_4").val() + ";" + $("#amis_femme_5").val() + ";" + $("#amis_femme_6").val() + ";"+ 
+                     $("#amis_femme_7").val() + ";" + $("#amis_femme_8").val() + ";" + $("#amis_femme_9").val() + ";" + $("#amis_femme_10").val() + ";" + $("#amis_femme_11").val() + ";" + $("#amis_femme_12").val() + ";" +
+                     $("#amis_femme_13").val() + ";" + $("#amis_femme_14").val() + ";" + $("#amis_femme_15").val() + ";" + $("#amis_femme_16").val() + ";" + $("#amis_femme_17").val() + ";" + $("#amis_femme_18").val() + ";" +
+                     $("#amis_femme_19").val() + ";" + $("#amis_femme_20").val() + ";" + $("#amis_femme_21").val() + ";" + $("#amis_femme_22").val() + ";" + $("#amis_femme_23").val() + ";" + $("#amis_femme_24").val() + ";" +
+                     $("#amis_femme_25").val() + ";" + $("#amis_femme_26").val() + ";" + $("#amis_femme_27").val() + ";" + $("#amis_femme_28").val() + ";" + $("#amis_femme_29").val() + ";" + $("#amis_femme_30").val()
+    var famille_femme = $("#famille_femme_1").val() + ";" + $("#famille_femme_2").val() + ";" + $("#famille_femme_3").val() + ";" + $("#famille_femme_4").val() + ";" + $("#famille_femme_5").val() + ";" + $("#famille_femme_6").val() + ";"+ 
+                     $("#famille_femme_7").val() + ";" + $("#famille_femme_8").val() + ";" + $("#famille_femme_9").val() + ";" + $("#famille_femme_10").val() + ";" + $("#famille_femme_11").val() + ";" + $("#famille_femme_12").val() + ";" +
+                     $("#famille_femme_13").val() + ";" + $("#famille_femme_14").val() + ";" + $("#famille_femme_15").val() + ";" + $("#famille_femme_16").val() + ";" + $("#famille_femme_17").val() + ";" + $("#famille_femme_18").val() + ";" +
+                     $("#famille_femme_19").val() + ";" + $("#famille_femme_20").val() + ";" + $("#famille_femme_21").val() + ";" + $("#famille_femme_22").val() + ";" + $("#famille_femme_23").val() + ";" + $("#famille_femme_24").val() + ";" +
+                     $("#famille_femme_25").val() + ";" + $("#famille_femme_26").val() + ";" + $("#famille_femme_27").val() + ";" + $("#famille_femme_28").val() + ";" + $("#famille_femme_29").val() + ";" + $("#famille_femme_30").val()
+        let data ={        
+            name_epouse: $('#name_epouse').val(),
+            lastname_epouse: $('#lastname_epouse').val(),
+            fille_dhonneur_epouse: fille_dhonneur,
+            parents_epouse:parents_femme,
+            ami_epouse:amis_femme,
+            famille_femme: famille_femme,
+
+            name_epoux: $('#name_epoux').val(),
+            lastname_epoux: $('#lastname_epoux').val(),            
+            parents_epoux: parents_homme,
+            ami_epoux:amis_homme,
+            famille_homme: famille_homme,
+            garcon_dhonneur: garcon_dhonneur,            
+           
+        };
+        
+        $.ajax({
+            url:"/activite/new/"+ $("#update_id").val(),
+            method: "PUT",
+            data: data,
+            success: function(response){
+                $("#success-alert").show();
+                window.setTimeout(function(){
+                    $("#success-alert").hide();
+                },2500)
+                $("#notification").text("La modification a été effectuée")
+            }
+    
+        })
+
+
+
 })
+
+})
+
+
 </script>
 
 {%endblock%}

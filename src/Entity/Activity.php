@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ActivityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
@@ -73,6 +74,7 @@ class Activity
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $fille_d_honneur = null;
+
 
     // Getters and Setters...
 
@@ -303,4 +305,6 @@ class Activity
 
         return $this;
     }
+
+    
 }

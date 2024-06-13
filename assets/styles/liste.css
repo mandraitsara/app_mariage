@@ -432,10 +432,10 @@ table td {
   z-index: 1;
 }
 
-.suppr{
-  position: absolute;
-  line-height: normal;  
-  left: 96%;  
-  display: none;
-  cursor:grab;
+#valide {
+  display: inline-block;  
+}
+
+#newinput_garcon_dhonneur {
+  margin-top: 10px;
 }

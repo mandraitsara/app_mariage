@@ -51,13 +51,23 @@ class ComptePrincipaleController extends AbstractController
         $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF();
         $PrenomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getPrenomF();
         $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();
-        $PrenomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getPrenomH();        
+        $PrenomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getPrenomH();
+        $ami_homme =  $entityManager->getRepository(Activity::class)->activityId($userID)->getAmiProcheH();  
+        $ami_femme = $entityManager->getRepository(Activity::class)->activityId($userID)->getAmieProcheF();
+
+        $amis_homme = mb_split(";",$ami_homme);
+        $amis_femme = mb_split(";",$ami_femme);
+
+        var_dump($amis_femme);
+
         $content = [
             'idUser' => $activiteID,
             'nomFemme'=>$NomF,
             'prenomFemme'=>$PrenomF,
             'nomHomme'=>$NomH,
             'prenomHomme'=>$PrenomH,
+            'amis_homme' =>$amis_homme,
+            'amis_femme' =>$amis_femme,
         ];
         return $this->render($templates, $content);
     }
@@ -71,11 +81,20 @@ class ComptePrincipaleController extends AbstractController
         
         if($project)
         {
+           
+            
+            $project->setGarconDHonneur($request->request->get('garcon_dhonneur'));                      
+           
+            /*
+            $project->setGarconDHonneur($request->request->get('garcon_dhonneur_epoux'));
+
+            */
+            
             $project->setNomH($request->request->get('name_epoux'));      
             $project->setPrenomH($request->request->get('lastname_epoux'));
             $project->setParentH($request->request->get('parents_epoux'));
-            $project->setGarconDHonneur($request->request->get('garcon_dhonneur_epoux'));
-            $project->setAmiProcheH($request->request->get('ami_proche_epoux'));
+            
+            $project->setAmiProcheH($request->request->get('famille_homme'));
             $project->setAmiH($request->request->get('ami_epoux'));
 
 
@@ -84,19 +103,13 @@ class ComptePrincipaleController extends AbstractController
             $project->setFilleDHonneur($request->request->get('fille_dhonneur_epouse'));            
             $project->setParentF($request->request->get('parents_epouse'));
             $project->setAmieF($request->request->get('ami_epouse'));
-            $project->setAmieProcheF($request->request->get('ami_proche_epouse'));
+            $project->setAmieProcheF($request->request->get('famille_femme'));
 
 
 
          $entityManager->flush(); 
-         $data = [
-            
-            'id'=>$project->getId(),
-            'name_epoux' => $project->getNomH(),
-            'lastname_epoux'=>$project->getPrenomH(),
-            'name_epouse' => $project->getNomF(),
-            'lastname_epouse'=>$project->getPrenomF()
-        ];
+
+         $data = "La modification a été effectué...";
            
 
             return $this->json($data);
