@@ -24,9 +24,9 @@ class ComptePrincipaleController extends AbstractController
         $templates = 'compte_principale.html.twig';
         $Id_Name= $userInterface->getId();
         $activity = $entityManager->getRepository(Activity::class)
-                    ->activityId($Id_Name)
-                    ->getUser()
-                    ->getUsername();
+                    ->activityId($Id_Name);
+        $femme = $activity->getNomF();
+        $homme = $activity->getNomH();
 
         $username =  $authenticationUtils->getLastUsername();
             
@@ -36,7 +36,8 @@ class ComptePrincipaleController extends AbstractController
         
         $content = [
             'username' => $username,
-            'is_activated' => $activity,
+            'femme'=>$femme,
+            'homme'=>$homme,
         ];
         return $this->render($templates,$content);
     }
