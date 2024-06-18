@@ -203,15 +203,14 @@
                             {% endfor %}
 
                             {% for amis_homme in ami_homme %}
-                                {% if amis_homme != "undefined" %}
-                                    <span hidden id="amis_homme_chiffre">{{loop.last}}</span>
-                                    <input id="data_amis_homme_{{loop.index}}" value="{{amis_homme}}">
+                                {% if amis_homme != "undefined" %}                                                              
+                                    <input id="data_amis_homme_{{loop.index}}" value="{{amis_homme}}">                                    
                                 {% endif %}
                             {% endfor %}
 
                             {% for amis_femme in ami_femme %}
-                                {% if amis_femme != "undefined "%}
-                                    <input id="data_amis_femme_{{loop.index}}" value="{{amis_femme}}">
+                                {% if amis_femme != "undefined" %}                                        
+                                    <input id="data_amis_femme_{{loop.index}}" value="{{amis_femme}}">                                                                                                            
                                 {% endif %}                                
                             {% endfor %}
                             
@@ -843,15 +842,19 @@ $(".fille_dhonneur").click(function(){
             '<input type="text" id="fille_dhonneur_'+num+'" class="mb-3"  name="fille_dhonneur"  value="" placeholder="Garçon d honneur">' +
             '<i class="fa fa-trash" id="deleteFille_dhonneur"</div>';     
         
-            $('#newinput_fille_dhonneur').append(newfille_dhonneur);
             
-            num++;
+            
+            let numero_fille_dhonneur = num++;
             
             
             data_fille_dhonneur++
             let fille_dhonneur = $("#data_fille_dhonneurs_"+data_fille_dhonneur).val();   
             
             $("#fille_dhonneur_"+data_fille_dhonneur).val(fille_dhonneur);
+
+            if(numero_fille_dhonneur < 5){  
+                $('#newinput_fille_dhonneur').append(newfille_dhonneur);                
+            }
         })
         
         $("body").on("click", "#deleteFille_dhonneur", function(){
@@ -886,8 +889,7 @@ $(".fille_dhonneur").click(function(){
         //fin
         
         //Ajout ami/Amie pour Homme
-        $(".amis_femme").click(function(){
-                
+        $(".amis_femme").click(function(){              
                
                
                     neWamis_femme = 
@@ -898,16 +900,18 @@ $(".fille_dhonneur").click(function(){
                     
                         $('#newinput_amis_femme').append(neWamis_femme);                        
                         num2++;
-                        data_amis_femme++; 
-                        $data = $("#data_amis_homme_"+data_amis_femme).val()
-                        console.log(amis_femme)
+                        data_amis_femme++;
+                        
+                        $data = $("#data_amis_femme_"+data_amis_femme).val()                        
                         $("#amis_femme_"+data_amis_femme).val($data);  
+                        
                         
                         
                     })
                     
                     $("body").on("click", "#deleteAmis_femme", function(){
                         $(this).parents("#amis_femme").remove();
+                        console.log(num2--);
                     })
         
         
