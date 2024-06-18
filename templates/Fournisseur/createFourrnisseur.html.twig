@@ -1,17 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Fournisseur rehetra {% endblock %}
-
-{% block body %}
-    <h2>Ajout fournisseur : </h2>
-    {{ form_start (form) }}
-    {{ form_row (form.Titre) }}
-    {{ form_row (form.Description) }}
-    {{ form_row (form.TitreCateg) }}
-    {{ form_row (form.SousCateg) }}
-    <br>
-    <button type="submit" class="btn btn-primary">AJOUT</button>
-     <a href="{{ path('app_fournisseur_list') }}"> Voir la liste des fournisseurs... </a>
-    {{ form_end (form) }}
+{% block title %}
+	Fournisseur rehetra
 {% endblock %}
 
+{% block body %}
+	<img src="{{asset('image/image1.jpg')}}" width="50%">
+
+	<h2>Ajout fournisseur :
+	</h2>
+	{{ form_start (form) }}
+	{{ form_row (form.Titre) }}
+	{{ form_row (form.Description) }}
+	{{ form_row (form.TitreCateg) }}
+	{{ form_row (form.SousCateg) }}
+	<br>
+	<button type="submit" class="btn btn-primary">AJOUT</button>
+	<a href="{{ path('app_fournisseur_list') }}">
+		Voir la liste des fournisseurs...
+	</a>
+	{{ form_end (form) }}
+{% endblock %}

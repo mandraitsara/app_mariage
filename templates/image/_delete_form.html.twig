@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_image_delete', {'id': image.id}) }}" onsubmit="return confirm('Etes-vous vraiment sûr de vouloir vraiment supprimer ?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+	<button class="btn">Supprimer</button>
+</form>
