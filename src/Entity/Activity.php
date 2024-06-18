@@ -75,6 +75,9 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $fille_d_honneur = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $totalInvite = null;
+
 
     // Getters and Setters...
 
@@ -302,6 +305,18 @@ class Activity
     public function setFilleDHonneur(?string $fille_d_honneur): static
     {
         $this->fille_d_honneur = $fille_d_honneur;
+
+        return $this;
+    }
+
+    public function getTotalInvite(): ?int
+    {
+        return $this->totalInvite;
+    }
+
+    public function setTotalInvite(?int $totalInvite): static
+    {
+        $this->totalInvite = $totalInvite;
 
         return $this;
     }

@@ -167,38 +167,53 @@
                         
                         <div hidden>
                             {% for famille_proche in amis_homme %}
-                                <input id="data_famille_homme_{{loop.index}}" value="{{famille_proche}}">                                    
+                                {% if famille_proche !="undefined" %}
+                                <input id="data_famille_homme_{{loop.index}}" value="{{famille_proche}}">  
+                                {% endif %}                                  
                             {% endfor %}
 
                             {% for famille_femme in amis_femme %}
+                                {% if famille_femme != "undefined" %}
                                 <input id="data_famille_femme_{{loop.index}}" value="{{famille_femme}}">  
+                                {% endif %}
                             {% endfor %}
 
                             {%  for garcons_dhonneurs in garcon_dhonneur %}
+                                {% if garcons_dhonneurs != "undefined" %}
                                 <input id="data_garcon_dhonneur_{{loop.index}}" value="{{garcons_dhonneurs}}">
+                                {% endif %}
                             {% endfor %}
 
                             {%  for fille_dhonneurs in fille_dhonneur %}
-                            <input id="data_fille_dhonneurs_{{loop.index}}" value="{{fille_dhonneurs}}">
+                                {% if fille_dhonneurs != "undefined" %}
+                                    <input id="data_fille_dhonneurs_{{loop.index}}" value="{{fille_dhonneurs}}">
+                                {% endif %}
                             {% endfor %}
 
-                            {%  for parents_homme in parent_homme %}
-                            <input id="data_parents_homme_{{loop.index}}" value="{{parents_homme}}">
+                            {% for parents_homme in parent_homme %}
+                                {% if parents_homme != "undefined" %}
+                                    <input id="data_parents_homme_{{loop.index}}" value="{{parents_homme}}">
+                                {% endif %}
                             {% endfor %}
 
                             {%  for parents_femme in parent_femme %}
-                            <input id="data_parents_femme_{{loop.index}}" value="{{parents_femme}}">
+                                {% if parents_femme != "undefined" %}
+                                    <input id="data_parents_femme_{{loop.index}}" value="{{parents_femme}}">
+                                {% endif%}
                             {% endfor %}
 
                             {% for amis_homme in ami_homme %}
-                            <input id="data_amis_homme_{{loop.index}}" value="{{amis_homme}}">
+                                {% if amis_homme != "undefined" %}
+                                    <span hidden id="amis_homme_chiffre">{{loop.last}}</span>
+                                    <input id="data_amis_homme_{{loop.index}}" value="{{amis_homme}}">
+                                {% endif %}
                             {% endfor %}
 
                             {% for amis_femme in ami_femme %}
-                            <input id="data_amis_femme_{{loop.index}}" value="{{amis_femme}}">
+                                {% if amis_femme != "undefined "%}
+                                    <input id="data_amis_femme_{{loop.index}}" value="{{amis_femme}}">
+                                {% endif %}                                
                             {% endfor %}
-
-
                             
 
                         </div>
@@ -255,7 +270,7 @@
                         <div class="col-12">
                             <div class="guest-import p-3">
                                 <a class="btn-1" href="{{path("app_pdf_generator")}}" target="_blank"><i class="fa-solid fa-download"></i>Importés une liste d'invités</a>
-                                <button class="btn-2"><i class="fa-solid fa-file-pdf"></i>Télécharger le fichier PDF</button>
+                                {# <button class="btn-2"><i class="fa-solid fa-file-pdf"></i>Télécharger le fichier PDF</button> #}
                             </div>
                         </div>
                     </div>

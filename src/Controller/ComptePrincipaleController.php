@@ -24,10 +24,12 @@ class ComptePrincipaleController extends AbstractController
         }
 
         $Id_Name = $userInterface->getId();
+        $act = new Activity();
         $activity = $entityManager->getRepository(Activity::class)
-            ->activityId($Id_Name)
-            ->getUser()
-            ->getUsername();
+            ->activityId($Id_Name);
+
+        $femme = "rabe";
+        $homme = "rakoto";
 
         $username =  $authenticationUtils->getLastUsername();
 
@@ -37,7 +39,8 @@ class ComptePrincipaleController extends AbstractController
 
         $content = [
             'username' => $username,
-            'is_activated' => $activity,
+            'femme' => $femme,
+            'homme' => $homme,
         ];
         return $this->render($templates, $content);
     }
