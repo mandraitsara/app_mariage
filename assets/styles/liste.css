@@ -418,6 +418,7 @@ table td {
   right: 29%;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.397);
   cursor: pointer;
+  z-index: 1;
   }
   .selectBlocF {
   cursor: pointer;
@@ -427,4 +428,14 @@ table td {
   display: none;
   right: 34%;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.397);
+  cursor: pointer;
+  z-index: 1;
+}
+
+#valide {
+  display: inline-block;  
+}
+
+#newinput_garcon_dhonneur {
+  margin-top: 10px;
 }
