@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Image;
-use App\Entity\Prestataire;
 use App\Form\ImageType;
+use App\Entity\Prestataire;
+use Psr\Log\LoggerInterface;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -12,19 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 #[Route('/image')]
 class ImageController extends AbstractController
 {
-    private $params;
-
-    public function __construct(ParameterBagInterface $params)
-    {
-        $this->params = $params;
-    }
-
     #[Route('/', name: 'app_image_index', methods: ['GET'])]
     public function index(ImageRepository $imageRepository): Response
     {
@@ -49,41 +41,19 @@ class ImageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadedFiles = $form->get('image')->getData();
+            $imageFile = $form->get('imageFile')->getData();
 
-            if ($uploadedFiles) {
-                foreach ($uploadedFiles as $uploadedFile) {
-                    if ($uploadedFile) {
-                        $fileName = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
-
-                        try {
-                            $uploadedFile->move(
-                                $this->params->get('images_directory'),
-                                $fileName
-                            );
-
-                            // Créer une nouvelle instance d'Image
-                            $img = new Image();
-                            $img->setName($form->get('name')->getData());
-                            $img->setImage($fileName);
-                            $img->setPrestataire($user);
-
-                            // Persister l'objet Image
-                            $entityManager->persist($img);
-                            $logger->info('Image uploaded and entity persisted.', ['image' => $fileName]);
-                        } catch (\Exception $e) {
-                            $logger->error('File upload error: ' . $e->getMessage());
-                        }
-                    }
-                }
-
-                // Exécuter les opérations SQL
+            if ($imageFile) {
+                $image->setImageFile($imageFile);
+                $image->setPrestataire($user);
+                $entityManager->persist($image);
                 $entityManager->flush();
 
-                // Rediriger vers la liste des images
+                $logger->info('Image uploaded and entity persisted.', ['image' => $image->getImage()]);
+
                 return $this->redirectToRoute('app_image_index');
             } else {
-                $logger->warning('No files uploaded.');
+                $logger->warning('No file uploaded.');
             }
         }
 
@@ -107,21 +77,11 @@ class ImageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadedFiles = $form->get('image')->getData();
+            $imageFile = $form->get('imageFile')->getData();
 
-            if ($uploadedFiles) {
-                foreach ($uploadedFiles as $uploadedFile) {
-                    $fileName = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
-                    $uploadedFile->move(
-                        $this->params->get('images_directory'),
-                        $fileName
-                    );
-
-                    $img = new Image();
-                    $img->setImage($fileName);
-                    $img->setPrestataire($image->getPrestataire());
-                    $entityManager->persist($img);
-                }
+            if ($imageFile) {
+                $image->setImageFile($imageFile);
+                $entityManager->persist($image);
             }
 
             $entityManager->flush();

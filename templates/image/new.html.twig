@@ -1,23 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Upload Images</h1>
+	<h1>Create new Image</h1>
 
 	{{ form_start(form) }}
-	{{ form_row(form.name) }}
-	{{ form_row(form.image) }}
-	{{ form_row(form.envoyer) }}
+	{{ form_widget(form) }}
+	<button class="btn">{{ button_label|default('Save') }}</button>
 	{{ form_end(form) }}
 
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">
-			{{ message }}
-		</div>
-	{% endfor %}
-
-	{% for message in app.flashes('error') %}
-		<div class="alert alert-danger">
-			{{ message }}
-		</div>
-	{% endfor %}
+	<a href="{{ path('app_image_index') }}">back to list</a>
 {% endblock %}

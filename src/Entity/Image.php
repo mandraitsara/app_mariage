@@ -28,13 +28,13 @@ class Image
     private ?Prestataire $prestataire = null;
 
     /**
-     * @Vich\UploadableField(mapping="post_thumbnail", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="image", fileNameProperty="image")
      * @var File|null
      */
-    private $imageFile;
+    private ?File $imageFile = null;
 
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTime $updatedAt = null;
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -49,7 +49,6 @@ class Image
     public function setName(string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -61,7 +60,6 @@ class Image
     public function setImage(?string $image): self
     {
         $this->image = $image;
-
         return $this;
     }
 
@@ -73,7 +71,6 @@ class Image
     public function setPrestataire(?Prestataire $prestataire): self
     {
         $this->prestataire = $prestataire;
-
         return $this;
     }
 
@@ -91,14 +88,13 @@ class Image
         return $this->imageFile;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
