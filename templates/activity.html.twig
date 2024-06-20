@@ -211,6 +211,7 @@
                             {% for amis_femme in ami_femme %}
                                 {% if amis_femme != "undefined" %}                                        
                                     <input id="data_amis_femme_{{loop.index}}" value="{{amis_femme}}">                                                                                                            
+                                    <span class="hita">{{loop.last}}</span>
                                 {% endif %}                                
                             {% endfor %}
                             
@@ -712,6 +713,7 @@ const selectElementH = document.querySelector('.selectBlocH')
 //Pour l'ajout de bouton
 
 $(document).ready(function(){
+    
 
     $("#success-alert").hide()
 
@@ -757,7 +759,23 @@ $("body").on("click", "#deleteRow", function(){
 })
 
 //fin
+//test 
 
+function newparents_homme(){
+    neWparents_homme = 
+          '<div id="parents_homme">' +  
+            '<select id="cv_parents_homme_'+count1+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
+            '<input type="text" id="parents_homme_'+count1+'" class="mb-3" name="parents_homme"  value="" placeholder="Parents">' +
+            '<i class="fa fa-trash" id="deleteParents_homme"</div>';  
+        
+            $('#newinput_parents_homme').append(neWparents_homme);            
+            count1++;      
+            data_parents_homme++
+            let parents_homme = $("#data_parents_homme_"+data_parents_homme).val();
+        
+            $("#parents_homme_"+data_parents_homme).val(parents_homme);          
+             
+}
 //Ajout parent pour le marié
 $(".parents_homme").click(function(){                 
         neWparents_homme = 
@@ -840,20 +858,17 @@ $(".fille_dhonneur").click(function(){
           '<div id="fille_dhonneur">' +  
             '<select id="select_fille_dhonneur_'+num+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
             '<input type="text" id="fille_dhonneur_'+num+'" class="mb-3"  name="fille_dhonneur"  value="" placeholder="Garçon d honneur">' +
-            '<i class="fa fa-trash" id="deleteFille_dhonneur"</div>';     
-        
+            '<i class="fa fa-trash" id="deleteFille_dhonneur"></div>';           
             
             
-            let numero_fille_dhonneur = num++;
+            let numero_fille_dhonneur = num++;            
             
-            
-            data_fille_dhonneur++
-            let fille_dhonneur = $("#data_fille_dhonneurs_"+data_fille_dhonneur).val();   
-            
-            $("#fille_dhonneur_"+data_fille_dhonneur).val(fille_dhonneur);
-
+            data_fille_dhonneur++            
             if(numero_fille_dhonneur < 5){  
-                $('#newinput_fille_dhonneur').append(newfille_dhonneur);                
+                $('#newinput_fille_dhonneur').append(newfille_dhonneur);     
+                let fille_dhonneurs = $("#data_fille_dhonneurs_"+data_fille_dhonneur).val();  
+            
+            $("#fille_dhonneur_"+data_fille_dhonneur).val(fille_dhonneurs);           
             }
         })
         
@@ -927,6 +942,7 @@ $(".fille_dhonneur").click(function(){
                         '<input type="text" id="famille_femme_'+num3+'" class="mb-3" name="famille_femme"  value="" placeholder="Famille proche">' +
                             '<i class="fa fa-trash" id="deleteFamille_femme"</div>';  
                     
+
                         $('#newinput_famille_femme').append(neWfamille_femme);
                         
                         num3++;
