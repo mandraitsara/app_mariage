@@ -27,6 +27,7 @@ class ComptePrincipaleController extends AbstractController
                     ->activityId($Id_Name);
         $femme = $activity->getNomF();
         $homme = $activity->getNomH();
+        $test ="d";
 
         $username =  $authenticationUtils->getLastUsername();
             

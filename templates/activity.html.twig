@@ -837,9 +837,12 @@ $(".famille_homme").click(function(){
                 $('#newinput_famille_homme').append(neWfamille_homme);
                 
                 count3++;
-                data_famille_homme++;      
-                $datas = $("#data_famille_homme_"+data_famille_homme).val()
-                $test = $("#famille_homme_"+data_famille_homme).val($datas);                
+                let famille_homme_ord = data_famille_homme++;  
+                if(famille_homme_ord < 41){
+                    $datas = $("#data_famille_homme_"+data_famille_homme).val()
+                    $test = $("#famille_homme_"+data_famille_homme).val($datas)
+                }
+                    
             })
             
             $("body").on("click", "#deleteFamilleProche", function(){
@@ -857,7 +860,7 @@ $(".fille_dhonneur").click(function(){
         newfille_dhonneur = 
           '<div id="fille_dhonneur">' +  
             '<select id="select_fille_dhonneur_'+num+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-            '<input type="text" id="fille_dhonneur_'+num+'" class="mb-3"  name="fille_dhonneur"  value="" placeholder="Garçon d honneur">' +
+            '<input type="text" id="fille_dhonneur_'+num+'" class="mb-3"  name="fille_dhonneur"  value="" placeholder="Fille d honneur">' +
             '<i class="fa fa-trash" id="deleteFille_dhonneur"></div>';           
             
             
