@@ -21,10 +21,12 @@
 
 {% block body %}
 <div class="container-fuid">
-    <div class="row p-5">
+    
+    <div class="row p-5">      
         <!-- Nav tabs -->
         <div class="col-md-2">
-            <div class="bloc-menu" style="border: 1px solid #00000015; height:500px">                
+            <span id="info_pour_marie"></span>
+            <div class="bloc-menu" style="border: 1px solid #00000015; height:500px">             
                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -714,7 +716,7 @@ const selectElementH = document.querySelector('.selectBlocH')
 
 $(document).ready(function(){
     
-
+    info_pour_marie()
     $("#success-alert").hide()
 
     let count = 1;
@@ -962,8 +964,19 @@ $(".fille_dhonneur").click(function(){
                     })
         
         //fin
+function info_pour_marie(){
+    let info_pour_marie = $("#name_epoux").val() + " & " + $("#name_epouse").val()
+    $("#info_pour_marie").text(info_pour_marie)
 
 
+}
+
+$("#name_epoux").change(function(){
+    info_pour_marie()
+})
+$("#name_epouse").change(function(){
+    info_pour_marie()
+})
 
 $("#valide").click(function(){
     var garcon_dhonneur = $("#garcon_dhonneur_1").val() + ";" + $("#garcon_dhonneur_2").val() + ";" +  $("#garcon_dhonneur_3").val() +  ";" + $("#garcon_dhonneur_4").val()
