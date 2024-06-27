@@ -1,0 +1,89 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+.head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.head .logo {
+    text-decoration: none;   
+    color: #000;
+    font-family: 'Qwigley';
+    color: blue;
+    font-size: 30px;
+}
+.head ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.head ul li {
+    list-style: none;
+}
+.head ul li a {
+    color: #000;
+    text-decoration: none;
+    margin: 30px;
+    font-family: 'Poppins', sans-serif;
+}
+.btn-bloc .btn-1{
+    color: #fff;
+    background: #dd8090;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+.btn-bloc .btn-2{
+    background: #0b98eb;
+    padding: 6px 12px;
+    color: #fff;
+    text-decoration: none;
+}
+.pic-landing img {
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+}
+.text-landing a {
+    background: #0b98eb;
+    color: #ffff;
+    padding: 10px 15px;
+    text-decoration: none !important;
+}
+.blob-2 {
+    position: absolute;
+    width: 760px;
+    top: -40%;
+    right: -10%;
+    z-index: -1;
+}
+.spacer {
+    height: 150px;
+}
+.box-icon .icon{
+    font-size: 50px;
+    color: #00000071;
+}
+.btn-parti a{
+    color: #fff;
+    background: #dd8090;
+    padding: 8px 15px;
+    text-decoration: none !important;
+}
+.btn-parti a:hover{
+    color: #fff;
+}
+.reseau-sociaux span{
+    margin: 5px;
+}
+
+

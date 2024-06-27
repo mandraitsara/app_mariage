@@ -1,0 +1,691 @@
+//Affich
+$("#name_epoux").change(function(){   
+    if ($("#name_epoux").length>0)
+    {
+        let count = $("#name_epoux[data-count]")
+        console.log(count)
+        let info_femme = $("#info_femme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_femme").text(calcule)
+    }
+    
+    let data ={
+
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };              
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#name_epoux").val();
+        }
+
+    })
+    
+
+
+
+})
+
+$("#lastname_epoux").change(function(){    
+    if ($("#lastname_epoux").length>0)
+    {
+        let info_femme = $("#info_femme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_femme").text(calcule)
+    }
+        
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };        
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epoux").val();
+
+        }
+
+    })
+    
+
+})
+
+$("#name_epouse").change(function(){           
+    if ($("#name_epouse").val() !="")
+    {
+        
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+
+        $("#info_homme").text(calcule)
+    }else{
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 0
+        $("#info_homme").text(calcule)
+    }
+         
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+
+};        
+
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#name_epouse").val();
+        }
+
+    })
+    
+
+
+
+})
+
+$("#lastname_epouse").change(function(){ 
+    if ($("#lastname_epouse").length>0)
+    {
+       
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_homme").text(calcule)
+    }    
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };
+    
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epouse").val();
+
+        }
+
+    })
+})  
+
+    $("#garcon_dhonneur_epoux_input").change(function(){
+    if ($("#garcon_dhonneur_epoux_input").length>0)
+    {
+       
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_homme").text(calcule)
+    }    
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };
+    
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epouse").val();
+
+        }
+
+    })
+    
+
+})
+
+$("#parents_epoux_input").change(function(){
+    if ($("#parents_epoux_input").length>0)
+    {
+       
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_homme").text(calcule)
+    }    
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };
+    
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epouse").val();
+
+        }
+
+    })
+    
+
+})
+
+$("#ami_epoux_input").change(function(){
+    if ($("#ami_epoux_input").length>0)
+    {
+       
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_homme").text(calcule)
+    }    
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };
+    
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epouse").val();
+
+        }
+
+    })
+    
+
+})
+
+$("#ami_proche_epoux_input").change(function(){
+    if ($("#ami_proche_epoux_input").length>0)
+    {
+       
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_homme").text(calcule)
+    }    
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };
+    
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epouse").val();
+
+        }
+
+    })
+    
+
+})
+
+
+$("#fille_dhonneur_epouse_input").change(function(){
+    if ($("#fille_dhonneur_epouse_input").length>0)
+    {
+       
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_homme").text(calcule)
+    }    
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };
+    
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epouse").val();
+
+        }
+
+    })
+    
+
+})
+
+$("#parents_epouse_input").change(function(){
+    if ($("#parents_epouse_input").length>0)
+    {
+       
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_homme").text(calcule)
+    }    
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };
+    
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epouse").val();
+
+        }
+
+    })
+    
+
+})
+
+$("#ami_epouse_input").change(function(){
+    if ($("#ami_epouse_input").length>0)
+    {
+       
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_homme").text(calcule)
+    }    
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };
+    
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epouse").val();
+
+        }
+
+    })
+    
+
+})
+
+$("#ami_proche_epouse_input").change(function(){
+    if ($("#ami_proche_epouse_input").length>0)
+    {
+       
+        let info_femme = $("#info_homme").text()
+        let calcule = parseFloat(info_femme) + 1
+        $("#info_homme").text(calcule)
+    }    
+    let data ={
+        name_epouse: $('#name_epouse').val(),
+        lastname_epouse: $('#lastname_epouse').val(),
+        fille_dhonneur_epouse: $('#fille_dhonneur_epouse_input').val(),
+        parents_epouse:$("#parents_epouse_input").val(),
+        ami_epouse:$("#ami_epouse_input").val(),
+        ami_proche_epouse: $("#ami_proche_epouse_input").val(),
+
+        name_epoux: $('#name_epoux').val(),
+        lastname_epoux: $('#lastname_epoux').val(),
+        garcon_dhonneur_epoux: $('#garcon_dhonneur_epoux_input').val(),
+        parents_epoux:$("#parents_epoux_input").val(),
+        ami_epoux:$("#ami_epoux_input").val(),
+        ami_proche_epoux: $("#ami_proche_epoux_input").val()
+    };
+    
+    $.ajax({
+        url:"/activite/new/"+ $("#update_id").val(),
+        method: "PUT",
+        data: data,
+        success: function(response)
+        {
+            $("#lastname_epouse").val();
+
+        }
+
+    })
+    
+
+})
+
+
+
+
+//Page de souris sur des case
+$("#garcon_dhonneur_epoux").mouseover(function(){
+    $("#garcon_dhonneur_epoux_suppr").show()
+})
+$("#garcon_dhonneur_epoux").mouseout(function(){
+    $("#garcon_dhonneur_epoux_suppr").hide()
+})
+//parents_epoux
+
+$("#ami_epoux").mouseover(function(){
+    $("#ami_epoux_suppr").show()
+})
+$("#ami_epoux").mouseout(function(){
+    $("#ami_epoux_suppr").hide()
+})
+
+$("#parents_epoux").mouseover(function(){
+    $("#parents_epoux_suppr").show()
+})
+$("#parents_epoux").mouseout(function(){
+    $("#parents_epoux_suppr").hide()
+})
+
+
+$("#ami_proche_epoux").mouseover(function(){
+    $("#ami_proche_epoux_suppr").show()
+})
+$("#ami_proche_epoux").mouseout(function(){
+    $("#ami_proche_epoux_suppr").hide()
+})
+
+
+
+//fin
+
+//pour le button suppr caché
+$("#garcon_dhonneur_epoux_suppr").click(function(){
+    $("#garcon_dhonneur_epoux").hide()
+})
+
+
+
+$("#ami_epoux_suppr").click(function(){
+    $("#ami_epoux").hide()
+})
+
+$("#ami_proche_epoux_suppr").click(function(){
+    $("#ami_proche_epoux").hide()
+})
+
+$("#ami_proche_epoux_suppr").click(function(){
+    $("#ami_proche_epoux").hide()
+})
+
+$("#parents_epoux_suppr").click(function(){
+    $("#parents_epoux").hide()
+})
+
+
+
+//Fin
+
+//Affiché le case pour le garçon d'honneur
+$("#gh_h").click(function(){
+    $("#garcon_dhonneur_epoux").show()
+})
+
+
+
+//Pour les mariée
+
+//Page de souris sur des case
+$("#fille_dhonneur_epouse").mouseover(function(){
+    $("#fille_dhonneur_epouse_suppr").show()
+})
+$("#fille_dhonneur_epouse").mouseout(function(){
+    $("#fille_dhonneur_epouse_suppr").hide()
+})
+//parents_epouse
+
+$("#ami_epouse").mouseover(function(){
+    $("#ami_epouse_suppr").show()
+})
+$("#ami_epouse").mouseout(function(){
+    $("#ami_epouse_suppr").hide()
+})
+
+$("#parents_epouse").mouseover(function(){
+    $("#parents_epouse_suppr").show()
+})
+$("#parents_epouse").mouseout(function(){
+    $("#parents_epouse_suppr").hide()
+})
+
+
+$("#ami_proche_epouse").mouseover(function(){
+    $("#ami_proche_epouse_suppr").show()
+})
+$("#ami_proche_epouse").mouseout(function(){
+    $("#ami_proche_epouse_suppr").hide()
+})
+
+
+
+//fin
+
+//pour le button suppr caché
+$("#fille_dhonneur_epouse_suppr").click(function(){
+    $("#fille_dhonneur_epouse").hide()
+})
+
+$("#ami_epouse_suppr").click(function(){
+    $("#ami_epouse").hide()
+})
+
+$("#ami_proche_epouse_suppr").click(function(){
+    $("#ami_proche_epouse").hide()
+})
+
+
+$("#parents_epouse_suppr").click(function(){
+    $("#parents_epouse").hide()
+})
+
+
+
+//Fin
+
+//Affiché le case pour le garçon d'honneur
+$("#gh_h").click(function(){
+    $("#garcon_dhonneur_epouse").show()
+})
+
+$("#prt_h").click(function(){
+    $("#parents_epoux").show()
+})
+
+$("#amproche_h").click(function(){
+    $("#ami_proche_epoux").show()
+})
+
+$("#am_h").click(function(){
+    $("#ami_epoux").show()
+})
+
+//mariée
+
+$("#gh_f").click(function(){
+    $("#fille_dhonneur_epouse").show()
+})
+
+$("#prt_f").click(function(){
+    $("#parents_epouse").show()
+})
+
+$("#amproche_f").click(function(){
+    $("#ami_proche_epouse").show()
+})
+
+$("#am_f").click(function(){
+    $("#ami_epouse").show()
+})
+
+//Fin
+$(document).ready(function(){
+    //caché l'input garçon d'honneur lorsqu'on fait le chargement de page.
+
+    //Pour marié
+    $("#garcon_dhonneur_epoux").hide()
+    $("#ami_epoux").hide()
+    $("#ami_proche_epoux").hide()    
+    $("#parents_epoux").hide()
+
+//Pour mariée
+    $("#ami_epouse").hide()
+    $("#ami_proche_epouse").hide()
+    $("#fille_dhonneur_epouse").hide()
+    $("#parents_epouse").hide()
+
+//fin
+})
+
+$('#garcon_dhonneur_epoux').addInputArea(
+btn_add: gh_h
+
+
+);
+
+
+
+
+
+
+<div id="parents_epoux">
+    <input type="text" id="parents_epoux_input" name="parents_epoux_input"  value="" placeholder="parents">
+        <i class="fa fa-user icon"></i>
+            <span id="parents_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+</div>
+
+<div id="ami_epoux">
+    <input type="text" id="ami_epoux_input" name="ami_epoux"  value="" placeholder="ami(e)">
+        <i class="fa fa-user icon"></i>
+        <span id="ami_epoux_suppr" class="suppr"> <i class="fa fa-trash" aria-hidden="true"></i></span>
+</div>
+
+
+<div id="ami_proche_epoux">
+    <input type="text" id="ami_proche_epoux_input" name="ami_proche_epoux_input"  value="" placeholder="famille proche">
+        <i class="fa fa-user icon"></i><span id="ami_proche_epoux_suppr" class="suppr"><i class="fa fa-trash" aria-hidden="true"></i></span>
+</div>

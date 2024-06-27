@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <article>
+        <h2>{{ prestataire.NomPrestataire }}</h2>
+        <div class="metadata">Type de prestataire : {{ prestataire.TypePrestataire }}</div>
+        <div class="content">
+            <img src="http://placehold.it/350x150" alt="Image Prestataire">
+            <hr>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit blanditiis, officia veritatis fugiat nemo ipsa aliquam fuga vitae qui cum eligendi ullam enim doloremque id nisi numquam nesciunt praesentium tempora?</p>
+            <p>Aut eaque rerum, autem praesentium voluptates obcaecati aliquid error natus quidem consectetur nostrum aliquam dolor modi neque dolore nemo necessitatibus, mollitia esse nam, perspiciatis ea fugiat minima?</p>
+            <p>Consequatur, consectetur, doloremque eius ipsum id architecto veniam laborum hic incidunt quos, fuga doloreos, soluta reprehenderit enim uidem, officia eum.</p>
+            <p>Ad nesciunt quidem debitis eum, commodi amet quos ipsum accusamus doloribus aliquam excepturi adipisci asperiores necessitatibus tenetur blanditiis perferendis, culpa cupiditate quisquam quibusdam quas illum. Et adipisci excepturi hic explicabo?</p>
+        </div>
+    </article>
+    <a href="{{ path('app_prestataire_list') }}" class="btn btn-success">Retour à la liste des prestataires</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Contact des agences dispo {% endblock %}
+
+{% block body %}
+    <h1>Ajout de nouveau contact</h1>
+    {{ form_start (form) }}
+    {{ form_row (form.nom) }}
+    {{ form_row (form.adresse) }}
+    {{ form_row (form.mail) }}
+
+    <br>
+    <button type="submit" class="btn btn-primary">Ajout</button>
+    {{ form_end (form) }}
+{% endblock %}

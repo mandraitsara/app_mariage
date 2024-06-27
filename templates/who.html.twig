@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Qui êtes vous ? {%endblock%}
+{% block body %}
+
+
+
+
+<div class="wrapper-img">
+    <div class="p-5">
+        <h3>Qui êtes vous ?</h3>
+    </div>
+    <div class="bloc-img">
+        <div class="img-1">
+            <img src="{{ asset('icons/men.svg')}}" alt="men-picture">
+            <h3 class="pt-3">Marié</h3>
+        </div>
+        <div class="img-2">
+            <img src="{{ asset('icons/women.svg')}}" alt="women-picture">
+            <h3 class="pt-3">Mariée</h3>
+        </div>
+    </div>
+    <div class="p-5">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum nobis impedit tenetur?</p>
+    </div>
+</div>
+
+
+
+{% endblock %}

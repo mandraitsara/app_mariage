@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie {% endblock %}
+
+{% block body %}
+    <h1>Catégorie :</h1>
+
+    {{ form_start (form) }}
+        {{ form_row (form.TitreCategorie) }}
+        {{ form_row (form.SoustitreCategorie) }}
+        {{ form_row (form.Content) }} <br>
+        <button type="submit" class="btn btn-primary">Ajout de Catégorie</button>
+        <a href="{{ path('app_categ_list') }}"> Voir les prestataires disponible </a>
+    {{ form_end (form) }}
+   
+{% endblock %}

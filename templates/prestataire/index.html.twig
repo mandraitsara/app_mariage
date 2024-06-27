@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PrestataireController!{% endblock %}
+
+{% block body %}
+    <section class="article">
+        {% for prestataire in prestataires %}
+        
+        <article>
+            <h2>{{ prestataire.NomPrestataire}}</h2>
+            <div class="metadata">natao androany teto am SAHAZA</div>
+            <div class="content">
+                <img src="http:placehold.it/350x150" alt="">
+                {{prestataire.TypePrestataire}}
+                <a href="{{ path('app_show', {'id': prestataire.id}) }}" class="btn btn-primary">En savoir plus...</a>
+
+            </div>
+        </article>
+        {% endfor %}
+        </section>
+{% endblock %}

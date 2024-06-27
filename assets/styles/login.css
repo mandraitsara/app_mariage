@@ -1,0 +1,46 @@
+.container {
+    position: relative;
+}
+
+.form-container {
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.12);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.12);
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.12);
+}
+.login-bloc .btn-1-log, .btn-2-log{
+    display: block;
+    text-decoration: none !important;
+    padding: 8px 0px;
+    text-align: center;
+}
+.login-bloc .btn-1-log{
+    background: #0b98eb;
+    color: #ffff;
+}
+.login-bloc .btn-2-log{
+    background: #dd8090;
+    color: #ffff;
+}
+.svg-box img {
+    width: 400px;
+}
+
+.go-back{
+    position: absolute;
+    left: 3%;
+    top: 5%;
+    color:#0b98eb;
+    padding: 4px 9px;
+    border-radius: 10px;
+    border-radius: 20px;
+    cursor: pointer !important;
+}
+.fa-user{
+    color: #0b98eb;
+    width: 40px;
+}
+.login-bloc span {
+    border: 2px solid #0b98eb;
+    padding: 10px;
+    border-radius: 40px;
+}

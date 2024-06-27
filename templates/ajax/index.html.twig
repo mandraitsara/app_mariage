@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test ajax
+{% endblock %}
+
+
+{% block stylesheets %}
+	<style>
+		.table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		.table th,
+		.table td {
+			border-bottom: 1px solid #ddd;
+			padding: 8px;
+			text-align: left;
+		}
+		.table th {
+			background-color: #f2f2f2;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<a id="loadstudent" href="#">prestataire information</a>
+	<br>
+	<br>
+	<table class="table">
+		<tbody id="prestataire"></tbody>
+	</table>
+
+
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script language="javascript">
+
+		$(document).ready(function () {
+
+console.log('hello');
+
+$("#loadstudent").on("click", function (event) {
+event.preventDefault();
+$.ajax({
+url: '{{ path('app_ajax_prestataire') }}',
+type: 'POST',
+dataType: 'json',
+async: true,
+success: function (data, status) {
+var header = $('<tr><th>Noms Prestataire</th><th>Type Prestataire</th><th>Info Prestataire</th></tr>');
+$('#prestataire').html('');
+$('#prestataire').append(header);
+
+for (var i = 0; i < data.length; i++) {
+var prestataire = data[i];
+var row = $('<tr><td class="NomPrestataire"></td><td class="TypePrestataire"></td><td class="InfoPrestataire"></td></tr>');
+
+$('.NomPrestataire', row).text(prestataire['NomPrestataire']);
+$('.TypePrestataire', row).text(prestataire['TypePrestataire']);
+$('.InfoPrestataire', row).text(prestataire['infoPrestataire']);
+$('#prestataire').append(row);
+}
+},
+error: function (xhr, textStatus, errorThrown) {
+alert('Ajax request failed.');
+}
+});
+});
+});
+	</script>
+{% endblock %}
