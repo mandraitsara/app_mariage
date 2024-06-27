@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use Symfony\Component\Validator\Constraints\Length;
 
 class ComptePrincipaleController extends AbstractController
 {
@@ -27,7 +27,7 @@ class ComptePrincipaleController extends AbstractController
                     ->activityId($Id_Name);
         $femme = $activity->getNomF();
         $homme = $activity->getNomH();
-        $test ="d";
+
 
         $username =  $authenticationUtils->getLastUsername();
             
@@ -74,6 +74,7 @@ class ComptePrincipaleController extends AbstractController
         $ami_h = mb_split(";", $ami_homme);
         $ami_f = mb_split(";", $ami_femme);
 
+     
         
 
         $content = [

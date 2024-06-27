@@ -78,6 +78,12 @@ class Activity
     #[ORM\Column(nullable: true)]
     private ?int $totalInvite = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email_filledHonneur = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email_garcondHonneur = null;
+
 
     // Getters and Setters...
 
@@ -317,6 +323,30 @@ class Activity
     public function setTotalInvite(?int $totalInvite): static
     {
         $this->totalInvite = $totalInvite;
+
+        return $this;
+    }
+
+    public function getEmailFilledHonneur(): ?string
+    {
+        return $this->email_filledHonneur;
+    }
+
+    public function setEmailFilledHonneur(?string $email_filledHonneur): static
+    {
+        $this->email_filledHonneur = $email_filledHonneur;
+
+        return $this;
+    }
+
+    public function getEmailGarcondHonneur(): ?string
+    {
+        return $this->email_garcondHonneur;
+    }
+
+    public function setEmailGarcondHonneur(?string $email_garcondHonneur): static
+    {
+        $this->email_garcondHonneur = $email_garcondHonneur;
 
         return $this;
     }

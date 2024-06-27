@@ -62,7 +62,7 @@
                         <span class="arrow-icon" data-toggle="collapse" data-target="#demo"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow" alt="arrow" style="width: 20px;margin:5px;">Couple</span>
                         <span class="pen-modif"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
                         <div class="collapse" id="demo">
-                            <a href="#">Parametré le nom et <br>prénom des mariées</a>
+                            <span id="parametre_nom"> {{nomHomme}}  et {{nomFemme}}</span>                              
                             <div class="img-valentine">
                                 <img src="{{asset('./icons/valentine.svg')}}" alt="valentine" style="width: 250px;">
                             </div>
@@ -205,13 +205,13 @@
                             {% endfor %}
 
                             {% for amis_homme in ami_homme %}
-                                {% if amis_homme != "undefined" %}                                                              
+                                {% if amis_homme != "undefined" or amis_homme == "" %}                                                              
                                     <input id="data_amis_homme_{{loop.index}}" value="{{amis_homme}}">                                    
                                 {% endif %}
                             {% endfor %}
 
                             {% for amis_femme in ami_femme %}
-                                {% if amis_femme != "undefined" %}                                        
+                                {% if amis_femme != "undefined" or amis_femme == "" %}                                        
                                     <input id="data_amis_femme_{{loop.index}}" value="{{amis_femme}}">                                                                                                            
                                     <span class="hita">{{loop.last}}</span>
                                 {% endif %}                                
@@ -922,8 +922,8 @@ $(".fille_dhonneur").click(function(){
                         num2++;
                         data_amis_femme++;
                         
-                        $data = $("#data_amis_femme_"+data_amis_femme).val()                        
-                        $("#amis_femme_"+data_amis_femme).val($data);  
+                        datass = $("#data_amis_femme_"+data_amis_femme).val()                                               
+                        $("#amis_femme_"+data_amis_femme).val(datass);  
                         
                         
                         
@@ -931,7 +931,7 @@ $(".fille_dhonneur").click(function(){
                     
                     $("body").on("click", "#deleteAmis_femme", function(){
                         $(this).parents("#amis_femme").remove();
-                        console.log(num2--);
+                      
                     })
         
         
@@ -978,6 +978,15 @@ $("#name_epouse").change(function(){
     info_pour_marie()
 })
 
+//parametrage nom
+
+$("#parametre_nom").click(function(){
+
+})
+
+
+
+
 $("#valide").click(function(){
     var garcon_dhonneur = $("#garcon_dhonneur_1").val() + ";" + $("#garcon_dhonneur_2").val() + ";" +  $("#garcon_dhonneur_3").val() +  ";" + $("#garcon_dhonneur_4").val()
     var parents_homme = $("#parents_homme_1").val() + ";" + $("#parents_homme_2").val();
@@ -1011,7 +1020,6 @@ $("#valide").click(function(){
             parents_epouse:parents_femme,
             ami_epouse:amis_femme,
             famille_femme: famille_femme,
-
             name_epoux: $('#name_epoux').val(),
 //            lastname_epoux: $('#lastname_epoux').val(),            
             parents_epoux: parents_homme,
