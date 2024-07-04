@@ -51,7 +51,13 @@ class ComptePrincipaleController extends AbstractController
         
         $activiteID = $entityManager->getRepository(Activity::class)->activityId($userID)->getId();
         $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF();        
-        $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();                             
+        $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();  
+        $dateCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getDateCeremonie();
+        $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();
+        $day = intval(date('d/m/y'));
+        $dateFin =intval(date($dateCeremonie));        
+        $dateDuJour = intval(date($day));
+        $jourJ = $dateFin - $dateDuJour;
         $explo = [];
 
       
@@ -93,6 +99,9 @@ class ComptePrincipaleController extends AbstractController
             'nomHomme'=>$NomH,            
             'liste_invites' => $tabs,
             'nombre_invite' => $nb_invite,
+            'dateCeremonie' =>$dateCeremonie,
+            'lieuxCeremonie' => $lieuCeremonie,
+            'jourJ' => $jourJ,
         ];
         return $this->render($templates, $content);
     }
@@ -107,24 +116,15 @@ class ComptePrincipaleController extends AbstractController
         if($project)
         {     
             
-         
+            $date_at = date('d/m/y;H:i:s');
             
-            $project->setNomH($request->request->get('name_epoux'));      
-            //$project->setPrenomH($request->request->get('lastname_epoux'));         
-            
-            
-
-
+            $project->setNomH($request->request->get('name_epoux'));
             $project->setNomF($request->request->get('name_epouse'));
-        
-
-
-
-         $entityManager->flush(); 
-
-         $data = "La modification a été effectué...";
-           
-
+            $project->setDateCeremonie($request->request->get('date_ceremonie'));
+            $project->setLieuxCeremonie($request->request->get('lieu_ceremonie'));
+            $project->setDateAt($date_at);
+            $entityManager->flush(); 
+            $data = "La modification a été effectué...";
             return $this->json($data);
         }  
         

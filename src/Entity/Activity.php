@@ -30,7 +30,13 @@ class Activity
     private ?string $dateCeremonie = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $LieuxCeremonie = null;  
+    private ?string $LieuxCeremonie = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $dateAt = null;
+
+    #[ORM\Column(nullable:true, length: 255)]
+    private ?string $jourJ = null;  
 
 
     // Getters and Setters...
@@ -84,6 +90,30 @@ class Activity
     public function setLieuxCeremonie(?string $LieuxCeremonie): static
     {
         $this->LieuxCeremonie = $LieuxCeremonie;
+
+        return $this;
+    }
+
+    public function getDateAt(): string
+    {
+        return $this->dateAt;
+    }
+
+    public function setDateAt(?string $dateAt): static
+    {
+        $this->dateAt = $dateAt;
+
+        return $this;
+    }
+
+    public function getJourJ(): ?string
+    {
+        return $this->jourJ;
+    }
+
+    public function setJourJ(string $jourJ): static
+    {
+        $this->jourJ = $jourJ;
 
         return $this;
     }

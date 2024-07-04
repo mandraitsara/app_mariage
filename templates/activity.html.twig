@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"/>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
               
 {% endblock %}
 {% block javascripts %}
@@ -15,6 +16,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="{{asset('./js/active.js')}}">
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 
 
 {% endblock %}
@@ -96,13 +98,29 @@
                         <span class="pen-modif2"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
                         <div class="collapse" id="demo2">
                             <div class="row p-3">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <h4>Date de la cérémonie</h4>
+                                    {% if dateCeremonie != "" %}                                                                        
+                                    <h4 class="text-success">{{dateCeremonie}}</h4>
+                                    <p hidden>Date: <input type="text" id="datepicker" value="{{dateCeremonie}}"></p>
+                                     {% else %}
                                     <p><a href="#">Ajouter une date pour la cérémonie</a></p>
+                                    <p>Date: <input type="text" id="datepicker" value="{{dateCeremonie}}"></p>
+                                    {% endif %}
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <h4>Jour - J</h4>
+                                    <h1>J - {{jourJ}}</h1>
+                                </div>
+                                <div class="col-md-4">
                                     <h4>Adresse de la cérémonie</h4>
+                                    {% if lieuxCeremonie != "" %}
+                                    <h4 class="text-success">{{lieuxCeremonie}}</h4>
+                                    <input hidden type="text" name="" id="lieuxCeremonie" value="{{lieuxCeremonie}}">
+                                    {% else %}
                                     <p><a href="#">Paramétrer un lieu</a></p>
+                                    <input type="text" name="" id="lieuxCeremonie" value="{{lieuxCeremonie}}"> 
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -573,14 +591,18 @@
 
 <script>
     $("#update").click(function(){
-        $("#app_update").show()
+        $("#app_update").toggle()
     })
 
+    function saveInvite()
+    {
+        
 
-     $("#valide").click(function(){        
         let data = {
             name_epoux : $('#homme').val(),
-            name_epouse : $('#femme').val()
+            name_epouse : $('#femme').val(),
+            date_ceremonie: $("#datepicker").val(),
+            lieu_ceremonie: $("#lieuxCeremonie").val()
         }
 
         $.ajax({
@@ -593,6 +615,18 @@
             }
         })
          
+    }
+
+     $("#valide").click(function(){
+        saveInvite()
+    })
+
+    $("#datepicker").change(function(){
+        saveInvite()
+    })
+
+    $("#lieuxCeremonie").change(function(){
+        saveInvite()
     })
     
    $(document).ready(function(){
@@ -600,6 +634,11 @@
 
    })
 
+   $( function() {
+    $( "#datepicker" ).datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+  } );
 const btnAddGuestH= document.querySelector('.btn-add-guestH')
 const btnAddGuestF= document.querySelector('.btn-add-guestF')
 const selectElementF = document.querySelector('.selectBlocF')
