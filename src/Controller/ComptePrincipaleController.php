@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
-use App\Entity\UserLogin;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,69 +13,59 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ComptePrincipaleController extends AbstractController
 {
-    #[Route('comptePrincipale/', name: 'app_compte_principale')]
-    public function comptePrincipale(AuthenticationUtils $authenticationUtils, UserInterface $userInterface, EntityManagerInterface $entityManager): Response
+    #[Route('activite/', name: "activite.app_mariage")]
+    public function activite(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface): Response
     {
-        $templates = 'compte_principale.html.twig';
+        $templates = 'activity.html.twig';
+        $userID = $userInterface->getId();
+        $activityRepository = $entityManager->getRepository(Activity::class);
+        $activity = $activityRepository->activityId($userID);
 
-        if (!$userInterface) {
-            return $this->redirectToRoute('app_login');
-        }
-
-        $Id_Name = $userInterface->getId();
-        $act = new Activity();
-        $activity = $entityManager->getRepository(Activity::class)
-            ->activityId($Id_Name);
-
-        $femme = "rabe";
-        $homme = "rakoto";
-
-        $username =  $authenticationUtils->getLastUsername();
-
-        if ($username == null) {
-            return $this->redirectToRoute('app_login');
+        if (!$activity) {
+            throw $this->createNotFoundException('Activity not found for user ID ' . $userID);
         }
 
         $content = [
-            'username' => $username,
-            'femme' => $femme,
-            'homme' => $homme,
+            'idUser' => $activity->getId(),
+            'nomFemme' => $activity->getNomF(),
+            'prenomFemme' => $activity->getPrenomF(),
+            'nomHomme' => $activity->getNomH(),
+            'prenomHomme' => $activity->getPrenomH(),
+            'amis_homme' => mb_split(";", $activity->getAmiProcheH()),
+            'amis_femme' => mb_split(";", $activity->getAmieProcheF()),
+            'garcon_dhonneur' => mb_split(";", $activity->getGarconDHonneur()),
+            'fille_dhonneur' => mb_split(";", $activity->getFilleDHonneur()),
+            'parent_homme' => mb_split(";", $activity->getParentH()),
+            'parent_femme' => mb_split(";", $activity->getParentF()),
+            'ami_homme' => mb_split(";", $activity->getAmiH()),
+            'ami_femme' => mb_split(";", $activity->getAmieF()),
         ];
+
         return $this->render($templates, $content);
     }
 
     #[Route('activite/new/{id}', name: 'active_new.app_mariage', methods: ['PUT'])]
     public function activiteEdit(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface, int $id): Response
     {
-        $project = $entityManager->getRepository(Activity::class)->find($id);
+        $activity = $entityManager->getRepository(Activity::class)->find($id);
 
-        if ($project) {
-            $project->setNomH($request->request->get('name_epoux'));
-            $project->setPrenomH($request->request->get('lastname_epoux'));
-            $project->setNomF($request->request->get('name_epouse'));
-            $project->setPrenomF($request->request->get('lastname_epouse'));
-
-            $entityManager->flush();
-
-            $data = [
-                'id' => $project->getId(),
-                'name_epoux' => $project->getTemoinF(),
-                'lastname_epoux' => $project->getPrenomH(),
-                'name_epouse' => $project->getNomF(),
-                'lastname_epouse' => $project->getPrenomF()
-            ];
-
-            return $this->json($data);
+        if (!$activity) {
+            return $this->json("Activity not found.", Response::HTTP_NOT_FOUND);
         }
 
-        $data = [
-            'id' => $project->getId(),
-            'name_epoux' => $project->getNomH(),
-            'lastname_epoux' => $project->getPrenomH(),
-            'name_epouse' => $project->getNomF(),
-            'lastname_epouse' => $project->getPrenomF()
-        ];
+        $activity->setGarconDHonneur($request->request->get('garcon_dhonneur'));
+        $activity->setNomH($request->request->get('name_epoux'));
+        $activity->setParentH($request->request->get('parents_epoux'));
+        $activity->setAmiProcheH($request->request->get('famille_homme'));
+        $activity->setAmiH($request->request->get('ami_epoux'));
+        $activity->setNomF($request->request->get('name_epouse'));
+        $activity->setFilleDHonneur($request->request->get('fille_dhonneur_epouse'));
+        $activity->setParentF($request->request->get('parents_epouse'));
+        $activity->setAmieF($request->request->get('ami_epouse'));
+        $activity->setAmieProcheF($request->request->get('famille_femme'));
 
-        return $this->json($data);
+        $entityManager->flush();
+
+        return $this->json("La modification a été effectuée...");
     }
 }

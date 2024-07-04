@@ -38,26 +38,23 @@ class PrestataireController extends AbstractController
         ]);
     }
     /////////////////// AJOUT DE DONNEE///////////////////////
-    #[Route('/prestataire/new', name: 'app_new')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/prestataire/new', name: 'prestataire_new')]
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $prestataire = new Prestataire();
         $form = $this->createForm(PrestataireType::class, $prestataire);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($prestataire);
-            $entityManager->flush();
+            $em->persist($prestataire);
+            $em->flush();
 
-            $this->addFlash('success', 'Prestataire ajouté avec succès.');
-
-            return $this->redirectToRoute('app_prestataire_list');
+            return $this->redirectToRoute('prestataire_index');
         }
-        $prestataires = $entityManager->getRepository(Prestataire::class)->findAll();
 
         return $this->render('prestataire/create.html.twig', [
             'form' => $form->createView(),
-            'prestataires' => $prestataires,
         ]);
     }
     /////////// LECTURE DE DONNEE//////////////

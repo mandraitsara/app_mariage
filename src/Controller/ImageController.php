@@ -25,13 +25,13 @@ class ImageController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_image_new', methods: ['GET', 'POST'])]
+    #[Route('/image/new', name: 'app_image_new', methods: ['GET'])]
     public function new(Request $request, EntityManagerInterface $entityManager, Security $security, LoggerInterface $logger): Response
     {
         $user = $this->getUser();
 
         // Vérifier si l'utilisateur est un prestataire
-        if (!$user instanceof Prestataire) {
+        /*   if (!$user instanceof Prestataire) {
             $logger->error('Utilisateur non authentifié ou non prestataire.');
             return $this->redirectToRoute('app_image_index');
         }
@@ -56,9 +56,9 @@ class ImageController extends AbstractController
                 $logger->warning('No file uploaded.');
             }
         }
-
+*/
         return $this->render('image/new.html.twig', [
-            'form' => $form->createView(),
+            //'form' => $form->createView(),
         ]);
     }
 

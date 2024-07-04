@@ -1,16 +1,26 @@
+{# templates/prestataire/new.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer un nouveau Prestataire{% endblock %}
+{% block title %}Créer un nouveau Prestataire
+{% endblock %}
 
 {% block body %}
-    <h1>Créer un nouveau Prestataire</h1>
+	<h1>Création prestataire</h1>
 
-    {{ form_start(form) }}
-        {{ form_row(form.NomPrestataire) }}
-        {{ form_row(form.TypePrestataire) }}
-        {{ form_row(form.infoPrestataire) }} <br>
-        <button type="submit" class="btn btn-primary">Ajout du prestataire</button>
-        <a href="{{ path('app_prestataire_list') }}"> Voir les prestataires disponible </a>
-    {{ form_end(form) }}
-   
+	{{ form_start(form) }}
+	{{ form_row(form.NomPrestataire) }}
+	{{ form_row(form.TypePrestataire) }}
+	{{ form_row(form.infoPrestataire) }}
+	{{ form_row(form.categorie) }}
+	{{ form_row(form.contact) }}
+	{{ form_row(form.imageFile) }}
+
+	<h3>Images</h3>
+	{{ form_widget(form.images) }}
+
+	<button type="submit" class="btn btn-primary">Ajout du prestataire</button>
+	<a href="{{ path('app_prestataire_list') }}" class="btn btn-secondary">
+		Voir les prestataires disponibles
+	</a>
+	{{ form_end(form) }}
 {% endblock %}
