@@ -43,6 +43,8 @@ class ComptePrincipaleController extends AbstractController
         return $this->render($templates, $content);
     }
 
+   
+    
     #[Route('activite/', name: "activite.app_mariage")]
     public function activite(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface)
     {
@@ -54,13 +56,31 @@ class ComptePrincipaleController extends AbstractController
         $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();
         $dateCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getDateCeremonie();
         $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();
-        $day = intval(date('d/m/y'));
-        $dateFin = intval(date($dateCeremonie));
-        $dateDuJour = intval(date($day));
-        $jourJ = $dateFin - $dateDuJour;
+       
+
+        function NbJours($debut, $fin) {
+
+            $tDeb = explode("-", $debut);
+            $tFin = explode("-", $fin);
+    
+             $diff = mktime(0, 0, 0, $tFin[1], $tFin[2], $tFin[0]) - mktime(0, 0, 0, $tDeb[1], $tDeb[2], $tDeb[0]);
+            
+        return(($diff / 86400)+0);
+    
+        }
+        global $jourJ;
+        if($dateCeremonie!=""){
+            $date = $dateCeremonie;
+            var_dump($date);
+            $aujourdhui = date('Y-m-d');
+            $jourJ = NbJours($date, $aujourdhui);
+        }
+        
+
+        
+
         $explo = [];
-
-
+                
         $rowNo = 1;
         //gerer le csv 
         $ext = ".csv";

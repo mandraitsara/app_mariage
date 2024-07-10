@@ -116,8 +116,7 @@
 								</div>
 								<div class="col-md-4">
 									<h4>Jour - J</h4>
-									<h1>J -
-										{{jourJ}}</h1>
+									<h1>J {{jourJ}}</h1>
 								</div>
 								<div class="col-md-4">
 									<h4>Adresse de la cérémonie</h4>
@@ -679,7 +678,7 @@ $("#app_update").hide()
 })
 
 $(function () {
-$("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
+$("#datepicker").datepicker({dateFormat: 'yy-mm-dd'});
 });
 const btnAddGuestH = document.querySelector('.btn-add-guestH')
 const btnAddGuestF = document.querySelector('.btn-add-guestF')
