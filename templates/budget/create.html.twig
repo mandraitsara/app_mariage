@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Definition Budget
+{% endblock %}
+
+{% block body %}
+	<h1>Définir Budget :
+	</h1>
+	{{ form_start(form) }}
+	{{ form_row(form.MontantTotal) }}
+	{{ form_row(form.MontantRestant) }}
+	<button class="btn">Enregistrer
+	</button>
+	{{ form_end(form) }}
+{% endblock %}

@@ -46,6 +46,9 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'user', cascade: ["persist"])]
     private Collection $activities;
 
+    #[ORM\OneToOne(mappedBy: 'user_login', cascade: ['persist', 'remove'])]
+    private ?Budget $budget = null;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -159,6 +162,23 @@ class UserLogin implements UserInterface, PasswordAuthenticatedUserInterface
                 $activity->setUser(null);
             }
         }
+        return $this;
+    }
+
+    public function getBudget(): ?Budget
+    {
+        return $this->budget;
+    }
+
+    public function setBudget(Budget $budget): static
+    {
+        // set the owning side of the relation if necessary
+        if ($budget->getUserLogin() !== $this) {
+            $budget->setUserLogin($this);
+        }
+
+        $this->budget = $budget;
+
         return $this;
     }
 }

@@ -3,69 +3,175 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
+use App\Entity\UserLogin;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpClient\Response\JsonMockResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ComptePrincipaleController extends AbstractController
 {
-    #[Route('activite/', name: "activite.app_mariage")]
-    public function activite(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface): Response
+    #[Route('comptePrincipale/', name: 'app_compte_principale')]
+    public function comptePrincipale(AuthenticationUtils $authenticationUtils, UserInterface $userInterface, EntityManagerInterface $entityManager)
     {
-        $templates = 'activity.html.twig';
-        $userID = $userInterface->getId();
-        $activityRepository = $entityManager->getRepository(Activity::class);
-        $activity = $activityRepository->activityId($userID);
+        global $is_activated, $user_id, $activite;
+        $templates = 'compte_principale.html.twig';
+        $Id_Name = $userInterface->getId();
+        $activity = $entityManager->getRepository(Activity::class)
+            ->activityId($Id_Name);
+        $femme = $activity->getNomF();
+        $homme = $activity->getNomH();
 
-        if (!$activity) {
-            throw $this->createNotFoundException('Activity not found for user ID ' . $userID);
+
+        $username =  $authenticationUtils->getLastUsername();
+
+        if ($username == null) {
+            return $this->redirectToRoute('app_login');
         }
 
         $content = [
-            'idUser' => $activity->getId(),
-            'nomFemme' => $activity->getNomF(),
-            'prenomFemme' => $activity->getPrenomF(),
-            'nomHomme' => $activity->getNomH(),
-            'prenomHomme' => $activity->getPrenomH(),
-            'amis_homme' => mb_split(";", $activity->getAmiProcheH()),
-            'amis_femme' => mb_split(";", $activity->getAmieProcheF()),
-            'garcon_dhonneur' => mb_split(";", $activity->getGarconDHonneur()),
-            'fille_dhonneur' => mb_split(";", $activity->getFilleDHonneur()),
-            'parent_homme' => mb_split(";", $activity->getParentH()),
-            'parent_femme' => mb_split(";", $activity->getParentF()),
-            'ami_homme' => mb_split(";", $activity->getAmiH()),
-            'ami_femme' => mb_split(";", $activity->getAmieF()),
+            'username' => $username,
+            'femme' => $femme,
+            'homme' => $homme,
         ];
-
         return $this->render($templates, $content);
     }
 
-    #[Route('activite/new/{id}', name: 'active_new.app_mariage', methods: ['PUT'])]
-    public function activiteEdit(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface, int $id): Response
+    #[Route('activite/', name: "activite.app_mariage")]
+    public function activite(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface)
     {
-        $activity = $entityManager->getRepository(Activity::class)->find($id);
+        $templates = 'activity.html.twig';
+        $userID = $userInterface->getId();
 
-        if (!$activity) {
-            return $this->json("Activity not found.", Response::HTTP_NOT_FOUND);
+        $activiteID = $entityManager->getRepository(Activity::class)->activityId($userID)->getId();
+        $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF();
+        $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();
+        $dateCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getDateCeremonie();
+        $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();
+        $day = intval(date('d/m/y'));
+        $dateFin = intval(date($dateCeremonie));
+        $dateDuJour = intval(date($day));
+        $jourJ = $dateFin - $dateDuJour;
+        $explo = [];
+
+
+        $rowNo = 1;
+        //gerer le csv 
+        $ext = ".csv";
+        $chemin = "info_mariage";
+        $fichier = "$chemin/app_mariage_$userID$ext";
+
+        if (!file_exists($fichier)) {
+            file_put_contents($fichier, "aucun;aucun");
+        } elseif (($fp = fopen("$chemin/app_mariage_$userID$ext", "r"))) {
+            while (($row = fgetcsv($fp)) !== FALSE) {
+                for ($i = 0; $i < count($row); $i++) {
+                    $urg =  $row[$i];
+                    $explo[] = $urg;
+                }
+            }
+
+            fclose($fp);
         }
 
-        $activity->setGarconDHonneur($request->request->get('garcon_dhonneur'));
-        $activity->setNomH($request->request->get('name_epoux'));
-        $activity->setParentH($request->request->get('parents_epoux'));
-        $activity->setAmiProcheH($request->request->get('famille_homme'));
-        $activity->setAmiH($request->request->get('ami_epoux'));
-        $activity->setNomF($request->request->get('name_epouse'));
-        $activity->setFilleDHonneur($request->request->get('fille_dhonneur_epouse'));
-        $activity->setParentF($request->request->get('parents_epouse'));
-        $activity->setAmieF($request->request->get('ami_epouse'));
-        $activity->setAmieProcheF($request->request->get('famille_femme'));
+        $contenu = $explo;
+        $tabs = [];
+        for ($i = 0; $i < count($contenu); $i++) {
+            $tab = explode(";", $contenu[$i]);
+            $tabs[] = $tab;
+        }
 
-        $entityManager->flush();
 
-        return $this->json("La modification a été effectuée...");
+        $nb_invite = count($tabs);
+        $content = [
+            'idUser' => $activiteID,
+            'nomFemme' => $NomF,
+            'nomHomme' => $NomH,
+            'liste_invites' => $tabs,
+            'nombre_invite' => $nb_invite,
+            'dateCeremonie' => $dateCeremonie,
+            'lieuxCeremonie' => $lieuCeremonie,
+            'jourJ' => $jourJ,
+        ];
+        return $this->render($templates, $content);
+    }
+
+
+    //methods:['POST']
+    #[Route('activite/new/{id}', name: 'active_new.app_mariage', methods: ['PUT'])]
+    public function activiteEdit(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface, int $id)
+    {
+        $project = $entityManager->getRepository(Activity::class)->find($id);
+
+        if ($project) {
+
+            $date_at = date('d/m/y;H:i:s');
+
+            $project->setNomH($request->request->get('name_epoux'));
+            $project->setNomF($request->request->get('name_epouse'));
+            $project->setDateCeremonie($request->request->get('date_ceremonie'));
+            $project->setLieuxCeremonie($request->request->get('lieu_ceremonie'));
+            $project->setDateAt($date_at);
+            $entityManager->flush();
+            $data = "La modification a été effectué...";
+            return $this->json($data);
+        }
+
+        return $this->json("rechargement reussi....");
+    }
+
+
+    #[Route('/csv', name: 'app.csv')]
+    public function csvTelecharger(): Response
+    {
+        $explo = [];
+
+
+        $rowNo = 1;
+        //$fp is file pointer to file sample.csv
+        $templates = "csvTelecharger.html.twig";
+
+        if (($fp = fopen("sample.csv", "r")) !== FALSE) {
+
+
+            echo "<table>";
+            while (($row = fgetcsv($fp)) !== FALSE) {
+                $num = count($row);
+
+                for ($i = 0; $i < count($row); $i++) {
+
+                    echo "<tr>";
+                    echo "<td>";
+                    $urg =  $row[$i];
+                    $explo[] = $urg;
+
+                    //$explo + mb_split(";",$urg);                   
+                    echo "</td>";
+                    echo "</tr>";
+                }
+            }
+            echo "</table>";
+
+            fclose($fp);
+        }
+
+        $contenu = $explo;
+        $tabs = [];
+        for ($i = 0; $i < count($contenu); $i++) {
+            $tab = explode(";", $contenu[$i]);
+            $tabs[] = $tab;
+        }
+
+        var_dump($tabs);
+        return $this->render($templates, [
+            'contenu' => $tabs
+
+        ]);
     }
 }

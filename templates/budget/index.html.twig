@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Budget
+{% endblock %}
+
+{% block body %}
+	<h1>Budget</h1>
+	<p>Total Budget :
+		{{ budget.MontantTotal }}</p>
+	<p>Total dépensé :
+		{{ budget.MontantRestant }}</p>
+
+	<p>Montant restant :
+		{{ budget.MontantTotal - budget.MontantRestant }}</p>
+
+
+	<a href="{{ path('budget_create') }}">Définir un nouveau budget</a>
+{% endblock %}

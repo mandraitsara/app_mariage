@@ -2,1033 +2,709 @@
 {% block navbar %}
 {%endblock%}
 {% block stylesheets %}
-<link rel="stylesheet" href="{{asset('./styles/liste.css')}}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"/>
-              
+	<link rel="stylesheet" href="{{asset('./styles/liste.css')}}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"/>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+
 {% endblock %}
 {% block javascripts %}
-<script src="jquery.add-input-area.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="{{asset('./js/active.js')}}">
+	<script src="jquery.add-input-area.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="{{asset('./js/active.js')}}">
+	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 
 
 {% endblock %}
 
 {% block body %}
 <div class="container-fuid">
-    <div class="row p-5">
-        <!-- Nav tabs -->
-        <div class="col-md-2">
-            <div class="bloc-menu" style="border: 1px solid #00000015; height:500px">                
-                <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                            aria-controls="home" aria-selected="true">Vue général </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                            aria-controls="profile" aria-selected="false">Liste des invités</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="budget-tab" data-toggle="tab" href="#budget" role="tab"
-                            aria-controls="budget" aria-selected="false">Budget</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                            aria-controls="contact" aria-selected="false">Tous les prestataires</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Vue général -->
-        <div class="col-md-10">
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="title text-center">
-                        <h3>Contenu pour Menu 1</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, ipsa!</p>
-                    </div>
+
+	<div
+		class="row p-5">
+		<!-- Nav tabs -->
+		<div class="col-md-2">
+			<span id="info_pour_marie"></span>
+			<div class="bloc-menu" style="border: 1px solid #00000015; height:500px">
+				<ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Vue général
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Liste des invités</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="budget-tab" data-toggle="tab" href="#budget" role="tab" aria-controls="budget" aria-selected="false">Budget</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Tous les prestataires</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Vue général -->
+		<div class="col-md-10">
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<div class="title text-center">
+						<h3>Contenu pour Menu 1</h3>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, ipsa!</p>
+					</div>
 
 
-                    <!-- menu-collapse-1 -->
-                    <div class="box-mari text-center p-5" style="border: 1px solid #00000015;">
-                        <span class="arrow-icon" data-toggle="collapse" data-target="#demo"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow" alt="arrow" style="width: 20px;margin:5px;">Couple</span>
-                        <span class="pen-modif"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
-                        <div class="collapse" id="demo">
-                            <a href="#">Parametré le nom et <br>prénom des mariées</a>
-                            <div class="img-valentine">
-                                <img src="{{asset('./icons/valentine.svg')}}" alt="valentine" style="width: 250px;">
-                            </div>
-                        </div>
-                    </div>
+					<!-- menu-collapse-1 -->
+					<div class="box-mari text-center p-5" style="border: 1px solid #00000015;">
+						<span class="arrow-icon" data-toggle="collapse" data-target="#demo"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow" alt="arrow" style="width: 20px;margin:5px;">Couple</span>
+						<span class="pen-modif">
+							<i class="fa-solid fa-pen mr-3"></i>Modifier</span>
+						<div class="collapse" id="demo">
+							<span id="parametre_nom">
+								{% if nomHomme != "" and nomFemme !="" %}
+									{{nomHomme}}
+									et
+									{{nomFemme}}
 
 
-                    <!-- menu-collapse-2 -->
-                    <div class="box-about-event p-5">
-                        <span class="arrow-icon2" data-toggle="collapse" data-target="#demo2"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow2" alt="arrow" style="width:20px;margin:5px;">Information de l'événement</span>
-                        <span class="pen-modif2"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
-                        <div class="collapse" id="demo2">
-                            <div class="row p-3">
-                                <div class="col-md-6">
-                                    <h4>Date de la cérémonie</h4>
-                                    <p><a href="#">Ajouter une date pour la cérémonie</a></p>
-                                </div>
-                                <div class="col-md-6">
-                                    <h4>Adresse de la cérémonie</h4>
-                                    <p><a href="#">Paramétrer un lieu</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- menu-collapse-3 -->
-                    <div class="add-guest p-5">
-                        <span class="arrow-icon3" data-toggle="collapse" data-target="#demo3"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow3" alt="arrow" style="width:20px;margin:5px;">Invités</span>
-                        <span class="pen-modif3"><i class="fa-solid fa-pen mr-3"></i>Modifier</span>
-                        <div class="collapse" id="demo3">
-                            <div class="p-3 text-center">
-                                <a href="#">Ajouter des invités</a>
-                            </div>
-                            <div class="guest-info pt-3 pb-3">
-                                <p>Invités : 2</p>
-                                <p>Total des invités : 0</p>
-                                <p>Confirmé Réponses : 0</p>
-                            </div>
-                        </div>
-                    </div>
+								</span>
+								<button id="update" class="btn btn-success">modif.</button>
+
+								<div id="app_update">
+									<label for="nomHomme">Nom pour l'époux</label><input type="text" name="homme" id="homme" value="{{nomHomme}}">
+									<label for="nomFemme">Nom pour l'épouse</label><input type="text" name="femme" id="femme" value="{{nomFemme}}">
+									<input type="button" id="valide" class="btn btn-primary" value="soumettre">
+								</div>
+							{% else %}
+								<div id="app_modif">
+									<label for="nomHomme">Nom pour l'époux</label><input type="text" name="homme" id="homme" value="{{nomHomme}}">
+									<label for="nomFemme">Nom pour l'épouse</label><input type="text" name="femme" id="femme" value="{{nomFemme}}">
+									<input type="button" id="valide" class="btn btn-primary" value="soumettre">
+								</div>
+							{% endif %}
+
+							<div class="img-valentine">
+								<img src="{{asset('./icons/valentine.svg')}}" alt="valentine" style="width: 250px;">
+							</div>
+						</div>
+					</div>
 
 
-                </div>
-                
-                <!-- Liste des invités -->
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="p-5">
-                        <h4 class="text-center">Les invités du mariage</h4>
-                        <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere maxime officiis laboriosam.Saepe, molestias adipisci.</p>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3"><span class="btn btn-success" id="valide" ><i class="fa fa-save"></i></span></div>
-                        <div class="col-md-6">
-                            <div id="success-alert" class="alert alert-success">
-                                <span id="notification"></span>
-                            </div>
-                        </div>
-                        
+					<!-- menu-collapse-2 -->
+					<div class="box-about-event p-5">
+						<span class="arrow-icon2" data-toggle="collapse" data-target="#demo2"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow2" alt="arrow" style="width:20px;margin:5px;">Information de l'événement</span>
+						<span class="pen-modif2">
+							<i class="fa-solid fa-pen mr-3"></i>Modifier</span>
+						<div class="collapse" id="demo2">
+							<div class="row p-3">
+								<div class="col-md-4">
+									<h4>Date de la cérémonie</h4>
+									{% if dateCeremonie != "" %}
+										<h4 class="text-success">{{dateCeremonie}}</h4>
+										<p hidden>Date:
+											<input type="text" id="datepicker" value="{{dateCeremonie}}"></p>
+									{% else %}
+										<p>
+											<a href="#">Ajouter une date pour la cérémonie</a>
+										</p>
+										<p>Date:
+											<input type="text" id="datepicker" value="{{dateCeremonie}}"></p>
+									{% endif %}
+								</div>
+								<div class="col-md-4">
+									<h4>Jour - J</h4>
+									<h1>J -
+										{{jourJ}}</h1>
+								</div>
+								<div class="col-md-4">
+									<h4>Adresse de la cérémonie</h4>
+									{% if lieuxCeremonie != "" %}
+										<h4 class="text-success">{{lieuxCeremonie}}</h4>
+										<input hidden type="text" name="" id="lieuxCeremonie" value="{{lieuxCeremonie}}">
+									{% else %}
+										<p>
+											<a href="#">Paramétrer un lieu</a>
+										</p>
+										<input type="text" name="" id="lieuxCeremonie" value="{{lieuxCeremonie}}">
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
 
-                        
-                    </div>
-                    <div class="row">
-                        
-                        
-                        <div class="col-md-6 border-right text-center">
-                            <img src="{{asset('./icons/shoes-man.svg')}}" alt="shoes-man" style="width: 75px;">
-                            <p style="font-weight: bold;">Les invités du marié</p>
-                            <form class="add-guest-form  pt-3">
-
-                                <input type="text" id="name_epoux" name="name_epoux" value="{{nomHomme}}" class="mb-3" placeholder="nom et prenom">
-                                <i class="fa fa-user icon"></i>
-
-                                {# <input type="text" id="lastname_epoux" name="lastname_epoux"  value="{{prenomHomme}}" placeholder="Prénom du marié">
-                                <i class="fa fa-user icon"></i>
-                                 #}
-                                <div id="newinput_garcon_dhonneur" class="mb-3 newinput">
-
-                                </div>
-
-                                <div id="newinput_parents_homme" class="newinput">
-                                </div>
-                            
-                                <div id="newinput_amis_homme" class="newinput">
-                                </div>
-                                <div>
-                                   
-                                </div>
-                                <div id="newinput_famille_homme" class="newinput">
-
-                                </div>
-
-                                <div class="m-5">                                    
-                                    <button class="btn-add-guestH text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
-                                            <div class="selectBlocH text-left">
-                                                <p id="gh_h" class="garcon_dhonneur_epoux">Garçon d'honneur</p>
-                                                <p id="prt_h" class="parents_homme">Parent</p>                                           
-                                                <p id="am_h" class="amis_homme">Ami/Amie</p>
-                                                <p id="amproche_h" class="famille_homme">Famille Proche</p>
-                                            </div>
-
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <div hidden>
-                            {% for famille_proche in amis_homme %}
-                                {% if famille_proche !="undefined" %}
-                                <input id="data_famille_homme_{{loop.index}}" value="{{famille_proche}}">  
-                                {% endif %}                                  
-                            {% endfor %}
-
-                            {% for famille_femme in amis_femme %}
-                                {% if famille_femme != "undefined" %}
-                                <input id="data_famille_femme_{{loop.index}}" value="{{famille_femme}}">  
-                                {% endif %}
-                            {% endfor %}
-
-                            {%  for garcons_dhonneurs in garcon_dhonneur %}
-                                {% if garcons_dhonneurs != "undefined" %}
-                                <input id="data_garcon_dhonneur_{{loop.index}}" value="{{garcons_dhonneurs}}">
-                                {% endif %}
-                            {% endfor %}
-
-                            {%  for fille_dhonneurs in fille_dhonneur %}
-                                {% if fille_dhonneurs != "undefined" %}
-                                    <input id="data_fille_dhonneurs_{{loop.index}}" value="{{fille_dhonneurs}}">
-                                {% endif %}
-                            {% endfor %}
-
-                            {% for parents_homme in parent_homme %}
-                                {% if parents_homme != "undefined" %}
-                                    <input id="data_parents_homme_{{loop.index}}" value="{{parents_homme}}">
-                                {% endif %}
-                            {% endfor %}
-
-                            {%  for parents_femme in parent_femme %}
-                                {% if parents_femme != "undefined" %}
-                                    <input id="data_parents_femme_{{loop.index}}" value="{{parents_femme}}">
-                                {% endif%}
-                            {% endfor %}
-
-                            {% for amis_homme in ami_homme %}
-                                {% if amis_homme != "undefined" %}                                                              
-                                    <input id="data_amis_homme_{{loop.index}}" value="{{amis_homme}}">                                    
-                                {% endif %}
-                            {% endfor %}
-
-                            {% for amis_femme in ami_femme %}
-                                {% if amis_femme != "undefined" %}                                        
-                                    <input id="data_amis_femme_{{loop.index}}" value="{{amis_femme}}">                                                                                                            
-                                    <span class="hita">{{loop.last}}</span>
-                                {% endif %}                                
-                            {% endfor %}
-                            
-
-                        </div>
-                        <div class="col-md-6 text-center">
-                            <img src="{{asset('./icons/shoes-woman.svg')}}" alt="shoes-woman" style="width: 75px;">
-                            <p style="font-weight: bold;">Les invités de la mariée</p>
-                            <form class="add-guest-form  pt-3">
-                                
-                                <input type="text" id="name_epouse" name="name_epouse" value="{{nomFemme}}" class="mb-3" placeholder="nom et prenom">
-                                <i class="fa fa-user icon" style="color: #dd8090;"></i>
-                                {# <input type="text" id="lastname_epouse" name="lastname_epouse" value="{{prenomHomme}}" placeholder="Prénom du mariée">
-                                <i class="fa fa-user icon" style="color: #dd8090;"></i>                                 #}
-
-                                <div id="newinput_fille_dhonneur" class="mb-3 newinput">
-
-                                </div>
-
-                                <div id="newinput_parents_femme" class="newinput">
-                                </div>                           
-                                
-                                <div id="newinput_amis_femme" class="newinput">
-                                </div>
-                                
-                                <div id="newinput_famille_femme" class="newinput">
-
-                                </div>
+					<!-- menu-collapse-3 -->
+					<div class="add-guest p-5">
+						<span class="arrow-icon3" data-toggle="collapse" data-target="#demo3"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow3" alt="arrow" style="width:20px;margin:5px;">Invités</span>
+						<span class="pen-modif3">
+							<i class="fa-solid fa-pen mr-3"></i>Modifier</span>
+						<div class="collapse" id="demo3">
+							<div class="p-3 text-center">
+								<a href="#">Etat de lieux</a>
+							</div>
+							<div class="guest-info pt-3 pb-3">
+								<p>Invités :
+									{{nombre_invite}}</p>
+								<p>Rejeté : 0</p>
+								<p>Confirmé : 0</p>
+							</div>
+						</div>
+					</div>
 
 
+				</div>
 
-                                <div class="m-5">
-                                    <button class="btn-add-guestF text-center"><i class="fa-solid fa-plus"></i>Ajouter un invité</button>
-                                            <div class="selectBlocF text-left">
-                                                <p id="gh_f" class="fille_dhonneur">Demoiselle d'honneur</p>
-                                                <p id="prt_f" class="parents_femme">Parent</p>
-                                                <p id="amproche_f" class="famille_femme">Famille proche</p>
-                                                <p id="am_f" class="amis_femme">Ami/Amie</p>
-                                            </div>
+				<!-- Liste des invités -->
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="p-5">
+						<h4 class="text-center">Listes des invités</h4>
+					</div>
 
+					<div>
+						<table class="table">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Nom et Prenom</th>
+									<th scope="col">Adresse e-mail</th>
+									<th scope="col">Status</th>
+									<th scope="col">Observation</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for liste_invite in liste_invites %}
+									<tr>
+										<td>{{liste_invite.0}}</td>
+										<td>{{liste_invite.1}}</td>
+										<td></td>
 
-
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row p-3">
-                        <div class="col-12">
-                            <div class="guest-sum p-3">
-                                <p class="text-center">Ration par côtés</p>
-                                <h4 class="text-center" style="font-weight: bold;"> <span id="info_femme">0</span> | <span id="info_homme">0</span></h4>                                
-                                <h4 class="text-center"> Les invités {2}</h4>
-                                <h4 class="text-center"> Total des invités {0}</h4>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="guest-import p-3">
-                                <a class="btn-1" href="{{path("app_pdf_generator")}}" target="_blank"><i class="fa-solid fa-download"></i>Importés une liste d'invités</a>
-                                {# <button class="btn-2"><i class="fa-solid fa-file-pdf"></i>Télécharger le fichier PDF</button> #}
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <!-- Tous les prestataires -->
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="row">
-                        <div class="text-center">
-                            <h4>Tous les vendeurs</h4>
-                            <p>
-                                Explorez notre vaste répertoire de prestataires, d'emplacements et de services idéaux pour votre mariage en
-                                découvrant notre base de données étendue de professionnels de confiance. De plus, personnalisez votre liste en
-                                ajoutant des vendeurs sur mesure pour garantir que chaque détail de votre journée soit en accord avec votre
-                                vision personnelle.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row p-3">
-                        <div class="col-12 mb-5 d-flex justify-content-center">
-                            <div class="add-prest p-5 text-center">
-                                <span><i class="fa-solid fa-plus"></i> <br> Ajouter des prestataires</span>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card card-1">
-                                <div class="show-prest text-center" id="openModalBtn"><i class="fa-regular fa-eye"></i><span>Afficher les détails</span></div>
-                                <span class="ellipsis"><img src="{{asset('./icons/ellipsis.svg')}}" alt="ellipsis"></span>
-                                <p>Wedding planner</p>
-                                <h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card card-2">
-                                <p>Wedding planner</p>
-                                <h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card card-3">
-                                <p>Wedding planner</p>
-                                <h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card card-4">
-                                <p>Wedding planner</p>
-                                <h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
-                            </div>
-                        </div>
-                    </div>
+										<td>
+											<a href="{{liste_invite.1}}" class="btn btn-success">Mail</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
 
 
+					</div>
+
+					<div class="row p-3">
+						<div class="col-12">
+							<div class="guest-sum p-3">
+
+								<h4 class="text-center">
+									Total des invités
+									<span class="circle">{{nombre_invite}}</span>
+								</h4>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="guest-import p-3">
+								<a class="btn-1" href="{{path("app_pdf_generator")}}" target="_blank">
+									<i class="fa-solid fa-download"></i>Importés une liste d'invités</a>
+								{# <button class="btn-2"><i class="fa-solid fa-file-pdf"></i>Télécharger le fichier PDF</button> #}
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Tous les prestataires -->
+				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+					<div class="row">
+						<div class="text-center">
+							<h4>Tous les vendeurs</h4>
+							<p>
+								Explorez notre vaste répertoire de prestataires, d'emplacements et de services idéaux pour votre mariage en
+								                                découvrant notre base de données étendue de professionnels de confiance. De plus, personnalisez votre liste en
+								                                ajoutant des vendeurs sur mesure pour garantir que chaque détail de votre journée soit en accord avec votre
+								                                vision personnelle.
+							</p>
+						</div>
+					</div>
+					<div class="row p-3">
+						<div class="col-12 mb-5 d-flex justify-content-center">
+							<div class="add-prest p-5 text-center">
+								<span>
+									<i class="fa-solid fa-plus"></i>
+									<br>
+									Ajouter des prestataires</span>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card card-1">
+								<div class="show-prest text-center" id="openModalBtn">
+									<i class="fa-regular fa-eye"></i>
+									<span>Afficher les détails</span>
+								</div>
+								<span class="ellipsis"><img src="{{asset('./icons/ellipsis.svg')}}" alt="ellipsis"></span>
+								<p>Wedding planner</p>
+								<h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card card-2">
+								<p>Wedding planner</p>
+								<h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card card-3">
+								<p>Wedding planner</p>
+								<h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card card-4">
+								<p>Wedding planner</p>
+								<h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
+							</div>
+						</div>
+					</div>
 
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="myModal" class="modal">
-                                    <div class="scrollBar">
-                                        <div class="modal-bloc">
-                                            <span id="closeModalBtn" class="close">&times;</span>
-                                            <div class="row">
-                                                <div class="bg-modal">
-                                                    <div class="head-prest" style="background-image: url(assets/pictures/test.png);">
-                                                        <div class="about-prest">
-                                                            <h4>Wedding Planner</h4>
-                                                            <h2>Harmony Weddings (Thailand) Co.,Ltd.</h2>
-                                                            <p>Bangkok, Thailand</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row p-3">
-                                                        <div class="col-md-8">
-                                                            <h4 class="border-bottom">A propos de</h4>
-                                                            <p class="pt-3">Welcome to Harmony Weddings Thailand, your premier destination wedding planning company in the heart of Thailand. We are dedicated to crafting unforgettable wedding experiences that are tailored to your dreams and budget. Whether you envision an intimate elopement surrounded by lush tropical landscapes or a grand celebration with your loved ones.</p>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <h4 class="border-bottom">Contacts</h4>
-                                                            <div class="btnBloc pt-3">
-                                                                <p><button class="btn01">Ajouter au mariage</button></p>
-                                                                <p><button class="btn02">Demander un devis</button></p>
-                                                                <p><i class="fa-solid fa-phone"></i>+6 694 861-6634</p>
-                                                                <p style="color: #0b98eb;"><i class="fa-solid fa-envelope"></i>test24@gmail.com</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="container">
-                                                        
-                                                        <div class="row pb-3">
-                                                            <div class="col-md-12">
-                                                                <h4 class="border-bottom">Photos et vidéos</h4>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <img style="width: 100%; margin-bottom:20px;" src="./assets/pictures/images/sar02.png" alt="">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <img style="width: 100%;" src="./assets/pictures/images/sar05.png" alt="">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <img style="width: 100%;" src="./assets/pictures/images/sar04.png" alt="">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <img style="width: 100%;" src="./assets/pictures/images/sar08.png" alt="">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <img style="width: 100%;" src="./assets/pictures/images/sar10.png" alt="">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <img style="width: 100%;" src="./assets/pictures/images/sar07.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="myModal" class="modal">
+								<div class="scrollBar">
+									<div class="modal-bloc">
+										<span id="closeModalBtn" class="close">&times;</span>
+										<div class="row">
+											<div class="bg-modal">
+												<div class="head-prest" style="background-image: url(assets/pictures/test.png);">
+													<div class="about-prest">
+														<h4>Wedding Planner</h4>
+														<h2>Harmony Weddings (Thailand) Co.,Ltd.</h2>
+														<p>Bangkok, Thailand</p>
+													</div>
+												</div>
+												<div class="row p-3">
+													<div class="col-md-8">
+														<h4 class="border-bottom">A propos de</h4>
+														<p class="pt-3">Welcome to Harmony Weddings Thailand, your premier destination wedding planning company in the heart of Thailand. We are dedicated to crafting unforgettable wedding experiences that are tailored to your dreams and budget. Whether you envision an intimate elopement surrounded by lush tropical landscapes or a grand celebration with your loved ones.</p>
+													</div>
+													<div class="col-md-4">
+														<h4 class="border-bottom">Contacts</h4>
+														<div class="btnBloc pt-3">
+															<p>
+																<button class="btn01">Ajouter au mariage</button>
+															</p>
+															<p>
+																<button class="btn02">Demander un devis</button>
+															</p>
+															<p>
+																<i class="fa-solid fa-phone"></i>+6 694 861-6634</p>
+															<p style="color: #0b98eb;">
+																<i class="fa-solid fa-envelope"></i>test24@gmail.com</p>
+														</div>
+													</div>
+												</div>
+												<div class="container">
+
+													<div class="row pb-3">
+														<div class="col-md-12">
+															<h4 class="border-bottom">Photos et vidéos</h4>
+														</div>
+														<div class="col-md-4">
+															<img style="width: 100%; margin-bottom:20px;" src="./assets/pictures/images/sar02.png" alt="">
+														</div>
+														<div class="col-md-4">
+															<img style="width: 100%;" src="./assets/pictures/images/sar05.png" alt="">
+														</div>
+														<div class="col-md-4">
+															<img style="width: 100%;" src="./assets/pictures/images/sar04.png" alt="">
+														</div>
+														<div class="col-md-4">
+															<img style="width: 100%;" src="./assets/pictures/images/sar08.png" alt="">
+														</div>
+														<div class="col-md-4">
+															<img style="width: 100%;" src="./assets/pictures/images/sar10.png" alt="">
+														</div>
+														<div class="col-md-4">
+															<img style="width: 100%;" src="./assets/pictures/images/sar07.png" alt="">
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
-
-
-                </div>
-                <!-- Budget -->
-                <div class="tab-pane fade" id="budget" role="tabpanel" aria-labelledby="budget-tab">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="budget-bloc text-center">
-                                <h4>Hello Budget</h4>
-                                <p>Tenez un registre précis de chaque dépense, puis organisez vos catégories <br> ou éléments individuels à votre guise en les déplaçant à volonté.</p>
-                            </div>
-                        </div>
-                        <div class="col-12 p-3">
-                            <div class="budget-amount text-center">
-                                <h2>Budget : <span><input type="text"></span> Ariary </h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 mt-3">
-                            <div class="container-search p-3" >
-                                <form class="search">
-                                    <input class="filter" type="text" placeholder="Filtres...">
-                                    <i class="fa fa-search"></i>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="beauty p-3" >
-                                <span class="arrow-budget" id="el-01" data-toggle="collapse" data-target="#demo10"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h5>Beauté et santé</h5>
-                                <div class="beautyChildParent" class="collapse" id="demo10">
-                                    <div class="beautyChild01">
-                                        <table>
-                                            <tr>
-                                                <th></th>
-                                                <th class="text-right">Coût actuel</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Coiffure et maquillage</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="beauty p-3" >
-                                <span class="arrow-budget" id="el-02" data-toggle="collapse" data-target="#demo11"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h5>Robe et tenue vestimentaire - Mariée</h5>
-                                <div class="beautyChildParent" class="collapse" id="demo11">
-                                    <div class="beautyChild01">
-                                        <table>
-                                            <tr>
-                                                <th></th>
-                                                <th class="text-right">Coût actuel</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Accessoires de la mariée</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Habillage et retouches</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tête et voile</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="beauty p-3" >
-                                <span class="arrow-budget" id="el-03" data-toggle="collapse" data-target="#demo12"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h5>Costume - Marié</h5>
-                                <div class="beautyChildParent" class="collapse" id="demo12">
-                                    <div class="beautyChild01">
-                                        <table>
-                                            <tr>
-                                                <th></th>
-                                                <th class="text-right">Coût actuel</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Accessoires de la mariée</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Costume de marié</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="beauty p-3" >
-                                <span class="arrow-budget" id="el-04" data-toggle="collapse" data-target="#demo13"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h5>Restauration</h5>
-                                <div class="beautyChildParent" class="collapse" id="demo13">
-                                    <div class="beautyChild01">
-                                        <table>
-                                            <tr>
-                                                <th></th>
-                                                <th class="text-right">Coût actuel</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Boissons et barmans</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Alimentation et services</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="beauty p-3" >
-                                <span class="arrow-budget" id="el-05" data-toggle="collapse" data-target="#demo14"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h5>Bijoux</h5>
-                                <div class="beautyChildParent" class="collapse" id="demo14">
-                                    <div class="beautyChild01">
-                                        <table>
-                                            <tr>
-                                                <th></th>
-                                                <th class="text-right">Coût actuel</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Sa bague</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Son anneau</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="beauty p-3" >
-                                <span class="arrow-budget" id="el-06" data-toggle="collapse" data-target="#demo15"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h5>Animateur</h5>
-                                <div class="beautyChildParent" class="collapse" id="demo15">
-                                    <div class="beautyChild01">
-                                        <table>
-                                            <tr>
-                                                <th></th>
-                                                <th class="text-right">Coût actuel</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Musiciens de cérémonie / Orchestre</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Chanteuse</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>DJ</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="beauty p-3" >
-                                <span class="arrow-budget" id="el-07" data-toggle="collapse" data-target="#demo16"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h5>Fleurs</h5>
-                                <div class="beautyChildParent" class="collapse" id="demo16">
-                                    <div class="beautyChild01">
-                                        <table>
-                                            <tr>
-                                                <th></th>
-                                                <th class="text-right">Coût actuel</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Bouquet de la mariée</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bouquets de demoiselles d'honneur</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Décorations de la cérémonie</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Boutonnières de marié et de garçon d'honneur</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Décorations de réception et centres de table</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="beauty p-3" >
-                                <span class="arrow-budget" id="el-08" data-toggle="collapse" data-target="#demo17"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h5>Photographe et Vidéaste</h5>
-                                <div class="beautyChildParent" class="collapse" id="demo17">
-                                    <div class="beautyChild01">
-                                        <table>
-                                            <tr>
-                                                <th></th>
-                                                <th class="text-right">Coût actuel</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Photographe</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Vidéographe</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="beauty p-3" >
-                                <span class="arrow-budget" id="el-09" data-toggle="collapse" data-target="#demo18"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01"> </span>
-                                <h5>Transport</h5>
-                                <div class="beautyChildParent" class="collapse" id="demo18">
-                                    <div class="beautyChild01">
-                                        <table>
-                                            <tr>
-                                                <th></th>
-                                                <th class="text-right">Coût actuel</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Navette ou stationnement pour les invités</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Location de limousine ou de voiture</td>
-                                                <td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="total text-right p-3">
-                                <p>Total actuel</p>
-                                <h4> {{2200000}} <span style="font-style:italic">Ariary</span></h4>
-                                <hr>
-                                <h2 class="text-secondary">Budget {{ 1500000 }} <span style="font-style:italic">Ariary</span> </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+				<!-- Budget -->
+				<div class="tab-pane fade" id="budget" role="tabpanel" aria-labelledby="budget-tab">
+					<div class="row">
+						<div class="col-12">
+							<div class="budget-bloc text-center">
+								<h4>Hello Budget</h4>
+								<p>Tenez un registre précis de chaque dépense, puis organisez vos catégories
+									<br>
+									ou éléments individuels à votre guise en les déplaçant à volonté.</p>
+							</div>
+						</div>
+						<div class="col-12 p-3">
+							<div class="budget-amount text-center">
+								<h2>Budget :
+									<span><input type="text"></span>
+									Ariary
+								</h2>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 mt-3">
+							<div class="container-search p-3">
+								<form class="search">
+									<input class="filter" type="text" placeholder="Filtres...">
+									<i class="fa fa-search"></i>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="beauty p-3">
+								<span class="arrow-budget" id="el-01" data-toggle="collapse" data-target="#demo10"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
+								</span>
+								<h5>Beauté et santé</h5>
+								<div class="beautyChildParent" class="collapse" id="demo10">
+									<div class="beautyChild01">
+										<table>
+											<tr>
+												<th></th>
+												<th class="text-right">Coût actuel</th>
+											</tr>
+											<tr>
+												<td>Coiffure et maquillage</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="beauty p-3">
+								<span class="arrow-budget" id="el-02" data-toggle="collapse" data-target="#demo11"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
+								</span>
+								<h5>Robe et tenue vestimentaire - Mariée</h5>
+								<div class="beautyChildParent" class="collapse" id="demo11">
+									<div class="beautyChild01">
+										<table>
+											<tr>
+												<th></th>
+												<th class="text-right">Coût actuel</th>
+											</tr>
+											<tr>
+												<td>Accessoires de la mariée</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Habillage et retouches</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Tête et voile</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="beauty p-3">
+								<span class="arrow-budget" id="el-03" data-toggle="collapse" data-target="#demo12"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
+								</span>
+								<h5>Costume - Marié</h5>
+								<div class="beautyChildParent" class="collapse" id="demo12">
+									<div class="beautyChild01">
+										<table>
+											<tr>
+												<th></th>
+												<th class="text-right">Coût actuel</th>
+											</tr>
+											<tr>
+												<td>Accessoires de la mariée</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Costume de marié</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="beauty p-3">
+								<span class="arrow-budget" id="el-04" data-toggle="collapse" data-target="#demo13"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
+								</span>
+								<h5>Restauration</h5>
+								<div class="beautyChildParent" class="collapse" id="demo13">
+									<div class="beautyChild01">
+										<table>
+											<tr>
+												<th></th>
+												<th class="text-right">Coût actuel</th>
+											</tr>
+											<tr>
+												<td>Boissons et barmans</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Alimentation et services</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="beauty p-3">
+								<span class="arrow-budget" id="el-05" data-toggle="collapse" data-target="#demo14"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
+								</span>
+								<h5>Bijoux</h5>
+								<div class="beautyChildParent" class="collapse" id="demo14">
+									<div class="beautyChild01">
+										<table>
+											<tr>
+												<th></th>
+												<th class="text-right">Coût actuel</th>
+											</tr>
+											<tr>
+												<td>Sa bague</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Son anneau</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="beauty p-3">
+								<span class="arrow-budget" id="el-06" data-toggle="collapse" data-target="#demo15"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
+								</span>
+								<h5>Animateur</h5>
+								<div class="beautyChildParent" class="collapse" id="demo15">
+									<div class="beautyChild01">
+										<table>
+											<tr>
+												<th></th>
+												<th class="text-right">Coût actuel</th>
+											</tr>
+											<tr>
+												<td>Musiciens de cérémonie / Orchestre</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Chanteuse</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>DJ</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="beauty p-3">
+								<span class="arrow-budget" id="el-07" data-toggle="collapse" data-target="#demo16"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
+								</span>
+								<h5>Fleurs</h5>
+								<div class="beautyChildParent" class="collapse" id="demo16">
+									<div class="beautyChild01">
+										<table>
+											<tr>
+												<th></th>
+												<th class="text-right">Coût actuel</th>
+											</tr>
+											<tr>
+												<td>Bouquet de la mariée</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Bouquets de demoiselles d'honneur</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Décorations de la cérémonie</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Boutonnières de marié et de garçon d'honneur</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Décorations de réception et centres de table</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="beauty p-3">
+								<span class="arrow-budget" id="el-08" data-toggle="collapse" data-target="#demo17"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
+								</span>
+								<h5>Photographe et Vidéaste</h5>
+								<div class="beautyChildParent" class="collapse" id="demo17">
+									<div class="beautyChild01">
+										<table>
+											<tr>
+												<th></th>
+												<th class="text-right">Coût actuel</th>
+											</tr>
+											<tr>
+												<td>Photographe</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Vidéographe</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="beauty p-3">
+								<span class="arrow-budget" id="el-09" data-toggle="collapse" data-target="#demo18"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
+								</span>
+								<h5>Transport</h5>
+								<div class="beautyChildParent" class="collapse" id="demo18">
+									<div class="beautyChild01">
+										<table>
+											<tr>
+												<th></th>
+												<th class="text-right">Coût actuel</th>
+											</tr>
+											<tr>
+												<td>Navette ou stationnement pour les invités</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+											<tr>
+												<td>Location de limousine ou de voiture</td>
+												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="total text-right p-3">
+								<p>Total actuel</p>
+								<h4>
+									{{2200000}}
+									<span style="font-style:italic">Ariary</span>
+								</h4>
+								<hr>
+								<h2 class="text-secondary">Budget
+									{{ 1500000 }}
+									<span style="font-style:italic">Ariary</span>
+								</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <input type="hidden" id="update_id" value="{{idUser}}">
 
 
 <script>
-    
-    
+	$("#update").click(function () {
+$("#app_update").toggle()
+})
 
-const btnAddGuestH= document.querySelector('.btn-add-guestH')
-const btnAddGuestF= document.querySelector('.btn-add-guestF')
+function saveInvite() {
+
+
+let data = {
+name_epoux: $('#homme').val(),
+name_epouse: $('#femme').val(),
+date_ceremonie: $("#datepicker").val(),
+lieu_ceremonie: $("#lieuxCeremonie").val()
+}
+
+$.ajax({
+url: "/activite/new/" + $("#update_id").val(),
+method: "PUT",
+data: data,
+success: function (response) {
+alert('L\'enregistrement a été effectué avec succès...')
+location.reload(true);
+}
+})
+
+}
+
+$("#valide").click(function () {
+saveInvite()
+})
+
+$("#datepicker").change(function () {
+saveInvite()
+})
+
+$("#lieuxCeremonie").change(function () {
+saveInvite()
+})
+
+$(document).ready(function () {
+$("#app_update").hide()
+
+})
+
+$(function () {
+$("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
+});
+const btnAddGuestH = document.querySelector('.btn-add-guestH')
+const btnAddGuestF = document.querySelector('.btn-add-guestF')
 const selectElementF = document.querySelector('.selectBlocF')
 const selectElementH = document.querySelector('.selectBlocH')
 
 
+btnAddGuestH.addEventListener('click', function (e) {
 
-  btnAddGuestH.addEventListener('click', function(e){
-    
-        e.preventDefault()
-        if(selectElementH.style.display === "block") {
-            selectElementH.style.display = "none";
-        } else {
-            selectElementH.style.display = "block";
-        }
-  })
-
-//Femme :
-
-
-
-
-  btnAddGuestF.addEventListener('click', function(e){
-    e.preventDefault()
-    if(selectElementF.style.display === "block") {
-        selectElementF.style.display = "none";
-    } else {
-        selectElementF.style.display = "block";
-    }
-})
-
-
-
-
-//Pour l'ajout de bouton
-
-$(document).ready(function(){
-    
-
-    $("#success-alert").hide()
-
-    let count = 1;
-    let count1 = 1;
-    let count2 = 1;
-    let count3 = 1;
-    let num = 1;
-    let num1 = 1;
-    let num2 = 1;
-    let num3 = 1;
-    let data_famille_homme = 0 
-    let data_famille_femme = 0 
-    let data_garcon_dhonneur = 0
-    let data_fille_dhonneur = 0
-    let data_parents_homme = 0
-    let data_parents_femme = 0
-    let data_amis_homme = 0
-    let data_amis_femme = 0
-
-//Ajout garcon d'honneur 
-$(".garcon_dhonneur_epoux").click(function(){
-        
-    
-   
-newgarcon_dhonneur = 
-  '<div id="garcon_dhonneur_epoux">' +  
-    '<select id="cv_parents_homme_'+count+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-    '<input type="text" id="garcon_dhonneur_'+count+'" class="mb-3"  name="garcon_dhonneur"  value="" placeholder="Garçon d honneur">' +
-    '<i class="fa fa-trash" id="deleteRow"</div>';     
-
-    $('#newinput_garcon_dhonneur').append(newgarcon_dhonneur);
-    
-    count++;
-    data_garcon_dhonneur++
-    
-    let garcon_dhonneur = $("#data_garcon_dhonneur_"+data_garcon_dhonneur).val();    
-    $("#garcon_dhonneur_"+data_garcon_dhonneur).val(garcon_dhonneur);
-})
-
-$("body").on("click", "#deleteRow", function(){
-    $(this).parents("#garcon_dhonneur_epoux").remove();
-})
-
-//fin
-//test 
-
-function newparents_homme(){
-    neWparents_homme = 
-          '<div id="parents_homme">' +  
-            '<select id="cv_parents_homme_'+count1+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-            '<input type="text" id="parents_homme_'+count1+'" class="mb-3" name="parents_homme"  value="" placeholder="Parents">' +
-            '<i class="fa fa-trash" id="deleteParents_homme"</div>';  
-        
-            $('#newinput_parents_homme').append(neWparents_homme);            
-            count1++;      
-            data_parents_homme++
-            let parents_homme = $("#data_parents_homme_"+data_parents_homme).val();
-        
-            $("#parents_homme_"+data_parents_homme).val(parents_homme);          
-             
+e.preventDefault()
+if (selectElementH.style.display === "block") {
+selectElementH.style.display = "none";
+} else {
+selectElementH.style.display = "block";
 }
-//Ajout parent pour le marié
-$(".parents_homme").click(function(){                 
-        neWparents_homme = 
-          '<div id="parents_homme">' +  
-            '<select id="cv_parents_homme_'+count1+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-            '<input type="text" id="parents_homme_'+count1+'" class="mb-3" name="parents_homme"  value="" placeholder="Parents">' +
-            '<i class="fa fa-trash" id="deleteParents_homme"</div>';  
-        
-            $('#newinput_parents_homme').append(neWparents_homme);            
-            count1++;      
-            data_parents_homme++
-            let parents_homme = $("#data_parents_homme_"+data_parents_homme).val();
-        
-            $("#parents_homme_"+data_parents_homme).val(parents_homme);
-          
-        })        
-
-        $("body").on("click", "#deleteParents_homme", function(){
-            $(this).parents("#parents_homme").remove();
-        })
-
-//fin
-
-//Ajout ami/Amie pour Homme
-$(".amis_homme").click(function(){
-        
-       
-       
-            neWamis_homme = 
-              '<div id="garcon_dhonneur_epoux">' +                  
-                '<select id="cv_parents_homme_'+count2+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-                '<input type="text" id="amis_homme_'+count2+'" class="mb-3" name="amis_homme"  value="" placeholder="Ami/Amie">' +
-                    '<i class="fa fa-trash" id="deleteRow"</div>';   
-            
-                $('#newinput_amis_homme').append(neWamis_homme);
-                
-                count2++;                
-                data_amis_homme++; 
-                datas = $("#data_amis_homme_"+data_amis_homme).val()
-                
-                $test = $("#amis_homme_"+data_amis_homme).val(datas);  
-            })
-            
-            $("body").on("click", "#deleteRow", function(){
-                $(this).parents("#garcon_dhonneur_epoux").remove();
-            })
-
-
-//fin
-
-//Ajout famille proche pour l'homme
-$(".famille_homme").click(function(){       
-        neWfamille_homme = 
-              '<div id="famille_homme">' +  
-                '<select id="cv_famille_homme_'+count3+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-                '<input type="text" id="famille_homme_'+count3+'" class="mb-3" name="famille_homme"  value="" placeholder="Famille proche">' +
-                    '<i class="fa fa-trash" id="deleteFamilleProche"</div>';  
-            
-                $('#newinput_famille_homme').append(neWfamille_homme);
-                
-                count3++;
-                let famille_homme_ord = data_famille_homme++;  
-                if(famille_homme_ord < 41){
-                    $datas = $("#data_famille_homme_"+data_famille_homme).val()
-                    $test = $("#famille_homme_"+data_famille_homme).val($datas)
-                }
-                    
-            })
-            
-            $("body").on("click", "#deleteFamilleProche", function(){
-                $(this).parents("#famille_homme").remove();
-            })
-
-//fin
-
-
-//Ajout garcon d'honneur 
-$(".fille_dhonneur").click(function(){       
-    
-    
-   
-        newfille_dhonneur = 
-          '<div id="fille_dhonneur">' +  
-            '<select id="select_fille_dhonneur_'+num+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-            '<input type="text" id="fille_dhonneur_'+num+'" class="mb-3"  name="fille_dhonneur"  value="" placeholder="Fille d honneur">' +
-            '<i class="fa fa-trash" id="deleteFille_dhonneur"></div>';           
-            
-            
-            let numero_fille_dhonneur = num++;            
-            
-            data_fille_dhonneur++            
-            if(numero_fille_dhonneur < 5){  
-                $('#newinput_fille_dhonneur').append(newfille_dhonneur);     
-                let fille_dhonneurs = $("#data_fille_dhonneurs_"+data_fille_dhonneur).val();  
-            
-            $("#fille_dhonneur_"+data_fille_dhonneur).val(fille_dhonneurs);           
-            }
-        })
-        
-        $("body").on("click", "#deleteFille_dhonneur", function(){
-            $(this).parents("#fille_dhonneur").remove();
-        })
-        
-        //fin
-        
-        //Ajout parent pour le marié
-        $(".parents_femme").click(function(){             
-           
-           
-                neWparents_femme = 
-                  '<div id="parents_femme">' +  
-                    '<select id="cv_parents_femme_'+num1+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-                    '<input type="text" id="parents_femme_'+num1+'" class="mb-3" name="parents_femme"  value="" placeholder="Parents">' +
-                    '<i class="fa fa-trash" id="deleteParents_femme"</div>';  
-                
-                    $('#newinput_parents_femme').append(neWparents_femme);            
-                    num1++;            
-                    console.log(data_parents_femme++)
-                    let parents_femme = $("#data_parents_femme_"+data_parents_femme).val();
-                    console.log(parents_femme)
-        
-                    $("#parents_femme_"+data_parents_femme).val(parents_femme);
-                })
-                
-                $("body").on("click", "#deleteParents_femme", function(){
-                    $(this).parents("#parents_femme").remove();
-                })
-        
-        //fin
-        
-        //Ajout ami/Amie pour Homme
-        $(".amis_femme").click(function(){              
-               
-               
-                    neWamis_femme = 
-                      '<div id="amis_femme">' +                  
-                        '<select id="cv_amis_femme_'+num2+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-                        '<input type="text" id="amis_femme_'+num2+'" class="mb-3" name="amis_femme"  value="" placeholder="Ami/Amie">' +
-                            '<i class="fa fa-trash" id="deleteAmis_femme"</div>';   
-                    
-                        $('#newinput_amis_femme').append(neWamis_femme);                        
-                        num2++;
-                        data_amis_femme++;
-                        
-                        $data = $("#data_amis_femme_"+data_amis_femme).val()                        
-                        $("#amis_femme_"+data_amis_femme).val($data);  
-                        
-                        
-                        
-                    })
-                    
-                    $("body").on("click", "#deleteAmis_femme", function(){
-                        $(this).parents("#amis_femme").remove();
-                        console.log(num2--);
-                    })
-        
-        
-        //fin
-        
-        //Ajout famille proche pour l'homme
-        $(".famille_femme").click(function(){               
-                
-               
-                    neWfamille_femme = 
-                      '<div id="famille_femme">' +  
-                        '<select id="cv_famille_femme_'+num3+'"><option value="mrs">Mrs</option><option value="mme">Madame</option><option value="Mlle">Mademoiselle</option></select>'+
-                        '<input type="text" id="famille_femme_'+num3+'" class="mb-3" name="famille_femme"  value="" placeholder="Famille proche">' +
-                            '<i class="fa fa-trash" id="deleteFamille_femme"</div>';  
-                    
-
-                        $('#newinput_famille_femme').append(neWfamille_femme);
-                        
-                        num3++;
-                        data_famille_femme++
-                        let datas = $("#data_famille_femme_"+data_famille_femme).val()
-                        $("#famille_femme_"+data_famille_femme).val(datas);
-                        
-                        
-                       
-                    })
-                    
-                    $("body").on("click", "#deleteFamille_femme", function(){                                             
-                        $(this).parents("#famille_femme").remove();
-                    })
-        
-        //fin
-
-
-
-$("#valide").click(function(){
-    var garcon_dhonneur = $("#garcon_dhonneur_1").val() + ";" + $("#garcon_dhonneur_2").val() + ";" +  $("#garcon_dhonneur_3").val() +  ";" + $("#garcon_dhonneur_4").val()
-    var parents_homme = $("#parents_homme_1").val() + ";" + $("#parents_homme_2").val();
-    var amis_homme = $("#amis_homme_1").val() + ";" + $("#amis_homme_2").val() + ";" + $("#amis_homme_3").val() + ";" + $("#amis_homme_4").val() + ";" + $("#amis_homme_5").val() + ";" + $("#amis_homme_6").val() + ";"+ 
-                     $("#amis_homme_7").val() + ";" + $("#amis_homme_8").val() + ";" + $("#amis_homme_9").val() + ";" + $("#amis_homme_10").val() + ";" + $("#amis_homme_11").val() + ";" + $("#amis_homme_12").val() + ";" +
-                     $("#amis_homme_13").val() + ";" + $("#amis_homme_14").val() + ";" + $("#amis_homme_15").val() + ";" + $("#amis_homme_16").val() + ";" + $("#amis_homme_17").val() + ";" + $("#amis_homme_18").val() + ";" +
-                     $("#amis_homme_19").val() + ";" + $("#amis_homme_20").val() + ";" + $("#amis_homme_21").val() + ";" + $("#amis_homme_22").val() + ";" + $("#amis_homme_23").val() + ";" + $("#amis_homme_24").val() + ";" +
-                     $("#amis_homme_25").val() + ";" + $("#amis_homme_26").val() + ";" + $("#amis_homme_27").val() + ";" + $("#amis_homme_28").val() + ";" + $("#amis_homme_29").val() + ";" + $("#amis_homme_30").val()
-    var famille_homme = $("#famille_homme_1").val() + ";" + $("#famille_homme_2").val() + ";" + $("#famille_homme_3").val() + ";" + $("#famille_homme_4").val() + ";" + $("#famille_homme_5").val() + ";" + $("#famille_homme_6").val() + ";"+ 
-                     $("#famille_homme_7").val() + ";" + $("#famille_homme_8").val() + ";" + $("#famille_homme_9").val() + ";" + $("#famille_homme_10").val() + ";" + $("#famille_homme_11").val() + ";" + $("#famille_homme_12").val() + ";" +
-                     $("#famille_homme_13").val() + ";" + $("#famille_homme_14").val() + ";" + $("#famille_homme_15").val() + ";" + $("#famille_homme_16").val() + ";" + $("#famille_homme_17").val() + ";" + $("#famille_homme_18").val() + ";" +
-                     $("#famille_homme_19").val() + ";" + $("#famille_homme_20").val() + ";" + $("#famille_homme_21").val() + ";" + $("#famille_homme_22").val() + ";" + $("#famille_homme_23").val() + ";" + $("#famille_homme_24").val() + ";" +
-                     $("#famille_homme_25").val() + ";" + $("#famille_homme_26").val() + ";" + $("#famille_homme_27").val() + ";" + $("#famille_homme_28").val() + ";" + $("#famille_homme_29").val() + ";" + $("#famille_homme_30").val()
-
-    var fille_dhonneur = $("#fille_dhonneur_1").val() + ";" + $("#fille_dhonneur_2").val() + ";" +  $("#fille_dhonneur_3").val() +  ";" + $("#fille_dhonneur_4").val()
-    var parents_femme = $("#parents_femme_1").val() + ";" + $("#parents_femme_2").val();
-    var amis_femme = $("#amis_femme_1").val() + ";" + $("#amis_femme_2").val() + ";" + $("#amis_femme_3").val() + ";" + $("#amis_femme_4").val() + ";" + $("#amis_femme_5").val() + ";" + $("#amis_femme_6").val() + ";"+ 
-                     $("#amis_femme_7").val() + ";" + $("#amis_femme_8").val() + ";" + $("#amis_femme_9").val() + ";" + $("#amis_femme_10").val() + ";" + $("#amis_femme_11").val() + ";" + $("#amis_femme_12").val() + ";" +
-                     $("#amis_femme_13").val() + ";" + $("#amis_femme_14").val() + ";" + $("#amis_femme_15").val() + ";" + $("#amis_femme_16").val() + ";" + $("#amis_femme_17").val() + ";" + $("#amis_femme_18").val() + ";" +
-                     $("#amis_femme_19").val() + ";" + $("#amis_femme_20").val() + ";" + $("#amis_femme_21").val() + ";" + $("#amis_femme_22").val() + ";" + $("#amis_femme_23").val() + ";" + $("#amis_femme_24").val() + ";" +
-                     $("#amis_femme_25").val() + ";" + $("#amis_femme_26").val() + ";" + $("#amis_femme_27").val() + ";" + $("#amis_femme_28").val() + ";" + $("#amis_femme_29").val() + ";" + $("#amis_femme_30").val()
-    var famille_femme = $("#famille_femme_1").val() + ";" + $("#famille_femme_2").val() + ";" + $("#famille_femme_3").val() + ";" + $("#famille_femme_4").val() + ";" + $("#famille_femme_5").val() + ";" + $("#famille_femme_6").val() + ";"+ 
-                     $("#famille_femme_7").val() + ";" + $("#famille_femme_8").val() + ";" + $("#famille_femme_9").val() + ";" + $("#famille_femme_10").val() + ";" + $("#famille_femme_11").val() + ";" + $("#famille_femme_12").val() + ";" +
-                     $("#famille_femme_13").val() + ";" + $("#famille_femme_14").val() + ";" + $("#famille_femme_15").val() + ";" + $("#famille_femme_16").val() + ";" + $("#famille_femme_17").val() + ";" + $("#famille_femme_18").val() + ";" +
-                     $("#famille_femme_19").val() + ";" + $("#famille_femme_20").val() + ";" + $("#famille_femme_21").val() + ";" + $("#famille_femme_22").val() + ";" + $("#famille_femme_23").val() + ";" + $("#famille_femme_24").val() + ";" +
-                     $("#famille_femme_25").val() + ";" + $("#famille_femme_26").val() + ";" + $("#famille_femme_27").val() + ";" + $("#famille_femme_28").val() + ";" + $("#famille_femme_29").val() + ";" + $("#famille_femme_30").val()
-        let data ={        
-            name_epouse: $('#name_epouse').val(),
-          //  lastname_epouse: $('#lastname_epouse').val(),
-            fille_dhonneur_epouse: fille_dhonneur,
-            parents_epouse:parents_femme,
-            ami_epouse:amis_femme,
-            famille_femme: famille_femme,
-
-            name_epoux: $('#name_epoux').val(),
-//            lastname_epoux: $('#lastname_epoux').val(),            
-            parents_epoux: parents_homme,
-            ami_epoux:amis_homme,
-            famille_homme: famille_homme,
-            garcon_dhonneur: garcon_dhonneur,            
-           
-        };
-        
-        $.ajax({
-            url:"/activite/new/"+ $("#update_id").val(),
-            method: "PUT",
-            data: data,
-            success: function(response){
-                $("#success-alert").show();
-                window.setTimeout(function(){
-                    $("#success-alert").hide();
-                },2500)
-                $("#notification").text("La modification a été effectuée")
-            }
-    
-        })
-
-
-
 })
 
+btnAddGuestF.addEventListener('click', function (e) {
+e.preventDefault()
+if (selectElementF.style.display === "block") {
+selectElementF.style.display = "none";
+} else {
+selectElementF.style.display = "block";
+}
 })
-
-
 </script>
 
 {%endblock%}

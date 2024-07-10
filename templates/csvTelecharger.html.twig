@@ -1,0 +1,23 @@
+
+
+<table>
+
+    <tr>
+        <td>
+            Nom
+        </td>
+        <td>
+            Adresse e-mail
+        </td>
+    </tr>
+
+{% for contenuTabs in contenu %}
+<tr>
+    <td>{{contenuTabs.0}}</td>
+    <td>{{contenuTabs.1}}</td>
+</tr>
+
+
+{% endfor %}
+
+</table>
