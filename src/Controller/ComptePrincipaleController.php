@@ -71,7 +71,7 @@ class ComptePrincipaleController extends AbstractController
         global $jourJ;
         if($dateCeremonie!=""){
             $date = $dateCeremonie;
-            var_dump($date);
+            //var_dump($date);
             $aujourdhui = date('Y-m-d');
             $jourJ = NbJours($date, $aujourdhui);
         }
