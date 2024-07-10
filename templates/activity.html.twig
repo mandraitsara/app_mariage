@@ -124,7 +124,7 @@
 									{% if lieuxCeremonie != "" %}
 										<h4 class="text-success">{{lieuxCeremonie}}</h4>
 										<input type="button" class="btn btn-success" id="modif_lieuxCeremonie" value="modif.">
-										<input hidden type="text" name="" id="lieuxCeremonie" value="{{lieuxCeremonie}}">
+										<input type="text" name="" id="lieuxCeremonie" value="{{lieuxCeremonie}}">
 									{% else %}
 										<p>
 											<a href="#">Paramétrer un lieu</a>
@@ -638,6 +638,8 @@
 <script>
 	$("#update").click(function (){$("#app_update").toggle()})
 	$("#modif_datepicker").click(function(){$("#datepicker").toggle()})
+	$("#modif_lieuxCeremonie").click(function(){$("#lieuxCeremonie").toggle()})
+
 	//$("#maj_date").click(function(){saveInvite()})
 	
 
@@ -679,7 +681,8 @@ saveInvite()
 $(document).ready(function () {
 $("#app_update").hide()
 $("#datepicker").hide()
-$("#modif_lieuxCeremonie").hide()
+$("#lieuxCeremonie").hide()
+
 
 })
 
