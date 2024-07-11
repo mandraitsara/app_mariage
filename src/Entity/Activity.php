@@ -38,6 +38,12 @@ class Activity
     #[ORM\Column(nullable: true, length: 255)]
     private ?string $jourJ = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $budgetInitial = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $budgetRestant = null;
+
     #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]
 
@@ -130,6 +136,30 @@ class Activity
     public function setUser(?UserLogin $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBudgetInitial(): ?string
+    {
+        return $this->budgetInitial;
+    }
+
+    public function setBudgetInitial(?string $budgetInitial): static
+    {
+        $this->budgetInitial = $budgetInitial;
+
+        return $this;
+    }
+
+    public function getBudgetRestant(): ?string
+    {
+        return $this->budgetRestant;
+    }
+
+    public function setBudgetRestant(?string $budgetRestant): static
+    {
+        $this->budgetRestant = $budgetRestant;
 
         return $this;
     }

@@ -56,8 +56,9 @@ class ComptePrincipaleController extends AbstractController
         $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();
         $dateCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getDateCeremonie();
         $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();
+        $budgetInitial = $entityManager->getRepository(Activity::class)->activityId($userID)->getBudgetInitial();
        
-
+       
         function NbJours($debut, $fin) {
 
             $tDeb = explode("-", $debut);
@@ -127,12 +128,6 @@ class ComptePrincipaleController extends AbstractController
 
         $pageCurrent = $pagination['currentPage']; 
 
-        if(isset($_GET['page'])){
-         echo 'style'   ;
-        } else{
-            echo 'dfd';
-        };
-
       
         
         $content = [
@@ -146,7 +141,7 @@ class ComptePrincipaleController extends AbstractController
             'jourJ' => $jourJ,
             'nbPages' => $pagination['nbPages'] ,
             'currentPage'=> $pageCurrent,
-            'url' => '127.0.0.1:8000/activite',
+            'budgetInitial' => $budgetInitial,
         ];
         return $this->render($templates, $content);
     }
@@ -166,6 +161,7 @@ class ComptePrincipaleController extends AbstractController
             $project->setNomF($request->request->get('name_epouse'));
             $project->setDateCeremonie($request->request->get('date_ceremonie'));
             $project->setLieuxCeremonie($request->request->get('lieu_ceremonie'));
+            $project->setBudgetInitial($request->request->get('budget_initial'));
             $project->setDateAt($date_at);
             $entityManager->flush();
             $data = "La modification a été effectué...";

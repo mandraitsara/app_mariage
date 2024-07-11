@@ -23,6 +23,53 @@
 
 {% block body %}
 <div class="container-fuid">
+	{% if budgetInitial == "" %}
+
+<section class="popup">	
+  <div class="popup__content">
+	<button type="button" class="close" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	  </button>
+    <div>
+      <span></span>
+      <span></span>
+    </div id="pop_up">
+		<h3 class="text-danger">Vous devez remplisser votre Budget avant de commencer...!</h3>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+			  <span class="input-group-text" id="basic-addon1">Votre budget : </span>
+			</div>
+			<input type="text" id="budget_initial" class="form-control" placeholder="1,000,000" aria-label="budget" aria-describedby="basic-addon1" value="{{budgetInitial}}">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">Ariary</span>
+			  </div>
+		  </div>
+	
+		  <h4 class="text-success">Budget minimum : 1.000.000 Ar</h4>
+
+</section>
+
+<script>
+affiche()
+	function affiche(){
+		$(".popup").fadeIn(500);
+	}
+	
+	$(".close").click(function(){
+		$(".popup").fadeOut(500);
+	});
+			
+
+</script>
+		
+
+{% endif %}
+
+
+	<div>
+
+	</div>
 
 	<div
 		class="row p-5">
@@ -369,9 +416,9 @@
 						</div>
 						<div class="col-12 p-3">
 							<div class="budget-amount text-center">
-								<h2>Budget :
-									<span><input type="text"></span>
-									Ariary
+								<h2>Mon budget :
+									{{budgetInitial}}
+									Ariary								
 								</h2>
 							</div>
 						</div>
@@ -669,7 +716,8 @@ let data = {
 name_epoux: $('#homme').val(),
 name_epouse: $('#femme').val(),
 date_ceremonie: $("#datepicker").val(),
-lieu_ceremonie: $("#lieuxCeremonie").val()
+lieu_ceremonie: $("#lieuxCeremonie").val(),
+budget_initial: $("#budget_initial").val()
 }
 
 $.ajax({
@@ -688,7 +736,9 @@ $("#valide").click(function () {
 saveInvite()
 })
 
-
+$("#budget_initial").change(function(){
+	saveInvite()
+})
 $("#datepicker").change(function () {
 saveInvite()
 })
