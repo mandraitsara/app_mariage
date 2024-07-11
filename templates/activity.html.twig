@@ -178,7 +178,7 @@
 									<tr>
 										<td>{{liste_invite.0}}</td>
 										<td>{{liste_invite.1}}</td>
-										<td></td>
+										<td>{{loop.index}}</td>
 
 										<td>
 											<a href="{{liste_invite.1}}" class="btn btn-success">Mail</a>
@@ -189,6 +189,25 @@
 						</table>
 
 
+					</div>
+
+					<div class="pagination_app">
+						
+
+						<nav aria-label="...">
+							<ul class="pagination">							
+								{% for i in 1.. nbPages %}
+								<li {% if i == currentPage %} class="page-item active" aria-current="page" {% else %}class="page-item" {% endif %}> 
+									{% if i != currentPage %}
+										<a class="page-link"  href="?page={{i}}">{{i}}</a>
+										{% else %}
+										<li class="page-item active" aria-current="page"><a class="page-link" href="?page={{i}}">{{i}}</a>										
+									{% endif %}
+								</li>							
+							{% endfor %}						 
+							  
+							</ul>
+						  </nav>
 					</div>
 
 					<div class="row p-3">

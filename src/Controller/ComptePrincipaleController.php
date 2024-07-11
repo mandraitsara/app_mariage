@@ -74,12 +74,7 @@ class ComptePrincipaleController extends AbstractController
             //var_dump($date);
             $aujourdhui = date('Y-m-d');
             $jourJ = NbJours($date, $aujourdhui);
-        }else{
-            $date = date('Y-m-d');
-            $aujourdhui = date('Y-m-d');
-            $jourJ = NbJours($date, $aujourdhui);
         }
-
         
 
         
@@ -93,7 +88,7 @@ class ComptePrincipaleController extends AbstractController
         $fichier = "$chemin/app_mariage_$userID$ext";
 
         if (!file_exists($fichier)) {
-            file_put_contents($fichier, "aucun;aucun");
+            file_put_contents($fichier, "non renseigné;non renseigné");
         } elseif (($fp = fopen("$chemin/app_mariage_$userID$ext", "r"))) {
             while (($row = fgetcsv($fp)) !== FALSE) {
                 for ($i = 0; $i < count($row); $i++) {
@@ -114,15 +109,44 @@ class ComptePrincipaleController extends AbstractController
 
 
         $nb_invite = count($tabs);
+
+        $parPage = 10;
+        $Nb_pages = ceil($nb_invite / $parPage);
+        $my_huge_array = [];
+
+        $pagination = [            
+                'length' => isset($_GET['length']) ? $_GET['length']: 10,
+                'total' => sizeof($tabs),
+                'currentPage' => isset($_GET['page']) ? $_GET['page'] : 1,
+                
+        ];
+
+        $pagination['nbPages'] = ceil($pagination['total'] / $pagination['length']) ;
+        $pagination['offset'] = ($pagination['currentPage'] * $pagination['length']) -  $pagination['length'] ;
+        $paginated = array_slice($tabs, $pagination['offset'], $pagination['length'], true);
+
+        $pageCurrent = $pagination['currentPage']; 
+
+        if(isset($_GET['page'])){
+         echo 'style'   ;
+        } else{
+            echo 'dfd';
+        };
+
+      
+        
         $content = [
             'idUser' => $activiteID,
             'nomFemme' => $NomF,
             'nomHomme' => $NomH,
-            'liste_invites' => $tabs,
+            'liste_invites' => $paginated,
             'nombre_invite' => $nb_invite,
             'dateCeremonie' => $dateCeremonie,
             'lieuxCeremonie' => $lieuCeremonie,
             'jourJ' => $jourJ,
+            'nbPages' => $pagination['nbPages'] ,
+            'currentPage'=> $pageCurrent,
+            'url' => '127.0.0.1:8000/activite',
         ];
         return $this->render($templates, $content);
     }
