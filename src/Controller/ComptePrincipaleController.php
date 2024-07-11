@@ -74,7 +74,12 @@ class ComptePrincipaleController extends AbstractController
             //var_dump($date);
             $aujourdhui = date('Y-m-d');
             $jourJ = NbJours($date, $aujourdhui);
+        }else{
+            $date = date('Y-m-d');
+            $aujourdhui = date('Y-m-d');
+            $jourJ = NbJours($date, $aujourdhui);
         }
+
         
 
         
