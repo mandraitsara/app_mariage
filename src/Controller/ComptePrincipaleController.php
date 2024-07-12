@@ -60,12 +60,13 @@ class ComptePrincipaleController extends AbstractController
         $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();
         $budgetInitial = $entityManager->getRepository(Activity::class)->activityId($userID)->getBudgetInitial();
        
-        $presta = $entityManager->getRepository(PrestataireTarif::class)->findAll();
-       
-        $prestataire[] = $presta;
-        var_dump($presta);
-        
+        $presta = $entityManager->getRepository(PrestataireTarif::class)->findAll();   
+        $prestataire = [];
+        foreach($presta as $prestas){
+               $prestataire[] =  $prestas->getPrestataire();
+        }
 
+        
         
         
         function NbJours($debut, $fin) {
@@ -151,7 +152,7 @@ class ComptePrincipaleController extends AbstractController
             'nbPages' => $pagination['nbPages'] ,
             'currentPage'=> $pageCurrent,
             'budgetInitial' => $budgetInitial,
-            'prestataire' => $presta,
+            'prestataire' => $prestataire,
         ];
         return $this->render($templates, $content);
     }
