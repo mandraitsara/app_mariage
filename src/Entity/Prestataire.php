@@ -2,15 +2,13 @@
 
 namespace App\Entity;
 
+use App\Repository\PrestataireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\PrestataireRepository;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: PrestataireRepository::class)]
-#[Vich\Uploadable]
 class Prestataire
 {
     #[ORM\Id]
@@ -18,41 +16,30 @@ class Prestataire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $NomPrestataire = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $TypePrestataire = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $contact = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $infoPrestataire = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adresse = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Prestataires')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Categorie $categorie = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Prestataires')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Contact $contact = null;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
     /**
-     * @var Collection<int, Image>
+     * @var Collection<int, PrestataireTarif>
      */
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'prestataire', orphanRemoval: true, cascade: ['persist'])]
-    private Collection $images;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $imageName = null;
-
-    #[Vich\UploadableField(mapping: 'prestataire_images', fileNameProperty: 'imageName')]
-    private ?File $imageFile = null;
-
-    #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $updatedAt = null;
+    #[ORM\OneToMany(targetEntity: PrestataireTarif::class, mappedBy: 'prestataire')]
+    private Collection $prestataire;
 
     public function __construct()
     {
-        $this->images = new ArrayCollection();
+        $this->prestataire = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -60,121 +47,93 @@ class Prestataire
         return $this->id;
     }
 
-    public function getNomPrestataire(): ?string
+    public function getNom(): ?string
     {
-        return $this->NomPrestataire;
+        return $this->nom;
     }
 
-    public function setNomPrestataire(string $NomPrestataire): self
+    public function setNom(?string $nom): static
     {
-        $this->NomPrestataire = $NomPrestataire;
+        $this->nom = $nom;
+
         return $this;
     }
 
-    public function getTypePrestataire(): ?string
-    {
-        return $this->TypePrestataire;
-    }
-
-    public function setTypePrestataire(string $TypePrestataire): self
-    {
-        $this->TypePrestataire = $TypePrestataire;
-        return $this;
-    }
-
-    public function getInfoPrestataire(): ?string
-    {
-        return $this->infoPrestataire;
-    }
-
-    public function setInfoPrestataire(string $infoPrestataire): self
-    {
-        $this->infoPrestataire = $infoPrestataire;
-        return $this;
-    }
-
-    public function getCategorie(): ?Categorie
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?Categorie $categorie): self
-    {
-        $this->categorie = $categorie;
-        return $this;
-    }
-
-    public function getContact(): ?Contact
+    public function getContact(): ?string
     {
         return $this->contact;
     }
 
-    public function setContact(?Contact $contact): self
+    public function setContact(?string $contact): static
     {
         $this->contact = $contact;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?string $adresse): static
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
         return $this;
     }
 
     /**
-     * @return Collection<int, Image>
+     * @return Collection<int, PrestataireTarif>
      */
-    public function getImages(): Collection
+    public function getPrestataire(): Collection
     {
-        return $this->images;
+        return $this->prestataire;
     }
 
-    public function addImage(Image $image): self
+    public function addPrestataire(PrestataireTarif $prestataire): static
     {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setPrestataire($this);
+        if (!$this->prestataire->contains($prestataire)) {
+            $this->prestataire->add($prestataire);
+            $prestataire->setPrestataire($this);
         }
+
         return $this;
     }
 
-    public function removeImage(Image $image): self
+    public function removePrestataire(PrestataireTarif $prestataire): static
     {
-        if ($this->images->removeElement($image)) {
-            if ($image->getPrestataire() === $this) {
-                $image->setPrestataire(null);
+        if ($this->prestataire->removeElement($prestataire)) {
+            // set the owning side to null (unless already changed)
+            if ($prestataire->getPrestataire() === $this) {
+                $prestataire->setPrestataire(null);
             }
         }
-        return $this;
-    }
 
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-    public function setImageName(?string $imageName): self
-    {
-        $this->imageName = $imageName;
-        return $this;
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageFile(?File $imageFile): self
-    {
-        $this->imageFile = $imageFile;
-        if ($imageFile) {
-            $this->updatedAt = new \DateTime('now');
-        }
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
         return $this;
     }
 }

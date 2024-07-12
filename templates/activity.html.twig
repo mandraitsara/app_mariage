@@ -269,6 +269,8 @@ affiche()
 						</div>
 						<div class="col-12">
 							<div class="guest-import p-3">
+								<a class="btn-1" href="" target="_blank">
+									<i class="fa-solid fa-download"></i>Ouvrir CSV</a>
 								<a class="btn-1" href="{{path("app_pdf_generator")}}" target="_blank">
 									<i class="fa-solid fa-download"></i>Importés une liste d'invités</a>
 								{# <button class="btn-2"><i class="fa-solid fa-file-pdf"></i>Télécharger le fichier PDF</button> #}
@@ -299,8 +301,8 @@ affiche()
 									Ajouter des prestataires</span>
 							</div>
 						</div>
-						<div class="col-md-3">
-							<div class="card card-1">
+						<div class="col-md-3 ">
+							<div class="card card-1 ">
 								<div class="show-prest text-center" id="openModalBtn">
 									<i class="fa-regular fa-eye"></i>
 									<span>Afficher les détails</span>
@@ -433,266 +435,23 @@ affiche()
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-12">
-							<div class="beauty p-3">
-								<span class="arrow-budget" id="el-01" data-toggle="collapse" data-target="#demo10"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
-								</span>
-								<h5>Beauté et santé</h5>
-								<div class="beautyChildParent" class="collapse" id="demo10">
-									<div class="beautyChild01">
-										<table>
-											<tr>
-												<th></th>
-												<th class="text-right">Coût actuel</th>
-											</tr>
-											<tr>
-												<td>Coiffure et maquillage</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-										</table>
-									</div>
+
+					<div class="row">	
+					{% for presta in prestataire %}					
+						<div class="col-md-3">							
+							<div class="card mt-3">
+								<img src="..." class="card-img-top" alt="...">
+								<div class="card-body">
+								  <h5 class="card-title">Card title</h5>
+								  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								  <a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="beauty p-3">
-								<span class="arrow-budget" id="el-02" data-toggle="collapse" data-target="#demo11"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
-								</span>
-								<h5>Robe et tenue vestimentaire - Mariée</h5>
-								<div class="beautyChildParent" class="collapse" id="demo11">
-									<div class="beautyChild01">
-										<table>
-											<tr>
-												<th></th>
-												<th class="text-right">Coût actuel</th>
-											</tr>
-											<tr>
-												<td>Accessoires de la mariée</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Habillage et retouches</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Tête et voile</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="beauty p-3">
-								<span class="arrow-budget" id="el-03" data-toggle="collapse" data-target="#demo12"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
-								</span>
-								<h5>Costume - Marié</h5>
-								<div class="beautyChildParent" class="collapse" id="demo12">
-									<div class="beautyChild01">
-										<table>
-											<tr>
-												<th></th>
-												<th class="text-right">Coût actuel</th>
-											</tr>
-											<tr>
-												<td>Accessoires de la mariée</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Costume de marié</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="beauty p-3">
-								<span class="arrow-budget" id="el-04" data-toggle="collapse" data-target="#demo13"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
-								</span>
-								<h5>Restauration</h5>
-								<div class="beautyChildParent" class="collapse" id="demo13">
-									<div class="beautyChild01">
-										<table>
-											<tr>
-												<th></th>
-												<th class="text-right">Coût actuel</th>
-											</tr>
-											<tr>
-												<td>Boissons et barmans</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Alimentation et services</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="beauty p-3">
-								<span class="arrow-budget" id="el-05" data-toggle="collapse" data-target="#demo14"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
-								</span>
-								<h5>Bijoux</h5>
-								<div class="beautyChildParent" class="collapse" id="demo14">
-									<div class="beautyChild01">
-										<table>
-											<tr>
-												<th></th>
-												<th class="text-right">Coût actuel</th>
-											</tr>
-											<tr>
-												<td>Sa bague</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Son anneau</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="beauty p-3">
-								<span class="arrow-budget" id="el-06" data-toggle="collapse" data-target="#demo15"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
-								</span>
-								<h5>Animateur</h5>
-								<div class="beautyChildParent" class="collapse" id="demo15">
-									<div class="beautyChild01">
-										<table>
-											<tr>
-												<th></th>
-												<th class="text-right">Coût actuel</th>
-											</tr>
-											<tr>
-												<td>Musiciens de cérémonie / Orchestre</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Chanteuse</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>DJ</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="beauty p-3">
-								<span class="arrow-budget" id="el-07" data-toggle="collapse" data-target="#demo16"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
-								</span>
-								<h5>Fleurs</h5>
-								<div class="beautyChildParent" class="collapse" id="demo16">
-									<div class="beautyChild01">
-										<table>
-											<tr>
-												<th></th>
-												<th class="text-right">Coût actuel</th>
-											</tr>
-											<tr>
-												<td>Bouquet de la mariée</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Bouquets de demoiselles d'honneur</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Décorations de la cérémonie</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Boutonnières de marié et de garçon d'honneur</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Décorations de réception et centres de table</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="beauty p-3">
-								<span class="arrow-budget" id="el-08" data-toggle="collapse" data-target="#demo17"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
-								</span>
-								<h5>Photographe et Vidéaste</h5>
-								<div class="beautyChildParent" class="collapse" id="demo17">
-									<div class="beautyChild01">
-										<table>
-											<tr>
-												<th></th>
-												<th class="text-right">Coût actuel</th>
-											</tr>
-											<tr>
-												<td>Photographe</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Vidéographe</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="beauty p-3">
-								<span class="arrow-budget" id="el-09" data-toggle="collapse" data-target="#demo18"><img src="{{asset("./icons/arrow.svg")}}" style="width:20px;margin:5px;" alt="arrow01">
-								</span>
-								<h5>Transport</h5>
-								<div class="beautyChildParent" class="collapse" id="demo18">
-									<div class="beautyChild01">
-										<table>
-											<tr>
-												<th></th>
-												<th class="text-right">Coût actuel</th>
-											</tr>
-											<tr>
-												<td>Navette ou stationnement pour les invités</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-											<tr>
-												<td>Location de limousine ou de voiture</td>
-												<td class="text-right"><input type="text" placeholder="Ar 0.00"></td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-12">
-							<div class="total text-right p-3">
-								<p>Total actuel</p>
-								<h4>
-									{{2200000}}
-									<span style="font-style:italic">Ariary</span>
-								</h4>
-								<hr>
-								<h2 class="text-secondary">Budget
-									{{ 1500000 }}
-									<span style="font-style:italic">Ariary</span>
-								</h2>
-							</div>
-						</div>
-					</div>
+							  </div>
+							</div>													
+					
+				{% endfor %}						
 				</div>
+
 			</div>
 		</div>
 	</div>

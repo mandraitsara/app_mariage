@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Prestataire;
+use App\Entity\PrestataireTarif;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Prestataire>
+ * @extends ServiceEntityRepository<PrestataireTarif>
  */
-class PrestataireRepository extends ServiceEntityRepository
+class PrestataireTarifRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Prestataire::class);
+        parent::__construct($registry, PrestataireTarif::class);
     }
 
     //    /**
-    //     * @return Prestataire[] Returns an array of Prestataire objects
+    //     * @return PrestataireTarif[] Returns an array of PrestataireTarif objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class PrestataireRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Prestataire
+    //    public function findOneBySomeField($value): ?PrestataireTarif
     //    {
     //        return $this->createQueryBuilder('p')
     //            ->andWhere('p.exampleField = :val')

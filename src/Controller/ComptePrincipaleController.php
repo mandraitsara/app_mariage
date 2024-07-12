@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
+use App\Entity\Prestataire;
+use App\Entity\PrestataireTarif;
 use App\Entity\UserLogin;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,7 +60,14 @@ class ComptePrincipaleController extends AbstractController
         $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();
         $budgetInitial = $entityManager->getRepository(Activity::class)->activityId($userID)->getBudgetInitial();
        
+        $presta = $entityManager->getRepository(PrestataireTarif::class)->findAll();
        
+        $prestataire[] = $presta;
+        var_dump($presta);
+        
+
+        
+        
         function NbJours($debut, $fin) {
 
             $tDeb = explode("-", $debut);
@@ -142,6 +151,7 @@ class ComptePrincipaleController extends AbstractController
             'nbPages' => $pagination['nbPages'] ,
             'currentPage'=> $pageCurrent,
             'budgetInitial' => $budgetInitial,
+            'prestataire' => $presta,
         ];
         return $this->render($templates, $content);
     }
