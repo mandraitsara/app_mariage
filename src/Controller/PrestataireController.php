@@ -32,6 +32,8 @@ class PrestataireController extends AbstractController
         $repo = $entityManager->getRepository(Prestataire::class);
         $prestataires = $repo->findAll();
 
+        
+
         return $this->render('prestataire/index.html.twig', [
             'controller_name' => 'PrestataireController',
             'prestataires' => $prestataires
@@ -58,12 +60,12 @@ class PrestataireController extends AbstractController
         ]);
     }
     /////////// LECTURE DE DONNEE//////////////
-    #[Route('/show/{id}', name: 'app_show')]
+    #[Route('/prestataire_show/{id}', name: 'app_show')]
     public function show($id, EntityManagerInterface $entityManager): Response
     {
         $repo = $entityManager->getRepository(Prestataire::class);
         $prestataire = $repo->find($id);
-        return $this->render('prestataire/show.html.twig', [
+        return $this->render('prestataire/prestataire_show.html.twig', [
             'prestataire' => $prestataire
         ]);
     }
@@ -71,7 +73,7 @@ class PrestataireController extends AbstractController
     #[Route('/prestataire/edit/{id}', name: 'app_edit')]
     public function edit($id, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $prestataire = $entityManager->getRepository(Prestataire::class)->find($id);
+        $prestataire = $entityManager->getRepository(Prestataire::class)->find($id);        
         if (!$prestataire) {
             throw $this->createNotFoundException('Aucun prestataire trouvé ' . $id);
         }
@@ -225,4 +227,10 @@ class PrestataireController extends AbstractController
             'fournisseurs' => $fournisseurs
         ]);
     }
+
+
+    
+
+
+
 }

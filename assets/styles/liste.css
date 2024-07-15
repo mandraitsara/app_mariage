@@ -508,3 +508,10 @@ button {
   cursor: pointer;
   border: none;
 }
+
+.app_budget {
+  background-color: cornsilk;
+  box-shadow: black;
+  box-sizing: unset;
+  border-radius: 5px;
+}

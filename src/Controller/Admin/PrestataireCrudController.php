@@ -13,6 +13,7 @@ class PrestataireCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
+       
         return Prestataire::class;
     }
 
@@ -21,7 +22,7 @@ class PrestataireCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInPlural('Prestataires')
             ->setEntityLabelInSingular('Prestataire')
-            ->setPageTitle('index', 'Administration des prestataires')
+            ->setPageTitle('index', 'Administrations de prestataires')
             ->setPaginatorPageSize(10);
     }
 
@@ -29,9 +30,12 @@ class PrestataireCrudController extends AbstractCrudController
     {
         return [
             //IdField::new('id'),
-            TextField::new('nomPrestataire'),
-            TextField::new('typePrestataire'),
-            TextEditorField::new('infoPrestataire'),
+            TextField::new('Nom'),
+            TextField::new('Contact'),
+            TextField::new('Adresse'),
+            TextField::new('Email'),
+            TextField::new('BudgetPrestataire'),
+            
         ];
     }
 }

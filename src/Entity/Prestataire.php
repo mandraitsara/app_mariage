@@ -37,6 +37,12 @@ class Prestataire
     #[ORM\OneToMany(targetEntity: PrestataireTarif::class, mappedBy: 'prestataire')]
     private Collection $prestataire;
 
+    #[ORM\ManyToOne(inversedBy: 'prestataires')]
+    private ?PrestataireTarif $prestataireTarif = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $budgetPrestataire = null;
+
     public function __construct()
     {
         $this->prestataire = new ArrayCollection();
@@ -45,6 +51,13 @@ class Prestataire
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id):static
+    {
+        $this->id = $id;
+        
+        return $this;
     }
 
     public function getNom(): ?string
@@ -133,6 +146,30 @@ class Prestataire
                 $prestataire->setPrestataire(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPrestataireTarif(): ?PrestataireTarif
+    {
+        return $this->prestataireTarif;
+    }
+
+    public function setPrestataireTarif(?PrestataireTarif $prestataireTarif): static
+    {
+        $this->prestataireTarif = $prestataireTarif;
+
+        return $this;
+    }
+
+    public function getBudgetPrestataire(): ?string
+    {
+        return $this->budgetPrestataire;
+    }
+
+    public function setBudgetPrestataire(?string $budgetPrestataire): static
+    {
+        $this->budgetPrestataire = $budgetPrestataire;
 
         return $this;
     }

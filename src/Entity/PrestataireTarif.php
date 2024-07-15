@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PrestataireTarifRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,7 +26,18 @@ class PrestataireTarif
     private ?Prestataire $prestataire = null;
 
     #[ORM\ManyToOne(inversedBy: 'prestaType')]
-    private ?PrestataireType $prestaType = null;    
+    private ?PrestataireType $prestaType = null;
+
+    /**
+     * @var Collection<int, Prestataire>
+     */
+    #[ORM\ManyToOne(targetEntity: Prestataire::class, inversedBy: 'prestataireTarif')]
+    private Collection $prestataires;
+
+    public function __construct()
+    {
+        $this->prestataires = new ArrayCollection();
+    }    
 
     public function getId(): ?int
     {
@@ -75,6 +88,36 @@ class PrestataireTarif
     public function setPrestaType(?PrestataireType $prestaType): static
     {
         $this->prestaType = $prestaType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Prestataire>
+     */
+    public function getPrestataires(): Collection
+    {
+        return $this->prestataires;
+    }
+
+    public function addPrestataire(Prestataire $prestataire): static
+    {
+        if (!$this->prestataires->contains($prestataire)) {
+            $this->prestataires->add($prestataire);
+            $prestataire->setPrestataireTarif($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrestataire(Prestataire $prestataire): static
+    {
+        if ($this->prestataires->removeElement($prestataire)) {
+            // set the owning side to null (unless already changed)
+            if ($prestataire->getPrestataireTarif() === $this) {
+                $prestataire->setPrestataireTarif(null);
+            }
+        }
 
         return $this;
     }

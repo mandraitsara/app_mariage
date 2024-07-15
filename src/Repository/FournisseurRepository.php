@@ -3,17 +3,18 @@
 namespace App\Repository;
 
 use App\Entity\Fournisseur;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Prestataire;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
- * @extends ServiceEntityRepository<Fournisseur>
+ * @extends ServiceEntityRepository<Prestataire>
  */
 class FournisseurRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Fournisseur::class);
+        parent::__construct($registry, Prestataire::class);
     }
 
     //    /**

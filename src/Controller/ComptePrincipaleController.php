@@ -60,15 +60,26 @@ class ComptePrincipaleController extends AbstractController
         $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();
         $budgetInitial = $entityManager->getRepository(Activity::class)->activityId($userID)->getBudgetInitial();
        
-        $presta = $entityManager->getRepository(PrestataireTarif::class)->findAll();   
-        $prestataire = [];
-        foreach($presta as $prestas){
-               $prestataire[] =  $prestas->getPrestataire();
-        }
+        $presta = $entityManager->getRepository(Prestataire::class)->findAll(); 
+        $prestaTarif = $entityManager->getRepository(PrestataireTarif::class)->findAll();
 
-        
-        
-        
+        $prestas = [];
+
+       
+        //$prestataire = [];
+        //$prestaPrix = [];
+
+       /* $pres = [];
+        foreach($presta as $prestas){
+               /* $pres = [
+                    'prestateur' => $prestas->getPrestataire(),
+                   // 'prix' => $prestas->getPrix()
+                ];
+
+            $prest[] = $pres;
+            $prestataire[] =  $prestas-> ;               
+        }       
+        */
         function NbJours($debut, $fin) {
 
             $tDeb = explode("-", $debut);
@@ -151,8 +162,10 @@ class ComptePrincipaleController extends AbstractController
             'jourJ' => $jourJ,
             'nbPages' => $pagination['nbPages'] ,
             'currentPage'=> $pageCurrent,
-            'budgetInitial' => $budgetInitial,
-            'prestataire' => $prestataire,
+            'budgetInitial' => $budgetInitial,            
+            'pres' => $presta,
+            
+            
         ];
         return $this->render($templates, $content);
     }

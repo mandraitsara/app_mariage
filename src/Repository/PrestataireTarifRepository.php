@@ -31,6 +31,17 @@ class PrestataireTarifRepository extends ServiceEntityRepository
     //        ;
     //    }
 
+        /*
+        *@return PrestataireTarif[] Returns an array of PrestataireTarif objects
+        */
+        public function prestateurID($prestataire_id):array
+        {
+            return $this->createQueryBuilder('pr')
+                ->andWhere('pr.prestataire=:prestataire_id')
+                ->setParameter('prestataire_id', $prestataire_id)
+                ->getQuery()
+                ->getResult();
+        }
 
     //    public function findOneBySomeField($value): ?PrestataireTarif
     //    {

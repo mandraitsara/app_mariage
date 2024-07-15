@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Presta;
+use App\Entity\Prestataire;
+use App\Entity\PrestataireTarif;
+use App\Entity\PrestataireType;
 use App\Form\PrestaType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -101,5 +104,54 @@ class PrestaController extends AbstractController
         return $this->render('presta/liste.html.twig', [
             'prestas' => $prestas
         ]);
+    }
+
+    #[Route('prestataire/budget/new', name:'budjet_new', methods:["PUT"])]
+    public function addBudget(Request $request, EntityManagerInterface $em){
+
+        $tarifs = new PrestataireTarif();
+        $id_prestataire = new Prestataire();
+        $id_typeprestataire = new PrestataireType();
+        
+        $tarifs->setPrestataire($id_prestataire->setId(2));
+        $tarifs->setPrestaType($id_typeprestataire->getId($request->request->get('id_type')));
+        $tarifs->setDescription($request->request->get('description'));
+        $tarifs->setPrix($request->request->get('price'));      
+        $em->persist($tarifs);
+        $em->flush();
+
+        return $this->json("Created new project successfully...");
+    }
+
+
+    #[Route('prestataire/budget/1', name:"app_budget_prestataire")]
+
+    public function budgetPrestataire(EntityManagerInterface $em):Response{
+        $prestateur = $em->getRepository(PrestataireTarif::class)->prestateurID(1);
+        $typePrestateur = $em->getRepository(PrestataireType::class)->findAll();
+
+        $prestas = [];
+        foreach($prestateur as $presta){
+            $prestateur = [
+                'type' => $presta->getPrestaType()->getTitre(),
+                'price'=>$presta->getPrix(),
+                'id_prestateur'=> $presta->getPrestataire()->getId(),
+            ];            
+            $prestas[] = $prestateur;
+            $totalPrice[] = $prestateur['price'];
+        }
+        $PrixTotal = array_sum($totalPrice);
+        
+
+        $content = [
+            'typePrestateur' => $typePrestateur,
+            'prestateur' => $prestas,
+            'totalPrice' => $PrixTotal,
+            'id_prestateur' => $prestateur['id_prestateur']
+        ];
+        
+        $templates = 'prestataire/budgetPrestataire.html.twig';
+
+        return $this->render($templates, $content);
     }
 }

@@ -6,9 +6,9 @@
     <h1>Modifier le Prestataire</h1>
 
     {{ form_start(form) }}
-        {{ form_row(form.NomPrestataire) }}
-        {{ form_row(form.TypePrestataire) }}
-        {{ form_row(form.infoPrestataire) }} <br>
+        {{ form_row(form.nom) }}
+        {{ form_row(form.adresse) }}
+       
         <button type="submit" class="btn btn-primary">Modifier le prestataire</button>
     {{ form_end(form) }}
 {% endblock %}

@@ -8,19 +8,21 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Nom du Prestataire</th>
-                <th>Type du Prestataire</th>
-                <th>Info du Prestataire</th>
-                <th>Action</th>
+                <th>Nom</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Description</th>
+                <th>Budget</th>
             </tr>
         </thead>
         <tbody>
             {% for prestataire in prestataires %}
                 <tr>
-                    <td>{{ prestataire.NomPrestataire }}</td>
-                    <td>{{ prestataire.TypePrestataire }}</td>
-                    <td>{{ prestataire.infoPrestataire }}</td>
+                    <td>{{ prestataire.nom }}</td>
+                    <td>{{ prestataire.contact }}</td>
+                    <td>{{ prestataire.adresse }}</td>
                     <td>
+                        <a href="{{ path('app_edit', {'id': prestataire.id}) }}" class="btn btn-warning">Modifier</a>
                         <a href="{{ path('app_edit', {'id': prestataire.id}) }}" class="btn btn-warning">Modifier</a>
                         <a href="{{ path('app_delete', {'id': prestataire.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prestataire ?');">Supprimer</a>
                     </td>
