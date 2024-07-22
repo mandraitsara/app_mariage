@@ -35,10 +35,8 @@ class Prestataire
      * @var Collection<int, PrestataireTarif>
      */
     #[ORM\OneToMany(targetEntity: PrestataireTarif::class, mappedBy: 'prestataire')]
-    private Collection $prestataire;
-
-    #[ORM\ManyToOne(inversedBy: 'prestataires')]
-    private ?PrestataireTarif $prestataireTarif = null;
+    private Collection $prestataire;    
+    
 
     #[ORM\Column(nullable: true)]
     private ?string $budgetPrestataire = null;

@@ -26,7 +26,7 @@
 {% block body %}
     <div class="row mt-3">       
         <div class="col-md-4 mb-3 app_budget">
-            <input type="hidden" name="" id="id_prestateur" value="{{id_prestateur}}">
+            <input type="hidden" name="id_prestateur" id="id_prestateur" value="{{id_prestateur}}">
             <h5>Ajout Budget:</h5>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
@@ -87,7 +87,11 @@
 
 
     <script>
+        $(document).ready(function(){
+            //alert($('#id_prestateur').val())
+        })
         function PrestataireTarif(){
+            
         let data = {
             id_prestateur: $('#id_prestateur').val(),
             id_typeprestateur : $('#id_type').val(),

@@ -113,8 +113,10 @@ class PrestaController extends AbstractController
         $id_prestataire = new Prestataire();
         $id_typeprestataire = new PrestataireType();
         
-        $tarifs->setPrestataire($id_prestataire->setId(2));
-        $tarifs->setPrestaType($id_typeprestataire->getId($request->request->get('id_type')));
+        //$tarifs->setPrestataire();
+        //$tarifs->setPrestaType($id_typeprestataire->getId($request->request->get('id_type')));
+        $id = isset($_POST['id_prestateur'])? null : '2';
+        $tarifs->setPrestataire($id_prestataire->setId($id));
         $tarifs->setDescription($request->request->get('description'));
         $tarifs->setPrix($request->request->get('price'));      
         $em->persist($tarifs);

@@ -22,7 +22,7 @@ class PrestataireTarif
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'prestataire')]
+    #[ORM\ManyToOne(inversedBy: 'prestataire', cascade:['persist'])]
     private ?Prestataire $prestataire = null;
 
     #[ORM\ManyToOne(inversedBy: 'prestaType')]
@@ -31,7 +31,7 @@ class PrestataireTarif
     /**
      * @var Collection<int, Prestataire>
      */
-    #[ORM\ManyToOne(targetEntity: Prestataire::class, inversedBy: 'prestataireTarif')]
+    #[ORM\OneToMany(targetEntity: Prestataire::class, mappedBy: 'prestataireTarif')]
     private Collection $prestataires;
 
     public function __construct()
