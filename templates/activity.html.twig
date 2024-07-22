@@ -419,7 +419,7 @@ affiche()
 						<div class="col-12 p-3">
 							<div class="budget-amount text-center">
 								<h2>Mon budget :
-									{{budgetInitial}}
+									{{budgetInitial | number_format(2)}}
 									Ariary								
 								</h2>
 							</div>
@@ -436,19 +436,21 @@ affiche()
 						</div>
 					</div>
 
-					<div class="row">	
+					<div class="row">				
 					{% for presta  in pres %}					
+						{% if budgetInitial < presta.budget %}
 						<div class="col-md-3">							
 							<div class="card mt-3">
-								<img src="..." class="card-img-top" alt="...">
+								<img src="{{asset('./icons/prestataire/1/')}}  {{presta.photo}}" class="card-img-top" alt="...">
 								<div class="card-body">
 								  <h5 class="card-title">{{presta.nom}}</h5>
 								  <p class="card-text">{{presta.description}}</p>
-								  <a href="#" class="btn btn-primary"></a>
+								  {{presta.photo}}
+								  <a href="#" class="btn btn-success">{{presta.budget}}</a>
 								</div>
 							  </div>
-							</div>													
-					
+							</div>																		
+							{%endif%}
 					{% endfor %}	
 
 					

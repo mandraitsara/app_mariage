@@ -44,6 +44,9 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $budgetRestant = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $budgetPrestataire = null;
+
     #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]
 
@@ -160,6 +163,18 @@ class Activity
     public function setBudgetRestant(?string $budgetRestant): static
     {
         $this->budgetRestant = $budgetRestant;
+
+        return $this;
+    }
+
+    public function getBudgetPrestataire(): ?string
+    {
+        return $this->budgetPrestataire;
+    }
+
+    public function setBudgetPrestataire(?string $budgetPrestataire): static
+    {
+        $this->budgetPrestataire = $budgetPrestataire;
 
         return $this;
     }

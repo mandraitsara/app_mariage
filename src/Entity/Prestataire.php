@@ -31,20 +31,11 @@ class Prestataire
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    /**
-     * @var Collection<int, PrestataireTarif>
-     */
-    #[ORM\OneToMany(targetEntity: PrestataireTarif::class, mappedBy: 'prestataire')]
-    private Collection $prestataire;    
-    
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $budget = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?string $budgetPrestataire = null;
-
-    public function __construct()
-    {
-        $this->prestataire = new ArrayCollection();
-    }
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photo = null;
 
     public function getId(): ?int
     {
@@ -118,56 +109,26 @@ class Prestataire
         return $this;
     }
 
-    /**
-     * @return Collection<int, PrestataireTarif>
-     */
-    public function getPrestataire(): Collection
+    public function getBudget(): ?string
     {
-        return $this->prestataire;
+        return $this->budget;
     }
 
-    public function addPrestataire(PrestataireTarif $prestataire): static
+    public function setBudget(?string $budget): static
     {
-        if (!$this->prestataire->contains($prestataire)) {
-            $this->prestataire->add($prestataire);
-            $prestataire->setPrestataire($this);
-        }
+        $this->budget = $budget;
 
         return $this;
     }
 
-    public function removePrestataire(PrestataireTarif $prestataire): static
+    public function getPhoto(): ?string
     {
-        if ($this->prestataire->removeElement($prestataire)) {
-            // set the owning side to null (unless already changed)
-            if ($prestataire->getPrestataire() === $this) {
-                $prestataire->setPrestataire(null);
-            }
-        }
-
-        return $this;
+        return $this->photo;
     }
 
-    public function getPrestataireTarif(): ?PrestataireTarif
+    public function setPhoto(?string $photo): static
     {
-        return $this->prestataireTarif;
-    }
-
-    public function setPrestataireTarif(?PrestataireTarif $prestataireTarif): static
-    {
-        $this->prestataireTarif = $prestataireTarif;
-
-        return $this;
-    }
-
-    public function getBudgetPrestataire(): ?string
-    {
-        return $this->budgetPrestataire;
-    }
-
-    public function setBudgetPrestataire(?string $budgetPrestataire): static
-    {
-        $this->budgetPrestataire = $budgetPrestataire;
+        $this->photo = $photo;
 
         return $this;
     }
