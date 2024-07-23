@@ -19,8 +19,15 @@ class PrestataireTarif
     #[ORM\Column(nullable: true)]
     private ?float $prix = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]    private ?string $description = null;
+
+ 
+
+    #[ORM\Column(nullable: true)]
+    private ?int $prestaId = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $typeId = null;
      
 
     public function getId(): ?int
@@ -48,6 +55,33 @@ class PrestataireTarif
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+ 
+  
+
+    public function getPrestaId(): ?int
+    {
+        return $this->prestaId;
+    }
+
+    public function setPrestaId(?int $prestaId): static
+    {
+        $this->prestaId = $prestaId;
+
+        return $this;
+    }
+
+    public function getTypeId(): ?int
+    {
+        return $this->typeId;
+    }
+
+    public function setTypeId(?int $typeId): static
+    {
+        $this->typeId = $typeId;
 
         return $this;
     }

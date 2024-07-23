@@ -116,7 +116,7 @@ class PrestaController extends AbstractController
         //$tarifs->setPrestataire();
         //$tarifs->setPrestaType($id_typeprestataire->getId($request->request->get('id_type')));
         $id = isset($_POST['id_prestateur'])? null : '2';
-        $tarifs->setPrestataire($id_prestataire->setId($id));
+        //$tarifs->setPrestataire($id_prestataire->setId($id));
         $tarifs->setDescription($request->request->get('description'));
         $tarifs->setPrix($request->request->get('price'));      
         $em->persist($tarifs);
@@ -126,30 +126,38 @@ class PrestaController extends AbstractController
     }
 
 
-    #[Route('prestataire/budget/1', name:"app_budget_prestataire")]
+    #[Route('prestataire/budget/{id}', name:"app_budget_prestataire")]
 
-    public function budgetPrestataire(EntityManagerInterface $em):Response{
-        $prestateur = $em->getRepository(PrestataireTarif::class)->prestateurID(1);
+    public function budgetPrestataire(EntityManagerInterface $em, $id):Response{
+        global $totalPrice;     
+        $fournisseur = $em->getRepository(Prestataire::class)->find($id);        
+        $prestateur = $em->getRepository(PrestataireTarif::class)->prestateurID($id);   
         $typePrestateur = $em->getRepository(PrestataireType::class)->findAll();
 
-        $prestas = [];
+        
+        $prestas = [];        
+        $totalPrice = [];
+
         foreach($prestateur as $presta){
             $prestateur = [
-                'type' => $presta->getPrestaType()->getTitre(),
+                'type' => $presta->getTypeId(),
                 'price'=>$presta->getPrix(),
-                'id_prestateur'=> $presta->getPrestataire()->getId(),
+                'description'=>$presta->getDescription()
             ];            
             $prestas[] = $prestateur;
             $totalPrice[] = $prestateur['price'];
+            $type[] = $prestateur['type'];
+            
         }
         $PrixTotal = array_sum($totalPrice);
         
-
+       
         $content = [
             'typePrestateur' => $typePrestateur,
             'prestateur' => $prestas,
             'totalPrice' => $PrixTotal,
-            'id_prestateur' => $prestateur['id_prestateur']
+            'id_prestateur' => $id,
+            'fournisseur'   =>$fournisseur,
         ];
         
         $templates = 'prestataire/budgetPrestataire.html.twig';

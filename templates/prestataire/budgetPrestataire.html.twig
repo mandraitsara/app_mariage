@@ -24,66 +24,39 @@
 {% block title %}Budget{% endblock %}
 
 {% block body %}
-    <div class="row mt-3">       
-        <div class="col-md-4 mb-3 app_budget">
-            <input type="hidden" name="id_prestateur" id="id_prestateur" value="{{id_prestateur}}">
-            <h5>Ajout Budget:</h5>
-                    <div class="input-group mb-3">
-                        <div class="input-group-append">
-                            <label class="input-group-text" for="inputGroupSelect02">Type</label>
-                          </div>
-                        <select class="custom-select" id="id_type">                          
-                          {% for type in typePrestateur %}                          
-                          <option value="{{type.id}}">{{type.titre}}</option>
-                          {% endfor %}
-                        </select>
-                       
-                      </div>                    
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    {% if fournisseur %}
+    <h1 class="display-4">{{fournisseur.nom}}</h1>
+    <p class="lead">{{fournisseur.description}}</p>
+    {% endif %}
+  </div>
+</div>
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">Prix en Ariary</span>
-                        </div>
-                        <input type="Number" id="price" class="form-control" placeholder="50000" aria-label="price" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">Description</span>
-                        </div>
-                        <textarea class="form-control" id="description" name="" id="" cols="30" rows="10" aria-label="description" aria-describedby="basic-addon1"></textarea>
-                        
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <button type="button" id="valide_tarifs" class="btn btn-success">valider</button>
-                        </div>
-                    </div>
-                </div>
+<nav class="nav nav-tabs">
+  {% for  presta in prestateur %}   
+  <a class="nav-item nav-link " href="#p{{presta.type}}" data-toggle="tab">{% if presta.type == 1 %}<span>Lieu de réception et salle de réception</span>{% elseif presta.type == 2%}<span>Repas</span>{% elseif presta.type == 3 %}<span>Photo & Vidéo</span>{% elseif presta.type == 4 %}<span>Transport</span>{% elseif presta.type == 5 %}<span>Fleurs et décoration</span>{% elseif presta.type == 6 %}<span>Animation</span>{% elseif presta.type == 7 %}<span>Mise en beauté</span>{% elseif presta.type == 8 %}<span>Tenue vestimentaire</span>  {% endif %}</a>
+  {% endfor %}
+  
+</nav>
+<div class="tab-content">  
+  {% for  presta in prestateur %}
+  <div class="tab-pane fade" id="p{{presta.type}}">
+    <h1>{% if presta.type == 1 %}<span>Lieu de réception et salle de réception</span>{% elseif presta.type == 2%}<span>Repas</span>{% elseif presta.type == 3 %}<span>Photo & Vidéo</span>{% elseif presta.type == 4 %}<span>Transport</span>{% elseif presta.type == 5 %}<span>Fleurs et décoration</span>{% elseif presta.type == 6 %}<span>Animation</span>{% elseif presta.type == 7 %}<span>Mise en beauté</span>{% elseif presta.type == 8 %}<span>Tenue vestimentaire</span>  {% endif %}</h1>
+    <img class="img-fluid">
+      <div class="content-app">
+          {{presta.description}}
+      </div>
 
-                <div class="col-md-6">
-                    <table class="table">
-                        <thead class="thead-dark">
-                          <tr>                            
-                            <th scope="col">Type de Prestataire</th>
-                            <th scope="col">Budget</th>                            
-                          </tr>
-                        </thead>
-                        <tbody>
-                        {% for  presta in prestateur %}
-                            <tr>
-                                <td>{{presta.type}}</td>
-                                <td>{{presta.price}}</td>
-                            </tr>
-                          {% endfor %}
-                        </tbody>
-                      </table>                 
-                      <div>
-                        <span>Budget Total : {{totalPrice}}</span><span> Ariary</span>
-                      </div>
-                </div>
-            </div>
-        </div>
-    </div>
+      <div class="price">
+        <h2 class="text-success">Tarif : {{presta.price | number_format(2)}} <span>Ariary</span></h2>
+      </div>
+  </div>
+
+  {% endfor %}
+</div>
+</div>
+            
 
 
     <script>

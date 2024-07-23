@@ -441,12 +441,13 @@ affiche()
 						{% if budgetInitial < presta.budget %}
 						<div class="col-md-3">							
 							<div class="card mt-3">
-								<img src="{{asset('./icons/prestataire/1/')}}  {{presta.photo}}" class="card-img-top" alt="...">
+								<img src="{{asset('./icons/prestataire/1/')}}{{presta.photo}}" class="card-img-top" alt="...">
 								<div class="card-body">
 								  <h5 class="card-title">{{presta.nom}}</h5>
 								  <p class="card-text">{{presta.description}}</p>
 								  {{presta.photo}}
 								  <a href="#" class="btn btn-success">{{presta.budget}}</a>
+								  <a href="/prestataire/budget/{{presta.id}}" class="btn btn-secondary">voir plus</a>
 								</div>
 							  </div>
 							</div>																		
