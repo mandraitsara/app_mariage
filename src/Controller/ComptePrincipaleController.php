@@ -63,10 +63,10 @@ class ComptePrincipaleController extends AbstractController
 
         $idPrestateur = $entityManager->getRepository(Activity::class)->activityId($userID)->getIdPrestateur();
         if ($idPrestateur !== NULL){
-             $fournisseur = $entityManager->getRepository(Prestataire::class)->find($idPrestateur);     }
+            $fournisseur = $entityManager->getRepository(Prestataire::class)->find($idPrestateur);     }
         else{
             $fournisseur = 0;
-        }       
+        }
         
 
         $presta = $entityManager->getRepository(Prestataire::class)->findAll(); 
@@ -252,4 +252,5 @@ class ComptePrincipaleController extends AbstractController
 
         ]);
     }
+    
 }
