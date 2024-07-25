@@ -47,6 +47,9 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $budgetPrestataire = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $id_prestateur = null;
+
     #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]
 
@@ -175,6 +178,18 @@ class Activity
     public function setBudgetPrestataire(?string $budgetPrestataire): static
     {
         $this->budgetPrestataire = $budgetPrestataire;
+
+        return $this;
+    }
+
+    public function getIdPrestateur(): ?int
+    {
+        return $this->id_prestateur;
+    }
+
+    public function setIdPrestateur(?int $id_prestateur): static
+    {
+        $this->id_prestateur = $id_prestateur;
 
         return $this;
     }

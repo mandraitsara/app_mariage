@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 use App\Entity\Activity;
+use App\Entity\Prestataire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Proxies\__CG__\App\Entity\Prestataire as EntityPrestataire;
 
 /**
  * @extends ServiceEntityRepository<Activity>
@@ -65,5 +67,8 @@ class ActivityRepository extends ServiceEntityRepository
     //     ->getQuery()
     //     ->getOneOrNullResult();
     // }
+
+
+    
     
 }

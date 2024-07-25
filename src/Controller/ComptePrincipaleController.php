@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpClient\Response\JsonMockResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,7 +60,15 @@ class ComptePrincipaleController extends AbstractController
         $dateCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getDateCeremonie();
         $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();
         $budgetInitial = $entityManager->getRepository(Activity::class)->activityId($userID)->getBudgetInitial();
-       
+
+        $idPrestateur = $entityManager->getRepository(Activity::class)->activityId($userID)->getIdPrestateur();
+        if ($idPrestateur !== NULL){
+             $fournisseur = $entityManager->getRepository(Prestataire::class)->find($idPrestateur);     }
+        else{
+            $fournisseur = 0;
+        }       
+        
+
         $presta = $entityManager->getRepository(Prestataire::class)->findAll(); 
         $prestaTarif = $entityManager->getRepository(PrestataireTarif::class)->findAll();
 
@@ -164,6 +173,7 @@ class ComptePrincipaleController extends AbstractController
             'currentPage'=> $pageCurrent,
             'budgetInitial' => $budgetInitial,            
             'pres' => $presta,
+            'fournisseur'=>$fournisseur
             
             
         ];
@@ -236,8 +246,7 @@ class ComptePrincipaleController extends AbstractController
             $tab = explode(";", $contenu[$i]);
             $tabs[] = $tab;
         }
-
-        var_dump($tabs);
+        
         return $this->render($templates, [
             'contenu' => $tabs
 

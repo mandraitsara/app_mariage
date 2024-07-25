@@ -30,14 +30,14 @@
     <h1 class="display-4">{{fournisseur.nom}}</h1>
     <p class="lead">{{fournisseur.description}}</p>
     {% endif %}
+    <h2 class="text-secondary">  {{totalPrice | number_format(2)}}<span>Ariary</span></h2>
   </div>
 </div>
 
 <nav class="nav nav-tabs">
   {% for  presta in prestateur %}   
-  <a class="nav-item nav-link " href="#p{{presta.type}}" data-toggle="tab">{% if presta.type == 1 %}<span>Lieu de réception et salle de réception</span>{% elseif presta.type == 2%}<span>Repas</span>{% elseif presta.type == 3 %}<span>Photo & Vidéo</span>{% elseif presta.type == 4 %}<span>Transport</span>{% elseif presta.type == 5 %}<span>Fleurs et décoration</span>{% elseif presta.type == 6 %}<span>Animation</span>{% elseif presta.type == 7 %}<span>Mise en beauté</span>{% elseif presta.type == 8 %}<span>Tenue vestimentaire</span>  {% endif %}</a>
-  {% endfor %}
-  
+  <a class="nav-item nav-link" href="#p{{presta.type}}" data-toggle="tab">{% if presta.type == 1 %}<span>Lieu de réception et salle de réception</span>{% elseif presta.type == 2%}<span>Repas</span>{% elseif presta.type == 3 %}<span>Photo & Vidéo</span>{% elseif presta.type == 4 %}<span>Transport</span>{% elseif presta.type == 5 %}<span>Fleurs et décoration</span>{% elseif presta.type == 6 %}<span>Animation</span>{% elseif presta.type == 7 %}<span>Mise en beauté</span>{% elseif presta.type == 8 %}<span>Tenue vestimentaire</span>  {% endif %}</a>
+  {% endfor %}  
 </nav>
 <div class="tab-content">  
   {% for  presta in prestateur %}
@@ -51,9 +51,14 @@
       <div class="price">
         <h2 class="text-success">Tarif : {{presta.price | number_format(2)}} <span>Ariary</span></h2>
       </div>
+
   </div>
 
   {% endfor %}
+  <div>
+    <h1>Le tarif de notre offre : <span class="text-secondary">  {{totalPrice | number_format(2)}}</span><span> Ariary</span> </h1>
+  </div>
+  
 </div>
 </div>
             

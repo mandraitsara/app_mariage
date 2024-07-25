@@ -515,3 +515,7 @@ button {
   box-sizing: unset;
   border-radius: 5px;
 }
+
+.card.mt-3.col-md-3 {
+  margin-left: 1rem;
+}

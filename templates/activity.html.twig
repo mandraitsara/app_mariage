@@ -89,7 +89,7 @@ affiche()
 						<a class="nav-link" id="budget-tab" data-toggle="tab" href="#budget" role="tab" aria-controls="budget" aria-selected="false">Budget</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Tous les prestataires</a>
+						<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Prestateur choisi</a>
 					</li>
 				</ul>
 			</div>
@@ -281,17 +281,12 @@ affiche()
 				</div>
 				<!-- Tous les prestataires -->
 				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-					<div class="row">
-						<div class="text-center">
-							<h4>Tous les vendeurs</h4>
-							<p>
-								Explorez notre vaste répertoire de prestataires, d'emplacements et de services idéaux pour votre mariage en
-								                                découvrant notre base de données étendue de professionnels de confiance. De plus, personnalisez votre liste en
-								                                ajoutant des vendeurs sur mesure pour garantir que chaque détail de votre journée soit en accord avec votre
-								                                vision personnelle.
-							</p>
-						</div>
-					</div>
+					{% if fournisseur %}	
+					
+					<div class="mt-0 p-5 bg-primary text-white rounded">
+						<h1>Jumbotron Example</h1>
+						<p>Lorem ipsum...</p>
+					  </div>
 					<div class="row p-3">
 						<div class="col-12 mb-5 d-flex justify-content-center">
 							<div class="add-prest p-5 text-center">
@@ -402,7 +397,11 @@ affiche()
 							</div>
 						</div>
 					</div>
-
+					{%else%}
+					<div class="app_prestateur_choisi">
+						<h1>Hello</h1>
+					</div>
+					{%endif%}
 
 				</div>
 				<!-- Budget -->
@@ -429,27 +428,28 @@ affiche()
 						<div class="col-12 mt-3">
 							<div class="container-search p-3">
 								<form class="search">
-									<input class="filter" type="text" placeholder="Filtres...">
 									<i class="fa fa-search"></i>
+									<input type="text" id="myFilter" class="form-control" onkeyup="myFunction()" placeholder="Search for card name...">									
 								</form>
 							</div>
 						</div>
 					</div>
+					<div id="message_app_alert">
 
-					<div class="row">				
+					</div>
+					<div class="row" id="myProducts">				
 					{% for presta  in pres %}					
 						{% if budgetInitial < presta.budget %}
-						<div class="col-md-3">							
-							<div class="card mt-3">
+						<div class="card mt-3 col-md-3">					
+							
 								<img src="{{asset('./icons/prestataire/1/')}}{{presta.photo}}" class="card-img-top" alt="...">
 								<div class="card-body">
 								  <h5 class="card-title">{{presta.nom}}</h5>
-								  <p class="card-text">{{presta.description}}</p>
-								  {{presta.photo}}
-								  <a href="#" class="btn btn-success">{{presta.budget}}</a>
-								  <a href="/prestataire/budget/{{presta.id}}" class="btn btn-secondary">voir plus</a>
+								  <p class="card-text">{{presta.description}}</p>								  
+								  <a href="#" class="btn btn-success card-price">{{presta.budget}}</a>
+								  <a href="/prestataire/budget/{{presta.id}}" class="btn btn-secondary">commander</a>
 								</div>
-							  </div>
+							
 							</div>																		
 							{%endif%}
 					{% endfor %}	
@@ -495,6 +495,8 @@ location.reload(true);
 })
 
 }
+
+
 
 $("#valide").click(function () {
 saveInvite()
@@ -546,6 +548,24 @@ selectElementF.style.display = "none";
 selectElementF.style.display = "block";
 }
 })
+
+function myFunction() {
+	var input, filter, cards, cardContainer, title, i;
+	input = document.getElementById("myFilter");
+	filter = input.value.toUpperCase();
+	cardContainer = document.getElementById("myProducts");
+	cards = cardContainer.getElementsByClassName("card");
+	for (i = 0; i < cards.length; i++) {
+	  title = cards[i].querySelector(".card-price");
+	  if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+		cards[i].style.display = "";
+	  } else {
+		cards[i].style.display = "none";
+	  }
+	}
+  }
+
+
 </script>
 
 {%endblock%}
