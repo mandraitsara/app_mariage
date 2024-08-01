@@ -1,0 +1,46 @@
+{% extends 'base.html.twig'%}
+
+{% block navbar %}
+
+{% endblock %}
+
+{%block body%}
+<div class="activity-form">
+	<div class="form-row-app">
+		{{ form_start(form) }}
+	{{ form_row(form.NomH)}}
+	{{ form_row(form.NomF)}}
+	{{ form_row(form.DateCeremonie) }}
+	{{ form_row(form.LieuxCeremonie) }}
+	{{ form_row(form.LieuxDeReception) }}
+	{{ form_row(form.BudgetInitial) }}
+	{{ form_row(form.PhotoPrincipale) }}
+	{{ form_row(form.PhotoReception) }}
+	{{ form_row(form.PhotoCeremonie) }}
+	<button class="btn">Enregistrer
+	</button>
+	{{ form_end(form) }}
+	</div>
+</div>
+
+<style>
+
+	.activity-form {
+  position: relative;
+  background-color: rgba(200, 200, 202, 0.5);
+  margin: 20%;
+  padding: 30px;
+  color: greenyellow;
+  font-size: 20px;
+  border: 2px solid tomato;
+  box-shadow: 0px 1px 15px 5px tomato;
+}
+
+body {
+  background-color: #212529;
+}
+	</style>
+
+
+
+{%endblock%}

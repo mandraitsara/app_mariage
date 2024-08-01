@@ -7,6 +7,7 @@ use App\Entity\Prestataire;
 use App\Entity\PrestataireTarif;
 use App\Entity\PrestataireType;
 use App\Entity\UserLogin;
+use App\Form\ActivityType;
 use Doctrine\Migrations\Version\Executor;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -303,5 +304,28 @@ class ComptePrincipaleController extends AbstractController
      
         
         return new JsonResponse('');
+     }
+
+
+     #[Route('activity_info/',name:'activity.app_mariage')]
+     public function infoActivity(Request $request, EntityManagerInterface $em)
+     {
+        //Instancier le class Activity
+        $activity = new Activity();
+        $form = $this->createForm(ActivityType::class,$activity);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Prestataire modifié avec succès.');
+            return new Response("hello");
+        }
+        
+        $templates = 'infoActivity.html.twig';
+
+        $content = [
+            'form' => $form->createView(),
+        ];
+        return $this->render($templates,$content);
      }
 }

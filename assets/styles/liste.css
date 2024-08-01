@@ -639,3 +639,30 @@ button {
   top: -50px;
   text-align: center;
 }
+
+.img_svg_image {
+  height: 50px;
+}
+.app_active_settings {
+  text-align: end;
+  margin-right: 44px; 
+}
+
+.app_active_settings_items {
+  background-color: rgba(150, 158, 136, 0.5) !important;  
+}
+.link_app {
+  color: white !important;
+  font-size: 16px;
+  text-transform: initial;
+  font-family: inherit;
+}
+.settings {
+  background-color: antiquewhite;
+}
+
+.link_app:hover { 
+  color: #ffffff !important;
+  text-decoration: none;
+  background-color: #92a5b3 !important;
+}

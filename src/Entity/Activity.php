@@ -6,10 +6,9 @@ use App\Repository\ActivityRepository;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 
-#[Vich\Uploadable]
+
+
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
 class Activity
 {
@@ -25,9 +24,7 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom_h = null;
 
-    #[ORM\Embedded(class: EmbeddedFile::class)]
-    private ?EmbeddedFile $image = null;
-
+  
     #[ORM\ManyToOne(targetEntity: UserLogin::class, inversedBy: 'activities', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: true)]
     private ?UserLogin $user = null;
@@ -56,32 +53,24 @@ class Activity
     #[ORM\Column(nullable: true)]
     private ?int $id_prestateur = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lieuxDeReception = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $PhotoReception = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photoCeremonie = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photoPrincipale = null;
+
     #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]
 
    
 
-    //Gerer l'image
-    #[Vich\UploadableField(
-        mapping: 'activity', # We will remember this value. It will serve as the identifier for the section in the configuration.
-       fileNameProperty: 'image.name',
-       size: 'image.size'
-       )]
-    private ?File $imageFile = null;
-
-          public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageFile(?File $imageFile): Activity
-    {
-        $this->imageFile = $imageFile;
-        return $this;
-    }
-
-   
-    //
+    
     
 
 
@@ -225,15 +214,51 @@ class Activity
         return $this;
     }
 
-    public function getImage(): ?EmbeddedFile
-        {
-            return $this->image;
-        }
-    
-        public function setImage(?EmbeddedFile $image): Activity
-        {
-            $this->image = $image;
-            return $this;
-        }
-    
+    public function getLieuxDeReception(): ?string
+    {
+        return $this->lieuxDeReception;
+    }
+
+    public function setLieuxDeReception(?string $lieuxDeReception): static
+    {
+        $this->lieuxDeReception = $lieuxDeReception;
+
+        return $this;
+    }
+
+    public function getPhotoReception(): ?string
+    {
+        return $this->PhotoReception;
+    }
+
+    public function setPhotoReception(?string $PhotoReception): static
+    {
+        $this->PhotoReception = $PhotoReception;
+
+        return $this;
+    }
+
+    public function getPhotoCeremonie(): ?string
+    {
+        return $this->photoCeremonie;
+    }
+
+    public function setPhotoCeremonie(?string $photoCeremonie): static
+    {
+        $this->photoCeremonie = $photoCeremonie;
+
+        return $this;
+    }
+
+    public function getPhotoPrincipale(): ?string
+    {
+        return $this->photoPrincipale;
+    }
+
+    public function setPhotoPrincipale(?string $photoPrincipale): static
+    {
+        $this->photoPrincipale = $photoPrincipale;
+
+        return $this;
+    }    
 }
