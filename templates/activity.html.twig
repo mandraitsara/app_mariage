@@ -1,5 +1,94 @@
 {% extends 'base.html.twig'%}
 {% block navbar %}
+
+<header>
+	<!-- Intro settings -->
+	<style>
+	  /* Default height for small devices */
+	  #intro-example {
+		height: 400px;
+	  }
+  
+	  /* Height for devices larger than 992px */
+	  @media (min-width: 992px) {
+		#intro-example {
+		  height: 600px;
+		}
+	  }
+	</style>
+  
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar_app ">
+	  <div class="container-fluid">
+		<button
+		  data-mdb-collapse-init
+		  class="navbar-toggler"
+		  type="button"
+		  data-mdb-target="#navbarExample01"
+		  aria-controls="navbarExample01"
+		  aria-expanded="false"
+		  aria-label="Toggle navigation"
+		>
+		  <i class="fas fa-bars"></i>
+		</button>
+		<div class="collapse navbar-collapse" id="navbar_app navbarExample01">
+		  <!-- Left links -->
+		  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			<li class="nav-item">
+			  <a class="nav-link _app_mariage app_mariage_nom" href="#">{{nomHomme | first}} & {{nomFemme | first}}</a>
+			</li>			
+		  </ul>
+		  <!-- Left links -->
+		</div>
+		<!-- Collapsible wrapper -->
+		<div class="d-flex align-items-center">
+			
+			<!-- Icon -->
+			
+			<a class="dropdown-item _app_mariage connexion_app_mariage" href="#"><svg data-bbox="0 0 50 50" class="icon_svg_app_mariage" data-type="shape" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><g><path d="M25 48.077c-5.924 0-11.31-2.252-15.396-5.921 2.254-5.362 7.492-8.267 15.373-8.267 7.889 0 13.139 3.044 15.408 8.418-4.084 3.659-9.471 5.77-15.385 5.77m.278-35.3c4.927 0 8.611 3.812 8.611 8.878 0 5.21-3.875 9.456-8.611 9.456s-8.611-4.246-8.611-9.456c0-5.066 3.684-8.878 8.611-8.878M25 0C11.193 0 0 11.193 0 25c0 .915.056 1.816.152 2.705.032.295.091.581.133.873.085.589.173 1.176.298 1.751.073.338.169.665.256.997.135.515.273 1.027.439 1.529.114.342.243.675.37 1.01.18.476.369.945.577 1.406.149.331.308.657.472.98.225.446.463.883.714 1.313.182.312.365.619.56.922.272.423.56.832.856 1.237.207.284.41.568.629.841.325.408.671.796 1.02 1.182.22.244.432.494.662.728.405.415.833.801 1.265 1.186.173.154.329.325.507.475l.004-.011A24.886 24.886 0 0 0 25 50a24.881 24.881 0 0 0 16.069-5.861.126.126 0 0 1 .003.01c.172-.144.324-.309.49-.458.442-.392.88-.787 1.293-1.209.228-.232.437-.479.655-.72.352-.389.701-.78 1.028-1.191.218-.272.421-.556.627-.838.297-.405.587-.816.859-1.24a26.104 26.104 0 0 0 1.748-3.216c.208-.461.398-.93.579-1.406.127-.336.256-.669.369-1.012.167-.502.305-1.014.44-1.53.087-.332.183-.659.256-.996.126-.576.214-1.164.299-1.754.042-.292.101-.577.133-.872.095-.89.152-1.791.152-2.707C50 11.193 38.807 0 25 0"></path></g></svg>invité(e)</a>				 
+			<a class="dropdown-item _app_mariage repondre_app_mariage" href="#">prestataire</a>
+			{# <svg class="icons_svg_app_mariage" preserveAspectRatio="xMidYMid meet" data-bbox="20 38.5 160 123" viewBox="20 38.5 160 123" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="shape" role="img" aria-label="Ouvrir navigation du site">
+				<g>
+					<path d="M180 38.5v6.254H20V38.5h160z"></path>
+					<path d="M180 96.873v6.254H20v-6.254h160z"></path>
+					<path d="M180 155.246v6.254H20v-6.254h160z"></path>
+				</g>
+			</svg> #}
+		</div>
+	  </div>
+	</nav>
+	<!-- Navbar -->
+  
+	<!-- Background image -->
+	<div
+	  id="intro-example"
+	  class="p-5 text-center bg-image"
+	  style="background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');"
+	>
+	  
+		<div class="d-flex justify-content-center align-items-center h-100">
+		  <div class="text-white app_mariage_wh">
+			
+			<h1 class="mb-4 jrs-j">{% if jourJ == 0 %}<span class="text-success" >C'est la date de cérémonie...</span>{%else%}J - <span class="text-white">{{jourJ}}</span>{%endif%}</h1>			
+			
+			<h1 class="mb-3 titre_app_nom">{{nomHomme}} <br> et {{nomFemme}}</h1>
+
+			<a
+			  data-mdb-ripple-init
+			  class="btn btn-outline-light btn-lg lieux_de_ceremonie_app"			  
+			  
+			>{{dateCeremonie}} | {{lieuxCeremonie}}</a
+			>
+		  </div>
+		</div>
+	  </div>
+	
+	<!-- Background image -->
+  </header>
+
+
+
+
 {%endblock%}
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('./styles/liste.css')}}">
@@ -22,9 +111,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fuid">
-	{% if budgetInitial == "" %}
-
+{% if budgetInitial == "" %}
 <section class="popup">	
   <div class="popup__content">
 	<button type="button" class="close" aria-label="Close">
@@ -61,511 +148,59 @@ affiche()
 	});
 			
 
-</script>
-		
+</script>	
 
 {% endif %}
 
-
-	<div>
-
-	</div>
-
-	<div
-		class="row p-5">
-		<!-- Nav tabs -->
-		<div class="col-md-2">
-			<span id="info_pour_marie"></span>
-			<div class="bloc-menu" style="border: 1px solid #00000015; height:500px">
-				<ul class="nav nav-pills flex-column" id="myTab" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Vue général
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Liste des invités</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="budget-tab" data-toggle="tab" href="#budget" role="tab" aria-controls="budget" aria-selected="false">Budget</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Prestateur choisi</a>
-					</li>
-				</ul>
-			</div>
+<div class="week-app-mariage">
+	<div class="row">
+		<div class="week-date col-md-4">
+				<h1>Le week-end du mariage</h1>
+				<h5>{{dateCeremonie}}</h5>
 		</div>
-		<!-- Vue général -->
-		<div class="col-md-10">
-			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-					<div class="title text-center">
-						<h3>Contenu pour Menu 1</h3>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, ipsa!</p>
-					</div>
 
-
-					<!-- menu-collapse-1 -->
-					<div class="box-mari text-center p-5" style="border: 1px solid #00000015;">
-						<span class="arrow-icon" data-toggle="collapse" data-target="#demo"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow" alt="arrow" style="width: 20px;margin:5px;">Couple</span>
-						<span class="pen-modif">
-							<i class="fa-solid fa-pen mr-3"></i>Modifier</span>
-						<div class="collapse" id="demo">
-							<span id="parametre_nom">
-								{% if nomHomme != "" and nomFemme !="" %}
-									{{nomHomme}}
-									et
-									{{nomFemme}}
-
-
-								</span>
-								<button id="update" class="btn btn-success">modif.</button>
-
-								<div id="app_update">
-									<label for="nomHomme">Nom pour l'époux</label><input type="text" name="homme" id="homme" value="{{nomHomme}}">
-									<label for="nomFemme">Nom pour l'épouse</label><input type="text" name="femme" id="femme" value="{{nomFemme}}">
-									<input type="button" id="valide" class="btn btn-primary" value="soumettre">
-								</div>
-							{% else %}
-								<div id="app_modif">
-									<label for="nomHomme">Nom pour l'époux</label><input type="text" name="homme" id="homme" value="{{nomHomme}}">
-									<label for="nomFemme">Nom pour l'épouse</label><input type="text" name="femme" id="femme" value="{{nomFemme}}">
-									<input type="button" id="valide" class="btn btn-primary" value="soumettre">
-								</div>
-							{% endif %}
-
-							<div class="img-valentine">
-								<img src="{{asset('./icons/valentine.svg')}}" alt="valentine" style="width: 250px;">
-							</div>
-						</div>
-					</div>
-
-
-					<!-- menu-collapse-2 -->
-					<div class="box-about-event p-5">
-						<span class="arrow-icon2" data-toggle="collapse" data-target="#demo2"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow2" alt="arrow" style="width:20px;margin:5px;">Information de l'événement</span>
-						<span class="pen-modif2">
-							<i class="fa-solid fa-pen mr-3"></i>Modifier</span>
-						<div class="collapse" id="demo2">
-							<div class="row p-3">
-								<div class="col-md-4">
-									<h4>Date de la cérémonie</h4>
-									{% if dateCeremonie != "" %}
-										<h4 class="text-success">{{dateCeremonie}}</h4>
-										<input class="btn btn-success" id="modif_datepicker" type="button" value="modif.">										
-										<input id="datepicker" type="text" value="{{dateCeremonie}}">
-											
-									{% else %}
-										<p>
-											<a href="#">Ajouter une date pour la cérémonie</a>
-										</p>
-										<p>Date:
-											<input type="text" id="datepicker" value="{{dateCeremonie}}"></p>
-									{% endif %}
-								</div>
-								<div class="col-md-4">
-									<h4>Jour - J</h4>
-									{% if jourJ == 0 %}<span class="text-success" >C'est la date de cérémonie...</span>{%else%}<h1 >J <span class="text-danger">{{jourJ}}</span></h1>{%endif%}
-								</div>
-								<div class="col-md-4">
-									<h4>Adresse de la cérémonie</h4>
-									{% if lieuxCeremonie != "" %}
-										<h4 class="text-success">{{lieuxCeremonie}}</h4>
-										<input type="button" class="btn btn-success" id="modif_lieuxCeremonie" value="modif.">
-										<input type="text" name="" id="lieuxCeremonie" value="{{lieuxCeremonie}}">
-									{% else %}
-										<p>
-											<a href="#">Paramétrer un lieu</a>
-										</p>
-										<input type="text" name="" id="lieuxCeremonie" value="{{lieuxCeremonie}}">
-									{% endif %}
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- menu-collapse-3 -->
-					<div class="add-guest p-5">
-						<span class="arrow-icon3" data-toggle="collapse" data-target="#demo3"><img src="{{asset('./icons/arrow.svg')}}" class="img-arrow3" alt="arrow" style="width:20px;margin:5px;">Invités</span>
-						<span class="pen-modif3">
-							<i class="fa-solid fa-pen mr-3"></i>Modifier</span>
-						<div class="collapse" id="demo3">
-							<div class="p-3 text-center">
-								<a href="#">Etat de lieux</a>
-							</div>
-							<div class="guest-info pt-3 pb-3">
-								<p>Invités :
-									{{nombre_invite}}</p>
-								<p>Rejeté : 0</p>
-								<p>Confirmé : 0</p>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-
-				<!-- Liste des invités -->
-				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="p-5">
-						<h4 class="text-center">Listes des invités</h4>
-					</div>
-
-					<div>
-						<table class="table">
-							<thead class="thead-dark">
-								<tr>
-									<th scope="col">Nom et Prenom</th>
-									<th scope="col">Adresse e-mail</th>
-									<th scope="col">Status</th>
-									<th scope="col">Observation</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for liste_invite in liste_invites %}
-									<tr>
-										<td>{{liste_invite.0}}</td>
-										<td>{{liste_invite.1}}</td>
-										<td>{{loop.index}}</td>
-
-										<td>
-											<a href="{{liste_invite.1}}" class="btn btn-success">Mail</a>
-										</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-
-
-					</div>
-
-					<div class="pagination_app">
-						
-
-						<nav aria-label="...">
-							<ul class="pagination">							
-								{% for i in 1.. nbPages %}
-								<li {% if i == currentPage %} class="page-item active" aria-current="page" {% else %}class="page-item" {% endif %}> 
-									{% if i != currentPage %}
-										<a class="page-link"  href="?page={{i}}">{{i}}</a>
-										{% else %}
-										<li class="page-item active" aria-current="page"><a class="page-link" href="?page={{i}}">{{i}}</a>										
-									{% endif %}
-								</li>							
-							{% endfor %}						 
-							  
-							</ul>
-						  </nav>
-					</div>
-
-					<div class="row p-3">
-						<div class="col-12">
-							<div class="guest-sum p-3">
-
-								<h4 class="text-center">
-									Total des invités
-									<span class="circle">{{nombre_invite}}</span>
-								</h4>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="guest-import p-3">
-								<a class="btn-1" href="" target="_blank">
-									<i class="fa-solid fa-download"></i>Ouvrir CSV</a>
-								<a class="btn-1" href="{{path("app_pdf_generator")}}" target="_blank">
-									<i class="fa-solid fa-download"></i>Importés une liste d'invités</a>
-								{# <button class="btn-2"><i class="fa-solid fa-file-pdf"></i>Télécharger le fichier PDF</button> #}
-							</div>
-						</div>
-					</div>
-
-				</div>
-				<!-- Tous les prestataires -->
-				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-					{% if fournisseur %}	
-					
-					<div class="mt-0 p-5 bg-primary text-white rounded">
-						<h1>Jumbotron Example</h1>
-						<p>Lorem ipsum...</p>
-					  </div>
-					<div class="row p-3">
-						<div class="col-12 mb-5 d-flex justify-content-center">
-							<div class="add-prest p-5 text-center">
-								<span>
-									<i class="fa-solid fa-plus"></i>
-									<br>
-									Ajouter des prestataires</span>
-							</div>
-						</div>
-						<div class="col-md-3 ">
-							<div class="card card-1 ">
-								<div class="show-prest text-center" id="openModalBtn">
-									<i class="fa-regular fa-eye"></i>
-									<span>Afficher les détails</span>
-								</div>
-								<span class="ellipsis"><img src="{{asset('./icons/ellipsis.svg')}}" alt="ellipsis"></span>
-								<p>Wedding planner</p>
-								<h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="card card-2">
-								<p>Wedding planner</p>
-								<h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="card card-3">
-								<p>Wedding planner</p>
-								<h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="card card-4">
-								<p>Wedding planner</p>
-								<h3>Noeni Bellante Weddin Planner Milano & Italy</h3>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="row">
-						<div class="col-md-12">
-							<div id="myModal" class="modal">
-								<div class="scrollBar">
-									<div class="modal-bloc">
-										<span id="closeModalBtn" class="close">&times;</span>
-										<div class="row">
-											<div class="bg-modal">
-												<div class="head-prest" style="background-image: url(assets/pictures/test.png);">
-													<div class="about-prest">
-														<h4>Wedding Planner</h4>
-														<h2>Harmony Weddings (Thailand) Co.,Ltd.</h2>
-														<p>Bangkok, Thailand</p>
-													</div>
-												</div>
-												<div class="row p-3">
-													<div class="col-md-8">
-														<h4 class="border-bottom">A propos de</h4>
-														<p class="pt-3">Welcome to Harmony Weddings Thailand, your premier destination wedding planning company in the heart of Thailand. We are dedicated to crafting unforgettable wedding experiences that are tailored to your dreams and budget. Whether you envision an intimate elopement surrounded by lush tropical landscapes or a grand celebration with your loved ones.</p>
-													</div>
-													<div class="col-md-4">
-														<h4 class="border-bottom">Contacts</h4>
-														<div class="btnBloc pt-3">
-															<p>
-																<button class="btn01">Ajouter au mariage</button>
-															</p>
-															<p>
-																<button class="btn02">Demander un devis</button>
-															</p>
-															<p>
-																<i class="fa-solid fa-phone"></i>+6 694 861-6634</p>
-															<p style="color: #0b98eb;">
-																<i class="fa-solid fa-envelope"></i>test24@gmail.com</p>
-														</div>
-													</div>
-												</div>
-												<div class="container">
-
-													<div class="row pb-3">
-														<div class="col-md-12">
-															<h4 class="border-bottom">Photos et vidéos</h4>
-														</div>
-														<div class="col-md-4">
-															<img style="width: 100%; margin-bottom:20px;" src="./assets/pictures/images/sar02.png" alt="">
-														</div>
-														<div class="col-md-4">
-															<img style="width: 100%;" src="./assets/pictures/images/sar05.png" alt="">
-														</div>
-														<div class="col-md-4">
-															<img style="width: 100%;" src="./assets/pictures/images/sar04.png" alt="">
-														</div>
-														<div class="col-md-4">
-															<img style="width: 100%;" src="./assets/pictures/images/sar08.png" alt="">
-														</div>
-														<div class="col-md-4">
-															<img style="width: 100%;" src="./assets/pictures/images/sar10.png" alt="">
-														</div>
-														<div class="col-md-4">
-															<img style="width: 100%;" src="./assets/pictures/images/sar07.png" alt="">
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					{%else%}
-					<div class="app_prestateur_choisi">
-						<h1>Vous devez choisir un prestateur conformant de vous demande. <a class="nav-link" id="budget-tab" data-toggle="tab" href="#budget" role="tab" aria-controls="budget" aria-selected="false">Budget</a>
-					</div>
-					{%endif%}
-
-				</div>
-				<!-- Budget -->
-				<div class="tab-pane fade" id="budget" role="tabpanel" aria-labelledby="budget-tab">
-					<div class="row">
-						<div class="col-12">
-							<div class="budget-bloc text-center">
-								<h4>Hello Budget</h4>
-								<p>Tenez un registre précis de chaque dépense, puis organisez vos catégories
-									<br>
-									ou éléments individuels à votre guise en les déplaçant à volonté.</p>
-							</div>
-						</div>
-						<div class="col-12 p-3">
-							<div class="budget-amount text-center">
-								<h2>Mon budget :
-									{{budgetInitial | number_format(2)}}
-									Ariary								
-								</h2>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-12 mt-3">
-							<div class="container-search p-3">
-								<form class="search">
-									<i class="fa fa-search"></i>
-									<input type="text" id="myFilter" class="form-control" onkeyup="myFunction()" placeholder="Search for card name...">									
-								</form>
-							</div>
-						</div>
-					</div>
-					<div id="message_app_alert">
-
-					</div>
-					<div class="row" id="myProducts">				
-					{% for presta  in pres %}					
-						{% if budgetInitial < presta.budget %}
-						<div class="card mt-3 col-md-3">					
-							
-								<img src="{{asset('./icons/prestataire/1/')}}{{presta.photo}}" class="card-img-top" alt="...">
-								<div class="card-body">
-								  <h5 class="card-title">{{presta.nom}}</h5>
-								  <p class="card-text">{{presta.description}}</p>								  
-								  <a href="#" class="btn btn-success card-price">{{presta.budget}}</a>
-								  <a href="/prestataire/budget/{{presta.id}}" class="btn btn-secondary">commander</a>
-								</div>
-							
-							</div>																		
-							{%endif%}
-					{% endfor %}	
-
-					
-				</div>
-
-			</div>
+		<div class="col-md-4 app-alliance">
+			<svg preserveAspectRatio="xMidYMid meet" class="alliance_app_img text-white"data-bbox="19.504 28.491 160.807 142.464" viewBox="19.504 28.491 160.807 142.464" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-l2iw4ah5 svg [data-color="1"] {fill: #FCF8EB;}</style></defs>
+				<g>
+					<path d="M138.832 83.334c-4.06-2.091-13.055-5.453-19.755-6.188-.107-3.349-.924-6.301-2.475-8.826-5.021-8.174-14.651-12.823-27.118-13.092-12.376-.272-26.111 3.826-38.646 11.525-14.433 8.865-26.928 25.419-30.386 40.256-1.765 7.573-1.056 14.183 2.05 19.114 5.207 8.267 16.958 12.023 29.759 12.023 10.896 0 22.551-2.726 31.577-7.706 7.028 7.831 16.686 14.471 27.83 19.039 10.079 4.132 20.573 6.225 30.188 6.225 7.733-.001 14.898-1.354 20.816-4.092 6.93-3.204 11.654-8.15 13.662-14.304 9.681-29.669-25.833-47.962-37.502-53.974zm-.458.889c7.644 3.938 25.681 13.232 34.111 27.519-.001.029-.009.057-.005.087 1.225 8.446-.533 14.494-5.208 18.004-12.249-26.846-50.083-35.203-52.257-35.661 2.663-6.042 4.033-11.398 4.083-16.017 6.557.749 15.308 4.025 19.276 6.068zm-23.827 11.009c.023-.049.042-.096.064-.145.035.016.068.037.107.045.393.078 39.422 8.104 51.698 35.233.007.015.023.022.031.036-13.814 8.898-45.284-3.988-46.086-4.361a.47.47 0 0 0-.069-.039c-.17-.081-9.414-4.539-18.007-11.188 2.586-3.094 8.275-10.91 12.262-19.581zm1.202-26.389c8.237 13.41-7.815 37.686-14.254 45.355-5.358-4.254-10.338-9.345-12.548-14.739.962-.739 19.951-15.529 18.253-29.347-.658-5.356-4.378-9.808-11.054-13.265 8.862 1.5 15.7 5.641 19.603 11.996zM72.527 107.86a.515.515 0 0 0-.185.063c-.242.143-24.339 14.123-38.967 7.777a15.831 15.831 0 0 1-3.293-1.941c.418-.904 5.958-12.57 17.662-23.034C58.867 80.78 78.002 69.93 106.05 74.547a19.417 19.417 0 0 1-.739 2.846.497.497 0 0 0-.185-.019c-16.053 1.54-26.768 7.791-30.985 18.079-1.591 3.876-2.118 8.065-1.614 12.407zm32.413-29.458c-3.826 9.754-14.53 18.61-16.352 20.066-.407-1.187-.693-2.385-.796-3.593-.469-5.485 2.559-10.578 8.994-15.139 2.531-.599 5.252-1.045 8.154-1.334zM51.361 67.605c12.374-7.6 25.916-11.636 38.101-11.378 1.225.026 2.413.107 3.58.219a.481.481 0 0 0 .128.089c7.958 3.454 12.345 8.062 13.038 13.697.135 1.1.115 2.211-.013 3.325-28.446-4.677-47.859 6.346-59.147 16.448-11.195 10.019-16.818 21.13-17.761 23.094-2.978-2.589-5.057-6.338-6.164-11.249-.007-.032-.026-.058-.039-.087 4.817-13.037 15.811-26.501 28.277-34.158zM23.348 125.59c-2.96-4.7-3.625-11.047-1.922-18.354a44.898 44.898 0 0 1 1.076-3.749c1.775 6.469 5.293 10.884 10.475 13.131 2.853 1.236 6.033 1.726 9.279 1.726 5.758 0 11.723-1.539 16.43-3.171 7.237-2.509 12.991-5.718 13.993-6.289.806 5.288 3.108 10.779 6.885 16.189a55.877 55.877 0 0 0 3.601 4.593c-21.152 11.573-51.224 9.568-59.817-4.076zm152.035 11.408c-1.92 5.883-6.46 10.622-13.131 13.707-13.031 6.025-32.269 5.202-50.205-2.151-13.436-5.508-24.68-14.05-31.663-24.054-6.936-9.937-8.826-20.118-5.32-28.668 3.028-7.386 9.587-12.616 19.199-15.429-5.401 4.405-7.918 9.293-7.468 14.559.602 7.042 6.365 14.565 17.13 22.359 7.964 5.767 15.86 9.545 15.938 9.582l.024-.05c2.371 1.424 19.376 7.673 33.358 7.672 2.938 0 5.746-.276 8.253-.932 9.032-2.359 13.139-8.934 12.239-19.548 3.308 6.657 4.464 14.319 1.646 22.953z" fill="#3C3C3B" data-color="1"></path>
+					<path d="M149.245 52.563h.954l2.769-8.79 8.79-2.769v-.954l-8.79-2.769-2.769-8.79h-.954l-2.769 8.79-8.791 2.769v.954l8.791 2.769 2.769 8.79zm-2.22-14.406.327-.327 2.37-7.524 2.371 7.524.327.327 7.524 2.371-7.524 2.37-.327.327-2.371 7.524-2.37-7.524-.327-.327-7.525-2.37 7.525-2.371z" fill="#3C3C3B" data-color="1"></path>
+					<path d="m175.93 72.298-1.38-4.382h-.954l-1.379 4.382-4.381 1.379v.954l4.381 1.38 1.379 4.381h.954l1.38-4.381 4.381-1.38v-.954l-4.381-1.379zm-.549 2.838-.327.327-.981 3.116-.981-3.116-.327-.327-3.116-.981 3.116-.981.327-.327.981-3.116.981 3.116.327.327 3.116.981-3.116.981z" fill="#3C3C3B" data-color="1"></path>
+					<path d="M62.94 158.478h-.954l-1.38 4.382-4.381 1.38v.953l4.381 1.38 1.38 4.382h.954l1.38-4.382 4.381-1.38v-.953l-4.381-1.38-1.38-4.382zm.831 7.219-.327.326-.981 3.116-.981-3.116-.327-.326-3.115-.981 3.115-.981.327-.326.981-3.116.981 3.116.327.326 3.115.981-3.115.981z" fill="#3C3C3B" data-color="1"></path>
+				</g>
+			</svg>
+		</div>
+		<div class="col-md-4 week_comment">
+			<h4 class="h_titre">
+				Nous avons le plaisir de vous inviter à notre mariage.
+			</h4>
+			<h6 class="l_titre">
+				Paragraphe. Cliquez ici pour le modifier et ajouter votre propre texte. C'est l'espace idéal pour raconter une histoire et vous présenter à vos visiteurs.
+			</h6>
 		</div>
 	</div>
 </div>
 
-<input type="hidden" id="update_id" value="{{idUser}}">
-
-
-<script>
-	$("#update").click(function (){$("#app_update").toggle()})
-	$("#modif_datepicker").click(function(){$("#datepicker").toggle()})
-	$("#modif_lieuxCeremonie").click(function(){$("#lieuxCeremonie").toggle()})
-
-	//$("#maj_date").click(function(){saveInvite()})
-	
-
-function saveInvite() {
-
-
-let data = {
-name_epoux: $('#homme').val(),
-name_epouse: $('#femme').val(),
-date_ceremonie: $("#datepicker").val(),
-lieu_ceremonie: $("#lieuxCeremonie").val(),
-budget_initial: $("#budget_initial").val()
-}
-
-$.ajax({
-url: "/activite/new/" + $("#update_id").val(),
-method: "PUT",
-data: data,
-success: function (response) {
-alert('L\'enregistrement a été effectué avec succès...')
-location.reload(true);
-}
-})
-
-}
-
-
-
-$("#valide").click(function () {
-saveInvite()
-})
-
-$("#budget_initial").change(function(){
-	saveInvite()
-})
-$("#datepicker").change(function () {
-saveInvite()
-})
-
-$("#lieuxCeremonie").change(function () {
-saveInvite()
-})
-
-$(document).ready(function () {
-$("#app_update").hide()
-$("#datepicker").hide()
-$("#lieuxCeremonie").hide()
-
-
-})
-
-$(function () {
-$("#datepicker").datepicker({dateFormat: 'yy-mm-dd'});
-});
-const btnAddGuestH = document.querySelector('.btn-add-guestH')
-const btnAddGuestF = document.querySelector('.btn-add-guestF')
-const selectElementF = document.querySelector('.selectBlocF')
-const selectElementH = document.querySelector('.selectBlocH')
-
-
-btnAddGuestH.addEventListener('click', function (e) {
-
-e.preventDefault()
-if (selectElementH.style.display === "block") {
-selectElementH.style.display = "none";
-} else {
-selectElementH.style.display = "block";
-}
-})
-
-btnAddGuestF.addEventListener('click', function (e) {
-e.preventDefault()
-if (selectElementF.style.display === "block") {
-selectElementF.style.display = "none";
-} else {
-selectElementF.style.display = "block";
-}
-})
-
-function myFunction() {
-	var input, filter, cards, cardContainer, title, i;
-	input = document.getElementById("myFilter");
-	filter = input.value.toUpperCase();
-	cardContainer = document.getElementById("myProducts");
-	cards = cardContainer.getElementsByClassName("card");
-	for (i = 0; i < cards.length; i++) {
-	  title = cards[i].querySelector(".card-price");
-	  if (title.innerText.toUpperCase().indexOf(filter) > -1) {
-		cards[i].style.display = "";
-	  } else {
-		cards[i].style.display = "none";
-	  }
-	}
-  }
-
-
-</script>
-
-{%endblock%}
+<div class="ceremonie-lieu">
+	<div class="row">
+		<div class="col-md-6 cardApp">
+			<div class="cardApp_ceremonie">				
+				<img src="{{asset('icons/prestataire/GettyImages-119494313.webp')}}" alt="">
+				<h1>Ceremonie</h1>
+				<p>
+					contenu
+				</p>
+			</div>
+		</div>
+		<div class="col-md-6 cardApp">
+			<div class="cardApp_reception">				
+				<img src="{{asset('icons/prestataire/GettyImages-1264870600.webp')}}" alt="">
+				
+				<h1>Reception</h1>
+				<p>
+					contenu
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

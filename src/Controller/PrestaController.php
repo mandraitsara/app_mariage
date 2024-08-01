@@ -131,7 +131,7 @@ class PrestaController extends AbstractController
     public function budgetPrestataire(EntityManagerInterface $em, $id):Response{
         global $totalPrice;     
         $fournisseur = $em->getRepository(Prestataire::class)->find($id);       
-        $prestateur = $em->getRepository(PrestataireTarif::class)->prestateurID($id);   
+        $prestateur = $em->getRepository(PrestataireTarif::class)->prestateurID($id);
         $typePrestateur = $em->getRepository(PrestataireType::class)->findAll();
 
         

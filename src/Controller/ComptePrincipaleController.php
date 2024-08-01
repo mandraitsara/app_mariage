@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Activity;
 use App\Entity\Prestataire;
 use App\Entity\PrestataireTarif;
+use App\Entity\PrestataireType;
 use App\Entity\UserLogin;
+use Doctrine\Migrations\Version\Executor;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -17,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Constraints\Length;
+use Vtiful\Kernel\Excel;
 
 class ComptePrincipaleController extends AbstractController
 {
@@ -30,6 +33,7 @@ class ComptePrincipaleController extends AbstractController
             ->activityId($Id_Name);
         $femme = $activity->getNomF();
         $homme = $activity->getNomH();
+        $date_at = $activity->getDateAt();
 
 
         $username =  $authenticationUtils->getLastUsername();
@@ -42,6 +46,7 @@ class ComptePrincipaleController extends AbstractController
             'username' => $username,
             'femme' => $femme,
             'homme' => $homme,
+            'date_at'=>$date_at,
         ];
         return $this->render($templates, $content);
     }
@@ -51,29 +56,59 @@ class ComptePrincipaleController extends AbstractController
     #[Route('activite/', name: "activite.app_mariage")]
     public function activite(Request $request, EntityManagerInterface $entityManager, UserInterface $userInterface)
     {
-        $templates = 'activity.html.twig';
+        global $prestateur,$jourJ,$type,$prestas;
+        $templates = 'activity.html.twig'; // Appeler la template via //Template
+        //identifier le numero d'User
         $userID = $userInterface->getId();
+        //Fin
+        $activiteID = $entityManager->getRepository(Activity::class)->activityId($userID)->getId(); //voir l'identité dans l'activité
 
-        $activiteID = $entityManager->getRepository(Activity::class)->activityId($userID)->getId();
-        $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF();
-        $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();
-        $dateCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getDateCeremonie();
-        $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();
-        $budgetInitial = $entityManager->getRepository(Activity::class)->activityId($userID)->getBudgetInitial();
-
+        $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF(); //Nom pour l'époux
+        $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();//Nom pour l'épouse
+        $dateCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getDateCeremonie(); //Date de céremonie 
+        $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();//Lieux de céremonie 
+        $budgetInitial = $entityManager->getRepository(Activity::class)->activityId($userID)->getBudgetInitial(); //Budget initial
+        $prestateurs = $entityManager->getRepository(Prestataire::class)->findAll(); 
+        
+        //Verifier s'il y a déjà commander un package de prestateur
         $idPrestateur = $entityManager->getRepository(Activity::class)->activityId($userID)->getIdPrestateur();
+        //fin
+        //S'il n'y a pas encore commander
         if ($idPrestateur !== NULL){
-            $fournisseur = $entityManager->getRepository(Prestataire::class)->find($idPrestateur);     }
+            $fournisseur = $entityManager->getRepository(Prestataire::class)->find($idPrestateur);            
+            $prestateur = $entityManager->getRepository(PrestataireTarif::class)->prestateurID($fournisseur);
+            $typePrestateur = $entityManager->getRepository(PrestataireType::class)->findAll();
+
+        
+        $prestas = [];        
+        $totalPrice = [];
+
+
+        foreach($prestateur as $presta){
+            $prestateur = [
+                'type' => $presta->getTypeId(),
+                'price'=>$presta->getPrix(),
+                'description'=>$presta->getDescription()
+            ];            
+            $prestas[] = $prestateur;
+            $totalPrice[] = $prestateur['price'];
+            $type[] = $prestateur['type'];
+            
+        }
+        
+        $PrixTotal = array_sum($totalPrice);
+            
+        }
         else{
             $fournisseur = 0;
         }
         
+        //Fin
 
-        $presta = $entityManager->getRepository(Prestataire::class)->findAll(); 
-        $prestaTarif = $entityManager->getRepository(PrestataireTarif::class)->findAll();
+        
+        
 
-        $prestas = [];
-
+      
        
         //$prestataire = [];
         //$prestaPrix = [];
@@ -89,6 +124,7 @@ class ComptePrincipaleController extends AbstractController
             $prestataire[] =  $prestas-> ;               
         }       
         */
+        //Function pour gerer le jour -j
         function NbJours($debut, $fin) {
 
             $tDeb = explode("-", $debut);
@@ -97,23 +133,23 @@ class ComptePrincipaleController extends AbstractController
              $diff = mktime(0, 0, 0, $tFin[1], $tFin[2], $tFin[0]) - mktime(0, 0, 0, $tDeb[1], $tDeb[2], $tDeb[0]);
             
         return(($diff / 86400)+0);
+    }
     
-        }
-        global $jourJ;
+        //fin
+
+        //Detecter si la date de ceremonie n'est pas vide
         if($dateCeremonie!=""){
-            $date = $dateCeremonie;
-            //var_dump($date);
+            $date = $dateCeremonie;            
             $aujourdhui = date('Y-m-d');
             $jourJ = NbJours($date, $aujourdhui);
         }
-        
+        //Fin        
 
-        
-
+        //gerer le csv 
         $explo = [];
                 
         $rowNo = 1;
-        //gerer le csv 
+        
         $ext = ".csv";
         $chemin = "info_mariage";
         $fichier = "$chemin/app_mariage_$userID$ext";
@@ -138,7 +174,8 @@ class ComptePrincipaleController extends AbstractController
             $tabs[] = $tab;
         }
 
-
+//fin
+        //Pour la pagination
         $nb_invite = count($tabs);
 
         $parPage = 10;
@@ -157,8 +194,9 @@ class ComptePrincipaleController extends AbstractController
         $paginated = array_slice($tabs, $pagination['offset'], $pagination['length'], true);
 
         $pageCurrent = $pagination['currentPage']; 
-
-      
+        //Fin   
+        
+              
         
         $content = [
             'idUser' => $activiteID,
@@ -172,9 +210,10 @@ class ComptePrincipaleController extends AbstractController
             'nbPages' => $pagination['nbPages'] ,
             'currentPage'=> $pageCurrent,
             'budgetInitial' => $budgetInitial,            
-            'pres' => $presta,
-            'fournisseur'=>$fournisseur
-            
+            'pres' => $prestateurs,
+            'fournisseur'=>$fournisseur,
+            'id'=>$userID,
+            'prestateur'=> $prestateur,                        
             
         ];
         return $this->render($templates, $content);
@@ -188,9 +227,7 @@ class ComptePrincipaleController extends AbstractController
         $project = $entityManager->getRepository(Activity::class)->find($id);
 
         if ($project) {
-
             $date_at = date('d/m/y;H:i:s');
-
             $project->setNomH($request->request->get('name_epoux'));
             $project->setNomF($request->request->get('name_epouse'));
             $project->setDateCeremonie($request->request->get('date_ceremonie'));
@@ -217,8 +254,6 @@ class ComptePrincipaleController extends AbstractController
         $templates = "csvTelecharger.html.twig";
 
         if (($fp = fopen("sample.csv", "r")) !== FALSE) {
-
-
             echo "<table>";
             while (($row = fgetcsv($fp)) !== FALSE) {
                 $num = count($row);
@@ -252,5 +287,21 @@ class ComptePrincipaleController extends AbstractController
 
         ]);
     }
-    
+
+     #[Route('/csv/open', name: 'app_csv')]
+     public function csvCharger(){
+       $dirN = '../public/info_mariage/';     
+       
+
+      var_dump(opendir($dirN));
+       //var_dump(chroot('../public/'));
+       
+      
+       //opendir(is_dir($dirN));
+//        $chemin = dirname('../public/info_mariage/app_mariage_12.csv');
+   
+     
+        
+        return new JsonResponse('');
+     }
 }

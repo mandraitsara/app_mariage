@@ -519,3 +519,123 @@ button {
 .card.mt-3.col-md-3 {
   margin-left: 1rem;
 }
+
+.sign_retour {        
+  font-size: 64px;
+  position: absolute;
+  left: 21%;
+  color: red;
+  text-align: center;        
+  padding: 7px;
+  z-index: 1;
+  margin-top: -34px;
+}
+
+.navbar_app{
+  background-color: #faebd7 !important;
+  height: 100px;
+}
+
+._app_mariage {
+  border-radius: 20px;
+  border: 1px solid !important;
+  padding: 15px 24px !important;
+  font-size: 21px !important;
+  color: brown !important;
+  text-align: center !important;
+  text-transform: lowercase !important;
+  margin-left:15px !important;
+}
+
+
+._app_mariage.app_mariage_nom {
+  color: cadetblue !important;
+  text-transform: capitalize !important;
+  font-size: 37px !important;
+}
+
+._app_mariage.repondre_app_mariage {
+  margin-right: 15px;
+}
+
+._app_mariage:hover {
+  background-color: antiquewhite !important;  
+  opacity: 0.60 !important;
+}
+
+._app_mariage.icons_svg_app_mariage {
+  border: transparent !important;
+}
+
+.connexion_app_mariage {
+  font-size: 17px !important;
+  display: contents !important; 
+}
+
+.icons_svg_app_mariage:hover {
+  background-color: transparent !important;
+}
+
+.app_mariage_wh {
+  color: #fff !important;
+  position: relative !important;
+  width: calc(100% - 1em) !important;
+  height: calc(100%-1em) !important;
+
+}
+.titre_app_nom {
+  font-size: 150px;
+  text-align: center;
+  text-transform: capitalize;
+  color: color-mix !important;
+  font-family: inherit;
+}
+
+.lieux_de_ceremonie_app {  
+  border-color: crimson !important; 
+  border-radius: 50px !important;
+  border: 2px solid;
+  height: 50% !important;
+  text-align: center;
+  width: calc(100% - 44em);  
+  background-color: #fff !important;
+  color: blue !important;
+}
+
+.jrs-j {
+  background-color: rgba(255, 0, 200, 0.4);
+  width: calc(100% - 41em);
+  border-radius:50px;
+}
+
+.week-app-mariage {
+  background-color: #ac5e23;
+  color: #fff;
+  position: inherit;
+  height: 500px;
+}
+
+.week-date {
+  text-align: center;
+  padding: 10%;
+}
+.app-alliance {
+  padding: 7%;
+  text-align: center;
+}
+
+.week_comment{
+  padding: 10%;
+  font-size:22px !important;
+  text-align: center;
+}
+.l_titre {
+  font-size: 14px; 
+  text-align: match-parent;
+}
+
+.ceremonie-lieu {
+  position: relative;
+  top: -50px;
+  text-align: center;
+}

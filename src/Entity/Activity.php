@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\ActivityRepository;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
 class Activity
 {
@@ -21,6 +25,8 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom_h = null;
 
+    #[ORM\Embedded(class: EmbeddedFile::class)]
+    private ?EmbeddedFile $image = null;
 
     #[ORM\ManyToOne(targetEntity: UserLogin::class, inversedBy: 'activities', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: true)]
@@ -52,6 +58,31 @@ class Activity
 
     #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]
+
+   
+
+    //Gerer l'image
+    #[Vich\UploadableField(
+        mapping: 'activity', # We will remember this value. It will serve as the identifier for the section in the configuration.
+       fileNameProperty: 'image.name',
+       size: 'image.size'
+       )]
+    private ?File $imageFile = null;
+
+          public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): Activity
+    {
+        $this->imageFile = $imageFile;
+        return $this;
+    }
+
+   
+    //
+    
 
 
 
@@ -193,4 +224,16 @@ class Activity
 
         return $this;
     }
+
+    public function getImage(): ?EmbeddedFile
+        {
+            return $this->image;
+        }
+    
+        public function setImage(?EmbeddedFile $image): Activity
+        {
+            $this->image = $image;
+            return $this;
+        }
+    
 }

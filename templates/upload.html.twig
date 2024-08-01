@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Upload Image</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.image) }}
+        <button class="btn">Upload</button>
+    {{ form_end(form) }}
+{% endblock %}

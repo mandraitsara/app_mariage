@@ -14,10 +14,12 @@
     font-size: 35px;
 }
 .new-project {
-    position: relative;
-    border: 1px solid #dd8090;
-    cursor: pointer;
-    width: 300px;
+  position: relative;
+  border: 1px solid #005536;
+  cursor: pointer;
+  width: 300px;
+  box-shadow: 5px 5px 20px 16px rgb(29 68 142 / 1);
+  color: rgb(255,255,0);
 }
 .new-project .gear-icon {
     position: absolute;
@@ -51,3 +53,20 @@
     padding: 5px 10px;
     color: #fff;
 }
+
+
+.invites_du_mariage {
+    width: 50% !important;
+  }
+
+  .app_card {
+    
+    margin-left: 15px;
+  }
+
+  .listes_des_maries {
+    overflow-y: scroll;
+    margin-left: 10%;
+  }
+
+ 
