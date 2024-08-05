@@ -14,6 +14,7 @@ class ActivityType extends AbstractType{
     {
         $builder
             ->add('NomH', TextType::class,[
+                'label'=>'Nom pour l\'homme',
                 'attr'=>[                    
                     'Placeholder'=> 'Nom d\'homme',
                     'class'=>'form-control'
@@ -21,6 +22,7 @@ class ActivityType extends AbstractType{
 
             ])
             ->add('NomF', TextType::class,[
+                'label'=>'Nom pour la femme',
                 'attr'=>[                    
                     'Placeholder'=> 'Nom de la Femme',
                     'class'=>'form-control'
@@ -54,37 +56,41 @@ class ActivityType extends AbstractType{
                             )
             ->add('BudgetInitial', TextType::class,[
                                 'attr'=>[                    
-                                    'Placeholder'=> 'Lieux de reception',
-                                    'class'=>'form-control'
+                                'Placeholder'=> 'Lieux de reception',
+                                'class'=>'form-control',                                
                                 ]
                 
                             ] 
-                                )
-            ->add('PhotoPrincipale', FileType::class,[
-                            'attr'=>[                    
-                                'Placeholder'=> 'Photo de couverture',
-                                'class'=>'form-control'
-                            ]
-            
-                        ] 
-                            )
-            ->add('PhotoCeremonie', FileType::class,[
-                                'attr'=>[                    
-                                    'Placeholder'=> 'Photo sur Ceremonie',
-                                    'class'=>'form-control'
-                                ]
-                
-                            ] 
-                                )
-            ->add('PhotoReception', FileType::class,[
-                                    'attr'=>[                    
-                                        'Placeholder'=> 'Photo sur la Reception',
-                                        'class'=>'form-control'
-                                    ]
-                    
-                                ] 
-                                    );
-           
+        )
+        ->add('PhotoPrincipal', FileType::class,[
+            'data_class'=>null,
+            'label'=>'Photo Principale',
+            'attr'=>[                    
+            'Placeholder'=> 'Photo Principale',
+            'class'=>'form-control',                               
+            ]
+
+        ])
+        ->add('PhotoReception', FileType::class,[
+            'data_class'=>null,
+            'label'=>'Photo de Reception',
+            'attr'=>[                    
+            'Placeholder'=> 'Photo de reception',
+            'class'=>'form-control',                               
+            ]
+
+        ])
+        ->add('PhotoCeremonie', FileType::class,[
+            'data_class'=>null,
+            'label'=>'Photo de Ceremonie',
+            'attr'=>[                    
+            'Placeholder'=> 'Ceremonie',
+            'class'=>'form-control',                               
+            ]
+
+        ])
+        
+        ;           
     }   
 
     public function configureOptions(OptionsResolver $resolver): void

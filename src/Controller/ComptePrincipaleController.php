@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Constraints\Length;
-use Vtiful\Kernel\Excel;
+
 
 class ComptePrincipaleController extends AbstractController
 {
@@ -35,7 +35,6 @@ class ComptePrincipaleController extends AbstractController
         $femme = $activity->getNomF();
         $homme = $activity->getNomH();
         $date_at = $activity->getDateAt();
-
 
         $username =  $authenticationUtils->getLastUsername();
 
@@ -69,6 +68,9 @@ class ComptePrincipaleController extends AbstractController
         $dateCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getDateCeremonie(); //Date de céremonie 
         $lieuCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getLieuxCeremonie();//Lieux de céremonie 
         $budgetInitial = $entityManager->getRepository(Activity::class)->activityId($userID)->getBudgetInitial(); //Budget initial
+        $photo_principal = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoPrincipal(); //Photo principal
+        $photo_reception = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoReception(); //Photo Reception
+        $photo_ceremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoCeremonie(); //Photo Ceremonie
         $prestateurs = $entityManager->getRepository(Prestataire::class)->findAll(); 
         
         //Verifier s'il y a déjà commander un package de prestateur
@@ -214,7 +216,10 @@ class ComptePrincipaleController extends AbstractController
             'pres' => $prestateurs,
             'fournisseur'=>$fournisseur,
             'id'=>$userID,
-            'prestateur'=> $prestateur,                        
+            'prestateur'=> $prestateur,         
+            'photo_principal'=>$photo_principal,
+            'photo_reception'=>$photo_reception,
+            'photo_ceremonie'=>$photo_ceremonie,
             
         ];
         return $this->render($templates, $content);
@@ -307,25 +312,68 @@ class ComptePrincipaleController extends AbstractController
      }
 
 
-     #[Route('activity_info/',name:'activity.app_mariage')]
-     public function infoActivity(Request $request, EntityManagerInterface $em)
+     #[Route('activity_info/{id}',name:'activity.app_mariage')]
+     public function infoActivity($id, Request $request, EntityManagerInterface $em)     
      {
-        //Instancier le class Activity
-        $activity = new Activity();
-        $form = $this->createForm(ActivityType::class,$activity);
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
-            $this->addFlash('success', 'Prestataire modifié avec succès.');
-            return new Response("hello");
+        $templates = 'infoActivity.html.twig'; //Template       
+
+        $activite= $em->getRepository(Activity::class)->find($id);
+
+        $photo_principal = $activite->getPhotoPrincipal();
+        $photo_reception = $activite->getPhotoReception();
+        $photo_ceremonie = $activite->getPhotoCeremonie();
+
+        if (!$activite){
+            throw $this->createNotFoundException('aucun prestataire trouvé ' . $id);
         }
-        
-        $templates = 'infoActivity.html.twig';
+
+        $form = $this->createForm(ActivityType::class, $activite);
+        //var_dump($form);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+          /* $photoreception = pathinfo($form->get('PhotoReception')
+                                            ->getData()
+                                            ->getClientOriginalName()
+                                            ,PATHINFO_FILENAME) ;*/
+
+            $photo_principal = $form->get('PhotoPrincipal')->getData();
+            $photoreception = $form->get('PhotoReception')->getData();
+            $photo_ceremonie = $form->get('PhotoCeremonie')->getData();
+            if($photoreception && $photo_principal && $photo_ceremonie){
+                $originalFilename_photoreception = pathinfo($photoreception->getClientOriginalName(), PATHINFO_FILENAME);                
+                $originalFilename_photo_principal = pathinfo($photo_principal->getClientOriginalName(), PATHINFO_FILENAME);                
+                $originalFilename_photo_ceremonie = pathinfo($photo_ceremonie->getClientOriginalName(), PATHINFO_FILENAME);                
+                $newFilename_originalFilename_photoreception = uniqid() . '.' . $photoreception->guessExtension();
+                $newFilename_originalFilename_photo_principal = uniqid() . '.' . $photo_principal->guessExtension();
+                $newFilename_originalFilename_photo_ceremonie = uniqid() . '.' . $photo_ceremonie->guessExtension();
+
+                // Déplace le fichier dans le répertoire de destination
+                $photoreception->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename_originalFilename_photoreception,
+                ); 
+                $photo_principal->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename_originalFilename_photo_principal,
+                ); 
+                $photo_ceremonie->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename_originalFilename_photo_ceremonie,
+                ); 
+            }             
+            $activite->setPhotoReception($newFilename_originalFilename_photoreception);     
+            $activite->setPhotoPrincipal($newFilename_originalFilename_photo_principal);     
+            $activite->setPhotoCeremonie($newFilename_originalFilename_photo_ceremonie);
+            $em->flush();
+        }
 
         $content = [
             'form' => $form->createView(),
+            'photo_reception' =>$photo_reception,
+            'photo_principal'=>$photo_principal,
+            'photo_ceremonie'=>$photo_ceremonie,
         ];
         return $this->render($templates,$content);
-     }
+    }
 }

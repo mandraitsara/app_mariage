@@ -6,10 +6,11 @@ use App\Repository\ActivityRepository;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
+#[Vich\Uploadable]
 class Activity
 {
     #[ORM\Id]
@@ -60,20 +61,14 @@ class Activity
     private ?string $PhotoReception = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $photoCeremonie = null;
+    private ?string $PhotoPrincipal = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $photoPrincipale = null;
+    private ?string $PhotoCeremonie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'user')]
-    #[ORM\JoinColumn(nullable: false)]
-
+     #[ORM\ManyToOne(inversedBy: 'user')]
+    #[ORM\JoinColumn(nullable: false)]   
    
-
-    
-    
-
-
 
     // Getters and Setters...
 
@@ -226,39 +221,39 @@ class Activity
         return $this;
     }
 
-    public function getPhotoReception(): ?string
+    public function getPhotoReception(): ?String
     {
         return $this->PhotoReception;
     }
 
-    public function setPhotoReception(?string $PhotoReception): static
+    public function setPhotoReception(?String $PhotoReception): static
     {
         $this->PhotoReception = $PhotoReception;
+        return $this;
+    }
+
+    public function getPhotoPrincipal(): ?string
+    {
+        return $this->PhotoPrincipal;
+    }
+
+    public function setPhotoPrincipal(?string $PhotoPrincipal): static
+    {
+        $this->PhotoPrincipal = $PhotoPrincipal;
 
         return $this;
     }
 
     public function getPhotoCeremonie(): ?string
     {
-        return $this->photoCeremonie;
+        return $this->PhotoCeremonie;
     }
 
-    public function setPhotoCeremonie(?string $photoCeremonie): static
+    public function setPhotoCeremonie(?string $PhotoCeremonie): static
     {
-        $this->photoCeremonie = $photoCeremonie;
+        $this->PhotoCeremonie = $PhotoCeremonie;
 
         return $this;
     }
 
-    public function getPhotoPrincipale(): ?string
-    {
-        return $this->photoPrincipale;
-    }
-
-    public function setPhotoPrincipale(?string $photoPrincipale): static
-    {
-        $this->photoPrincipale = $photoPrincipale;
-
-        return $this;
-    }    
 }

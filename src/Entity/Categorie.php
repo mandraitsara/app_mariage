@@ -75,34 +75,4 @@ class Categorie
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Prestataire>
-     */
-    public function getPrestataires(): Collection
-    {
-        return $this->Prestataires;
-    }
-
-    public function addPrestataire(Prestataire $prestataire): static
-    {
-        if (!$this->Prestataires->contains($prestataire)) {
-            $this->Prestataires->add($prestataire);
-            $prestataire->setCategorie($this);
-        }
-
-        return $this;
-    }
-
-    public function removePrestataire(Prestataire $prestataire): static
-    {
-        if ($this->Prestataires->removeElement($prestataire)) {
-            // set the owning side to null (unless already changed)
-            if ($prestataire->getCategorie() === $this) {
-                $prestataire->setCategorie(null);
-            }
-        }
-
-        return $this;
-    }
 }

@@ -158,8 +158,7 @@ public function csvmodif(){
     if (($handle = fopen($filename, 'r')) !== FALSE) {
     while (($data = fgetcsv($handle)) !== FALSE) {
         $rows[] = $data;        
-        $index = 
-        var_dump($rows);
+      
         
     }
     fclose($handle);

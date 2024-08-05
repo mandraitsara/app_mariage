@@ -23,8 +23,7 @@ class ImageUploadController extends AbstractController
             $file = $form->get('image')->getData();
 
             if ($file) {
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                var_dump($originalFilename);
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);                
                 $newFilename = uniqid() . '.' . $file->guessExtension();
 
                 // Déplace le fichier dans le répertoire de destination

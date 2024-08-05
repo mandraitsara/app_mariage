@@ -589,6 +589,8 @@ button {
   text-transform: capitalize;
   color: color-mix !important;
   font-family: inherit;
+  background-color: rgba(100, 210, 100, 0.5);
+  border-radius: 10px;
 }
 
 .lieux_de_ceremonie_app {  

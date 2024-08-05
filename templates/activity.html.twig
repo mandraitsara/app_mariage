@@ -6,18 +6,20 @@
 	<style>
 	  /* Default height for small devices */
 	  #intro-example {
-		height: 400px;
+		height: 800px;
+		background-size: cover;
 	  }
   
 	  /* Height for devices larger than 992px */
 	  @media (min-width: 992px) {
 		#intro-example {
-		  height: 600px;
+		  height: 800px;
 		}
 	  }
 	</style>
   
 	<!-- Navbar -->
+<div class="navbar-fixed">
 	<nav class="navbar navbar-expand-lg navbar_app ">
 	  <div class="container-fluid">
 		<button
@@ -64,19 +66,19 @@
 		<div class="dropdown app_active_settings">				
 		<img id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle img_svg_image" src="{{asset('icons/settings-svgrepo.svg')}}">
 			<div class="dropdown-menu app_active_settings_items" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-item link_app" href="#">Information personnelle </a>
+				<a class="dropdown-item link_app" href="/activity_info/{{id}}">Information personnelle </a>
 				<a class="dropdown-item link_app" href="#">Another action</a>
 				<a class="dropdown-item link_app" href="#">Something else here</a>
 			  </div>
 		</div>
 	</div>
 	<!-- Navbar -->
-  
+</div>
 	<!-- Background image -->
 	<div
 	  id="intro-example"
 	  class="p-5 text-center bg-image"
-	  style="background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');"
+	  style="background-image: url('/uploads/images/{{photo_principal}}');"
 	>
 	  
 		<div class="d-flex justify-content-center align-items-center h-100">
@@ -171,7 +173,10 @@ affiche()
 				<h1>Le week-end du mariage</h1>
 				<h5>{{dateCeremonie}}</h5>
 		</div>
-
+		{# <button type="button"
+  class="btn btn-gotop d-inline-flex align-items-center justify-content-center"
+  data-action="gotop"> <i class="fas fa-chevron-up"></i>
+		</button> #}
 		<div class="col-md-4 app-alliance">
 			<svg preserveAspectRatio="xMidYMid meet" class="alliance_app_img text-white"data-bbox="19.504 28.491 160.807 142.464" viewBox="19.504 28.491 160.807 142.464" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-l2iw4ah5 svg [data-color="1"] {fill: #FCF8EB;}</style></defs>
 				<g>
@@ -193,11 +198,13 @@ affiche()
 	</div>
 </div>
 
+<span id="pageYOffset">window.scrollY = <span id="position">0px</span></span>
+
 <div class="ceremonie-lieu">
 	<div class="row">
 		<div class="col-md-6 cardApp">
 			<div class="cardApp_ceremonie">				
-				<img src="{{asset('icons/prestataire/GettyImages-119494313.webp')}}" alt="">
+				<img src="/uploads/images/{{photo_ceremonie}}" alt="">
 				<h1>Ceremonie</h1>
 				<p>
 					contenu
@@ -206,8 +213,7 @@ affiche()
 		</div>
 		<div class="col-md-6 cardApp">
 			<div class="cardApp_reception">				
-				<img src="{{asset('icons/prestataire/GettyImages-1264870600.webp')}}" alt="">
-				
+				<img src="/uploads/images/{{photo_reception}}" alt="">				
 				<h1>Reception</h1>
 				<p>
 					contenu
@@ -216,4 +222,41 @@ affiche()
 		</div>
 	</div>
 </div>
+<style type="text/css">
+	.navbarClass{
+		position:fixed;
+		width: 100%;
+		background-color: aquamarine;
+	}
+
+	.navbar_appClass {
+  		background-color: rgb(26,21,0) !important;  
+}
+.app_active_settingsClass {
+  		background-color: rgb(26,21,0) !important;  
+}
+</style>
+<script type="text/javascript">
+
+	function btnReveal (){			
+		/* console.log(window.scrollY); */
+		if(window.scrollY > 1156)
+		{
+
+			$('.navbar-fixed').addClass('navbarClass')
+			$('.navbar_app').addClass('navbar_appClass')
+			$('.app_active_settings').addClass('app_active_settingsClass')
+			
+		}else{
+			$('.navbar-fixed').removeClass('navbarClass')
+			$('.navbar_app').removeClass('navbar_appClass')
+			$('.app_active_settings').removeClass('app_active_settingsClass')
+		
+		}
+	}
+
+window.addEventListener('scroll', btnReveal);
+
+
+</script>
 {% endblock %}
