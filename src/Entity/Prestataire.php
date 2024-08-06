@@ -37,6 +37,9 @@ class Prestataire
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $populChiffre = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -129,6 +132,18 @@ class Prestataire
     public function setPhoto(?string $photo): static
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getPopulChiffre(): ?int
+    {
+        return $this->populChiffre;
+    }
+
+    public function setPopulChiffre(?int $populChiffre): static
+    {
+        $this->populChiffre = $populChiffre;
 
         return $this;
     }

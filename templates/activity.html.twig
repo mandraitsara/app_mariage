@@ -67,8 +67,8 @@
 		<img id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle img_svg_image" src="{{asset('icons/settings-svgrepo.svg')}}">
 			<div class="dropdown-menu app_active_settings_items" aria-labelledby="dropdownMenuButton">
 				<a class="dropdown-item link_app" href="/activity_info/{{id}}">Information personnelle </a>
-				<a class="dropdown-item link_app" href="#">Another action</a>
-				<a class="dropdown-item link_app" href="#">Something else here</a>
+				<a class="dropdown-item link_app" href="#">Changer prestataire</a>
+				<a class="dropdown-item link_app" href="#">Tous les prestataires</a>
 			  </div>
 		</div>
 	</div>
@@ -198,8 +198,6 @@ affiche()
 	</div>
 </div>
 
-<span id="pageYOffset">window.scrollY = <span id="position">0px</span></span>
-
 <div class="ceremonie-lieu">
 	<div class="row">
 		<div class="col-md-6 cardApp">
@@ -222,11 +220,64 @@ affiche()
 		</div>
 	</div>
 </div>
+
+<div class="invites_mariage_app">
+
+</div>
+
+<div class="prestataire_mariage_app">
+	<h1 class="liste_prestataire_plus_suivre">Les 5 prestataires plus populaires <a href="">voir plus</a></h1>
+	<div class="row">
+		{% for  presta in pres %}
+		<div class="col-md-4 card_prestataire_mariage_app mt-4">
+			<div class="card card_app_mariage" >
+				<img class="card-img-top img_card_app" src="/uploads/images/{{presta.photo}}" alt="Card image">
+				<div class="card-body">
+				  <h4 class="card-title">{{presta.nom}}</h4>
+				  <p class="card-text">{{presta.description}}</p>
+				  <h1 class="price_h1">{{presta.budget | number_format }} Ar</h1>
+				  <a href="{{presta.id}}" class="btn btn-primary btn_commande_app">commander</a>
+				</div>
+			  </div>
+		</div>
+		{% endfor %}
+	</div>
+	
+
+	
+
+</div>
+
+<div class="footer_wedding">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="hf_app_mariage">
+			<h1 class="mariage_hf">{{nomHomme | first}} & {{nomFemme | first}}</h1>		
+		</div>
+		</div>
+		
+		<div class="col-md-4">
+			<h1 class="h1_contact">Nous appeler </h1>
+			<h5>{{nomHomme}}</h5>
+			<h5>{{nomFemme}}</h5>
+		</div>
+		<div class="col-md-4">
+			<h1 class="menu_app">Menu</h1>
+			<ul class="ul_menu_app">
+				<a href=""  class="ancre_app_menu" ><li>Listes des invité(e)s  </li></a>
+				<a href="" class="ancre_app_menu"><li>Mariage</li></a>
+				<a href="" class="ancre_app_menu"><li>Ceremonie</li></a>
+				<a href="" class="ancre_app_menu"><li>Prestataire</li></a>
+			</ul>
+		</div>
+	</div>
+</div>
 <style type="text/css">
 	.navbarClass{
 		position:fixed;
 		width: 100%;
 		background-color: aquamarine;
+		z-index: 1;
 	}
 
 	.navbar_appClass {
@@ -235,22 +286,34 @@ affiche()
 .app_active_settingsClass {
   		background-color: rgb(26,21,0) !important;  
 }
+
+.app_image_svg{
+background-color: aquamarine;
+  color: bisque;
+  border-radius: 50px;
+  border: 2px solid deeppink;
+}
+
 </style>
 <script type="text/javascript">
 
 	function btnReveal (){			
-		/* console.log(window.scrollY); */
-		if(window.scrollY > 1156)
+		
+
+		if(window.scrollY > 965)
 		{
 
 			$('.navbar-fixed').addClass('navbarClass')
 			$('.navbar_app').addClass('navbar_appClass')
-			$('.app_active_settings').addClass('app_active_settingsClass')
+			$('.settings').addClass('app_active_settingsClass')
+			$('.img_svg_image').addClass('app_image_svg')
+
 			
 		}else{
 			$('.navbar-fixed').removeClass('navbarClass')
 			$('.navbar_app').removeClass('navbar_appClass')
-			$('.app_active_settings').removeClass('app_active_settingsClass')
+			$('.settings').removeClass('app_active_settingsClass')
+			$('.img_svg_image').removeClass('app_image_svg')
 		
 		}
 	}

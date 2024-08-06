@@ -66,6 +66,15 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $PhotoCeremonie = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $PhoneHomme = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $PhoneFemme = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sloganTexte = null;
+
      #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]   
    
@@ -252,6 +261,42 @@ class Activity
     public function setPhotoCeremonie(?string $PhotoCeremonie): static
     {
         $this->PhotoCeremonie = $PhotoCeremonie;
+
+        return $this;
+    }
+
+    public function getPhoneHomme(): ?int
+    {
+        return $this->PhoneHomme;
+    }
+
+    public function setPhoneHomme(?int $PhoneHomme): static
+    {
+        $this->PhoneHomme = $PhoneHomme;
+
+        return $this;
+    }
+
+    public function getPhoneFemme(): ?int
+    {
+        return $this->PhoneFemme;
+    }
+
+    public function setPhoneFemme(?int $PhoneFemme): static
+    {
+        $this->PhoneFemme = $PhoneFemme;
+
+        return $this;
+    }
+
+    public function getSloganTexte(): ?string
+    {
+        return $this->sloganTexte;
+    }
+
+    public function setSloganTexte(?string $sloganTexte): static
+    {
+        $this->sloganTexte = $sloganTexte;
 
         return $this;
     }

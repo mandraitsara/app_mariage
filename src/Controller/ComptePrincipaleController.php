@@ -70,8 +70,8 @@ class ComptePrincipaleController extends AbstractController
         $budgetInitial = $entityManager->getRepository(Activity::class)->activityId($userID)->getBudgetInitial(); //Budget initial
         $photo_principal = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoPrincipal(); //Photo principal
         $photo_reception = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoReception(); //Photo Reception
-        $photo_ceremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoCeremonie(); //Photo Ceremonie
-        $prestateurs = $entityManager->getRepository(Prestataire::class)->findAll(); 
+        $photo_ceremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoCeremonie(); //Photo Ceremonie        
+        $prestateurs = $entityManager->getRepository(Prestataire::class)->findBy([],['populChiffre'=>'DESC'],5); 
         
         //Verifier s'il y a déjà commander un package de prestateur
         $idPrestateur = $entityManager->getRepository(Activity::class)->activityId($userID)->getIdPrestateur();
@@ -170,6 +170,7 @@ class ComptePrincipaleController extends AbstractController
             fclose($fp);
         }
 
+        
         $contenu = $explo;
         $tabs = [];
         for ($i = 0; $i < count($contenu); $i++) {

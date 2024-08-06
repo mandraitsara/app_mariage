@@ -668,3 +668,57 @@ button {
   text-decoration: none;
   background-color: #92a5b3 !important;
 }
+
+.footer_wedding {
+  background-color: #ac5e23;
+  color: #fff;
+  position: inherit;
+  height: 500px;
+  padding-top: 5%;
+  line-height: 10px;
+}
+
+.mariage_hf {
+  text-transform: uppercase;
+  font-size: 100px;
+  font-family: initial;
+  text-shadow: 2px 2px #15ffff, -4px 0px aqua;
+}
+
+
+.ul_menu_app {
+  line-height: normal; 
+}
+
+.ancre_app_menu {
+  color: #fff !important; 
+  text-decoration: none;
+  list-style: circle;
+}
+.prestataire_mariage_app {
+  background-color: #ac5e23;
+  padding: 10px;
+}
+
+.liste_prestataire_plus_suivre {
+  color: antiquewhite;
+  text-align: center;
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 4px;
+}
+.card_app_mariage {
+  padding: 0px;
+  border-radius: 2px !important;
+  border: 0px; 
+}
+.price_h1 {
+  color: #ac5e23;
+}
+.btn_commande_app {
+  background-color: #ac5e23 !important;
+  border: 2px solid #ac5e23 !important;
+}
+.btn_commande_app:hover{
+  background-color: #ac5e23 !important;
+  border: 2px solid #ac5e23 !important;
+}
