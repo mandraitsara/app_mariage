@@ -17,6 +17,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="{{asset('./js/active.js')}}">
+	<link rel="stylesheet" href="{{asset('./styles/budget_prestataire.css')}}">
 	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 
 {% endblock %}
@@ -24,19 +25,19 @@
 {% block title %}Budget{% endblock %}
 
 {% block body %}
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    {% if fournisseur %}
+{% if fournisseur %}
+<div class="jumbotron jumbotron-fluid head_app_mariage" style="background-image: url('/uploads/images/{{fournisseur.photo}}');">
+  <div class="container">    
     <h1 class="display-4">{{fournisseur.nom}}</h1>
-    <p class="lead">{{fournisseur.description}}</p>
-    {% endif %}
+    <p class="lead">{{fournisseur.description}}</p>    
     <h2 class="text-secondary">  {{totalPrice | number_format(2)}}<span>Ariary</span></h2>
   </div>
 </div>
+{% endif %}
 
-<nav class="nav nav-tabs">
+<nav class="nav nav-tabs tabs_app_mariage">
   {% for  presta in prestateur %}   
-  <a class="nav-item nav-link" href="#p{{presta.type}}" data-toggle="tab">{% if presta.type == 1 %}<span>Lieu de réception et salle de réception</span>{% elseif presta.type == 2%}<span>Repas</span>{% elseif presta.type == 3 %}<span>Photo & Vidéo</span>{% elseif presta.type == 4 %}<span>Transport</span>{% elseif presta.type == 5 %}<span>Fleurs et décoration</span>{% elseif presta.type == 6 %}<span>Animation</span>{% elseif presta.type == 7 %}<span>Mise en beauté</span>{% elseif presta.type == 8 %}<span>Tenue vestimentaire</span>  {% endif %}</a>
+  <a class="nav-item nav-link link_app" href="#p{{presta.type}}" data-toggle="tab">{% if presta.type == 1 %}<span>Lieu de réception et salle de réception</span>{% elseif presta.type == 2%}<span>Repas</span>{% elseif presta.type == 3 %}<span>Photo & Vidéo</span>{% elseif presta.type == 4 %}<span>Transport</span>{% elseif presta.type == 5 %}<span>Fleurs et décoration</span>{% elseif presta.type == 6 %}<span>Animation</span>{% elseif presta.type == 7 %}<span>Mise en beauté</span>{% elseif presta.type == 8 %}<span>Tenue vestimentaire</span>  {% endif %}</a>
   {% endfor %}  
 </nav>
 <div class="tab-content">  
@@ -47,7 +48,6 @@
       <div class="content-app">
           {{presta.description}}
       </div>
-
       <div class="price">
         <h2 class="text-success">Tarif : {{presta.price | number_format(2)}} <span>Ariary</span></h2>
       </div>
@@ -55,8 +55,8 @@
   </div>
 
   {% endfor %}
-  <div>
-    <h1>Le tarif de notre offre : <span class="text-secondary">  {{totalPrice | number_format(2)}}</span><span> Ariary</span> </h1>
+  <div class="total_price">
+    <h1>Le tarif de notre offre : <span class="text-success">  {{totalPrice | number_format(2)}}</span><span> Ariary</span> </h1>
   </div>
   
 </div>

@@ -106,9 +106,6 @@ class ComptePrincipaleController extends AbstractController
             $fournisseur = 0;
         }
         
-        //Fin
-
-        
         
 
       
@@ -376,5 +373,40 @@ class ComptePrincipaleController extends AbstractController
             'photo_ceremonie'=>$photo_ceremonie,
         ];
         return $this->render($templates,$content);
+    }
+
+
+    #[Route('fichier/', name:'fichier_txt')]
+    public function fichier(){
+        //Template 
+        $templates = 'fichier_txt.html.twig';
+
+        //chemin vers le fichier 
+        $chemin_fichier = file('info_mariage/mon_fichier.txt');
+
+       /*
+        $contenu_fichiers = file_get_contents($chemin_fichier);
+        
+        $contenu = explode(";", $contenu_fichiers);
+        var_dump($contenu); exit;
+        echo nl2br(htmlspecialchars($contenu));
+*/
+        //Lire le contenu du fichier
+        $contenu_fichier = file($chemin_fichier);
+
+        var_dump($contenu_fichier);
+
+        //spécifier la ligne modifier
+        $ligne_a_modifier = 2;
+
+        $nouveau_contenu_ligne = 'zafy;tahiana;tanjona';
+
+        if(isset($contenu_fichier[$ligne_a_modifier])){        
+            $contenu_fichier[$ligne_a_modifier] = $nouveau_contenu_ligne .PHP_EOL;
+
+        }
+        file_put_contents($chemin_fichier, implode(';', $contenu_fichier));
+        
+        return $this->render($templates);
     }
 }
