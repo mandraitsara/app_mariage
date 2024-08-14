@@ -222,7 +222,7 @@ affiche()
 	</div>
 </div>
 <div class="prestataire_mariage_app" id="prestataire">
-	<h1 class="liste_prestataire_plus_suivre">Les 5 prestataires plus populaires <a href="">voir plus</a></h1>
+	<h1 class="liste_prestataire_plus_suivre">Les 5 prestataires plus populaires <a href="{{ path('prestataireComplet')}}">voir plus</a></h1>
 	<div class="row">
 		{% for  presta in pres %}
 		<div class="col-md-4 card_prestataire_mariage_app mt-4">

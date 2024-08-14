@@ -29,8 +29,10 @@
 <div class="jumbotron jumbotron-fluid head_app_mariage" style="background-image: url('/uploads/images/{{fournisseur.photo}}');">
   <div class="container">    
     <h1 class="display-4">{{fournisseur.nom}}</h1>
-    <p class="lead">{{fournisseur.description}}</p>    
-    <h2 class="text-secondary">  {{totalPrice | number_format(2)}}<span>Ariary</span></h2>
+    <p class="lead">{{fournisseur.description}}</p> 
+    <input type="hidden" id="id_active" value="{{id_active}}">
+    <input type="hidden" id="id_fournisseur" value="{{fournisseur.id}}">
+    <h2 class="text-secondary">  {{totalPrice | number_format(2)}}<span>Ariary</span></h2><a class="btn btn-success" id='{% if app.user %}commande{% else %}login_app{% endif %}'>commander</a>
   </div>
 </div>
 {% endif %}
@@ -55,43 +57,29 @@
   </div>
 
   {% endfor %}
-  <div class="total_price">
-    <h1>Le tarif de notre offre : <span class="text-success">  {{totalPrice | number_format(2)}}</span><span> Ariary</span> </h1>
-  </div>
   
 </div>
 </div>
-            
-
-
-    <script>
-        $(document).ready(function(){
-            //alert($('#id_prestateur').val())
-        })
-        function PrestataireTarif(){
-            
-        let data = {
-            id_prestateur: $('#id_prestateur').val(),
-            id_typeprestateur : $('#id_type').val(),
-            description: $("#description").val(),
-            price: $("#price").val(),            
+<script>
+        
+        function ajoutPanier(){
+        let id = $("#id_active").val()            
+        let data = {          
+            id_fournisseur: $('#id_fournisseur').val()                   
             }
 
             $.ajax({
-            url: "/prestataire/budget/new",
+            url: "/panier/"+id,
             method: "PUT",
             data: data,
-            success: function (response) {
-            alert('L\'enregistrement a été effectué avec succès...')
-            location.reload(true);
-                }
-                    })
+            success: function (response) {alert('L\'enregistrement a été effectué avec succès...')}
+          })
 
 
         }
 
-        $("#valide_tarifs").click(function(){
-            PrestataireTarif()
+        $("#commande").click(function(){
+          ajoutPanier()
         })
     </script>
 

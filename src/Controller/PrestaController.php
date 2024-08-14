@@ -2,15 +2,19 @@
 
 namespace App\Controller;
 
+use Exception;
+use JsonException;
 use App\Entity\Presta;
-use App\Entity\Prestataire;
-use App\Entity\PrestataireTarif;
-use App\Entity\PrestataireType;
+use App\Entity\Activity;
 use App\Form\PrestaType;
+use App\Entity\Prestataire;
+use App\Entity\PrestataireType;
+use App\Entity\PrestataireTarif;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PrestaController extends AbstractController
@@ -118,7 +122,7 @@ class PrestaController extends AbstractController
         $id = isset($_POST['id_prestateur'])? null : '2';
         //$tarifs->setPrestataire($id_prestataire->setId($id));
         $tarifs->setDescription($request->request->get('description'));
-        $tarifs->setPrix($request->request->get('price'));      
+        $tarifs->setPrix($request->request->get('price'));  
         $em->persist($tarifs);
         $em->flush();
 
@@ -128,12 +132,14 @@ class PrestaController extends AbstractController
 
     #[Route('prestataire/budget/{id}', name:"app_budget_prestataire")]
 
-    public function budgetPrestataire(EntityManagerInterface $em, $id):Response{
-        global $totalPrice;     
-        $fournisseur = $em->getRepository(Prestataire::class)->find($id);       
+    public function budgetPrestataire(UserInterface $userInterface, EntityManagerInterface $em, $id):Response{
+        global $totalPrice;
+        $fournisseur = $em->getRepository(Prestataire::class)->find($id);        
         $prestateur = $em->getRepository(PrestataireTarif::class)->prestateurID($id);
         $typePrestateur = $em->getRepository(PrestataireType::class)->findAll();
-
+        $id_activity = $em->getRepository(Activity::class)->find($userInterface->getId());
+        $id_activite = $id_activity->getId();
+      
         
         $prestas = [];        
         $totalPrice = [];
@@ -158,10 +164,41 @@ class PrestaController extends AbstractController
             'totalPrice' => $PrixTotal,
             'id_prestateur' => $id,
             'fournisseur'   =>$fournisseur,
+            'id_active'=> $id_activite
         ];
         
         $templates = 'prestataire/budgetPrestataire.html.twig';
 
         return $this->render($templates, $content);
     }
+
+    #[Route('VoirPrestataire/', name:"prestataireComplet")]
+    public function prestataireComplet(Request $request, EntityManagerInterface $em){
+        global $listes_des_prestataires;
+        try{
+            $listes_des_prestataires =  $em->getRepository(Prestataire::class)->findAll(); 
+            
+        }catch(Exception $e){
+            echo 'Exception reçue:', $e->getMessage(), "\n";
+        }
+
+        $content = [
+            'listes_des_prestataires' => $listes_des_prestataires,
+        ];
+        $templates = "presta/prestataire_affiche.html.twig";
+        return $this->render($templates,$content);
+    }
+
+
+    #[Route('panier/{id}', name:"panier_app")]
+    public function panier(Request $request, EntityManagerInterface $em,$id){
+        $activite = $em->getRepository(Activity::class)->find($id);    
+   
+        if($activite){
+            $activite->setIdPrestateur($request->request->get("id_fournisseur"));            
+            $em->flush();
+        }
+        return $this->json("ajout panier reuissi...");
+    }
+
 }
