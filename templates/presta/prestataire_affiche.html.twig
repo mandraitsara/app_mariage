@@ -28,8 +28,10 @@
           </form>
         </div>
       </nav>
-
-<div class="liste_des_prestataires">
+<div class="pagination">
+  {{ knp_pagination_render(listes_des_prestataires, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+</div>
+<div class="liste_des_prestataires">  
     <div class="row">
         {% for prestataire in listes_des_prestataires %}
         <div class="col-md-4">
@@ -46,9 +48,14 @@
                   <a href="/prestataire/budget/{{prestataire.id}}" class="btn btn-primary" data-mdb-ripple-init>commander</a>
                 </div>
               </div>
-        </div>
+        </div>       
         {% endfor %}
+        
     </div>
+    
+</div>
+<div class="pagination">
+  {{ knp_pagination_render(listes_des_prestataires, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
 </div>
 <style>
 .liste_des_prestataires {

@@ -11,6 +11,7 @@ use App\Entity\Prestataire;
 use App\Entity\PrestataireType;
 use App\Entity\PrestataireTarif;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -173,17 +174,23 @@ class PrestaController extends AbstractController
     }
 
     #[Route('VoirPrestataire/', name:"prestataireComplet")]
-    public function prestataireComplet(Request $request, EntityManagerInterface $em){
+    public function prestataireComplet(Request $request, EntityManagerInterface $em, PaginatorInterface $paginator){
         global $listes_des_prestataires;
         try{
-            $listes_des_prestataires =  $em->getRepository(Prestataire::class)->findAll(); 
+            $donnees =  $em->getRepository(Prestataire::class)->findBy([],['populChiffre'=>'desc']); 
+            $prestataires = $paginator->paginate(
+                $donnees, $request->query->getInt('page', 1),
+                6
+            );           
+            
+
             
         }catch(Exception $e){
             echo 'Exception reçue:', $e->getMessage(), "\n";
         }
 
         $content = [
-            'listes_des_prestataires' => $listes_des_prestataires,
+            'listes_des_prestataires' => $prestataires,
         ];
         $templates = "presta/prestataire_affiche.html.twig";
         return $this->render($templates,$content);
@@ -196,6 +203,16 @@ class PrestaController extends AbstractController
    
         if($activite){
             $activite->setIdPrestateur($request->request->get("id_fournisseur"));            
+            $em->flush();
+        }
+        return $this->json("ajout panier reuissi...");
+    }
+
+    #[Route('montant/{id}', name:'montant_app')]
+    public function montant(Request $request, EntityManagerInterface $em, $id){
+        $activite = $em->getRepository(Activity::class)->find($id);
+        if($activite){
+            $activite->setBudgetInitial($request->request->get("montant"));            
             $em->flush();
         }
         return $this->json("ajout panier reuissi...");

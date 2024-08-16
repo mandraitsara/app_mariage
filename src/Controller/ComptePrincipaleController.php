@@ -62,7 +62,6 @@ class ComptePrincipaleController extends AbstractController
         $userID = $userInterface->getId();
         //Fin
         $activiteID = $entityManager->getRepository(Activity::class)->activityId($userID)->getId(); //voir l'identité dans l'activité
-
         $NomF = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomF(); //Nom pour l'époux
         $NomH = $entityManager->getRepository(Activity::class)->activityId($userID)->getNomH();//Nom pour l'épouse
         $dateCeremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getDateCeremonie(); //Date de céremonie 
@@ -71,6 +70,9 @@ class ComptePrincipaleController extends AbstractController
         $photo_principal = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoPrincipal(); //Photo principal
         $photo_reception = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoReception(); //Photo Reception
         $photo_ceremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoCeremonie(); //Photo Ceremonie        
+        $phoneH = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhoneHomme();
+        $phoneF = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhoneFemme();
+        
         $prestateurs = $entityManager->getRepository(Prestataire::class)->findBy([],['populChiffre'=>'DESC'],5); 
         
         //Verifier s'il y a déjà commander un package de prestateur
@@ -218,7 +220,9 @@ class ComptePrincipaleController extends AbstractController
             'photo_principal'=>$photo_principal,
             'photo_reception'=>$photo_reception,
             'photo_ceremonie'=>$photo_ceremonie,
-            
+            'phoneH'=>$phoneH,
+            'phoneF'=>$phoneF,   
+            'id_presta' =>$idPrestateur
         ];
         return $this->render($templates, $content);
     }
@@ -242,7 +246,6 @@ class ComptePrincipaleController extends AbstractController
             $data = "La modification a été effectué...";
             return $this->json($data);
         }
-
         return $this->json("rechargement reussi....");
     }
 
