@@ -75,6 +75,9 @@ class Activity
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $sloganTexte = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fichierCsv = null;
+
      #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]   
    
@@ -297,6 +300,18 @@ class Activity
     public function setSloganTexte(?string $sloganTexte): static
     {
         $this->sloganTexte = $sloganTexte;
+
+        return $this;
+    }
+
+    public function getFichierCsv(): ?string
+    {
+        return $this->fichierCsv;
+    }
+
+    public function setFichierCsv(?string $fichierCsv): static
+    {
+        $this->fichierCsv = $fichierCsv;
 
         return $this;
     }

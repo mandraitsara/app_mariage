@@ -72,6 +72,7 @@ class ComptePrincipaleController extends AbstractController
         $photo_ceremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoCeremonie(); //Photo Ceremonie        
         $phoneH = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhoneHomme();
         $phoneF = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhoneFemme();
+        $csv = $entityManager->getRepository(Activity::class)->activityId($userID)->getFichierCsv();
         
         $prestateurs = $entityManager->getRepository(Prestataire::class)->findBy([],['populChiffre'=>'DESC'],5); 
         
@@ -148,17 +149,14 @@ class ComptePrincipaleController extends AbstractController
         //Fin        
 
         //gerer le csv 
-        $explo = [];
-                
-        $rowNo = 1;
+        $explo = [];                
         
-        $ext = ".csv";
-        $chemin = "info_mariage";
-        $fichier = "$chemin/app_mariage_$userID$ext";
+        
+        $fichier = "uploads/images/".$csv;        
 
         if (!file_exists($fichier)) {
             file_put_contents($fichier, "non renseigné;non renseigné");
-        } elseif (($fp = fopen("$chemin/app_mariage_$userID$ext", "r"))) {
+        } elseif (($fp = fopen("$fichier", "r"))) {
             while (($row = fgetcsv($fp)) !== FALSE) {
                 for ($i = 0; $i < count($row); $i++) {
                     $urg =  $row[$i];
@@ -329,7 +327,7 @@ class ComptePrincipaleController extends AbstractController
         }
 
         $form = $this->createForm(ActivityType::class, $activite);
-        //var_dump($form);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted()){
@@ -341,13 +339,16 @@ class ComptePrincipaleController extends AbstractController
             $photo_principal = $form->get('PhotoPrincipal')->getData();
             $photoreception = $form->get('PhotoReception')->getData();
             $photo_ceremonie = $form->get('PhotoCeremonie')->getData();
-            if($photoreception && $photo_principal && $photo_ceremonie){
+            $fichier_csv = $form->get('FichierCsv')->getData();
+            if($photoreception && $photo_principal && $photo_ceremonie && $fichier_csv){
                 $originalFilename_photoreception = pathinfo($photoreception->getClientOriginalName(), PATHINFO_FILENAME);                
                 $originalFilename_photo_principal = pathinfo($photo_principal->getClientOriginalName(), PATHINFO_FILENAME);                
                 $originalFilename_photo_ceremonie = pathinfo($photo_ceremonie->getClientOriginalName(), PATHINFO_FILENAME);                
+                $originalFilename_fichier_csv = pathinfo($fichier_csv->getClientOriginalName(), PATHINFO_FILENAME);                
                 $newFilename_originalFilename_photoreception = uniqid() . '.' . $photoreception->guessExtension();
                 $newFilename_originalFilename_photo_principal = uniqid() . '.' . $photo_principal->guessExtension();
                 $newFilename_originalFilename_photo_ceremonie = uniqid() . '.' . $photo_ceremonie->guessExtension();
+                $newFilename_originalFilename_fichier_csv = uniqid() . '.' . $fichier_csv->guessExtension();
 
                 // Déplace le fichier dans le répertoire de destination
                 $photoreception->move(
@@ -362,10 +363,15 @@ class ComptePrincipaleController extends AbstractController
                     $this->getParameter('images_directory'),
                     $newFilename_originalFilename_photo_ceremonie,
                 ); 
+                $fichier_csv->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename_originalFilename_fichier_csv,
+                ); 
             }             
             $activite->setPhotoReception($newFilename_originalFilename_photoreception);     
             $activite->setPhotoPrincipal($newFilename_originalFilename_photo_principal);     
             $activite->setPhotoCeremonie($newFilename_originalFilename_photo_ceremonie);
+            $activite->setFichierCsv($newFilename_originalFilename_fichier_csv);
             $em->flush();
         }
 

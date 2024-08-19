@@ -1,7 +1,9 @@
 {% extends 'base.html.twig'%}
 
 {% block navbar %}
-
+<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 {% endblock %}
 
 {%block body%}
@@ -10,18 +12,18 @@
 	{{ form_start(form) }}
 	{{ form_row(form.NomH)}}
 	{{ form_row(form.NomF)}}
-	{{ form_row(form.DateCeremonie) }}
+	{{ form_row(form.DateCeremonie ,{'id':'datepicker'}) }}
 	{{ form_row(form.LieuxCeremonie) }}
 	{{ form_row(form.LieuxDeReception) }}
 	{{ form_row(form.BudgetInitial) }}	
-	{{ form_row(form.PhotoPrincipal) }}
+	{{ form_row(form.PhotoPrincipal ) }}
 	<img src="\uploads\images\{{photo_principal}}">
 	{{ form_row(form.PhotoReception) }}
 	<img src="\uploads\images\{{photo_reception}}">
 	{{ form_row(form.PhotoCeremonie) }}
 	<img src="\uploads\images\{{photo_ceremonie}}">
-	<button class="btn btn-success">Enregistrer
-	</button>
+	{{ form_row(form.FichierCsv)}}
+	<button class="btn btn-success">Enregistrer</button>
 	{{ form_end(form) }}
 	</div>
 </div>
@@ -44,6 +46,20 @@ body {
 }
 	</style>
 
+
+    <script>
+        $(document).ready(function () {			
+            $(function () {
+                $("#datepicker").
+                datepicker({
+					dateFormat :"yy-mm-dd"
+				}
+				);
+            });
+        }) 
+
+		
+    </script>
 
 
 {%endblock%}

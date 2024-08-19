@@ -31,9 +31,10 @@ class ActivityType extends AbstractType{
             ] 
                 )
             ->add('DateCeremonie', TextType::class,[
-                    'attr'=>[                    
+                    'attr'=>[                                            
                         'Placeholder'=> 'Date de la cérémonie',
-                        'class'=>'form-control'
+                        'class'=>'form-control datepicker',
+                        
                     ]
     
                 ] 
@@ -55,6 +56,7 @@ class ActivityType extends AbstractType{
                         ] 
                             )
             ->add('BudgetInitial', TextType::class,[
+                'label'=>'png',
                                 'attr'=>[                    
                                 'Placeholder'=> 'Lieux de reception',
                                 'class'=>'form-control',                                
@@ -86,6 +88,16 @@ class ActivityType extends AbstractType{
             'attr'=>[                    
             'Placeholder'=> 'Ceremonie',
             'class'=>'form-control',                               
+            ]
+
+        ])
+
+        ->add('FichierCsv', FileType::class,[
+            'data_class'=>null,
+            'label'=>'Fichier pour les listes des invités',
+            'attr'=>[                    
+            'Placeholder'=> 'rakoto_12.csv',            
+            'class'=>'form-control',                       
             ]
 
         ])

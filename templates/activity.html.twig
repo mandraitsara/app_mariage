@@ -73,6 +73,7 @@
 				{% else %}
 				<a class="dropdown-item link_app" href="#prestataire">Choisir l'un de prestataire plus suivis </a>
 				{% endif %}
+				<a class="dropdown-item link_app" href="">Charger les listes des invité(e)s</a>
 				<a class="dropdown-item link_app" href="/VoirPrestataire">Tous les prestataires</a>
 				<a class="dropdown-item link_app" href="/deconnexion">Deconnexion</a>
 			  </div>
@@ -90,7 +91,7 @@
 		<div class="d-flex justify-content-center align-items-center h-100">
 		  <div class="text-white app_mariage_wh">
 			
-			<h1 class="mb-4 jrs-j">{% if jourJ == 0 %}<span class="text-success" >c'est la date de cérémonie</span>{%else%}J - <span class="text-white">{{jourJ}}</span>{%endif%}</h1>			
+			<h1 class="mb-4 jrs-j">{% if jourJ == 0 %}<span class="text-success" >c'est la date de cérémonie</span>{%else%}J<span class="text-white">{{jourJ}}</span>{%endif%}</h1>			
 			
 			<h1 class="mb-3 titre_app_nom">{% if nomHomme !="" %}{{nomHomme}}{% else %} Anonyme {% endif %}<br> et {% if nomFemme !="" %}{{nomFemme}}{% else %} Anonyme {% endif %}</h1>
 
