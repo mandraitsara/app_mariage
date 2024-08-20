@@ -17,6 +17,7 @@
                 <li><a href="#">Accueil</a></li>
                 <li><a href="#">À propos</a></li>
                 <li><a href="#">Galerie</a></li>
+                <li><a href="{{path('prestataireComplet')}}">Besoin prestataire</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
 				<li><a href="{{ path('admin') }}">Administration</a></li>
 				{% endif %}

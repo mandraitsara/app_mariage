@@ -9,7 +9,6 @@ use App\Form\InscriptionType;
 use App\Form\ResetPasswordType;
 use App\Service\SendMailService;
 use Symfony\Component\Mime\Email;
-use App\Repository\UserRepository;
 use App\Repository\UserLoginRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,16 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Http\Logout\LogoutUtils;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-class SecurityController extends AbstractController
+class IdentificationController extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, Security $security, Request $request): Response

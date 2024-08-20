@@ -30,7 +30,7 @@
   <div class="container">    
     <h1 class="display-4">{{fournisseur.nom}}</h1>
     <p class="lead">{{fournisseur.description}}</p> 
-    <input type="hidden" id="id_active" value="{{id_active}}">
+    <input type="hidden" id="id_active" value="{{id_active}}"> 
     <input type="hidden" id="id_fournisseur" value="{{fournisseur.id}}">
     <h2 class="text-secondary">  {{totalPrice | number_format(2)}}<span>Ariary</span></h2><a class="btn btn-success" id='{% if app.user %}commande{% else %}login_app{% endif %}'>commander</a>
     <input hidden id="code_populaire" value="{{fournisseur.populChiffre}}">
@@ -65,7 +65,6 @@
 <div class="div-nothing">  
   <h2 class="h2_nothing"> L'id prestataire n'existe de pas...</h2>
 </div>
-
 {% endif %}
 <style>
   .h2_nothing {

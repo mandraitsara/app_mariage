@@ -111,7 +111,7 @@ class PrestaController extends AbstractController
         ]);
     }
 
-    #[Route('prestataire/budget/new', name:'budjet_new', methods:["PUT"])]
+    #[Route('prestataire/gerer', name:'budjet_new', methods:["PUT"])]
     public function addBudget(Request $request, EntityManagerInterface $em){
 
         $tarifs = new PrestataireTarif();
