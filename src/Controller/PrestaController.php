@@ -135,12 +135,13 @@ class PrestaController extends AbstractController
 
     public function budgetPrestataire(UserInterface $userInterface, EntityManagerInterface $em, $id):Response{
         global $totalPrice;
-        $fournisseur = $em->getRepository(Prestataire::class)->find($id);        
+        $fournisseur = $em->getRepository(Prestataire::class)->find($id);   
         $prestateur = $em->getRepository(PrestataireTarif::class)->prestateurID($id);
         $typePrestateur = $em->getRepository(PrestataireType::class)->findAll();
         $id_activity = $em->getRepository(Activity::class)->find($userInterface->getId());
-        $id_activite = $id_activity->getId();
-      
+        $id_activite = $id_activity->getId();      
+
+        
         
         $prestas = [];        
         $totalPrice = [];
@@ -158,7 +159,6 @@ class PrestaController extends AbstractController
         }
         $PrixTotal = array_sum($totalPrice);
         
-       
         $content = [
             'typePrestateur' => $typePrestateur,
             'prestateur' => $prestas,
@@ -181,7 +181,7 @@ class PrestaController extends AbstractController
             $prestataires = $paginator->paginate(
                 $donnees, $request->query->getInt('page', 1),
                 6
-            );           
+            );         
             
 
             
@@ -216,6 +216,18 @@ class PrestaController extends AbstractController
             $em->flush();
         }
         return $this->json("ajout panier reuissi...");
+    }
+
+    #[Route('popularite/{id}', name:'popularite_app')]
+    public function popularite(request $request, EntityManagerInterface $em, $id){
+        $prestataire = $em->getRepository(Prestataire::class)->find($id);
+        if($prestataire){
+            $prestataire->setPopulChiffre($request->request->get("popularite"));
+            $em->flush();
+        }
+
+        return $this->json('ajout code popularite effecuté...');
+
     }
 
 }

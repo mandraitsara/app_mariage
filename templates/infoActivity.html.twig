@@ -7,8 +7,10 @@
 {% endblock %}
 
 {%block body%}
+
 <div class="activity-form">
 	<div class="form-row-app">
+		<a class="close_a" href="/activite/">X</a>
 	{{ form_start(form) }}
 	{{ form_row(form.NomH)}}
 	{{ form_row(form.NomF)}}
@@ -16,7 +18,7 @@
 	{{ form_row(form.LieuxCeremonie) }}
 	{{ form_row(form.LieuxDeReception) }}
 	{{ form_row(form.BudgetInitial) }}	
-	{{ form_row(form.PhotoPrincipal ) }}
+	{{ form_row(form.PhotoPrincipal) }}
 	<img src="\uploads\images\{{photo_principal}}">
 	{{ form_row(form.PhotoReception) }}
 	<img src="\uploads\images\{{photo_reception}}">
@@ -29,6 +31,32 @@
 </div>
 
 <style>
+	.close_a {
+  color: aliceblue;
+  background-color: red;
+  font-size: 20px;
+  border-radius: 50%;
+  padding: 6px;  
+  text-align: end;
+  position: absolute;
+  right: 10px;
+  top: 2px;  
+  border: 3px solid;
+}
+.close_a:hover {
+  color: red;
+  background-color: aliceblue;
+  font-size: 20px;
+  border-radius: 50%;
+  padding: 6px;
+  text-align: end;
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  border: 3px solid;
+  transition: 2s;
+  text-decoration: none;
+}
 
 	.activity-form {
   position: relative;

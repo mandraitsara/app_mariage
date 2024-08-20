@@ -77,7 +77,6 @@ class Activity
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $fichierCsv = null;
-
      #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]   
    

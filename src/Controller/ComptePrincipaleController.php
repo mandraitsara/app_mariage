@@ -72,8 +72,7 @@ class ComptePrincipaleController extends AbstractController
         $photo_ceremonie = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhotoCeremonie(); //Photo Ceremonie        
         $phoneH = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhoneHomme();
         $phoneF = $entityManager->getRepository(Activity::class)->activityId($userID)->getPhoneFemme();
-        $csv = $entityManager->getRepository(Activity::class)->activityId($userID)->getFichierCsv();
-        
+        $csv = $entityManager->getRepository(Activity::class)->activityId($userID)->getFichierCsv();                
         $prestateurs = $entityManager->getRepository(Prestataire::class)->findBy([],['populChiffre'=>'DESC'],5); 
         
         //Verifier s'il y a déjà commander un package de prestateur
@@ -149,24 +148,26 @@ class ComptePrincipaleController extends AbstractController
         //Fin        
 
         //gerer le csv 
-        $explo = [];                
-        
-        
-        $fichier = "uploads/images/".$csv;        
-
-        if (!file_exists($fichier)) {
-            file_put_contents($fichier, "non renseigné;non renseigné");
-        } elseif (($fp = fopen("$fichier", "r"))) {
-            while (($row = fgetcsv($fp)) !== FALSE) {
-                for ($i = 0; $i < count($row); $i++) {
-                    $urg =  $row[$i];
-                    $explo[] = $urg;
+        $explo = [];         
+        $fichier = "uploads/images/".$csv;       
+        if($csv){            
+            if (!file_exists($fichier)) {
+                file_put_contents($fichier, "non renseigné;non renseigné");
+            } elseif (($fp = fopen("$fichier", "r"))) {
+                while (($row = fgetcsv($fp)) !== FALSE) {
+                    for ($i = 0; $i < count($row); $i++) {
+                        $urg =  $row[$i];
+                        $explo[] = $urg;
+                    }
                 }
+                fclose($fp);
             }
 
-            fclose($fp);
+        }else{
+            file_put_contents($fichier, "non renseigné;non renseigné");
         }
-
+        
+       
         
         $contenu = $explo;
         $tabs = [];
@@ -403,7 +404,7 @@ class ComptePrincipaleController extends AbstractController
         //Lire le contenu du fichier
         $contenu_fichier = file($chemin_fichier);
 
-        var_dump($contenu_fichier);
+        
 
         //spécifier la ligne modifier
         $ligne_a_modifier = 2;
@@ -417,5 +418,16 @@ class ComptePrincipaleController extends AbstractController
         file_put_contents($chemin_fichier, implode(';', $contenu_fichier));
         
         return $this->render($templates);
+    }
+    #[Route('chargerInvites/{id}', name:"invites_app")]
+    public function chargerInvites(EntityManagerInterface $em, $id){
+        $templates = 'charger_invites.html.twig';
+        $activite = $em->getRepository(Activity::class)->find($id);
+        $form = $form = $this->createForm(ActivityType::class, $activite);
+        
+        $content = [
+            'form' => $form->createView()
+        ];
+       return $this->render($templates, $content);
     }
 }

@@ -35,7 +35,7 @@
     <h2 class="text-secondary">  {{totalPrice | number_format(2)}}<span>Ariary</span></h2><a class="btn btn-success" id='{% if app.user %}commande{% else %}login_app{% endif %}'>commander</a>
   </div>
 </div>
-{% endif %}
+
 
 <nav class="nav nav-tabs tabs_app_mariage">
   {% for  presta in prestateur %}   
@@ -60,6 +60,17 @@
   
 </div>
 </div>
+{%else%}
+<div class="div-nothing">  
+  <h2 class="h2_nothing"> L'id prestataire n'existe de pas...</h2>
+</div>
+
+{% endif %}
+<style>
+  .h2_nothing {
+  text-align: center;
+}
+  </style>
 <script>
         
 function ajoutPanier(){
@@ -72,7 +83,7 @@ function ajoutPanier(){
             url: "/panier/"+id,
             method: "PUT",
             data: data,
-            success: function (response) {alert('L\'enregistrement a été effectué avec succès...')}
+            success: function (response) {alert('Ajout panier effectué...')}
           })
 
 
