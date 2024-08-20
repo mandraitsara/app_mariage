@@ -35,7 +35,7 @@
 <div class="liste_des_prestataires">  
     <div class="row">
         {% for prestataire in listes_des_prestataires %}
-        <div class="col-md-4">
+        <div class="col-md-4" data-id-presta = "{{prestataire.id}}">
             <div class="card mt-3">
                 <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
                   <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid"/>
@@ -51,9 +51,9 @@
                   <a id="commande_btn" href="/prestataire/budget/{{prestataire.id}}" class="btn btn-primary" data-mdb-ripple-init>commander</a>
                 </div>
                 <div class="view">
-                  <i class="fa fa-eye app_mariage" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="popularité {{prestataire.populChiffre}}"></i>
+                  <i class="fa fa-eye app_mariage" class="voir_app" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="popularité {{prestataire.populChiffre}}"></i>
                   <span class="codepopulaire">{{prestataire.populChiffre}}</span>
-                  <input hidden id="code_populaire" value="{{prestataire.populChiffre}}">
+                  
                 </div>
               </div>
         </div>       
@@ -72,25 +72,7 @@
 
 
 <script>
-  function ajoutCode(){    
-    var id = parseInt($("#id_prestataire").val())  
-    var popul = parseInt($("#code_populaire").val())   
-    let n = + 1    
-    let data ={          
-              popularite: popul + parseInt(n)                  
-            }
-
-            $.ajax({
-            url: "/popularite/"+id,
-            method: "PUT",
-            data: data,
-            success: function (response) {console.log('Ajout panier effectué...')}
-          })
-  }
-$("#commande_btn").onmouseup(function(){ 
- 
-  ajoutCode()
-})
+  
   
 </script>
 

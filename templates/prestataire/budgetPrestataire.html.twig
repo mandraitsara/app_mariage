@@ -33,6 +33,7 @@
     <input type="hidden" id="id_active" value="{{id_active}}">
     <input type="hidden" id="id_fournisseur" value="{{fournisseur.id}}">
     <h2 class="text-secondary">  {{totalPrice | number_format(2)}}<span>Ariary</span></h2><a class="btn btn-success" id='{% if app.user %}commande{% else %}login_app{% endif %}'>commander</a>
+    <input hidden id="code_populaire" value="{{fournisseur.populChiffre}}">
   </div>
 </div>
 
@@ -92,6 +93,27 @@ function ajoutPanier(){
         $("#commande").click(function(){
           ajoutPanier()
         })
+
+
+
+  function ajoutCode(){    
+    var id = parseInt($("#id_fournisseur").val())  
+    var popul = parseInt($("#code_populaire").val())   
+    let n = + 1    
+    let data ={          
+              popularite: popul + parseInt(n)                  
+            }
+
+            $.ajax({
+            url: "/popularite/"+id,
+            method: "PUT",
+            data: data,
+            success: function (response) {console.log('Ajout panier effectué...')}
+          })
+  }
+  $(document).ready(function(){
+    ajoutCode()
+  })
     </script>
 
 {% endblock %}
