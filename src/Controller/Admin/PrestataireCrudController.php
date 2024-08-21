@@ -6,6 +6,7 @@ use App\Entity\Prestataire;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -33,8 +34,8 @@ class PrestataireCrudController extends AbstractCrudController
             TextField::new('Nom'),
             TextField::new('Contact'),
             TextField::new('Adresse'),
-            TextField::new('Email'),
-            TextField::new('BudgetPrestataire'),
+            TextField::new('Email'),                       
+            
             
         ];
     }

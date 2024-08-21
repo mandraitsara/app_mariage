@@ -31,6 +31,8 @@
     <h1 class="display-4">{{fournisseur.nom}}</h1>
     <p class="lead">{{fournisseur.description}}</p> 
     <input type="hidden" id="id_active" value="{{id_active}}"> 
+    <input type="hidden" id="price_active" value="{{price_active}}"> 
+
     <input type="hidden" id="id_fournisseur" value="{{fournisseur.id}}">
     <h2 class="text-secondary">  {{totalPrice | number_format(2)}}<span>Ariary</span></h2><a class="btn btn-success" id='{% if app.user %}commande{% else %}login_app{% endif %}'>commander</a>
     <input hidden id="code_populaire" value="{{fournisseur.populChiffre}}">
@@ -52,6 +54,7 @@
           {{presta.description}}
       </div>
       <div class="price">
+        <input hidden id="presta_price" value="{{presta.price}}">
         <h2 class="text-success">Tarif : {{presta.price | number_format(2)}} <span>Ariary</span></h2>
       </div>
 
@@ -74,11 +77,16 @@
 <script>
         
 function ajoutPanier(){
+        let price_active =  parseFloat($("#price_active").val())
+        let presta_price = parseFloat($("#presta_price").val())?parseInt($("#presta_price").val()):0      
+if(price_active > presta_price) {
+alert("Votre budget est insuffisant face à votre commande...")
+}else{
+
         let id = $("#id_active").val()            
         let data = {          
             id_fournisseur: $('#id_fournisseur').val()                   
             }
-
             $.ajax({
             url: "/panier/"+id,
             method: "PUT",
@@ -86,9 +94,8 @@ function ajoutPanier(){
             success: function (response) {alert('Ajout panier effectué...')}
           })
 
-
         }
-
+      }
         $("#commande").click(function(){
           ajoutPanier()
         })

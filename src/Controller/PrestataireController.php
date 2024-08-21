@@ -23,7 +23,7 @@ class PrestataireController extends AbstractController{
         $typePrestateur = $em->getRepository(PrestataireType::class)->findAll();
         $id_activity = $em->getRepository(Activity::class)->find($userInterface->getId());
         $id_activite = $id_activity->getId();        
-        
+        $price_active = $id_activity->getBudgetInitial();       
         $prestas = [];        
         $totalPrice = [];
 
@@ -46,7 +46,8 @@ class PrestataireController extends AbstractController{
             'totalPrice' => $PrixTotal,
             'id_prestateur' => $id,
             'fournisseur'   =>$fournisseur,
-            'id_active'=> $id_activite
+            'id_active'=> $id_activite,
+            'price_active'=>$price_active
         ];
         
         $templates = 'prestataire/budgetPrestataire.html.twig';
