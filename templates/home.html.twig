@@ -19,7 +19,7 @@
                 <li><a href="#">Galerie</a></li>
                 <li><a href="{{path('prestataireComplet')}}">Besoin prestataire</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
-				<li><a href="{{ path('admin') }}">Administration</a></li>
+				<li><a href="{{ path('admin_app') }}">Administration</a></li>
 				{% endif %}
                 {% if app.user %}
 				<li><a href="{{path('activite.app_mariage')}}">Mon projet</a></li>

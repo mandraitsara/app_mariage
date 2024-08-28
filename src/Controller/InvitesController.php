@@ -11,7 +11,7 @@ class InvitesController extends AbstractController{
     public function chargerInvites(EntityManagerInterface $em, $id){
         $templates = 'charger_invites.html.twig';
         $activite = $em->getRepository(Activity::class)->find($id);
-        $form = $form = $this->createForm(ActivityType::class, $activite);
+        $form = $this->createForm(ActivityType::class, $activite);
         
         $content = [
             'form' => $form->createView()

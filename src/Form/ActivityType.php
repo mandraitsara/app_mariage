@@ -69,7 +69,8 @@ class ActivityType extends AbstractType{
             'label'=>'Photo Principale',
             'attr'=>[                    
             'Placeholder'=> 'Photo Principale',
-            'class'=>'form-control',                               
+            'class'=>'form-control',  
+            'accept' =>'.jpeg, .png, .jpg, .webp'                             
             ]
 
         ])
@@ -78,7 +79,8 @@ class ActivityType extends AbstractType{
             'label'=>'Photo de Reception',
             'attr'=>[                    
             'Placeholder'=> 'Photo de reception',
-            'class'=>'form-control',                               
+            'class'=>'form-control',  
+            'accept' =>'.jpeg, .png, .jpg, .webp'                             
             ]
 
         ])
@@ -87,7 +89,8 @@ class ActivityType extends AbstractType{
             'label'=>'Photo de Ceremonie',
             'attr'=>[                    
             'Placeholder'=> 'Ceremonie',
-            'class'=>'form-control',                               
+            'class'=>'form-control',  
+            'accept' =>'.jpeg, .png, .jpg, .webp'
             ]
 
         ])
@@ -97,7 +100,8 @@ class ActivityType extends AbstractType{
             'label'=>'Fichier pour les listes des invités',
             'attr'=>[                    
             'Placeholder'=> 'rakoto_12.csv',            
-            'class'=>'form-control',                       
+            'class'=>'form-control', 
+            'accept'=>'.csv'
             ]
 
         ])

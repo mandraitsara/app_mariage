@@ -1,7 +1,7 @@
 <?php 
 namespace App\Controller;
-
 use App\Entity\Activity;
+use App\Form\ActivityType;
 use App\Entity\Prestataire;
 use App\Entity\PrestataireTarif;
 use App\Entity\PrestataireType;
@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 
 
 class ActiviteController extends AbstractController{
@@ -183,6 +184,82 @@ class ActiviteController extends AbstractController{
         }
         return $this->json("rechargement reussi....");
     }
+    #[Route('activity_info/{id}',name:'activity.app_mariage')]
+    public function infoActivity($id, Request $request, EntityManagerInterface $em)     
+    {
+       $templates = 'infoActivity.html.twig'; //Template       
+
+       $activite= $em->getRepository(Activity::class)->find($id);
+
+       $photo_principal = $activite->getPhotoPrincipal();
+       $photo_reception = $activite->getPhotoReception();
+       $photo_ceremonie = $activite->getPhotoCeremonie();
+
+       if (!$activite){
+           throw $this->createNotFoundException('aucun prestataire trouvé ' . $id);       }
+
+       $form = $this->createForm(ActivityType::class, $activite);
+       
+       $form->handleRequest($request);
+
+       if ($form->isSubmitted()){
+         /* $photoreception = pathinfo($form->get('PhotoReception')
+                                           ->getData()
+                                           ->getClientOriginalName()
+                                           ,PATHINFO_FILENAME) ;*/
+
+           $photo_principal = $form->get('PhotoPrincipal')->getData();
+           $photoreception = $form->get('PhotoReception')->getData();
+           $photo_ceremonie = $form->get('PhotoCeremonie')->getData();
+           $fichier_csv = $form->get('FichierCsv')->getData();
+           if($photoreception && $photo_principal && $photo_ceremonie && $fichier_csv){
+               $originalFilename_photoreception = pathinfo($photoreception->getClientOriginalName(), PATHINFO_FILENAME);                
+               $originalFilename_photo_principal = pathinfo($photo_principal->getClientOriginalName(), PATHINFO_FILENAME);                
+               $originalFilename_photo_ceremonie = pathinfo($photo_ceremonie->getClientOriginalName(), PATHINFO_FILENAME);                
+               $originalFilename_fichier_csv = pathinfo($fichier_csv->getClientOriginalName(), PATHINFO_FILENAME);                
+               $newFilename_originalFilename_photoreception = uniqid() . '.' . $photoreception->guessExtension();
+               $newFilename_originalFilename_photo_principal = uniqid() . '.' . $photo_principal->guessExtension();
+               $newFilename_originalFilename_photo_ceremonie = uniqid() . '.' . $photo_ceremonie->guessExtension();
+               $newFilename_originalFilename_fichier_csv = uniqid() . '.' . $fichier_csv->guessExtension();
+
+               // Déplace le fichier dans le répertoire de destination
+               $photoreception->move(
+                   $this->getParameter('images_directory'),
+                   $newFilename_originalFilename_photoreception,
+               ); 
+               $photo_principal->move(
+                   $this->getParameter('images_directory'),
+                   $newFilename_originalFilename_photo_principal,
+               ); 
+               $photo_ceremonie->move(
+                   $this->getParameter('images_directory'),
+                   $newFilename_originalFilename_photo_ceremonie,
+               ); 
+               $fichier_csv->move(
+                   $this->getParameter('images_directory'),
+                   $newFilename_originalFilename_fichier_csv,
+               ); 
+           }             
+           $activite->setPhotoReception($newFilename_originalFilename_photoreception);     
+           $activite->setPhotoPrincipal($newFilename_originalFilename_photo_principal);     
+           $activite->setPhotoCeremonie($newFilename_originalFilename_photo_ceremonie);
+           $activite->setFichierCsv($newFilename_originalFilename_fichier_csv);
+           $em->flush();
+       }
+
+       $content = [
+           'form' => $form->createView(),
+           'photo_reception' =>$photo_reception,
+           'photo_principal'=>$photo_principal,
+           'photo_ceremonie'=>$photo_ceremonie,
+       ];
+       return $this->render($templates,$content);
+   }
+
+
+
+
+
 }
 
 

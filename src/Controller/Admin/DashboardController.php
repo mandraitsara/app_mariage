@@ -15,7 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/admin/CRUD/', name: 'admin')]
     #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {

@@ -11,12 +11,12 @@
         <div class="col-md-6 p-3">
             
             {{ form_start (form, {'attr': {'class': 'form-group sing-up-bloc', 'action': path ('app_inscr')}}) }}
+            
                 <h2 class="text-center pb-5 pt-5"><span><i class="fa-regular fa-user"></i></span>Inscrivez-vous</h2>
-                {{ form_row (form.username, {'attr': {'class': 'form-control', 'placeholder': 'Nom d\'utilisateur'}}) }} <br>
-                {{ form_row (form.email, {'attr': {'class': 'form-control', 'placeholder': 'Adresse Email'}}) }} <br>
-                {{ form_row (form.password.first, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }} <br> 
-                {{ form_row (form.password.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirmation du mot mot de passe'}}) }} <br> 
-    
+                {{ form_row (form.username, {'attr': {'class': 'form-control', 'placeholder': 'Nom d\'utilisateur'}}) }} <br>                
+                {{ form_row (form.email,{'attr': {'class': 'form-control', 'placeholder': 'Adresse Email'}}) }} <br>                                            
+                {{ form_row (form.password.first, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }} <br>                 
+                {{ form_row (form.password.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirmation du mot mot de passe'}}) }} <br>                 
                 <button type="submit" class="btn btn-success">Valider</button>
                 <a href=" {{path ('app_inscr')}}" class="btn-2">Annuler</a>
             {{ form_end (form) }}

@@ -18,7 +18,7 @@ class InscriptionType extends AbstractType
             ->add('email')
             ->add('password', RepeatedType::class, [
                     'type' => PasswordType::class,
-                    'invalid_message' => 'les mots de passe ne correspond pas',
+                    'invalid_message' => 'Les mots de passe ne correspond pas',
                     'options' => ['attr' => ['class' => 'password-field']],
                     'required' => true,
                     'first_options'  => ['label' => 'Mot de passe'],

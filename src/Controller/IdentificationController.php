@@ -54,11 +54,11 @@ class IdentificationController extends AbstractController
     {
         $user = new UserLogin();
         $form = $this->createForm(InscriptionType::class, $user);
-        $form->handleRequest($request);
+        $form->handleRequest($request);        
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user = $form->getData();
+            $user = $form->getData();            
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
 
             $user->setPassword($hashedPassword);

@@ -28,6 +28,9 @@ class PrestataireTarif
 
     #[ORM\Column(nullable: true)]
     private ?int $typeId = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photo = null;
      
 
     public function getId(): ?int
@@ -82,6 +85,18 @@ class PrestataireTarif
     public function setTypeId(?int $typeId): static
     {
         $this->typeId = $typeId;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): static
+    {
+        $this->photo = $photo;
 
         return $this;
     }
