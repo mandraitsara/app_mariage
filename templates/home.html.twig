@@ -22,7 +22,7 @@
 				<li><a href="{{ path('admin_app') }}">Administration</a></li>
 				{% endif %}
                 {% if app.user %}
-				<li><a href="{{path('activite.app_mariage')}}">Mon projet</a></li>
+				<li><a href="{{path('activite.app_mariage',{'id_user':app.user.id})}}">Mon projet</a></li>
 				{% endif %}
             </ul>
         </nav>
@@ -46,7 +46,7 @@
                 of the inherent dignity
             </p>
             <br>
-            <a href="{% if app.user %} {{path('activite.app_mariage')}} {% else %} {{ path('app_login') }}  {%  endif %} " class="btn btn-primary">Mon projet</a>
+            <a href="{% if app.user %} {{path('activite.app_mariage',{'id_user':app.user.id})}} {% else %} {{ path('app_login') }}  {%  endif %} " class="btn btn-primary">Mon projet</a>
         </div>
     </div>
 </div>

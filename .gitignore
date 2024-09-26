@@ -11,7 +11,11 @@
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
+<<<<<<< HEAD
 /public/build/
+=======
+##/public/build/
+>>>>>>> cb6dcb9 (envoyé)
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###

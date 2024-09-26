@@ -93,14 +93,10 @@
 			
 			<h1 class="mb-4 jrs-j">{% if jourJ == 0 %}<span class="text-success" >c'est la date de cérémonie</span>{%else%}J<span class="text-white">{{jourJ}}</span>{%endif%}</h1>			
 			
-			<h1 class="mb-3 titre_app_nom">{% if nomHomme !="" %}{{nomHomme}}{% else %} Anonyme {% endif %}<br> et {% if nomFemme !="" %}{{nomFemme}}{% else %} Anonyme {% endif %}</h1>
-
-			<a
-			  data-mdb-ripple-init
-			  class="btn btn-outline-light btn-lg lieux_de_ceremonie_app"			  
-			  
-			>{{dateCeremonie}} | {{lieuxCeremonie}}</a
-			>
+			<h1 class="mb-3 titre_app_nom">{% if nomHomme !="" %}{{nomHomme}}{% else %} anonyme {% endif %}<br> et {% if nomFemme !="" %}{{nomFemme}}{% else %} anonyme {% endif %}</h1>
+			<a data-mdb-ripple-init class="btn btn-outline-light btn-lg lieux_de_ceremonie_app">
+			{{dateCeremonie}} | {{lieuxCeremonie}}
+			</a>
 		  </div>
 		</div>
 	  </div>
@@ -223,10 +219,12 @@
 		</div>
 	</div>
 </div>
-<div class="prestataire_mariage_app" id="prestataire">
-	<h1 class="liste_prestataire_plus_suivre">Les 5 prestataires plus populaires <a href="{{ path('prestataireComplet')}}">voir plus</a></h1>
+
+<div class="correspond_tarif">
+	<h1 class="correspond_tarif">Suggestions:</h1>
 	<div class="row">
-		{% for  presta in pres %}
+		{% for  presta in fournisseurs %}
+			{% if presta.budget < budgetInitial %}
 		<div class="col-md-4 card_prestataire_mariage_app mt-4">
 			<div class="card card_app_mariage" >
 				<img class="card-img-top img_card_app" src="/uploads/images/{{presta.photo}}" alt="Card image">
@@ -238,6 +236,28 @@
 				</div>
 			  </div>
 		</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+</div>
+
+<div class="prestataire_mariage_app" id="prestataire">
+	<h1 class="liste_prestataire_plus_suivre">Les 5 prestataires plus populaires <a href="{{ path('prestataireComplet')}}">voir plus</a></h1>
+	<div class="row">		
+		{% for  presta in pres %}		
+		<div class="col-md-4 card_prestataire_mariage_app mt-4">
+			<div class="card card_app_mariage" >
+				<img class="card-img-top img_card_app" src="/uploads/images/{{presta.photo}}" alt="Card image">
+				<div class="card-body">
+				  <h4 class="card-title">{{presta.nom}}</h4>
+				  
+				  <p class="card-text">{{presta.description}}</p>
+				  <h1 class="price_h1">{{presta.budget | number_format }} Ar</h1>
+				  <a href="{{presta.id}}" class="btn btn-primary btn_commande_app">commander</a>
+				</div>
+			  </div>
+		</div>
+		
 		{% endfor %}
 	</div>
 </div>
@@ -312,6 +332,10 @@ background-color: aquamarine;
   color: bisque;
   border-radius: 50px;
   border: 2px solid deeppink;
+}
+
+.correspond_tarif {
+  background-color: rgba(155, 200, 15, 0.5);
 }
 
 </style>

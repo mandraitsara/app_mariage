@@ -21,14 +21,26 @@
         "symfony/asset-mapper": "7.0.*",
         "symfony/console": "7.0.*",
         "symfony/dotenv": "7.0.*",
+<<<<<<< HEAD
+=======
+        "symfony/event-dispatcher": "7.0.*",
+>>>>>>> cb6dcb9 (envoyé)
         "symfony/filesystem": "7.0.*",
         "symfony/flex": "^2",
         "symfony/form": "7.0.*",
         "symfony/framework-bundle": "7.0.*",
+<<<<<<< HEAD
+=======
+        "symfony/http-client": "7.0.*",
+>>>>>>> cb6dcb9 (envoyé)
         "symfony/http-foundation": "7.0.*",
         "symfony/intl": "7.0.*",
         "symfony/mailer": "7.0.*",
         "symfony/mercure-bundle": "^0.3.8",
+<<<<<<< HEAD
+=======
+        "symfony/notifier": "7.0.*",
+>>>>>>> cb6dcb9 (envoyé)
         "symfony/password-hasher": "7.0.*",
         "symfony/property-access": "7.0.*",
         "symfony/runtime": "7.0.*",
@@ -36,10 +48,18 @@
         "symfony/stimulus-bundle": "^2.17",
         "symfony/twig-bridge": "7.0.*",
         "symfony/twig-bundle": "7.0.*",
+<<<<<<< HEAD
+=======
+        "symfony/twilio-notifier": "7.0.*",
+>>>>>>> cb6dcb9 (envoyé)
         "symfony/ux-icons": "^2.17",
         "symfony/ux-turbo": "^2.17",
         "symfony/validator": "7.0.*",
         "symfony/web-link": "7.0.*",
+<<<<<<< HEAD
+=======
+        "symfony/webhook": "7.0.*",
+>>>>>>> cb6dcb9 (envoyé)
         "symfony/webpack-encore-bundle": "^2.1",
         "symfony/yaml": "7.0.*",
         "symfonycasts/reset-password-bundle": "*",
@@ -47,6 +67,10 @@
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/intl-extra": "^3.10",
         "twig/twig": "^2.12|^3.0",
+<<<<<<< HEAD
+=======
+        "twilio/sdk": "^8.3",
+>>>>>>> cb6dcb9 (envoyé)
         "vich/uploader-bundle": "^2.4"
     },
     "config": {
