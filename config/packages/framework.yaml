@@ -6,15 +6,12 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
-<<<<<<< HEAD
-=======
     webhook:
         routing:
             mailer_twilio:
                 service: 'notifier.webhook.request_parser.twilio'
                 secret: '%env(MAILER_TWILIO_SECRET)%'
 
->>>>>>> cb6dcb9 (envoyé)
     #esi: true
     #fragments: true
 
@@ -23,7 +20,3 @@ when@test:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
-<<<<<<< HEAD
-=======
-
->>>>>>> cb6dcb9 (envoyé)
