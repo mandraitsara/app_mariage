@@ -9,13 +9,10 @@ parameters:
 
 
 services:
-<<<<<<< HEAD
-=======
     twilio.client:
         class: Twilio\Rest\Client
         arguments: ['%twilio_sid%','twilio_token']
     Twilio\Rest\Client: '@twilio.client'
->>>>>>> cb6dcb9 (envoyé)
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
