@@ -31,7 +31,21 @@ class SecurityController extends AbstractController
         // $result = $smspartner->sendSms($fields);
         // var_dump($result);
 
-   
+        $twilioSid = 'AC514e22dbe8acf9cfcd5fe49995569f7a'    ;
+        $twilioToken ='a17c06410af669f2c22ad8048dc0c643';
+
+        $twilio = new Client($twilioSid,$twilioToken);
+
+        $message = $twilio->messages
+                            ->create(
+                                "Whatsapp:+1484749871",
+                                array(
+                                    "body"=>"Greeting",
+                                    "from"=>"whatsapp:14847498710"
+                                )
+                                );
+        
+
        return new Response('ok');
     }
 }

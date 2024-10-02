@@ -4,6 +4,7 @@ use App\Entity\UserLogin;
 use App\Entity\Prestataire;
 use App\Entity\PrestataireTarif;
 use App\Entity\PrestataireType;
+use App\Form\PrestaType;
 use App\Form\PrestataireTarifType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -146,5 +147,42 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_app');
       }
+
+      #[Route('admin/app/add', name:'app_add_app') ]
+      public function adminAddPrestataire(Request $request, EntityManagerInterface $em){
+        $templates = 'admin/adminAppAddTemplate.html.twig';
+
+        $newPrestataire = new Prestataire();
+        
+        $form = $this->createForm(PrestaType::class, $newPrestataire);  
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $photo = $form->get('photo')->getData();
+
+
+            
+            if($photo){
+                $originalFilename_photo = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME); 
+                $newFilename_originalFilename_photo = uniqid() . '.' . $photo->guessExtension();               
+            }
+            $photo->move(
+                $this->getParameter('images_directory'),
+                $newFilename_originalFilename_photo,
+               
+            );
+            $newPrestataire->setPhoto($newFilename_originalFilename_photo);         
+                $em->persist($newPrestataire);            
+                $em->flush();    
+            }
+
+        $content = [
+            'form'=> $form->createView(),
+        ];
+
+        return $this->render($templates, $content);
+      }
+
 }
 ?>

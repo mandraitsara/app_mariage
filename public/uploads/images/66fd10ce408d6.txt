@@ -1,0 +1,5 @@
+meva;kanto;034;1;
+;;;meva;kanto;034;0;
+;zafy;tahiana;tanjona
+;;;tz;kanto;034;1;
+;;;dfre;kanto;034;0;
