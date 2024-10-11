@@ -87,7 +87,7 @@ class ActiviteController extends AbstractController{
 
             $tDeb = explode("-", $debut);
             $tFin = explode("-", $fin);
-    
+            
              $diff = mktime(0, 0, 0, $tFin[1], $tFin[2], $tFin[0]) - mktime(0, 0, 0, $tDeb[1], $tDeb[2], $tDeb[0]);
             
         return(($diff / 86400)+0);
@@ -267,6 +267,7 @@ class ActiviteController extends AbstractController{
            'photo_reception' =>$photo_reception,
            'photo_principal'=>$photo_principal,
            'photo_ceremonie'=>$photo_ceremonie,
+           'id' =>$id
        ];
        return $this->render($templates,$content);
    }
